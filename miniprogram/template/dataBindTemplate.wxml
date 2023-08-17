@@ -1,0 +1,4 @@
+<template name="dataBindTemplate">
+  <view class="label">data.name: {{name}}</view>
+  <view class="label">data.array: {{array}}</view>
+</template>

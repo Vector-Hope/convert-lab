@@ -1,0 +1,76 @@
+{
+  "entryPagePath": "pages/framework/index",
+  "pages": [
+    "pages/framework/index",
+    "pages/cloud/index",
+    "pages/component/index",
+    "pages/API/index"
+  ],
+  "usingComponents": {
+    "mp-navigation-bar": "/component/navigation-bar/navigation-bar"
+  },
+  "window": {
+    "navigationBarBackgroundColor": "#F7F7F7",
+    "navigationBarTextStyle": "black",
+    "navigationBarTitleText": "演示",
+    "backgroundColor": "#F7F7F7",
+    "backgroundTextStyle": "dark"
+  },
+  "tabBar": {
+    "color": "#7A7E83",
+    "selectedColor": "#3cc51f",
+    "backgroundColor": "#F7F7F7",
+    "borderStyle": "black",
+    "list": [
+      {
+        "pagePath": "pages/framework/index",
+        "iconPath": "image/icon_component.png",
+        "selectedIconPath": "image/icon_component_HL.png",
+        "text": "框架"
+      },
+      {
+        "pagePath": "pages/component/index",
+        "iconPath": "image/icon_component.png",
+        "selectedIconPath": "image/icon_component_HL.png",
+        "text": "组件"
+      },
+      {
+        "pagePath": "pages/API/index",
+        "iconPath": "image/icon_API.png",
+        "selectedIconPath": "image/icon_API_HL.png",
+        "text": "接口"
+      },
+      {
+        "pagePath": "pages/cloud/index",
+        "iconPath": "image/icon_cloud.png",
+        "selectedIconPath": "image/icon_cloud_HL.png",
+        "text": "云开发"
+      }
+    ]
+  },
+  "networkTimeout": {
+    "request": 5000,
+    "connectSocket": 5000,
+    "uploadFile": 5000,
+    "downloadFile": 5000
+  },
+  "subpackages": [
+    {
+      "root": "pages/packagesFramework",
+      "pages": [
+        "pages/wxml/dataBind/index",
+        "pages/wxml/listRender/index",
+        "pages/wxml/ifRender/index",
+        "pages/wxml/template/index",
+        "pages/wxml/quote/index",
+        "pages/wxs/index",
+        "pages/config/index",
+        "pages/frameAPI/index"
+      ]
+    }
+  ],
+  "themeLocation": "lab.theme.json",
+  "style": "v2",
+  "sitemapLocation": "sitemap.json",
+  "lazyCodeLoading": "requiredComponents"
+}

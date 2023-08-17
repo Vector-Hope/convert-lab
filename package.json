@@ -1,0 +1,17 @@
+{
+  "name": "convert-lab",
+  "version": "1.0.0",
+  "description": "",
+  "main": ".eslintrc.js",
+  "scripts": {
+    "lint": "eslint miniprogram --ext .js --ext .wxml --ext .wxss",
+    "format": "prettier --write \"miniprogram/**/*.{js,wxml,wxss}\" && eslint miniprogram --ext .js --ext .wxml --ext .wxss --fix",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "eslint": "^8.47.0",
+    "prettier": "^3.0.2"
+  }
+}
