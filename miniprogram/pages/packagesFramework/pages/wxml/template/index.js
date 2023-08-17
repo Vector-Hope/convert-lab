@@ -1,13 +1,18 @@
-// packagesFramework/pages/wxml/index.js
 Page({
   /**
    * 页面的初始数据
    */
   data: {
-    simple: '简单绑定',
-    comId: 'combination',
-    control: true,
-    theme: 'light',
+    creatTemplate: {
+      title: '创建模板并使用',
+      name: 'creatTemplate',
+      content: '使用成功',
+    },
+    chooseTrue: true,
+    chooseTemplate: {
+      name: '选择Template',
+      content: '选择如title所示',
+    },
   },
 
   /**
@@ -29,15 +34,9 @@ Page({
       })
     }
   },
-  changeControl() {
-    const { control } = this.data
+  changeChooseTrue(e) {
     this.setData({
-      control: !control,
-    })
-  },
-  changeSimple(e) {
-    this.setData({
-      simple: e.detail.value,
+      chooseTrue: e.detail.value,
     })
   },
 })

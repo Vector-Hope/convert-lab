@@ -36,10 +36,9 @@ Page({
       })
     }
   },
-  changeControl() {
-    const { control } = this.data
+  changeControl(e) {
     this.setData({
-      control: !control,
+      control: e.detail.value,
     })
   },
   changeSimple(e) {

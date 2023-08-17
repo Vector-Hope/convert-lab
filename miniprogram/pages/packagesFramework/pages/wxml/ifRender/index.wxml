@@ -1,55 +1,70 @@
-<import src="../../../common/head.wxml" />
-
 <view class="container page" data-weui-theme="{{theme}}">
   <view class="page-body">
     <view class="page-section">
-      <view class="cells_title">数据绑定</view>
+      <view class="cells_title">简单条件渲染</view>
       <view class="cells cells_after-title">
         <view class="cell">
           <view class="cell_hd">
-            <view class="label">{{ simple }}</view>
+            <view class="label">simpleIf的值为</view>
           </view>
           <view class="cell_bd">
-            <input class="cell-input" value="{{simple}}" bindinput="changeSimple" />
+            <view class="label">{{simpleIf}}</view>
           </view>
         </view>
         <view class="cell">
           <view class="cell_hd">
-            <view class="label">item-{{comId}}</view>
+            <switch checked="{{simpleIf}}" bindchange="changeSimpleIf"></switch>
           </view>
           <view class="cell_bd">
-            <view id="item-{{comId}}">组合属性-见id</view>
-          </view>
-        </view>
-        <view class="cell">
-          <view class="cell_hd">
-            <switch checked="{{control}}" bindchange="changeControl"></switch>
-          </view>
-          <view class="cell_bd">
-            <view class="label" wx:if="{{control}}">控制属性与关键字</view>
-          </view>
-        </view>
-        <view class="cell">
-          <view class="cell_hd">
-            <switch checked="false"></switch>
-          </view>
-          <view class="cell_bd">
-            <view class="label">不生效关键字</view>
+            <view class="label" wx:if="{{simpleIf}}">条件为true时显现</view>
           </view>
         </view>
       </view>
     </view>
     <view class="page-section">
-      <view>列表渲染</view>
+      <view class="cells_title">block条件渲染</view>
+      <view class="cells cells_after-title">
+        <view class="cell">
+          <view class="cell_hd">
+            <view class="label">blockIf的值为</view>
+          </view>
+          <view class="cell_bd">
+            <view class="label">{{blockIf}}</view>
+          </view>
+        </view>
+        <view class="cell">
+          <view class="cell_hd">
+            <switch checked="{{blockIf}}" bindchange="changeBlockIf"></switch>
+          </view>
+          <view class="cell_bd">
+            <block wx:if="{{blockIf}}">
+              <view class="label">条件为true时显现</view>
+              <view class="label">条件为true时显现</view>
+            </block>
+          </view>
+        </view>
+      </view>
     </view>
     <view class="page-section">
-      <view>条件渲染</view>
-    </view>
-    <view class="page-section">
-      <view>模板</view>
-    </view>
-    <view class="page-section">
-      <view>引用</view>
+      <view class="cells_title">hidden条件渲染</view>
+      <view class="cells cells_after-title">
+        <view class="cell">
+          <view class="cell_hd">
+            <view class="label">hidden的值为</view>
+          </view>
+          <view class="cell_bd">
+            <view class="label">{{hidden}}</view>
+          </view>
+        </view>
+        <view class="cell">
+          <view class="cell_hd">
+            <switch checked="{{hidden}}" bindchange="changeHidden"></switch>
+          </view>
+          <view class="cell_bd">
+            <view class="label" hidden="{{hidden}}">条件为true时显现</view>
+          </view>
+        </view>
+      </view>
     </view>
   </view>
 </view>

@@ -1,12 +1,16 @@
-// packagesFramework/pages/wxml/index.js
 Page({
   /**
    * 页面的初始数据
    */
   data: {
-    simple: '简单绑定',
-    comId: 'combination',
-    control: true,
+    importSuccess: {
+      name: 'import成功',
+      content: '模板为quoteTemplate',
+    },
+    includeSuccess: {
+      name: 'include成功',
+      content: '文件为includeQuote',
+    },
     theme: 'light',
   },
 

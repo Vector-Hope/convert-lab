@@ -164,8 +164,12 @@ input {
 }
 
 .page-section {
-  width: 100%;
-  margin-bottom: 30px;
+  width: auto;
+  margin: 15px;
+  padding: 30px 15px;
+  background-color: #fff;
+  text-align: center;
+  font-size: 14px;
 }
 .page-section_center {
   display: flex;

@@ -1,13 +1,12 @@
-// packagesFramework/pages/wxml/index.js
 Page({
   /**
    * 页面的初始数据
    */
   data: {
-    simple: '简单绑定',
-    comId: 'combination',
-    control: true,
+    simpleIf: true,
+    blockIf: true,
     theme: 'light',
+    hidden: true,
   },
 
   /**
@@ -29,15 +28,19 @@ Page({
       })
     }
   },
-  changeControl() {
-    const { control } = this.data
+  changeSimpleIf(e) {
     this.setData({
-      control: !control,
+      simpleIf: e.detail.value,
     })
   },
-  changeSimple(e) {
+  changeBlockIf(e) {
     this.setData({
-      simple: e.detail.value,
+      blockIf: e.detail.value,
+    })
+  },
+  changeHidden(e) {
+    this.setData({
+      hidden: e.detail.value,
     })
   },
 })
