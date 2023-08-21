@@ -1,8 +1,0 @@
-<import src="../../../../../template/quoteTemplate" />
-
-<view class="container page" data-weui-theme="{{theme}}">
-  <view class="page-body">
-    <template is="quoteTemplate" data="{{...importSuccess}}" />
-    <include src="includeQuote" />
-  </view>
-</view>

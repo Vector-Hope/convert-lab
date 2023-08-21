@@ -1,5 +1,5 @@
 /**app.wxss**/
-@import './common/common-skyline.wxss';
+@import './style/reset.wxss';
 
 page {
   background-color: #f7f7f7;
@@ -198,8 +198,6 @@ input {
   padding-left: 0;
   padding-right: 0;
 }
-.page-section-ctn {
-}
 
 /* widget */
 .btn-area {
@@ -330,7 +328,6 @@ input {
   align-items: center;
 }
 .cell-input {
-  padding: 10rpx 0;
   margin: 0 20rpx;
   border: #9a9a9a solid 4rpx;
   border-radius: 10rpx;

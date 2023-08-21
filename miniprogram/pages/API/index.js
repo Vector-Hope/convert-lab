@@ -1,11 +1,4 @@
 Page({
-  onShareAppMessage() {
-    return {
-      title: '小程序接口能力展示',
-      path: 'page/API/index',
-    }
-  },
-
   data: {
     list: [
       {
@@ -443,32 +436,6 @@ Page({
         ],
       },
     ],
-    isSetTabBarPage: false,
-    theme: 'light',
-  },
-  onUnload() {
-    if (wx.offThemeChange) {
-      wx.offThemeChange()
-    }
-  },
-  onLoad() {
-    this.setData({
-      theme: wx.getSystemInfoSync().theme || 'light',
-    })
-
-    if (wx.onThemeChange) {
-      wx.onThemeChange(({ theme }) => {
-        this.setData({
-          theme,
-        })
-      })
-    }
-  },
-  onShow() {
-    this.leaveSetTabBarPage()
-  },
-  onHide() {
-    this.leaveSetTabBarPage()
   },
   kindToggle(e) {
     const id = e.currentTarget.id
@@ -488,16 +455,6 @@ Page({
     }
     this.setData({
       list,
-    })
-  },
-  enterSetTabBarPage() {
-    this.setData({
-      isSetTabBarPage: true,
-    })
-  },
-  leaveSetTabBarPage() {
-    this.setData({
-      isSetTabBarPage: false,
     })
   },
 })

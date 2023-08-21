@@ -2,18 +2,6 @@ Page({
   data: {
     list: [
       {
-        id: 'config',
-        name: '小程序配置',
-        open: false,
-        pages: [],
-      },
-      {
-        id: 'frameAPI',
-        name: '框架接口',
-        open: false,
-        pages: [],
-      },
-      {
         id: 'wxml',
         name: 'WXML语法参考',
         open: false,
@@ -44,39 +32,20 @@ Page({
         id: 'wxs',
         name: 'WXS语法参考',
         open: false,
-        pages: [],
+        pages: [
+          {
+            id: 'wxsModule',
+            name: '模块',
+          },
+        ],
       },
     ],
-    theme: 'light',
-  },
-
-  onUnload() {
-    if (wx.offThemeChange) {
-      wx.offThemeChange()
-    }
-  },
-  onLoad() {
-    this.setData({
-      theme: wx.getSystemInfoSync().theme || 'light',
-    })
-
-    if (wx.onThemeChange) {
-      wx.onThemeChange(({ theme }) => {
-        this.setData({ theme })
-      })
-    }
   },
   kindToggle(e) {
     const id = e.currentTarget.id
     const list = this.data.list
     for (let i = 0, len = list.length; i < len; ++i) {
       if (list[i].id === id) {
-        if (list[i].url) {
-          wx.navigateTo({
-            url: `../../packageAPI/pages/${list[i].id}/${list[i].url}`,
-          })
-          return
-        }
         list[i].open = !list[i].open
       } else {
         list[i].open = false

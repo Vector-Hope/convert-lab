@@ -1,11 +1,4 @@
 Page({
-  onShareAppMessage() {
-    return {
-      title: '小程序云开发展示',
-      path: 'page/cloud/index',
-    }
-  },
-
   data: {
     list: [
       {
@@ -89,23 +82,6 @@ Page({
         ],
       },
     ],
-    theme: 'light',
-  },
-  onUnload() {
-    if (wx.offThemeChange) {
-      wx.offThemeChange()
-    }
-  },
-  onLoad() {
-    this.setData({
-      theme: wx.getSystemInfoSync().theme || 'light',
-    })
-
-    if (wx.onThemeChange) {
-      wx.onThemeChange(({ theme }) => {
-        this.setData({ theme })
-      })
-    }
   },
   kindToggle(e) {
     const id = e.currentTarget.id

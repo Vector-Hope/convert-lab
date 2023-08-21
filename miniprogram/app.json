@@ -6,9 +6,7 @@
     "pages/component/index",
     "pages/API/index"
   ],
-  "usingComponents": {
-    "mp-navigation-bar": "/component/navigation-bar/navigation-bar"
-  },
+  "usingComponents": {},
   "window": {
     "navigationBarBackgroundColor": "#F7F7F7",
     "navigationBarTextStyle": "black",
@@ -56,20 +54,17 @@
   },
   "subpackages": [
     {
-      "root": "pages/packagesFramework",
+      "root": "packagesFramework",
       "pages": [
         "pages/wxml/dataBind/index",
         "pages/wxml/listRender/index",
         "pages/wxml/ifRender/index",
         "pages/wxml/template/index",
         "pages/wxml/quote/index",
-        "pages/wxs/index",
-        "pages/config/index",
-        "pages/frameAPI/index"
+        "pages/wxs/wxsModule/index"
       ]
     }
   ],
-  "themeLocation": "lab.theme.json",
   "style": "v2",
   "sitemapLocation": "sitemap.json",
   "lazyCodeLoading": "requiredComponents"

@@ -1,24 +1,40 @@
 // app.js
 App({
-  onLaunch() {},
-  onThemeChange({ theme }) {
-    this.globalData.theme = theme
-    themeListeners.forEach((listener) => {
-      listener(theme)
+  onLaunch() {
+    wx.showToast({
+      title: '小程序初始化完成',
     })
+    console.log('App on Launch!')
   },
-  watchThemeChange(listener) {
-    if (themeListeners.indexOf(listener) < 0) {
-      themeListeners.push(listener)
-    }
+  onShow() {
+    wx.showToast({
+      title: '小程序显现',
+    })
+    console.log('App on show!')
   },
-  unWatchThemeChange(listener) {
-    const index = themeListeners.indexOf(listener)
-    if (index > -1) {
-      themeListeners.splice(index, 1)
-    }
+  onHide() {
+    wx.showToast({
+      title: '小程序隐藏',
+    })
+    console.log('App on hide!')
   },
-  globalData: {
-    theme: wx.getSystemInfoSync().theme,
+  onError() {
+    wx.showToast({
+      title: 'appOnError出现错误',
+    })
+    console.log('App on error!')
   },
+  onPageNotFound() {
+    wx.showToast({
+      title: '无法找到相应页面',
+    })
+    console.log('App on page not found!')
+  },
+  onUnhandledRejection() {
+    wx.showToast({
+      title: 'UnhandledRejection',
+    })
+    console.log('App on unhandled rejection!')
+  },
+  globalData: {},
 })

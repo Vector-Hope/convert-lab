@@ -1,0 +1,13 @@
+<view class="page-section" id="quoteInclude">
+  <view class="cells_title">include成功</view>
+  <view class="cells cells_after-title">
+    <view class="cell">
+      <view class="cell_hd">
+        <view class="label">{{includeSuccess.name}}</view>
+      </view>
+      <view class="cell_bd">
+        <view class="label">{{includeSuccess.content}}</view>
+      </view>
+    </view>
+  </view>
+</view>

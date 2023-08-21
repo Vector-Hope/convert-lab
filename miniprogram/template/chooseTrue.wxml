@@ -1,5 +1,5 @@
 <template name="chooseTrue">
-  <view class="page-section">
+  <view class="page-section" id="MustacheRender">
     <view class="cells_title">chooseTrue为true时显示</view>
     <view class="cells cells_after-title">
       <view class="cell">

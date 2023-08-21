@@ -1,0 +1,55 @@
+<wxs module="labelWxs">
+  var labelVar = 12;
+
+  module.exports = {
+    labelVar: labelVar,
+  }
+  // 单行注释
+  /*
+  多行注释
+  多行注释
+  */
+
+ /*
+ 结尾注释
+ 结尾注释
+</wxs>
+<wxs src="./index.wxs" module="fileWxs"></wxs>
+<view class="container page">
+  <view class="page-body">
+    <view class="page-section">
+      <view class="cells_title">模块</view>
+      <view class="cells cells_after-title">
+        <view class="cell">
+          <view class="cell_hd">
+            <view class="label">标签中变量</view>
+          </view>
+          <view class="cell_bd">
+            <view class="label">{{labelWxs.labelVar}}</view>
+          </view>
+        </view>
+        <view class="cell">
+          <view class="cell_hd">
+            <view class="label">文件中变量</view>
+          </view>
+          <view class="cell_bd">
+            <view class="label">{{fileWxs.fileVar}}</view>
+          </view>
+        </view>
+      </view>
+    </view>
+    <view class="page-section">
+      <view class="cells_title">运算符</view>
+      <view class="cells cells_after-title">
+        <view class="cell">
+          <view class="cell_hd">
+            <view class="label">文件中变量</view>
+          </view>
+          <view class="cell_bd">
+            <button bindtap="{{fileWxs.operators(num1, num2)}}">aaa</button>
+          </view>
+        </view>
+      </view>
+    </view>
+  </view>
+</view>

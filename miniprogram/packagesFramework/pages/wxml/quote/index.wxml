@@ -1,0 +1,8 @@
+<import src="/template/quoteTemplate" />
+
+<view class="container page">
+  <view class="page-body">
+    <template is="quoteTemplate" data="{{...importSuccess}}" />
+    <include src="includeQuote" />
+  </view>
+</view>

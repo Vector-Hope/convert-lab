@@ -1,5 +1,5 @@
 <template name="quoteTemplate">
-  <view class="page-section">
+  <view class="page-section" id="quoteImport">
     <view class="cells_title">import成功</view>
     <view class="cells cells_after-title">
       <view class="cell">
