@@ -1,0 +1,164 @@
+var basicOperator = function (num1, num2, operate) {
+  switch (operate) {
+    case '+':
+      return num1 + num2;
+    case '-':
+      return num1 - num2;
+    case '*':
+      return num1 * num2;
+    case '/':
+      return (num1 / num2).toFixed(2);
+    case '%':
+      return num1 % num2;
+  }
+}
+
+var unaryOperator = function (num, operate) {
+  switch (operate) {
+    case 'a++':
+      return num++;
+    case '++a':
+      return ++num;
+    case 'a--':
+      return num--;
+    case '--a':
+      return --num;
+    case '~a':
+      return ~num;
+    case '+a':
+      return +num;
+    case '-a':
+      return -num;
+    case '!a':
+      return !num;
+    case 'delete':
+      return delete num.fake;
+    case 'void':
+      return typeof(void num);
+    case 'typeof':
+      return typeof num;
+  }
+}
+
+var bitOperator = function (num1, num2, operate) {
+  switch (operate) {
+    case '<<':
+      return num1 << 2;
+    case '>>':
+      return num1 >> 2;
+    case '>>>':
+      return num1 >>> 2;
+    case '&':
+      return num1 & num2;
+    case '^':
+      return num1 ^ num2;
+    case '|':
+      return num1 | num2;
+  }
+}
+
+var compareOperator = function (num1, num2, operate) {
+  switch (operate) {
+    case '<':
+      return num1 < num2;
+    case '>':
+      return num1 > num2;
+    case '<=':
+      return num1 <= num2;
+    case '>=':
+      return num1 >= num2;
+    case '==':
+      return num1 == num2;
+    case '!=':
+      return num1 != num2;
+    case '!==':
+      return num1 !== num1.toString();
+    case '===':
+      return num1 === num1.toString();
+  }
+}
+
+var assignOperator = function (num1, num2, operate) {
+  switch (operate) {
+    case '+':
+      num1 += num2;
+      return num1;
+    case '-':
+      num1 -= num2;
+      return num1;
+    case '*':
+      num1 *= num2;
+      return num1;
+    case '/':
+      num1 /= num2;
+      return num1;
+    case '%':
+      num1 %= num2;
+      return num1;
+    case '<<':
+      num1 <<= 2;
+      return num1;
+    case '>>':
+      num1 >>= 2;
+      return num1;
+    case '>>>':
+      num1 >>>= 2;
+      return num1;
+    case '&':
+      num1 &= num2;
+      return num1;
+    case '^':
+      num1 ^= num2;
+      return num1;
+    case '|':
+      num1 |= num2;
+      return num1;
+  }
+}
+
+var binLogicOperator = function (num1, num2, operate) {
+  if (operate == '&&') {
+    return num1 && num2;
+  } else if (operate == '||') {
+    return num1 || num2;
+  }
+}
+
+var otherOperator = function (num1, num2, operate) {
+  var whileVar = 0;
+  for (var i = 0; i < 10; i++) {
+    console.log('for语句执行', i);
+  }
+  while (whileVar < 10) {
+    console.log('while语句执行', whileVar);
+    whileVar += 1;
+  }
+  if (operate == '?:') {
+    return num1 > num2 ? num1 : num2;
+  } else if (operate == ',') {
+    return (num1, num2);
+  }
+}
+
+var operator = function (type, num1, num2, operate) {
+  switch (type) {
+    case 'basicOperate':
+      return basicOperator(num1, num2, operate);
+    case 'unaryOperate':
+      return unaryOperator(num1, operate);
+    case 'bitOperate':
+      return bitOperator(num1, num2, operate);
+    case 'compareOperate':
+      return compareOperator(num1, num2, operate);
+    case 'assignOperate':
+      return assignOperator(num1, num2, operate);
+    case 'binLogicOperate':
+      return binLogicOperator(num1, num2, operate);
+    case 'otherOperate':
+      return otherOperator(num1, num2, operate);
+  }
+}
+
+module.exports = {
+  operator: operator,
+}

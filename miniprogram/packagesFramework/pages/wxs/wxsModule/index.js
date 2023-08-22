@@ -1,4 +1,5 @@
-// pages/packagesFramework/pages/wxs/wxsModule/index.js
+// const util = require('../../../../utils/util.js')
+// const fileWxs = require('./index.wxs')
 Page({
 
   /**
@@ -6,62 +7,18 @@ Page({
    */
   data: {
     num1: 10,
-    num2: 20
+    num2: 20,
+    wxsFuncRes: 0,
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
-  onLoad(options) {
-
+  onLoad() {
+    const {num1, num2} = this.data;
+    // const wxsFuncRes = fileWxs.operator(num1, num2);
+    // this.setData({
+    //   wxsFuncRes,
+    // })
   },
-
-  /**
-   * 生命周期函数--监听页面初次渲染完成
-   */
-  onReady() {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面显示
-   */
-  onShow() {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面隐藏
-   */
-  onHide() {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面卸载
-   */
-  onUnload() {
-
-  },
-
-  /**
-   * 页面相关事件处理函数--监听用户下拉动作
-   */
-  onPullDownRefresh() {
-
-  },
-
-  /**
-   * 页面上拉触底事件的处理函数
-   */
-  onReachBottom() {
-
-  },
-
-  /**
-   * 用户点击右上角分享
-   */
-  onShareAppMessage() {
-
-  }
 })

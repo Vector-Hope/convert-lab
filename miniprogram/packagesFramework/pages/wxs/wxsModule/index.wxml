@@ -11,14 +11,15 @@
   */
 
  /*
+ 结尾注释 不可用
  结尾注释
- 结尾注释
+ */
 </wxs>
 <wxs src="./index.wxs" module="fileWxs"></wxs>
 <view class="container page">
   <view class="page-body">
     <view class="page-section">
-      <view class="cells_title">模块</view>
+      <view class="cells_title">文件&标签引入</view>
       <view class="cells cells_after-title">
         <view class="cell">
           <view class="cell_hd">
@@ -39,14 +40,14 @@
       </view>
     </view>
     <view class="page-section">
-      <view class="cells_title">运算符</view>
+      <view class="cells_title">require进js中</view>
       <view class="cells cells_after-title">
         <view class="cell">
           <view class="cell_hd">
-            <view class="label">文件中变量</view>
+            <view class="label">经计算后的变量</view>
           </view>
           <view class="cell_bd">
-            <button bindtap="{{fileWxs.operators(num1, num2)}}">aaa</button>
+            <view class="label">{{wxsFuncRes}}</view>
           </view>
         </view>
       </view>

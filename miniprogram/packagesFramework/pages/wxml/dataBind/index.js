@@ -1,7 +1,4 @@
 Page({
-  /**
-   * 页面的初始数据
-   */
   data: {
     dataBind: '数据绑定',
     simple: 'dataBind',

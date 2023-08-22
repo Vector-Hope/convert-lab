@@ -37,6 +37,10 @@ Page({
             id: 'wxsModule',
             name: '模块',
           },
+          {
+            id: 'wxsOperator',
+            name: '运算符',
+          },
         ],
       },
     ],

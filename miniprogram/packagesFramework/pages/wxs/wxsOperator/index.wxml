@@ -1,0 +1,40 @@
+<wxs src="./index.wxs" module="opreatorWxs"></wxs>
+<view class="container page">
+  <view class="page-body">
+    <view class="page-section">
+      <view class="cells_title">num控制</view>
+      <view class="cells cells_after-title">
+        <view class="cell">
+          <view class="cell_hd">
+            <view class="label">num1</view>
+          </view>
+          <view class="cell_bd">
+            <slider bindchange="changeNum1" min="-50" max="50" step="1" show-value />
+          </view>
+        </view>
+        <view class="cell">
+          <view class="cell_hd">
+            <view class="label">num2</view>
+          </view>
+          <view class="cell_bd">
+            <slider bindchange="changeNum2" min="1" max="50" step="1" show-value />
+          </view>
+        </view>
+      </view>
+    </view>
+    <view class="page-section" wx:for="{{operatorList}}" wx:key="{{item.id}}" id="{{item.id}}">
+      <view class="cells_title">{{item.title}}</view>
+      <view class="cells cells_after-title">
+        <view class="cell" wx:for="{{item.list}}" wx:for-item="unit" wx:key="{{unit.id}}">
+          <view class="cell_hd">
+            <view class="label">{{unit.name}}</view>
+          </view>
+          <view class="cell_bd">
+            <view class="label">{{opreatorWxs.operator(item.id, num1, num2, unit.operator)}}</view>
+          </view>
+        </view>
+      </view>
+    </view>
+  </view>
+</view>
+

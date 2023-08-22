@@ -1,16 +1,7 @@
 var fileVar = 1231;
 
-function operators (num1, num2, str1, str2) {
-    // 加法运算
-  console.log(30 === num1 + num2);
-  // 减法运算
-  console.log(-10 === num1 - num2);
-  // 乘法运算
-  console.log(200 === num1 * num2);
-  // 除法运算
-  console.log(0.5 === num1 / num2);
-  // 取余运算
-  console.log(10 === num1 % num2);
+function operators (num1, num2) {
+  return num1 + num2;
 }
 
 module.exports = {

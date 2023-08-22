@@ -1,6 +1,10 @@
-<import src="/template/creatTemplate" />
-<import src="/template/chooseTrue" />
-<import src="/template/chooseFalse" />
+<!--
+  绝对路径不可用
+  <import src="/template/creatTemplate" /> 
+-->
+<import src="../../../../template/creatTemplate" />
+<import src="../../../../template/chooseTrue" />
+<import src="../../../../template/chooseFalse" />
 <view class="container page">
   <view class="page-body">
     <template is="creatTemplate" data="{{...creatTemplate}}" />

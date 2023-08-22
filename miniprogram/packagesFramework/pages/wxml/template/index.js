@@ -1,7 +1,4 @@
 Page({
-  /**
-   * 页面的初始数据
-   */
   data: {
     creatTemplate: {
       title: '创建模板并使用',
