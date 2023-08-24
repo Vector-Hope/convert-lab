@@ -2,198 +2,118 @@ Page({
   data: {
     list: [
       {
-        id: 'api',
-        name: '开放接口',
+        id: 'basics',
+        name: '基础',
         open: false,
         pages: [
           {
-            zh: '微信登录',
-            url: 'login/login',
+            id: 'basics',
+            name: '基础',
           },
           {
-            zh: '获取用户信息',
-            url: 'get-user-info/get-user-info',
+            id: 'system',
+            name: '系统',
           },
           {
-            zh: '发起支付',
-            url: 'request-payment/request-payment',
+            id: 'update',
+            name: '更新',
           },
           {
-            zh: '跳转',
-            url: 'jump/jump',
+            id: 'miniProgram',
+            name: '小程序',
           },
           {
-            zh: '转发',
-            url: 'share/share',
+            id: 'debug',
+            name: '调试',
           },
           {
-            zh: '转发按钮',
-            url: 'share-button/share-button',
+            id: 'performance',
+            name: '性能',
           },
           {
-            zh: '客服消息',
-            url: 'custom-message/custom-message',
+            id: 'packageLoading',
+            name: '分包加载',
           },
           {
-            zh: '订阅消息',
-            url: 'subscribe-message/subscribe-message',
-          },
-          {
-            zh: '收货地址',
-            url: 'choose-address/choose-address',
-          },
-          {
-            zh: '获取发票抬头',
-            url: 'choose-invoice-title/choose-invoice-title',
-          },
-          {
-            zh: '生物认证',
-            url: 'soter-authentication/soter-authentication',
-          },
-          {
-            zh: '设置',
-            url: 'setting/setting',
+            id: 'encryption',
+            name: '加密',
           },
         ],
       },
       {
-        id: 'page',
+        id: 'routing',
+        name: '路由',
+        open: false,
+        pages: [],
+      },
+      {
+        id: 'redirection',
+        name: '跳转',
+        open: false,
+        pages: [],
+      },
+      {
+        id: 'forward',
+        name: '转发',
+        open: false,
+        pages: [],
+      },
+      {
+        id: 'interface',
         name: '界面',
         open: false,
         pages: [
           {
-            zh: '设置界面标题',
-            url: 'set-navigation-bar-title/set-navigation-bar-title',
+            id: 'interaction',
+            name: '交互',
           },
           {
-            zh: '标题栏加载动画',
-            url: 'navigation-bar-loading/navigation-bar-loading',
+            id: 'navigationBar',
+            name: '导航栏',
           },
           {
-            zh: '设置TabBar',
-            url: '@set-tab-bar',
+            id: 'background',
+            name: '背景',
           },
           {
-            zh: '页面跳转',
-            url: 'navigator/navigator',
+            id: 'tabBar',
+            name: 'Tab Bar',
           },
           {
-            zh: '下拉刷新',
-            url: 'pull-down-refresh/pull-down-refresh',
+            id: 'font',
+            name: '字体',
           },
           {
-            zh: '创建动画',
-            url: 'animation/animation',
+            id: 'pullDownRefresh',
+            name: '下拉刷新',
           },
           {
-            zh: '创建绘画',
-            url: 'canvas/canvas',
+            id: 'scroll',
+            name: '滚动',
           },
           {
-            zh: '显示操作菜单',
-            url: 'action-sheet/action-sheet',
+            id: 'animation',
+            name: '动画',
           },
           {
-            zh: '显示模态弹窗',
-            url: 'modal/modal',
+            id: 'setTop',
+            name: '置顶',
           },
           {
-            zh: '页面滚动',
-            url: 'page-scroll/page-scroll',
+            id: 'customizedComponents',
+            name: '自定义组件',
           },
           {
-            zh: '显示消息提示框',
-            url: 'toast/toast',
+            id: 'menu',
+            name: '菜单',
           },
           {
-            zh: '获取WXML节点信息',
-            url: 'get-wxml-node-info/get-wxml-node-info',
+            id: 'windows',
+            name: '窗口',
           },
           {
-            zh: 'WXML节点布局相交状态',
-            url: 'intersection-observer/intersection-observer',
-          },
-        ],
-      },
-      {
-        id: 'device',
-        name: '设备',
-        open: false,
-        pages: [
-          {
-            zh: '获取手机网络状态',
-            url: 'get-network-type/get-network-type',
-          },
-          {
-            zh: '监听手机网络变化',
-            url: 'on-network-status-change/on-network-status-change',
-          },
-          {
-            zh: '获取手机系统信息',
-            url: 'get-system-info/get-system-info',
-          },
-          {
-            zh: '获取手机设备电量',
-            url: 'get-battery-info/get-battery-info',
-          },
-          {
-            zh: '监听重力感应数据',
-            url: 'on-accelerometer-change/on-accelerometer-change',
-          },
-          {
-            zh: '监听罗盘数据',
-            url: 'on-compass-change/on-compass-change',
-          },
-          {
-            zh: '打电话',
-            url: 'make-phone-call/make-phone-call',
-          },
-          {
-            zh: '扫码',
-            url: 'scan-code/scan-code',
-          },
-          {
-            zh: '剪切板',
-            url: 'clipboard-data/clipboard-data',
-          },
-          {
-            zh: '蓝牙',
-            url: 'bluetooth/bluetooth',
-          },
-          {
-            zh: 'iBeacon',
-            url: 'ibeacon/ibeacon',
-          },
-          {
-            zh: '屏幕亮度',
-            url: 'screen-brightness/screen-brightness',
-          },
-          {
-            zh: '用户截屏事件',
-            url: 'capture-screen/capture-screen',
-          },
-          {
-            zh: '振动',
-            url: 'vibrate/vibrate',
-          },
-          {
-            zh: '手机联系人',
-            url: 'add-contact/add-contact',
-          },
-          {
-            zh: 'Wi-Fi',
-            url: 'wifi/wifi',
-          },
-        ],
-      },
-      {
-        id: 'performance',
-        name: '性能',
-        open: false,
-        pages: [
-          {
-            zh: '获取性能数据',
-            url: 'get-performance/get-performance',
+            id: 'worklet',
+            name: 'worklet 动画',
           },
         ],
       },
@@ -203,30 +123,64 @@ Page({
         open: false,
         pages: [
           {
-            zh: '发起一个请求',
-            url: 'request/request',
+            id: 'request',
+            name: '发起请求',
           },
           {
-            zh: 'WebSocket',
-            url: 'web-socket/web-socket',
+            id: 'download',
+            name: '下载',
           },
           {
-            zh: '上传文件',
-            url: 'upload-file/upload-file',
+            id: 'upload',
+            name: '上传',
           },
           {
-            zh: '下载文件',
-            url: 'download-file/download-file',
+            id: 'webSocket',
+            name: 'WebSocket',
           },
           {
-            zh: 'UDPSocket',
-            url: 'udp-socket/udp-socket',
+            id: 'mDNS',
+            name: 'mDNS',
           },
           {
-            zh: 'mDNS',
-            url: 'mdns/mdns',
+            id: 'TCPCommunications',
+            name: 'TCP 通信',
+          },
+          {
+            id: 'UDPCommunications',
+            name: 'UDP 通信',
           },
         ],
+      },
+      {
+        id: 'payment',
+        name: '支付',
+        open: false,
+        pages: [],
+      },
+      {
+        id: 'cache',
+        name: '数据缓存',
+        open: false,
+        pages: [],
+      },
+      {
+        id: 'analysis',
+        name: '数据分析',
+        open: false,
+        pages: [],
+      },
+      {
+        id: 'xr-frame',
+        name: 'XR-FRAME',
+        open: false,
+        pages: [],
+      },
+      {
+        id: 'canvas',
+        name: '画布',
+        open: false,
+        pages: [],
       },
       {
         id: 'media',
@@ -234,36 +188,56 @@ Page({
         open: false,
         pages: [
           {
-            zh: '图片',
-            url: 'image/image',
+            id: 'map',
+            name: '地图',
           },
           {
-            zh: '音频',
-            url: 'audio/audio',
+            id: 'image',
+            name: '图片',
           },
           {
-            zh: '录音',
-            url: 'voice/voice',
+            id: 'video',
+            name: '视频',
           },
           {
-            zh: '背景音频',
-            url: 'background-audio/background-audio',
+            id: 'audio',
+            name: '音频',
           },
           {
-            zh: '文件',
-            url: 'file/file',
+            id: 'backgroundAudio',
+            name: '背景音频',
           },
           {
-            zh: '视频',
-            url: 'video/video',
+            id: 'realtimeAudioAndVideo',
+            name: '实时音视频',
           },
           {
-            zh: '音视频合成',
-            url: 'media-container/media-container',
+            id: 'recording',
+            name: '录音',
           },
           {
-            zh: '动态加载字体',
-            url: 'load-font-face/load-font-face',
+            id: 'camera',
+            name: '相机',
+          },
+          {
+            id: 'richText',
+            name: '富文本',
+          },
+          {
+            id: 'audioOrVideoCompose',
+            name: '音视频合成',
+          },
+          {
+            id: 'realtimeVoice',
+            name: '实时语音',
+          },
+          {
+            id: 'screenRecorder',
+            name: '画面录制器',
+          },
+          {
+            id: 'videoDecoder',
+            name: '视频解码器',
           },
         ],
       },
@@ -271,190 +245,257 @@ Page({
         id: 'location',
         name: '位置',
         open: false,
+        pages: [],
+      },
+      {
+        id: 'file',
+        name: '文件',
+        open: false,
+        pages: [],
+      },
+      {
+        id: 'openAPIS',
+        name: '开放接口',
+        open: false,
         pages: [
           {
-            zh: '获取当前位置',
-            url: 'get-location/get-location',
+            id: 'login',
+            name: '登录',
           },
           {
-            zh: '使用原生地图查看位置',
-            url: 'open-location/open-location',
+            id: 'accountInfomation',
+            name: '账户信息',
           },
           {
-            zh: '使用原生地图选择位置',
-            url: 'choose-location/choose-location',
+            id: 'userInfomation',
+            name: '用户信息',
+          },
+          {
+            id: 'authorization',
+            name: '授权',
+          },
+          {
+            id: 'setting',
+            name: '设置',
+          },
+          {
+            id: 'recipientAddress',
+            name: '收货地址',
+          },
+          {
+            id: 'cardsAndOffers',
+            name: '卡券',
+          },
+          {
+            id: 'invoice',
+            name: '发票',
+          },
+          {
+            id: 'biometricAuthorization',
+            name: '生物认证',
+          },
+          {
+            id: 'weRun',
+            name: '微信运动',
+          },
+          {
+            id: 'subscribeNews',
+            name: '订阅消息',
+          },
+          {
+            id: 'wechatRedRacket',
+            name: '微信红包',
+          },
+          {
+            id: 'collection',
+            name: '收藏',
+          },
+          {
+            id: 'mineMiniProgram',
+            name: '我的小程序',
+          },
+          {
+            id: 'licensePlate',
+            name: '车牌',
+          },
+          {
+            id: 'wechatVideoChannel',
+            name: '视频号',
+          },
+          {
+            id: 'deviceVoip',
+            name: '音视频通话设备',
+          },
+          {
+            id: 'wechatGroup',
+            name: '微信群',
+          },
+          {
+            id: 'privacyInformation',
+            name: '隐私信息授权',
+          },
+          {
+            id: 'wechatCustomerService',
+            name: '微信客服',
           },
         ],
       },
       {
-        id: 'storage',
-        name: '数据',
+        id: 'device',
+        name: '设备',
+        open: false,
         pages: [
           {
-            zh: '本地存储',
-            url: 'storage/storage',
+            id: 'bluetoothGeneral',
+            name: '蓝牙-通用',
           },
           {
-            zh: '周期性更新',
-            url: 'get-background-fetch-data/get-background-fetch-data',
+            id: 'bluetoothLowCenter',
+            name: '蓝牙-低功耗中心设备',
           },
           {
-            zh: '数据预拉取',
-            url: 'get-background-prefetch-data/get-background-prefetch-data',
-          },
-        ],
-      },
-      {
-        id: 'worker',
-        name: '多线程',
-        url: 'worker/worker',
-      },
-      {
-        id: 'framework',
-        name: '框架',
-        pages: [
-          {
-            zh: '双向绑定',
-            url: 'two-way-bindings/two-way-bindings',
+            id: 'bluetoothLowPerpherals',
+            name: '蓝牙-低功耗外围设备',
           },
           {
-            zh: 'WXS',
-            url: 'wxs/wxs',
+            id: 'bluetoothBeacon',
+            name: '蓝牙-信标(Beacon)',
           },
           {
-            zh: '屏幕旋转',
-            url: 'resizable/resizable',
+            id: 'nfc',
+            name: 'NFC',
+          },
+          {
+            id: 'wifi',
+            name: 'Wi-Fi',
+          },
+          {
+            id: 'calendar',
+            name: '日历',
+          },
+          {
+            id: 'contact',
+            name: '联系人',
+          },
+          {
+            id: 'accessibility',
+            name: '无障碍',
+          },
+          {
+            id: 'bettery',
+            name: '电量',
+          },
+          {
+            id: 'nfcHCE',
+            name: 'NFC 主机卡模拟',
+          },
+          {
+            id: 'clipBoard',
+            name: '剪切板',
+          },
+          {
+            id: 'deviceNetwork',
+            name: '网络',
+          },
+          {
+            id: 'deviceEncryption',
+            name: '加密',
+          },
+          {
+            id: 'screen',
+            name: '屏幕',
+          },
+          {
+            id: 'keyboard',
+            name: '键盘',
+          },
+          {
+            id: 'phoneCall',
+            name: '电话',
+          },
+          {
+            id: 'accelerometer',
+            name: '加速计',
+          },
+          {
+            id: 'compass',
+            name: '罗盘',
+          },
+          {
+            id: 'deviceOrientation',
+            name: '设备方向',
+          },
+          {
+            id: 'gyroscope',
+            name: '陀螺仪',
+          },
+          {
+            id: 'memory',
+            name: '内存',
+          },
+          {
+            id: 'scan',
+            name: '扫码',
+          },
+          {
+            id: 'sms',
+            name: '短信',
+          },
+          {
+            id: 'vibration',
+            name: '振动',
           },
         ],
       },
       {
         id: 'ai',
-        name: '通用AI推理能力',
+        name: 'AI',
+        open: false,
         pages: [
           {
-            zh: 'mobileNet',
-            url: 'mobilenet/index',
+            id: 'inference',
+            name: 'AI推理',
           },
           {
-            zh: 'style transfer',
-            url: 'style-trans/index',
+            id: 'visionAlgorithms',
+            name: '视觉算法',
           },
           {
-            zh: 'mobileNetInt8',
-            url: 'mobilenet_int8/index',
+            id: 'faceRecognition',
+            name: '人脸识别',
           },
         ],
       },
       {
-        id: 'ar',
-        name: 'VisionKit视觉能力',
-        pages: [
-          {
-            zh: 'VisionKit基础',
-            url: 'visionkit-basic/visionkit-basic',
-          },
-          {
-            zh: 'VisionKit基础-v2',
-            url: 'visionkit-basic-v2/visionkit-basic-v2',
-          },
-          {
-            zh: '水平面AR',
-            url: 'plane-ar/plane-ar',
-          },
-          {
-            zh: '水平面AR-v2',
-            url: 'plane-ar-v2/plane-ar-v2',
-          },
-          {
-            zh: '水平面AR-v2-marker识别',
-            url: 'plane-ar-v2-marker/plane-ar-v2-marker',
-          },
-          {
-            zh: '水平面AR-v2-虚实遮挡',
-            url: 'plane-ar-v2-depth/plane-ar-v2-depth',
-          },
-          {
-            zh: '水平面旋转AR',
-            url: 'plane-ar-3dof/plane-ar-3dof',
-          },
-          {
-            zh: '2DMarkerAR',
-            url: '2dmarker-ar/2dmarker-ar',
-          },
-          {
-            zh: '3DMarkerAR',
-            url: '3dmarker-ar/3dmarker-ar',
-          },
-          {
-            zh: '单样本检测(OSD)',
-            url: 'osd-ar/osd-ar',
-          },
-          {
-            zh: '相机帧测试',
-            url: 'cameraBuffer-detect/cameraBuffer-detect',
-          },
-          {
-            zh: '实时深度图检测',
-            url: 'depth-detect/depth-detect',
-          },
-          {
-            zh: '照片深度图检测',
-            url: 'photo-depth-detect/photo-depth-detect',
-          },
-          // {
-          //   zh: '实时OCR检测',
-          //   url: 'ocr-detect/ocr-detect'
-          // },
-          {
-            zh: '照片OCR检测',
-            url: 'photo-ocr-detect/photo-ocr-detect',
-          },
-          {
-            zh: '实时人脸检测',
-            url: 'face-detect/face-detect',
-          },
-          {
-            zh: '照片人脸检测',
-            url: 'photo-face-detect/photo-face-detect',
-          },
-          {
-            zh: '实时人体检测',
-            url: 'body-detect/body-detect',
-          },
-          {
-            zh: '照片人体检测',
-            url: 'photo-body-detect/photo-body-detect',
-          },
-          {
-            zh: '实时手势检测',
-            url: 'hand-detect/hand-detect',
-          },
-          {
-            zh: '照片手势检测',
-            url: 'photo-hand-detect/photo-hand-detect',
-          },
-        ],
+        id: 'worker',
+        name: 'Worker',
+        open: false,
+        pages: [],
+      },
+      {
+        id: 'wxml',
+        name: 'WXML',
+        open: false,
+        pages: [],
+      },
+      {
+        id: 'thirdParty',
+        name: '第三方平台',
+        open: false,
+        pages: [],
+      },
+      {
+        id: 'advertising',
+        name: '广告',
+        open: false,
+        pages: [],
+      },
+      {
+        id: 'skyline',
+        name: 'Skyline',
+        open: false,
+        pages: [],
       },
     ],
-  },
-  kindToggle(e) {
-    const id = e.currentTarget.id
-    const list = this.data.list
-    for (let i = 0, len = list.length; i < len; ++i) {
-      if (list[i].id === id) {
-        if (list[i].url) {
-          wx.navigateTo({
-            url: `../../packageAPI/pages/${list[i].id}/${list[i].url}`,
-          })
-          return
-        }
-        list[i].open = !list[i].open
-      } else {
-        list[i].open = false
-      }
-    }
-    this.setData({
-      list,
-    })
   },
 })

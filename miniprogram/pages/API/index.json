@@ -1,4 +1,6 @@
 {
-  "usingComponents": {},
-  "navigationBarTitleText": "小程序接口能力展示"
+  "usingComponents": {
+    "tab-page-list": "../../components/tabPageList/index"
+  },
+  "navigationBarTitleText": "convert接口能力展示"
 }

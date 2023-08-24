@@ -1,3 +1,6 @@
 {
-  "navigationBarTitleText": "小程序交互动画展示"
+  "usingComponents": {
+    "tab-page-list": "../../components/tabPageList/index"
+  },
+  "navigationBarTitleText": "convert框架内容展示"
 }

@@ -1,0 +1,2 @@
+/* components/tabPageList/index.wxss */
+@import '../../style/tabPage.wxss';

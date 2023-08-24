@@ -1,0 +1,28 @@
+<!--components/tabPageList/index.wxml-->
+<view class="kind-list">
+  <block wx:for-items="{{pageList}}" wx:key="{{item.id}}">
+    <view class="kind-list-item">
+      <view
+        id="{{item.id}}"
+        class="kind-list-item-hd {{item.open ? 'kind-list-item-hd-show' : ''}}"
+        bindtap="kindToggle"
+      >
+        <view class="kind-list-text">{{item.name}}</view>
+      </view>
+      <view class="kind-list-item-bd {{item.open ? 'kind-list-item-bd-show' : ''}}">
+        <view class="navigator-box {{item.open ? 'navigator-box-show' : ''}}">
+          <block wx:for-items="{{item.pages}}" wx:for-item="page" wx:key="{{page.id}}">
+            <view>
+              <navigator
+                url="/{{packageName}}/pages/{{item.id}}/{{page.id}}/index"
+                class="navigator {{index + 1 === item.pages.length ? '' : 'navigator-bottom-line'}}"
+                >{{page.name}}</navigator
+              >
+              <view class="navigator-arrow"></view>
+            </view>
+          </block>
+        </view>
+      </view>
+    </view>
+  </block>
+</view>

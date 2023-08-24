@@ -11,28 +11,28 @@ Page({
           {
             id: 'addition',
             name: 'num1 + num2',
-            operator: '+'
+            operator: '+',
           },
           {
             id: 'subtraction',
             name: 'num1 - num2',
-            operator: '-'
+            operator: '-',
           },
           {
             id: 'multiplication',
             name: 'num1 * num2',
-            operator: '*'
+            operator: '*',
           },
           {
             id: 'division',
             name: 'num1 / num2',
-            operator: '/'
+            operator: '/',
           },
           {
             id: 'remainder',
             name: 'num1 % num2',
-            operator: '%'
-          }
+            operator: '%',
+          },
         ],
       },
       {
@@ -94,7 +94,6 @@ Page({
             name: 'typeof num1',
             operator: 'typeof',
           },
-    
         ],
       },
       {
@@ -186,27 +185,27 @@ Page({
           {
             id: 'assign_addition',
             name: 'num1 += num2',
-            operator: '+'
+            operator: '+',
           },
           {
             id: 'assign_subtraction',
             name: 'num1 -= num2',
-            operator: '-'
+            operator: '-',
           },
           {
             id: 'assign_multiplication',
             name: 'num1 *= num2',
-            operator: '*'
+            operator: '*',
           },
           {
             id: 'assign_division',
             name: 'num1 /= num2',
-            operator: '/'
+            operator: '/',
           },
           {
             id: 'assign_remainder',
             name: 'num1 %= num2',
-            operator: '%'
+            operator: '%',
           },
           {
             id: 'assign_move_left',
@@ -274,14 +273,14 @@ Page({
       },
     ],
   },
-  changeNum1 (e) {
+  changeNum1(e) {
     this.setData({
       num1: e.detail.value,
     })
   },
-  changeNum2 (e) {
+  changeNum2(e) {
     this.setData({
       num2: e.detail.value,
     })
-  }
+  },
 })
