@@ -6,6 +6,7 @@ Component({
   properties: {
     pageList: Array,
     packageName: String,
+    category: String,
   },
 
   /**
@@ -23,7 +24,6 @@ Component({
       for (let i = 0, len = pageList.length; i < len; ++i) {
         if (pageList[i].id === id) {
           if (pageList[i].pages.length == 0) {
-            console.log('gogogo')
             wx.navigateTo({
               url: `../../${packageName}/pages/${pageList[i].id}/index`,
             })

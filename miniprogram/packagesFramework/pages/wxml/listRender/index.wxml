@@ -3,7 +3,7 @@
     <view class="page-section">
       <view class="cells_title">简单渲染(key为item的property)</view>
       <view class="cells cells_after-title" id="simpleRender">
-        <view class="cell" wx:for="{{simpleRender}}" wx:key="{{item.id}}">
+        <view class="cell" wx:for="{{simpleRender}}" wx:key="id">
           <view class="cell_hd">
             <view class="label">{{index}}</view>
           </view>
@@ -29,7 +29,7 @@
     <view class="page-section">
       <view class="cells_title">嵌套渲染+自定义item, key</view>
       <view class="cells cells_after-title" id="nestRender">
-        <view class="cell" wx:for="{{listRender}}" wx:key="{{item.id}}">
+        <view class="cell" wx:for="{{listRender}}" wx:key="id">
           <view class="cell_hd">
             <view class="label"> {{index}}:{{item.name}} </view>
           </view>

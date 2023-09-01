@@ -1,2 +1,4 @@
 <!--packagesAPI/pages/basics/basics/index.wxml-->
-<text>packagesAPI/pages/basics/basics/index.wxml</text>
+<view className='api-page'>
+  <button-list buttonList='{{list}}' />
+</view>

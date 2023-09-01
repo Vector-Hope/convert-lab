@@ -1,4 +1,7 @@
 {
   "component": true,
-  "usingComponents": {}
+  "usingComponents": {
+    "callback-contents": "../callbackContent/index",
+    "json-tree": "../jsonTree/index"
+  }
 }

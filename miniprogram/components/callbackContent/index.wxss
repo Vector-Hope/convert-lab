@@ -1,1 +1,4 @@
 /* components/callbackContent/index.wxss */
+.callback-content {
+  display: none;
+}

@@ -1,2 +1,5 @@
 <!--packagesAPI/pages/routing/index.wxml-->
-<text>packagesAPI/pages/routing/index.wxml</text>
+<view>
+  <json-tree id="json-tree" jsonData="{{jsonData}}"></json-tree>
+<button bindtap="showJsonData">jsonData</button>
+</view>

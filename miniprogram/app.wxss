@@ -1,8 +1,8 @@
 /**app.wxss**/
-@import './style/reset.wxss';
+@import './style/variables.wxss';
 
 page {
-  background-color: #f7f7f7;
+  background-color: var(--color-bg-base);
   height: 100%;
   font-size: 16px;
   line-height: 1.6;
@@ -146,18 +146,7 @@ input {
   margin-bottom: 50px;
 }
 
-.page-foot {
-  margin: 50px 0 0 0;
-  margin-bottom: constant(safe-area-inset-bottom);
-  margin-bottom: env(safe-area-inset-bottom);
-  padding-bottom: 15px;
-  text-align: center;
-  color: #1aad19;
-  font-size: 0;
-}
 .icon-foot {
-  /* width: 151px;
-  height: 12px; */
   width: 76px;
   height: 12px;
   margin: 0 auto;
@@ -167,7 +156,7 @@ input {
   width: auto;
   margin: 15px;
   padding: 30px 15px;
-  background-color: #fff;
+  background-color: var(--color-bg);
   text-align: center;
   font-size: 14px;
 }
@@ -192,7 +181,6 @@ input {
   color: rgba(0, 0, 0, 0.5);
   margin-bottom: 5px;
   padding-left: 15px;
-  /* padding-right: 15px; */
 }
 .page-section-gap .page-section-title {
   padding-left: 0;
@@ -238,55 +226,6 @@ input {
   height: 2px;
   transform: translate(-50%, -50%);
 }
-
-.demo-text-1 {
-  position: relative;
-  align-items: center;
-  justify-content: center;
-  background-color: #1aad19;
-  color: #ffffff;
-  font-size: 18px;
-}
-/* skyline不支持:before */
-/* .demo-text-1:before{
-  content: 'A';
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-} */
-.demo-text-2 {
-  position: relative;
-  align-items: center;
-  justify-content: center;
-  background-color: #2782d7;
-  color: #ffffff;
-  font-size: 18px;
-}
-/* skyline不支持:before */
-/* .demo-text-2:before{
-  content: 'B';
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-} */
-.demo-text-3 {
-  position: relative;
-  align-items: center;
-  justify-content: center;
-  background-color: #f1f1f1;
-  color: #353535;
-  font-size: 18px;
-}
-/* skyline不支持:before */
-/* .demo-text-3:before{
-  content: 'C';
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-} */
 /* pick from weui */
 .cells_title {
   margin-bottom: 30rpx;
@@ -341,10 +280,6 @@ input {
 }
 .cell::before {
   display: none;
-}
-
-[data-weui-theme='dark'] .weui-cell_before {
-  border-top-color: hsla(0, 0%, 100%, 0.1);
 }
 
 .center {

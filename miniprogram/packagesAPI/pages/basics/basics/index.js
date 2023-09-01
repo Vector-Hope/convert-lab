@@ -3,7 +3,50 @@ Page({
   /**
    * 页面的初始数据
    */
-  data: {},
+  data: {
+    list: [
+      {
+        id: 'env',
+        func: (data = {}) => {
+          const env = wx.env;
+          console.log(env);
+          return env;
+        },
+      },
+      {
+        id: 'canIUse',
+        inputData: {
+          apiName: 'openBluetoothAdapter',
+        },
+        func: (data = {}) => {
+          const {apiName} = data;
+          const res = {};
+          res[apiName] = wx.canIUse(apiName);
+          return res;
+        },
+      },
+      {
+        id: 'canIuseWebp',
+        func: () => {
+        },
+      },
+      {
+        id: 'base64ToArrayBuffer',
+        func: () => {
+        },
+      },
+      {
+        id: 'arrayBufferToBase64',
+        func: () => {
+        },
+      },
+      {
+        id: 'perload',
+        func: () => {
+        },
+      },
+    ]
+  },
 
   /**
    * 生命周期函数--监听页面加载

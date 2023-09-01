@@ -1,0 +1,16 @@
+page {
+  /* card/button Color */
+  --color-success: #317af7;
+  --color-error: #e84026;
+  --color-warning: #ed6f21;
+  --color-oncall: #64bb5c;
+  --color-icon: #0a59f7;
+
+  /* background Color */
+  --color-bg: #fff;
+  --color-bg-base: #f1f3f5;
+
+  /* text Color */
+  --color-text-base: #000000dd;
+  
+}

@@ -1,1 +1,109 @@
 /* components/buttonList/index.wxss */
+.button-list {
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.api-page-btn-area {
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    transition: 0.3s;
+}
+
+.api-page-btn-area-hidden {
+    opacity: 0;
+    height: 0;
+}
+
+.api-textarea-area {
+    width: 100%;
+}
+
+.api-input-area {
+    width: 80%;
+    height: 180px;
+    margin: 20px auto;
+    padding: 20rpx;
+    border: #333 solid 4rpx;
+    border-radius: 10px;
+    overflow: hidden;
+    transition: 0.3s;
+    resize: none;
+    box-sizing: border-box;
+}
+
+.api-input-area-hidden {
+    height: 0;
+    margin: 0 auto;
+    border: 0;
+}
+
+.textarea-control {
+    height: 100%;
+    width: 60rpx;
+    margin: 0 20rpx;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.control-icon {
+  height: 60rpx;
+  width: 60rpx;
+  transition: 0.3s;
+}
+
+.control-icon-hidden {
+  display: none;
+}
+
+.textarea-hidden {
+  transform: rotate(45deg);
+}
+
+.btn-area {
+  display: flex;
+  justify-content: space-between;
+  width: 84%;
+}
+
+.api-page-btn, .show-res-btn {
+    color: #f7f7f7;
+    /* white-space: nowrap; */
+    padding: 15rpx 25rpx;
+    border-radius: 40rpx;
+    font-size: 28rpx;
+    /* box-shadow: 5px 5px 5px 2px #666, 0 0 0 0 #666 inset; */
+    background-color: #317af7;
+    transition: 0.3s;
+}
+.show-res-btn {
+  flex: 1;
+}
+
+.api-page-btn-uncreate {
+    opacity: 0.4;
+    pointer-events: none;
+}
+
+.api-page-btn-advanced {
+    background-color: #63d095;
+}
+
+.api-page-btn:active {
+    color: #317af7;
+    background-color: #f7f7f7;
+    /* box-shadow: 0 0 0 0 #666, 5px 5px 5px 2px #666 inset; */
+}
+
+.btn-split {
+  width: 16%;
+}
+
+.show-res-btn {
+  background-color: #63d095;
+}

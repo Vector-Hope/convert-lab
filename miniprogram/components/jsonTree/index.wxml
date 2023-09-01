@@ -1,0 +1,5 @@
+<!--components/jsonTree/index.wxml-->
+<view class="json-tree-mask {{showJsonData ? '' : 'json-tree-hidden'}}">
+  <image class="close-btn" src="./image/close.png" bindtap="closeJsonData"></image>
+  <tree-node data="{{jsonData}}"></tree-node>
+</view>

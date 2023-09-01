@@ -22,10 +22,10 @@
         </view>
       </view>
     </view>
-    <view class="page-section" wx:for="{{operatorList}}" wx:key="{{item.id}}" id="{{item.id}}">
+    <view class="page-section" wx:for="{{operatorList}}" wx:key="id" id="{{item.id}}">
       <view class="cells_title">{{item.title}}</view>
       <view class="cells cells_after-title">
-        <view class="cell" wx:for="{{item.list}}" wx:for-item="unit" wx:key="{{unit.id}}">
+        <view class="cell" wx:for="{{item.list}}" wx:for-item="unit" wx:key="id">
           <view class="cell_hd">
             <view class="label">{{unit.name}}</view>
           </view>
