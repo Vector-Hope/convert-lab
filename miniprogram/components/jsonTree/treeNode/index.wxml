@@ -21,7 +21,7 @@
   <view class="json-detail" wx:if="{{isShowDetail}}">
     <block wx:for="{{jsonData}}" wx:key="key">
       <view wx:if="{{item.type == 'Object' || item.type == 'Array'}}">
-        <tree-node data="{{item.value}}" dataKey="{{item.key}}"></tree-node>
+        <tree-node showData="{{item.value}}" dataKey="{{item.key}}"></tree-node>
       </view>
       <view class="single-data" wx:else>
         <text class="json-text json-key">{{item.key}}: </text>

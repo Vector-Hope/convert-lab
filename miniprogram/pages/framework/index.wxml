@@ -6,7 +6,7 @@
         <text class="index-desc"> 框架能力 </text>
       </view>
       <view class="index-bd">
-        <tab-page-list pageList="{{list}}" packageName="packagesFramework" category="framework" />
+        <tab-page-list pageList="{{list}}" packageName="packagesFramework" category="framework" iconList="{{iconList}}"/>
       </view>
     </view>
   </view>

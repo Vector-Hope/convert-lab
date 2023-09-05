@@ -7,6 +7,7 @@ Component({
     pageList: Array,
     packageName: String,
     category: String,
+    iconList: Object
   },
 
   /**
@@ -20,7 +21,8 @@ Component({
   methods: {
     kindToggle(e) {
       const id = e.currentTarget.id
-      const { pageList, packageName } = this.properties
+      const { pageList, packageName, iconList } = this.properties
+      console.log(iconList)
       for (let i = 0, len = pageList.length; i < len; ++i) {
         if (pageList[i].id === id) {
           if (pageList[i].pages.length == 0) {

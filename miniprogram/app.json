@@ -79,6 +79,7 @@
         "pages/basics/packageLoading/index",
         "pages/basics/encryption/index",
         "pages/routing/index",
+        "pages/routing/routingPage/index",
         "pages/redirection/index",
         "pages/forward/index",
         "pages/interface/interaction/index",

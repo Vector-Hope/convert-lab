@@ -5,41 +5,111 @@ Page({
    * 页面的初始数据
    */
   data: {
-    jsonData: {},
-    isShowJsonData: false,
+    list: [
+      {
+        id: 'switchTab',
+        inputData: {
+          url: '../../../pages/API/index'
+        },
+        func: (data = {}) => {
+          return new Promise((resolve) => {
+            const callback = {};
+            wx.switchTab({
+              url: data.url,
+              success: (res) => {
+                callback['success'] = res;
+              },
+              fail: (res) => {
+                callback['fail'] = res;
+              },
+              complete: (res) => {
+                callback['complete'] = res;
+                resolve(callback);
+              },
+            })
+          })
+        },
+        isDone: true
+      },
+      {
+        id: 'reLaunch',
+        inputData: {
+          url: '../../../pages/API/index'
+        },
+        func: (data = {}) => {
+          return new Promise((resolve) => {
+            const callback = {};
+            wx.reLaunch({
+              url: data.url,
+              success: (res) => {
+                callback['success'] = res;
+              },
+              fail: (res) => {
+                callback['fail'] = res;
+              },
+              complete: (res) => {
+                callback['complete'] = res;
+                resolve(callback);
+              },
+            })
+          })
+        },
+        isDone: true
+      },
+      {
+        id: 'redirectTo',
+        inputData: {
+          url: '../../../pages/API/index'
+        },
+        func: (data = {}) => {
+          return new Promise((resolve) => {
+            const callback = {};
+            wx.redirectTo({
+              url: data.url,
+              success: (res) => {
+                callback['success'] = res;
+              },
+              fail: (res) => {
+                callback['fail'] = res;
+              },
+              complete: (res) => {
+                callback['complete'] = res;
+                resolve(callback)
+              },
+            })
+          })
+        },
+        isDone: true
+      },
+      {
+        id: 'navigateTo',
+        func: (data = {}) => {
+          return new Promise((resolve) => {
+            const callback = {};
+            wx.navigateTo({
+              url: './routingPage/index',
+              success: (res) => {
+                callback['success'] = res;
+              },
+              fail: (res) => {
+                callback['fail'] = res;
+              },
+              complete: (res) => {
+                callback['complete'] = res;
+                resolve(callback)
+              },
+            })
+          })
+        },
+        isDone: true
+      },
+      {
+        id: 'EventChannel',
+        func: null,
+      },
+    ],
   },
 
   onReady() {
-    const date = new Date();
-    const jsonData = {
-      id: 'first',
-      name: ['lxh', 'clf'],
-      class: {
-        class1: 123,
-        class3: {
-          lalal: [1, 2, 3],
-          name: 'wdf'
-        }
-      },
-      ses: '12312312',
-      look: [1, 2, 3],
-      watch: {
-        padding: [true, undefined, null]
-      },
-      date: date,
-    }
-    this.setData({
-      jsonData: jsonData
-    })
-  },
-
-  showJsonData() {
-    let jsonTree = this.selectComponent('#json-tree');
-    jsonTree.showJsonData();
-  },
-  closeJsonData() {
-    this.setData({
-      isShowJsonData: false
-    })
   }
 })

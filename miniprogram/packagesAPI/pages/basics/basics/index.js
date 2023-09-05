@@ -24,6 +24,7 @@ Page({
           res[apiName] = wx.canIUse(apiName);
           return res;
         },
+        isDone: true,
       },
       {
         id: 'canIuseWebp',
@@ -32,18 +33,28 @@ Page({
       },
       {
         id: 'base64ToArrayBuffer',
-        func: () => {
+        inputData: {
+          base64: 'CxYh'
         },
+        func: (data = {}) => {
+          const {base64} = data;
+          const arrayBuffer = wx.base64ToArrayBuffer(base64);
+          console.log(arrayBuffer);
+          return {
+            Int8Array: new Int8Array(arrayBuffer),
+            Uint8Array: new Uint8Array(arrayBuffer),
+            ArrayBufferByteLength: arrayBuffer.byteLength,
+          };
+        },
+        isDone: true
       },
       {
         id: 'arrayBufferToBase64',
-        func: () => {
-        },
+        func: null,
       },
       {
         id: 'perload',
-        func: () => {
-        },
+        func: null
       },
     ]
   },

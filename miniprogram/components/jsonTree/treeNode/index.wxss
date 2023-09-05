@@ -8,7 +8,8 @@
   color: #e5e5e5;
 }
 .json-data-thumb {
-  display: block;
+  display: flex;
+  flex-wrap: wrap;
   min-height: 50rpx;
   line-height: 50rpx;
   box-sizing: content-box;

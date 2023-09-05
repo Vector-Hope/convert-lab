@@ -8,7 +8,7 @@
         bindtap="kindToggle"
       >
         <view class="kind-list-text">{{item.name}}</view>
-        <image class="kind-list-img" src="../../image/{{category}}/{{item.id}}.png"></image>
+        <image class="kind-list-img" src="{{iconList[item.id]}}"></image>
       </view>
       <view class="kind-list-item-bd {{item.open ? 'kind-list-item-bd-show' : ''}}">
         <view class="navigator-box {{item.open ? 'navigator-box-show' : ''}}">

@@ -8,7 +8,7 @@
       </text>
     </view>
     <view class="index-bd">
-      <tab-page-list pageList="{{list}}" packageName="packagesAPI" category="API" />
+      <tab-page-list pageList="{{list}}" packageName="packagesAPI" category="API" iconList="{{iconList}}" />
     </view>
   </view>
 </view>

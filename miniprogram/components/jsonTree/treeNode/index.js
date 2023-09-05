@@ -5,7 +5,22 @@ Component({
    * 组件的属性列表
    */
   properties: {
-    data: Object || Array,
+    showData: {
+      type: Object || Array,
+      observer: function (newVal) {
+        const type = getType(newVal);
+        const resetData = this.resetData(newVal);
+        let needMore = false;
+        if ((type == 'Object' && Object.keys(newVal).length != 0) || (type == 'Array' && newVal.length != 0)) {
+          needMore = true;
+        }
+        this.setData({
+          jsonData: resetData,
+          dataType: type,
+          needMore,
+        })
+      }
+    },
     dataKey: {
       type: String,
       value: ''
@@ -29,11 +44,6 @@ Component({
     dataType: 'null',
     isShowDetail: false,
   },
-  observers: {
-    'data': function (data) {
-      this.initData();
-    }
-  },
   /**
    * 组件的方法列表
    */
@@ -44,11 +54,11 @@ Component({
   },
   methods: {
     initData() {
-      const {data} = this.properties;
-      const type = getType(data);
-      const resetData = this.resetData(data);
+      const {showData} = this.properties;
+      const type = getType(showData);
+      const resetData = this.resetData(showData);
       let needMore = false;
-      if ((type == 'Object' && Object.keys(data).length != 0) || (type == 'Array' && data.length != 0)) {
+      if ((type == 'Object' && Object.keys(showData).length != 0) || (type == 'Array' && showData.length != 0)) {
         needMore = true;
       }
       this.setData({
@@ -68,6 +78,9 @@ Component({
         dataDetail.type = this.getType(data[index]);
         dataDetail.key = index;
         dataDetail.value = data[index];
+        if (dataDetail.type == 'Boolean' || dataDetail.type == 'Null') {
+          dataDetail.value = data[index].toString();
+        }
         jsonData.push(dataDetail)
       }
       return jsonData;

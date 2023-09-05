@@ -5,7 +5,15 @@ Component({
    * 组件的属性列表
    */
   properties: {
-    jsonData: Object || Array
+    jsonData: Object || Array,
+    isShowRes: {
+      type: Boolean,
+      observer: function (newVal) {
+        this.setData({
+          showJsonData: newVal,
+        })
+      }
+    }
   },
 
   /**
@@ -14,7 +22,6 @@ Component({
   data: {
     showJsonData: false,
   },
-
   /**
    * 组件的方法列表
    */
@@ -24,9 +31,7 @@ Component({
   },
   methods: {
     closeJsonData() {
-      this.setData({
-        showJsonData: false,
-      })
+      this.triggerEvent("closeRes")
     },
     showJsonData() {
       this.setData({

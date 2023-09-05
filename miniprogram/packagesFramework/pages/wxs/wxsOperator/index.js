@@ -67,7 +67,7 @@ Page({
           {
             id: 'negative',
             name: '-num1',
-            operator: 'a++',
+            operator: '-a',
           },
           {
             id: 'no_operation',

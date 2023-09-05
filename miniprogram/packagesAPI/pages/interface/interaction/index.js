@@ -1,9 +1,28 @@
 // packagesAPI/pages/interface/interaction/index.js
+import {callback} from '../../../../utils/util'
 Page({
   /**
    * 页面的初始数据
    */
-  data: {},
+  data: {
+    list: {
+      showToast: {
+        inputData: {
+          title: 'showToast',
+          duration: 10000,
+          icon: 'success',
+          mask: false,
+        },
+        func: (data) => {
+          wx.showToast({
+            ...data,
+            success: callback.call(this, 'showToast', 'success'),
+          })
+        },
+      },
+      
+    },
+  },
 
   /**
    * 生命周期函数--监听页面加载

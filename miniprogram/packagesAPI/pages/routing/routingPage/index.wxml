@@ -1,4 +1,4 @@
-<!--packagesAPI/pages/routing/index.wxml-->
+<!--packagesAPI/pages/routing/routingPage/index.wxml-->
 <view className='api-page'>
   <button-list buttonList='{{list}}' />
 </view>
