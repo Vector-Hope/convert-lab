@@ -12,15 +12,25 @@
       </view>
       <view class="kind-list-item-bd {{item.open ? 'kind-list-item-bd-show' : ''}}">
         <view class="navigator-box {{item.open ? 'navigator-box-show' : ''}}">
-            <view class="navgator-item" wx:for-items="{{item.pages}}" wx:for-item="page" wx:key="id">
+          <view class="navgator-item" wx:for-items="{{item.pages}}" wx:for-item="page" wx:key="id">
+            <block wx:if="{{page.id !== 'tabBar'}}">
               <navigator
                 url="/{{packageName}}/pages/{{item.id}}/{{page.id}}/index"
                 class="navigator {{index + 1 === item.pages.length ? '' : 'navigator-bottom-line'}}"
               >
                 {{page.name}}
               </navigator>
-              <view class="navigator-arrow"></view>
-            </view>
+            </block>
+            <block wx:else>
+              <view
+                class="navigator {{index + 1 === item.pages.length ? '' : 'navigator-bottom-line'}}"
+                bindtap="enterSetTabBarPage"
+              >
+                {{page.name}}
+              </view>
+            </block>
+            <view class="navigator-arrow"></view>
+          </view>
         </view>
       </view>
     </view>

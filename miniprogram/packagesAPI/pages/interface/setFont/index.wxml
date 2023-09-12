@@ -1,0 +1,9 @@
+<!--packagesAPI/pages/interface/setFont/index.wxml-->
+<view class="api-page">
+  <button-list buttonList="{{list}}" />
+  <view class="show-font">
+    <text class="show-font-text"> weapp微信小程序(normal, normal) </text>
+    <text class="show-font-text font-2"> weapp微信小程序(normal, bold) </text>
+    <text class="show-font-text font-3"> weapp微信小程序(italic, normal) </text>
+  </view>
+</view>

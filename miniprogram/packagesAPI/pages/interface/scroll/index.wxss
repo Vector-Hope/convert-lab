@@ -1,1 +1,26 @@
 /* packagesAPI/pages/interface/scroll/index.wxss */
+#blank-content {
+  width: 100%;
+}
+
+.blank-item {
+  width: 96%;
+  margin: 0 auto;
+  height: 1000rpx;
+  border: #000 solid 4rpx;
+  box-sizing: border-box;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  font-size: 100rpx;
+}
+
+.blank-position {
+  width: 100%;
+  text-align: center;
+}
+
+.scrollToTop-button-area {
+  width: 100%;
+}

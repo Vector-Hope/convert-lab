@@ -1,10 +1,17 @@
 <!--components/jsonTree/treeNode/index.wxml-->
-  <view class="json-tree">
+<view class="json-tree">
+  <!-- 传入的jsonData缩略字符 -->
   <view class="json-data-thumb">
-    <text class="extend-arrow {{isShowDetail ? 'extend-arrow-down' : ''}}" wx:if="{{needMore}}" bindtap="showDetail"></text>
+    <!-- 展开jsonData控件 -->
+    <text
+      class="extend-arrow {{isShowDetail ? 'extend-arrow-down' : ''}}"
+      wx:if="{{needMore}}"
+      bindtap="showDetail"
+    ></text>
     <text class="json-text json-key" wx:if="{{dataKey != ''}}">{{dataKey}}: </text>
     <text class="json-text">{{startExp[dataType]}} </text>
     <block wx:for="{{jsonData}}" wx:key="key">
+      <!-- 不同类型数据继续颜色区分 -->
       <text class="json-text thumb-key" wx:if="{{dataType == 'Object'}}">{{item.key}}</text>
       <text class="json-text thumb-key" wx:if="{{dataType == 'Object'}}">: </text>
       <text class="json-text thumb-object" wx:if="{{item.type == 'Object'}}">{...}</text>
@@ -18,20 +25,22 @@
     </block>
     <text class="json-text"> {{endExp[dataType]}}</text>
   </view>
+  <!-- jsonData的详细数据展示 -->
   <view class="json-detail" wx:if="{{isShowDetail}}">
     <block wx:for="{{jsonData}}" wx:key="key">
+      <!-- 引用数据类型递归调用tree-node -->
       <view wx:if="{{item.type == 'Object' || item.type == 'Array'}}">
         <tree-node showData="{{item.value}}" dataKey="{{item.key}}"></tree-node>
       </view>
+      <!-- 基本数据类型继续展示 -->
       <view class="single-data" wx:else>
         <text class="json-text json-key">{{item.key}}: </text>
         <text class="json-text json-string" wx:if="{{item.type == 'String'}}">"{{item.value}}"</text>
         <text class="json-text json-boolean" wx:elif="{{item.type == 'Boolean'}}">{{item.value}}</text>
         <text class="json-text json-undefined" wx:elif="{{item.type == 'Undefined'}}">undefined</text>
-      <text class="json-text json-null" wx:elif="{{item.type == 'Null'}}">{{item.value}}</text>
+        <text class="json-text json-null" wx:elif="{{item.type == 'Null'}}">{{item.value}}</text>
         <text class="json-text json-number" wx:else>{{item.value}}</text>
       </view>
     </block>
   </view>
 </view>
-

@@ -15,13 +15,8 @@ const formatNumber = (n) => {
 }
 
 const getType = (variable) => {
-  const type = Object.prototype.toString
-                  .call(variable)
-                  .split(' ')[1]
-                  .split('')
-                  .slice(0, -1)
-                  .join('');
-  return type;
+  const type = Object.prototype.toString.call(variable).split(' ')[1].split('').slice(0, -1).join('')
+  return type
 }
 
 module.exports = {

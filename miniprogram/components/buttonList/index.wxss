@@ -1,55 +1,61 @@
 /* components/buttonList/index.wxss */
 .button-list {
-    width: 100%;
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.json-tree-component {
+  position: absolute;
+  top: 0;
+  left: 0;
 }
 
 .api-page-btn-area {
-    width: 100%;
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    transition: 0.3s;
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  transition: 0.3s;
 }
 
 .api-page-btn-area-hidden {
-    opacity: 0;
-    height: 0;
+  opacity: 0;
+  height: 0;
 }
 
 .api-textarea-area {
-    width: 100%;
+  width: 100%;
 }
 
 .api-input-area {
-    width: 80%;
-    height: 180px;
-    margin: 20rpx auto;
-    padding: 20rpx;
-    border: #333 solid 4rpx;
-    border-radius: 10px;
-    overflow: hidden;
-    transition: 0.3s;
-    resize: none;
-    box-sizing: border-box;
+  width: 80%;
+  height: 180px;
+  margin: 20rpx auto;
+  padding: 20rpx;
+  border: #333 solid 4rpx;
+  border-radius: 10px;
+  overflow: hidden;
+  transition: 0.3s;
+  resize: none;
+  box-sizing: border-box;
 }
 
 .api-input-area-hidden {
-    height: 0;
-    margin: 0 auto;
-    border: 0;
-    padding: 0;
+  height: 0;
+  margin: 0 auto;
+  border: 0;
+  padding: 0;
 }
 
 .textarea-control {
-    height: 100%;
-    width: 10%;
-    margin: 0 20rpx;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+  height: 100%;
+  width: 10%;
+  margin: 0 20rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .control-icon {
@@ -73,23 +79,26 @@
   width: 84%;
 }
 
-.api-page-btn, .show-res-btn {
-    color: #f7f7f7;
-    white-space: nowrap;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    font-size: 36rpx;
-    font-weight: 700;
-    overflow: hidden;
-    padding-left: 14px;
-    padding-right: 14px;
-    padding: 15rpx 25rpx;
-    border-radius: 40rpx;
-    font-size: 28rpx;
-    box-shadow: 5px 5px 5px 2px #666, 0 0 0 0 #666 inset;
-    background-color: #317af7;
-    transition: 0.3s;
+.api-page-btn,
+.show-res-btn {
+  color: #f7f7f7;
+  white-space: nowrap;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 36rpx;
+  font-weight: 700;
+  overflow: hidden;
+  padding-left: 14px;
+  padding-right: 14px;
+  padding: 15rpx 25rpx;
+  border-radius: 40rpx;
+  font-size: 28rpx;
+  box-shadow:
+    5px 5px 5px 2px #666,
+    0 0 0 0 #666 inset;
+  background-color: #317af7;
+  transition: 0.3s;
 }
 
 .show-res-btn {
@@ -101,22 +110,20 @@
 }
 
 .api-page-btn-uncreate {
-    opacity: 0.4;
-    pointer-events: none;
+  opacity: 0.4;
+  pointer-events: none;
 }
 
 .api-page-btn-advanced {
-    background-color: #63d095;
+  background-color: #63d095;
 }
 
 .api-page-btn:active {
-    color: #317af7;
-    background-color: #f7f7f7;
-    /* box-shadow: 0 0 0 0 #666, 5px 5px 5px 2px #666 inset; */
+  color: #317af7;
+  background-color: #f7f7f7;
+  /* box-shadow: 0 0 0 0 #666, 5px 5px 5px 2px #666 inset; */
 }
 
 .btn-split {
   width: 16%;
 }
-
-

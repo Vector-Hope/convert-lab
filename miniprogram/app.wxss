@@ -19,7 +19,10 @@ page > scroll-view {
 }
 checkbox,
 radio {
-  margin-right: 5px;
+  margin-right: 0.5px;
+  margin-left: 0.5rpx;
+  margin-top: 0.9px;
+  margin-bottom: 0.3rpx;
 }
 
 canvas {
@@ -207,24 +210,6 @@ input {
 .image-plus-text {
   color: rgba(0, 0, 0, 0.3);
   font-size: 14px;
-}
-.image-plus-horizontal {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  background-color: rgba(0, 0, 0, 0.5);
-  width: 2px;
-  height: 40px;
-  transform: translate(-50%, -50%);
-}
-.image-plus-vertical {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  background-color: rgba(0, 0, 0, 0.5);
-  width: 40px;
-  height: 2px;
-  transform: translate(-50%, -50%);
 }
 /* pick from weui */
 .cells_title {

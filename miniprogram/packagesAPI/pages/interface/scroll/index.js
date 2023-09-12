@@ -3,7 +3,61 @@ Page({
   /**
    * 页面的初始数据
    */
-  data: {},
+  data: {
+    list: [
+      {
+        id: 'pageScrollTo',
+        inputData: {
+          duration: 300,
+          selector: '#blank-content',
+          offsetTop: 0,
+        },
+        func: (data = {}) => {
+          return new Promise((resolve) => {
+            const callback = {}
+            wx.pageScrollTo({
+              ...data,
+              success: (res) => {
+                callback['success'] = res
+              },
+              fail: (res) => {
+                callback['fail'] = res
+              },
+              complete: (res) => {
+                callback['complete'] = res
+                resolve(callback)
+              },
+            })
+          })
+        },
+        isDone: true,
+      },
+    ],
+    scrollToTop: [
+      {
+        id: 'scrollToTop',
+        func: (data = {}) => {
+          return new Promise((resolve) => {
+            const callback = {}
+            wx.pageScrollTo({
+              scrollTop: 0,
+              success: (res) => {
+                callback['success'] = res
+              },
+              fail: (res) => {
+                callback['fail'] = res
+              },
+              complete: (res) => {
+                callback['complete'] = res
+                resolve(callback)
+              },
+            })
+          })
+        },
+        isDone: true,
+      },
+    ],
+  },
 
   /**
    * 生命周期函数--监听页面加载

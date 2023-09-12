@@ -1,17 +1,6 @@
 <wxs module="labelWxs">
-  var labelVar = 12;
-  module.exports = {
-    labelVar: labelVar,
-  }
-  // 单行注释
-  /*
-  多行注释
-  多行注释
-  */
-  /*
-  结尾注释 不可用
-  结尾注释
-  */
+  var labelVar = 12; module.exports = { labelVar: labelVar, } // 单行注释 /* 多行注释 多行注释 */ /* 结尾注释 不可用
+  结尾注释 */
 </wxs>
 <wxs src="./index.wxs" module="fileWxs"></wxs>
 <view class="container page">

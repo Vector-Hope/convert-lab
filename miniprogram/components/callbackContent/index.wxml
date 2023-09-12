@@ -1,6 +1,4 @@
 <!--components/callbackContent/index.wxml-->
-<view class='callback-content'>
-  <view class='callback-res' id="{{testAPI}}-callback">
-    {{callbackResString}}
-  </view>
+<view class="callback-content">
+  <view class="callback-res" id="{{testApi}}-callback"> {{callbackResString}} </view>
 </view>

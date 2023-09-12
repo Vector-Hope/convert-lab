@@ -1,0 +1,21 @@
+/* packagesAPI/pages/interface/setFont/index.wxss */
+.show-font {
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.show-font-text {
+  font-family: 'My Font';
+  font-style: normal;
+  font-weight: normal;
+}
+
+.font-2 {
+  font-weight: bold;
+}
+
+.font-3 {
+  font-style: italic;
+}

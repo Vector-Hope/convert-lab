@@ -1,6 +1,7 @@
 /* components/jsonTree/treeNode/index.wxss */
 .json-tree {
   margin-left: 36rpx;
+  max-width: 100%;
 }
 
 .json-text {
@@ -37,23 +38,33 @@
   transform: rotate(90deg);
 }
 
-.thumb-key, .thumb-object, .thumb-array {
+.thumb-key,
+.thumb-object,
+.thumb-array {
   color: #a5a5a5;
 }
 
-.thumb-string, .json-string {
+.thumb-string,
+.json-string {
   color: #9c554b;
+  max-width: 100%;
+  word-break: break-word;
 }
 
-.thumb-number, .json-number {
+.thumb-number,
+.json-number {
   color: #6b8052;
 }
 
-.thumb-boolean, .json-boolean {
+.thumb-boolean,
+.json-boolean {
   color: #997e39;
 }
 
-.thumb-undefined, .json-undefined, .thumb-null, .json-null {
+.thumb-undefined,
+.json-undefined,
+.thumb-null,
+.json-null {
   color: #555555;
 }
 

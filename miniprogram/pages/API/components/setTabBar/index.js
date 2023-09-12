@@ -1,22 +1,24 @@
-// packagesAPI/pages/interface/interaction/index.js
-Page({
+// pages/API/components/tabBar/index.js
+Component({
   /**
-   * 页面的初始数据
+   * 组件的属性列表
+   */
+  properties: {},
+
+  /**
+   * 组件的初始数据
    */
   data: {
     list: [
       {
-        id: 'showToast',
+        id: 'showTabBarRedDot',
         inputData: {
-          title: 'showToast',
-          duration: 10000,
-          icon: 'success',
-          mask: false,
+          index: 0,
         },
         func: (data = {}) => {
           return new Promise((resolve) => {
             const callback = {}
-            wx.showToast({
+            wx.showTabBarRedDot({
               ...data,
               success: (res) => {
                 callback['success'] = res
@@ -34,14 +36,14 @@ Page({
         isDone: true,
       },
       {
-        id: 'hideToast',
+        id: 'hideTabBarRedDot',
         inputData: {
-          noConflict: false,
+          index: 0,
         },
         func: (data = {}) => {
           return new Promise((resolve) => {
             const callback = {}
-            wx.hideToast({
+            wx.hideTabBarRedDot({
               ...data,
               success: (res) => {
                 callback['success'] = res
@@ -59,15 +61,14 @@ Page({
         isDone: true,
       },
       {
-        id: 'showLoading',
+        id: 'hideTabBar',
         inputData: {
-          title: '加载中',
-          mask: false,
+          animation: true,
         },
         func: (data = {}) => {
           return new Promise((resolve) => {
             const callback = {}
-            wx.showLoading({
+            wx.hideTabBar({
               ...data,
               success: (res) => {
                 callback['success'] = res
@@ -85,14 +86,14 @@ Page({
         isDone: true,
       },
       {
-        id: 'hideLoading',
+        id: 'showTabBar',
         inputData: {
-          noConflict: false,
+          animation: true,
         },
         func: (data = {}) => {
           return new Promise((resolve) => {
             const callback = {}
-            wx.hideLoading({
+            wx.showTabBar({
               ...data,
               success: (res) => {
                 callback['success'] = res
@@ -110,20 +111,17 @@ Page({
         isDone: true,
       },
       {
-        id: 'showModal',
+        id: 'setTabBarStyle',
         inputData: {
-          title: '提示',
-          content: '这是一个模态弹窗',
-          showCancel: true,
-          cancelColor: '#f00',
-          cancelText: '取消',
-          confirmColor: '#0f0',
-          confirmText: '确认',
+          color: '#1F69FF',
+          selectedColor: '#F7F7F7',
+          backgroundColor: '#7A7E83',
+          borderStyle: 'white',
         },
         func: (data = {}) => {
           return new Promise((resolve) => {
             const callback = {}
-            wx.showModal({
+            wx.setTabBarStyle({
               ...data,
               success: (res) => {
                 callback['success'] = res
@@ -141,16 +139,17 @@ Page({
         isDone: true,
       },
       {
-        id: 'showActionSheet',
+        id: 'setTabBarItem',
         inputData: {
-          alertText: '警示文案',
-          itemList: ['ActionA', 'ActionB', 'ActionC'],
-          itemColor: '#0f0',
+          index: 2,
+          text: 'API',
+          iconPath: '/image/tab/cloud.png',
+          selectedIconPath: '/image/tab/cloud_select.png',
         },
         func: (data = {}) => {
           return new Promise((resolve) => {
             const callback = {}
-            wx.showActionSheet({
+            wx.setTabBarItem({
               ...data,
               success: (res) => {
                 callback['success'] = res
@@ -168,53 +167,61 @@ Page({
         isDone: true,
       },
       {
-        id: 'enableAlertBeforeUnload',
-        func: null,
+        id: 'setTabBarBadge',
+        inputData: {
+          index: 1,
+          text: '3',
+        },
+        func: (data = {}) => {
+          return new Promise((resolve) => {
+            const callback = {}
+            wx.setTabBarBadge({
+              ...data,
+              success: (res) => {
+                callback['success'] = res
+              },
+              fail: (res) => {
+                callback['fail'] = res
+              },
+              complete: (res) => {
+                callback['complete'] = res
+                resolve(callback)
+              },
+            })
+          })
+        },
+        isDone: true,
       },
       {
-        id: 'disableAlertBeforeUnload',
-        func: null,
+        id: 'removeTabBarBadge',
+        inputData: {
+          index: 1,
+        },
+        func: (data = {}) => {
+          return new Promise((resolve) => {
+            const callback = {}
+            wx.removeTabBarBadge({
+              ...data,
+              success: (res) => {
+                callback['success'] = res
+              },
+              fail: (res) => {
+                callback['fail'] = res
+              },
+              complete: (res) => {
+                callback['complete'] = res
+                resolve(callback)
+              },
+            })
+          })
+        },
+        isDone: true,
       },
     ],
   },
 
   /**
-   * 生命周期函数--监听页面加载
+   * 组件的方法列表
    */
-  onLoad(options) {},
-
-  /**
-   * 生命周期函数--监听页面初次渲染完成
-   */
-  onReady() {},
-
-  /**
-   * 生命周期函数--监听页面显示
-   */
-  onShow() {},
-
-  /**
-   * 生命周期函数--监听页面隐藏
-   */
-  onHide() {},
-
-  /**
-   * 生命周期函数--监听页面卸载
-   */
-  onUnload() {},
-
-  /**
-   * 页面相关事件处理函数--监听用户下拉动作
-   */
-  onPullDownRefresh() {},
-
-  /**
-   * 页面上拉触底事件的处理函数
-   */
-  onReachBottom() {},
-
-  /**
-   * 用户点击右上角分享
-   */
-  onShareAppMessage() {},
+  methods: {},
 })

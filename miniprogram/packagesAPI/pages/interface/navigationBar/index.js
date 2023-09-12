@@ -3,7 +3,77 @@ Page({
   /**
    * 页面的初始数据
    */
-  data: {},
+  data: {
+    list: [
+      {
+        id: 'showNavigationBarLoading',
+        func: null,
+      },
+      {
+        id: 'setNavigationBarTitle',
+        inputData: {
+          title: '当前页面',
+        },
+        func: (data = {}) => {
+          return new Promise((resolve) => {
+            const callback = {}
+            wx.setNavigationBarTitle({
+              ...data,
+              success: (res) => {
+                callback['success'] = res
+              },
+              fail: (res) => {
+                callback['fail'] = res
+              },
+              complete: (res) => {
+                callback['complete'] = res
+                resolve(callback)
+              },
+            })
+          })
+        },
+        isDone: true,
+      },
+      {
+        id: 'setNavigationBarColor',
+        inputData: {
+          frontColor: '#ffffff',
+          backgroundColor: '#317af7',
+          animation: {
+            duration: 1000,
+            timingFunc: 'easeIn',
+          },
+        },
+        func: (data = {}) => {
+          return new Promise((resolve) => {
+            const callback = {}
+            wx.setNavigationBarColor({
+              ...data,
+              success: (res) => {
+                callback['success'] = res
+              },
+              fail: (res) => {
+                callback['fail'] = res
+              },
+              complete: (res) => {
+                callback['complete'] = res
+                resolve(callback)
+              },
+            })
+          })
+        },
+        isDone: true,
+      },
+      {
+        id: 'hideNavigationBarLoading',
+        func: null,
+      },
+      {
+        id: 'hideHomeButton',
+        func: null,
+      },
+    ],
+  },
 
   /**
    * 生命周期函数--监听页面加载

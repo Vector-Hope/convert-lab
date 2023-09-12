@@ -1,2 +1,5 @@
 <!--packagesAPI/pages/interface/animation/index.wxml-->
-<text>packagesAPI/pages/interface/animation/index.wxml</text>
+<view class="api-page">
+  <view animation="{{animationData}}" style="background: red; height: 100rpx; width: 100rpx"></view>
+  <button-list buttonList="{{list}}" />
+</view>

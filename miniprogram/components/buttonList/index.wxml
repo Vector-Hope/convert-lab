@@ -1,13 +1,17 @@
 <!--components/buttonList/index.wxml-->
 <view class="button-list">
-  <json-tree
-    id="json-tree"
-    wx:if="{{showResId != ''}}"
-    jsonData="{{list[showResId].callbackRes}}"
-    isShowRes="{{isShowRes}}"
-    bind:closeRes="closeRes"
-  ></json-tree>
+  <!-- 回调内容展示 -->
+  <view class="json-tree-component">
+    <json-tree
+      wx:if="{{showResId != ''}}"
+      jsonData="{{list[showResId].callbackRes}}"
+      isShowRes="{{isShowRes}}"
+      apiId="{{showResId}}"
+      bind:closeRes="closeRes"
+    ></json-tree>
+  </view>
   <view class="api-page-btn-area" wx:for="{{listKey}}" wx:key="index">
+    <!-- 用于修改入参的textarea -->
     <view class="api-textarea-area">
       <textarea
         class="api-input-area {{!list[item].inputData || list[item].hideTextarea ? 'api-input-area-hidden' : ''}}"
@@ -18,17 +22,33 @@
         id="{{item}}-input"
       />
     </view>
+    <!-- 按钮区域 -->
     <view class="btn-area">
-      <view class="api-page-btn {{list[item].isDone ? '' : 'api-page-btn-uncreate'}}" bindtap="APITrigger" data-id="{{item}}" id="{{item}}">
+      <!-- api触发按钮 -->
+      <view
+        class="api-page-btn {{list[item].isDone ? '' : 'api-page-btn-uncreate'}}"
+        bindtap="APITrigger"
+        data-id="{{item}}"
+        id="{{item}}"
+      >
         {{item}}
-        <callback-contents callbackRes="{{list[item].callbackRes}}" testAPI="{{item}}"/>
+        <!-- 用于自动化测试获取页面回调内容节点 -->
+        <callback-contents callbackRes="{{list[item].callbackRes}}" testApi="{{item}}" />
       </view>
+      <!-- 控制textarea展示控件 -->
       <view class="textarea-control">
-        <image class="control-icon {{!list[item].inputData ? 'control-icon-hidden': ''}} {{list[item].hideTextarea ? 'textarea-hidden' : ''}}" src="./image/close.png" bindtap="hideTextarea" data-id="{{item}}"></image>
+        <image
+          class="control-icon {{!list[item].inputData ? 'control-icon-hidden': ''}} {{list[item].hideTextarea ? 'textarea-hidden' : ''}}"
+          src="./image/close.png"
+          bindtap="hideTextarea"
+          data-id="{{item}}"
+        ></image>
       </view>
+      <!-- 展示回调结果按钮 -->
       <view class="show-res-btn" bindtap="showRes" data-id="{{item}}">显示结果</view>
     </view>
   </view>
+  <!-- 微信小程序可以利用遍历Object进行列表渲染，taro不行，所以暂时注释掉 -->
   <!-- <view class="api-page-btn-area" wx:for="{{list}}" wx:key="id">
     <view class="api-textarea-area">
       <textarea

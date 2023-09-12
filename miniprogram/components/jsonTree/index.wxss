@@ -3,12 +3,13 @@
   box-sizing: border-box;
   width: 100vw;
   height: 100vh;
-  padding: 60rpx;
+  padding: 40rpx 60rpx;
   display: flex;
+  flex-wrap: wrap;
   justify-content: center;
-  align-items: center;
   background-color: #000;
-  opacity: 0.8;
+  opacity: 0.86;
+  font-size: 32rpx;
   position: fixed;
   left: 0;
   right: 0;
@@ -19,11 +20,15 @@
   display: none;
 }
 
+.close-btn-area {
+  width: 100%;
+  display: flex;
+  height: 140rpx;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
 .close-btn {
-  position: absolute;
-  left: 50%;
-  transform: translate(-50%, 0);
-  top: 40rpx;
   border-radius: 100%;
   height: 60rpx;
   width: 60rpx;
@@ -32,4 +37,23 @@
   display: flex;
   justify-content: center;
   align-items: center;
+}
+
+.api-id-area {
+  color: #a5a5a5;
+  height: 80rpx;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  font-size: 32rpx;
+}
+
+.api-id {
+  padding: 20rpx 20rpx;
+  border-bottom: #a5a5a5 solid 2rpx;
+}
+
+.json-data-area {
+  padding: 20rpx 10rpx;
+  max-height: 1100rpx;
 }

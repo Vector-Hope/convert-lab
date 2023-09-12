@@ -1,4 +1,4 @@
-<!--packagesAPI/pages/interface/pullDownRefresh/index.wxml-->
+<!--pages/API/components/tabBar/index.wxml-->
 <view class="api-page">
   <button-list buttonList="{{list}}" />
 </view>

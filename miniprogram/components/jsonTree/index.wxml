@@ -1,5 +1,14 @@
 <!--components/jsonTree/index.wxml-->
-<view class="json-tree-mask {{showJsonData ? '' : 'json-tree-hidden'}}">
-  <image class="close-btn" src="./image/close.png" bindtap="closeJsonData"></image>
-  <tree-node showData="{{jsonData}}"></tree-node>
+<view>
+  <view class="json-tree-mask {{showJsonData ? '' : 'json-tree-hidden'}}">
+    <view class="close-btn-area">
+      <image class="close-btn" src="./image/close.png" bindtap="closeJsonData"></image>
+      <view class="api-id-area">
+        <view class="api-id">{{apiId}}</view>
+      </view>
+    </view>
+    <scroll-view scroll-y="true" class="json-data-area">
+      <tree-node showData="{{jsonData}}"></tree-node>
+    </scroll-view>
+  </view>
 </view>

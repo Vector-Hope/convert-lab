@@ -1,6 +1,7 @@
 {
   "usingComponents": {
-    "tab-page-list": "../../components/tabPageList/index"
+    "tab-page-list": "../../components/tabPageList/index",
+    "set-tab-bar": "./components/setTabBar/index"
   },
   "navigationBarTitleText": "convert接口能力展示"
 }
