@@ -1,4 +1,4 @@
-.page {
+page, .page {
   /* card/button Color */
   --color-success: #317af7;
   --color-error: #e84026;

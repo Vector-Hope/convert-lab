@@ -19,9 +19,9 @@ page > scroll-view {
 }
 checkbox,
 radio {
-  margin-right: 0.5px;
+  margin-right: 0.5rpx;
   margin-left: 0.5rpx;
-  margin-top: 0.9px;
+  margin-top: 0.9rpx;
   margin-bottom: 0.3rpx;
 }
 

@@ -1,4 +1,5 @@
 // components/buttonList/index.js
+import { getType } from '../../utils/util'
 Component({
   /**
    * 组件的属性列表
@@ -134,7 +135,8 @@ Component({
     async getResult(id, inputData = {}) {
       const { list } = this.data
       try {
-        let callbackRes = await list[id].func(inputData)
+        let callback = await list[id].func(inputData)
+        let callbackRes = this.formatCallback(callback);
         list[id].callbackRes = callbackRes
         console.log(`test API: ${id}`)
         console.log(callbackRes)
@@ -149,11 +151,30 @@ Component({
         }
       } catch (err) {
         console.log(err)
-        wx.showToast({
-          icon: 'error',
-          title: '请检查执行函数',
-        })
+        if (err.name == 'TypeError') {
+          wx.showToast({
+            icon: 'error',
+            title: '未创建实例对象',
+          })
+        } else {
+          wx.showToast({
+            icon: 'error',
+            title: '请检查执行函数',
+          })
+        }
       }
+    },
+    formatCallback(callback) {
+      const callbackRes = {};
+      const callbackKeys = Object.keys(callback);
+      callbackKeys.forEach((key) => {
+        if (getType(callback[key]) == 'Function') {
+          callbackRes[key] = 'f ( )';
+        } else {
+          callbackRes[key] = callback[key];
+        }
+      })
+      return callbackRes;
     },
     // 修改textarea中的内容，改变对应api入参
     changeData(e) {

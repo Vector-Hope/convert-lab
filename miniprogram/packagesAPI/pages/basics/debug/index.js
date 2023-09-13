@@ -1,14 +1,118 @@
 // packagesAPI/pages/basics/debug/index.js
+let that = null;
 Page({
   /**
    * 页面的初始数据
    */
-  data: {},
+  data: {
+    list: [
+      {
+        id: 'setEnableDebug',
+        inputData: {
+          enableDebug: true,
+        },
+        func: (data = {}) => {
+          const callback = {};
+          return new Promise((resolve) => {
+            wx.setEnableDebug({
+              ...data,
+              success: (res) => {
+                callback['success'] = res
+              },
+              fail: (res) => {
+                callback['fail'] = res
+              },
+              complete: (res) => {
+                callback['complete'] = res
+                resolve(callback)
+              },
+            })
+          })
+        },
+        isDone: true
+      },
+      {
+        id: 'getRealtimeLogManager',
+        func: (data = {}) => {
+          const realtimeLogManager = wx.getRealtimeLogManager()
+          that.setData({
+            realtimeLogManager,
+          })
+          return realtimeLogManager
+        },
+        isDone: true
+      },
+      {
+        id: 'getLogManager',
+        inputData: {
+          level: 0
+        },
+        func: (data = {}) => {
+          const logManager = wx.getLogManager({
+            ...data,
+          })
+          that.setData({
+            logManager,
+          })
+          return logManager
+        },
+        isDone: true
+      },
+      {
+        id: 'LogManager.debug',
+        func: (data = {}) => {
+          const {logManager} = that.data;
+          logManager.debug({debugMsg: 'debug msg'}, 'debug log');
+          return {};
+        },
+        isDone: true
+      },
+      {
+        id: 'LogManager.info',
+        func: (data = {}) => {
+          const {logManager} = that.data;
+          logManager.info({infoMsg: 'info msg'}, 'info log');
+          return {};
+        },
+        isDone: true
+      },
+      {
+        id: 'LogManager.log',
+        func: (data = {}) => {
+          const {logManager} = that.data;
+          logManager.log({logMsg: 'log msg'}, 'log');
+          return {};
+        },
+        isDone: true
+      },
+      {
+        id: 'LogManager.warn',
+        func: (data = {}) => {
+          const {logManager} = that.data;
+          logManager.warn({warnMsg: 'warn msg'}, 'warn log');
+          return {};
+        },
+        isDone: true
+      },
+      {
+        id: 'console',
+        func: null,
+      },
+      {
+        id: 'RealtimeTagLogManager',
+        func: null,
+      },
+    ],
+    logManager: null,
+    realtimeLogManager: null,
+  },
 
   /**
    * 生命周期函数--监听页面加载
    */
-  onLoad(options) {},
+  onLoad(options) {
+    that = this;
+  },
 
   /**
    * 生命周期函数--监听页面初次渲染完成

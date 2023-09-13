@@ -1,5 +1,11 @@
 <!--packagesAPI/pages/interface/animation/index.wxml-->
 <view class="api-page">
-  <view animation="{{animationData}}" style="background: red; height: 100rpx; width: 100rpx"></view>
+  <view class="animation-example-fixed">
+    <view class="animation-example-title">{{description}}</view>
+    <view class="animation-example-area">
+      <view animation="{{animationData}}" class="animation-example"></view>
+    </view>
+  </view>
+  <view class="animation-example-block"></view>
   <button-list buttonList="{{list}}" />
 </view>

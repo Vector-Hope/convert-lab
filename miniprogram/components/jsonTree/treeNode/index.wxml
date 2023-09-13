@@ -16,12 +16,13 @@
       <text class="json-text thumb-key" wx:if="{{dataType == 'Object'}}">: </text>
       <text class="json-text thumb-object" wx:if="{{item.type == 'Object'}}">{...}</text>
       <text class="json-text thumb-array" wx:elif="{{item.type == 'Array'}}">[...]</text>
+      <text class="json-text thumb-function" wx:elif="{{item.type == 'String' && item.value == 'f ( )'}}">f</text>
       <text class="json-text thumb-string" wx:elif="{{item.type == 'String'}}">"{{item.value}}"</text>
       <text class="json-text thumb-boolean" wx:elif="{{item.type == 'Boolean'}}">{{item.value}}</text>
       <text class="json-text thumb-undefined" wx:elif="{{item.type == 'Undefined'}}">undefined</text>
       <text class="json-text thumb-null" wx:elif="{{item.type == 'Null'}}">{{item.value}}</text>
       <text class="json-text thumb-number" wx:else>{{item.value}}</text>
-      <text class="json-text" wx:if="{{index < jsonData.length - 1}}">, </text>
+      <text class="json-text" wx:if="{{index < jsonData.length - 1}}">,</text>
     </block>
     <text class="json-text"> {{endExp[dataType]}}</text>
   </view>
@@ -35,7 +36,8 @@
       <!-- 基本数据类型继续展示 -->
       <view class="single-data" wx:else>
         <text class="json-text json-key">{{item.key}}: </text>
-        <text class="json-text json-string" wx:if="{{item.type == 'String'}}">"{{item.value}}"</text>
+        <text class="json-text json-function" wx:if="{{item.type == 'String' && item.value == 'f ( )'}}">{{item.value}}</text>
+        <text class="json-text json-string" wx:elif="{{item.type == 'String'}}">"{{item.value}}"</text>
         <text class="json-text json-boolean" wx:elif="{{item.type == 'Boolean'}}">{{item.value}}</text>
         <text class="json-text json-undefined" wx:elif="{{item.type == 'Undefined'}}">undefined</text>
         <text class="json-text json-null" wx:elif="{{item.type == 'Null'}}">{{item.value}}</text>

@@ -1,1 +1,39 @@
 /* packagesAPI/pages/interface/animation/index.wxss */
+.animation-example-fixed {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 400rpx;
+  background-color: #fff;
+  z-index: 10;
+}
+.animation-example-title {
+  width: 100%;
+  text-align: center;
+}
+
+.animation-example-area {
+  width: 90%;
+  height: 300rpx;
+  border: #000 solid 4rpx;
+  margin: 10rpx auto;
+  padding: 10rpx;
+  border-radius: 20rpx;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  perspective: 600rpx;
+  position: relative;
+}
+.animation-example {
+  background-color: #e84026;
+  position: absolute;
+  height: 100rpx;
+  width: 100rpx;
+}
+
+.animation-example-block {
+  width: 100%;
+  height: 400rpx;
+}

@@ -1,0 +1,4 @@
+<!--packagesAPI/pages/interface/customizedComponents/nextTick/index.wxml-->
+<view class="api-page">
+  <button-list buttonList="{{list}}" />
+</view>

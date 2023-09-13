@@ -6,6 +6,7 @@
 
 .json-text {
   display: inline;
+  padding: 0 4rpx;
   color: #e5e5e5;
 }
 .json-data-thumb {
@@ -42,6 +43,14 @@
 .thumb-object,
 .thumb-array {
   color: #a5a5a5;
+}
+
+.thumb-function,
+.json-function {
+  color: #634794;
+  max-width: 100%;
+  word-break: break-word;
+  font-style: italic;
 }
 
 .thumb-string,

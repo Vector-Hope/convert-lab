@@ -3,7 +3,29 @@ Page({
   /**
    * 页面的初始数据
    */
-  data: {},
+  data: {
+    list: [
+      {
+        id: 'onWindowResize',
+        func: (data = {}) => {
+          return new Promise((reslove) => {
+            wx.onWindowResize((res) => {
+              reslove(res);
+            })
+          })
+        },
+        isDone: true
+      },
+      {
+        id: 'offWindowResize',
+        func: (data = {}) => {
+            wx.offWindowResize()
+            return {};
+        },
+        isDone: true
+      },
+    ]
+  },
 
   /**
    * 生命周期函数--监听页面加载

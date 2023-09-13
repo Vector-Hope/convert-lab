@@ -1,2 +1,4 @@
 <!--packagesAPI/pages/cache/index.wxml-->
-<text>packagesAPI/pages/cache/index.wxml</text>
+<view class="api-page">
+  <button-list buttonList="{{list}}" />
+</view>
