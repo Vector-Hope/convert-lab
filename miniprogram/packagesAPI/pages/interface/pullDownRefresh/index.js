@@ -11,7 +11,6 @@ Page({
           return new Promise((resolve) => {
             const callback = {}
             wx.startPullDownRefresh({
-              ...data,
               success: (res) => {
                 callback['success'] = res
               },
@@ -20,7 +19,7 @@ Page({
               },
               complete: (res) => {
                 callback['complete'] = res
-                resolve(callback)
+                resolve({ callback })
               },
             })
           })
@@ -33,7 +32,6 @@ Page({
           return new Promise((resolve) => {
             const callback = {}
             wx.stopPullDownRefresh({
-              ...data,
               success: (res) => {
                 callback['success'] = res
               },
@@ -42,7 +40,7 @@ Page({
               },
               complete: (res) => {
                 callback['complete'] = res
-                resolve(callback)
+                resolve({ callback })
               },
             })
           })

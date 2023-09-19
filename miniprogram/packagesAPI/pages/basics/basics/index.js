@@ -9,7 +9,9 @@ Page({
         id: 'env',
         func: (data = {}) => {
           const env = wx.env
-          return env
+          return {
+            callback: env,
+          }
         },
         isDone: true,
       },
@@ -22,7 +24,9 @@ Page({
           const { apiName } = data
           const res = {}
           res[apiName] = wx.canIUse(apiName)
-          return res
+          return {
+            callback: res,
+          }
         },
         isDone: true,
       },
@@ -40,10 +44,12 @@ Page({
           const arrayBuffer = wx.base64ToArrayBuffer(base64)
           console.log(arrayBuffer)
           return {
-            base64,
-            Int8Array: new Int8Array(arrayBuffer),
-            Uint8Array: new Uint8Array(arrayBuffer),
-            ArrayBufferByteLength: arrayBuffer.byteLength,
+            callback: {
+              base64,
+              Int8Array: new Int8Array(arrayBuffer),
+              Uint8Array: new Uint8Array(arrayBuffer),
+              ArrayBufferByteLength: arrayBuffer.byteLength,
+            },
           }
         },
         isDone: true,
@@ -54,8 +60,10 @@ Page({
           const arrayBuffer = new Uint8Array([11, 22, 33])
           const res = wx.arrayBufferToBase64(arrayBuffer)
           return {
-            arrayBuffer: arrayBuffer,
-            base64: res,
+            callback: {
+              arrayBuffer: arrayBuffer,
+              base64: res,
+            },
           }
         },
         isDone: true,

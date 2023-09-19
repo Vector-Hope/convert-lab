@@ -1,5 +1,5 @@
 // packagesAPI/pages/basics/update/index.js
-let that = null;
+let that = null
 Page({
   /**
    * 页面的初始数据
@@ -13,71 +13,81 @@ Page({
       {
         id: 'getUpdateManager',
         func: (data = {}) => {
-          const updateManager = wx.getUpdateManager();
+          const updateManager = wx.getUpdateManager()
           that.setData({
             updateManager,
           })
           console.log(updateManager)
-          return updateManager;
+          return {
+            callback: updateManager,
+          }
         },
-        isDone: true
+        isDone: true,
       },
       {
         id: 'UpdateManager.applyUpdate',
         func: (data = {}) => {
-          const {updateManager} = that.data;
-          updateManager.applyUpdate();
+          const { updateManager } = that.data
+          updateManager.applyUpdate()
           that.setData({
-            updateManager
+            updateManager,
           })
-          return updateManager;
+          return {
+            callback: updateManager,
+          }
         },
-        isDone: true
+        isDone: true,
       },
       {
         id: 'UpdateManager.onCheckForUpdate',
         func: (data = {}) => {
-          const {updateManager} = that.data;
+          const { updateManager } = that.data
           return new Promise((resolve) => {
             updateManager.onCheckForUpdate((res) => {
-              resolve(res);
+              resolve({
+                callback: res,
+              })
             })
             that.setData({
-              updateManager
+              updateManager,
             })
           })
         },
-        isDone: true
+        isDone: true,
       },
       {
         id: 'UpdateManager.onUpdateReady',
         func: (data = {}) => {
-          const {updateManager} = that.data;
+          const { updateManager } = that.data
           return new Promise((resolve) => {
             updateManager.onUpdateReady((res) => {
-              resolve(res);
+              resolve({
+                callback: res,
+              })
             })
             that.setData({
-              updateManager
+              updateManager,
             })
           })
         },
-        isDone: true
+        isDone: true,
       },
       {
         id: 'UpdateManager.onUpdateFailed',
         func: (data = {}) => {
-          const {updateManager} = that.data;
+          const { updateManager } = that.data
           return new Promise((resolve) => {
             updateManager.onUpdateFailed((res) => {
-              resolve(res);
+              resolve({
+                callback: res,
+              })
             })
             that.setData({
-              updateManager
+              updateManager,
             })
           })
         },
-        isDone: true
+        isDone: true,
       },
     ],
     updateManager: null,
@@ -87,7 +97,7 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad(options) {
-    that = this;
+    that = this
   },
 
   /**

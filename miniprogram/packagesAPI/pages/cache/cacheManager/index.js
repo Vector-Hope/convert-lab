@@ -1,35 +1,9 @@
-// packagesAPI/pages/interface/windows/index.js
+// packagesAPI/pages/cache/cacheManager/index.js
 Page({
   /**
    * 页面的初始数据
    */
-  data: {
-    list: [
-      {
-        id: 'onWindowResize',
-        func: (data = {}) => {
-          return new Promise((reslove) => {
-            wx.onWindowResize((res) => {
-              reslove({
-                callback: res,
-              })
-            })
-          })
-        },
-        isDone: true,
-      },
-      {
-        id: 'offWindowResize',
-        func: (data = {}) => {
-          wx.offWindowResize()
-          return {
-            callback: {},
-          }
-        },
-        isDone: true,
-      },
-    ],
-  },
+  data: {},
 
   /**
    * 生命周期函数--监听页面加载

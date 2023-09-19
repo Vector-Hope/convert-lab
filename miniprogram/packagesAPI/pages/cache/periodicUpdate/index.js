@@ -1,4 +1,4 @@
-// packagesAPI/pages/interface/windows/index.js
+// packagesAPI/pages/cache/periodicUpdate/index.js
 Page({
   /**
    * 页面的初始数据
@@ -6,27 +6,24 @@ Page({
   data: {
     list: [
       {
-        id: 'onWindowResize',
+        id: 'getBackgroundFetchData',
+        inputData: {
+          fetchType: '',
+        },
         func: (data = {}) => {
-          return new Promise((reslove) => {
-            wx.onWindowResize((res) => {
-              reslove({
-                callback: res,
-              })
-            })
+          Taro.getBackgroundFetchData({
+            ...data,
+            success: (res) => {
+              TestConsole.consoleSuccess.call(this, res, apiIndex)
+            },
+            fail: (res) => {
+              TestConsole.consoleFail.call(this, res, apiIndex)
+            },
+            complete: (res) => {
+              TestConsole.consoleComplete.call(this, res, apiIndex)
+            },
           })
         },
-        isDone: true,
-      },
-      {
-        id: 'offWindowResize',
-        func: (data = {}) => {
-          wx.offWindowResize()
-          return {
-            callback: {},
-          }
-        },
-        isDone: true,
       },
     ],
   },

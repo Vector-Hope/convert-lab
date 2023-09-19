@@ -3,7 +3,53 @@ Page({
   /**
    * 页面的初始数据
    */
-  data: {},
+  data: {
+    list: [
+      {
+        id: 'request',
+        inputData: {
+          url: 'http://172.20.10.11:3000/hello',
+          dataType: 'json',
+          method: 'POST',
+          data: { name: 'Taro' },
+          headers: {
+            'Content-Type': 'application/json',
+          },
+        },
+        func: (data = {}) => {
+          const callback = {}
+          return new Promise((resolve) => {
+            wx.request({
+              ...data,
+              success: (res) => {
+                callback['success'] = res
+              },
+              fail: (res) => {
+                callback['fail'] = res
+              },
+              complete: (res) => {
+                callback['complete'] = res
+                resolve({ callback })
+              },
+            })
+          })
+        },
+        isDone: true,
+      },
+      {
+        id: 'RequestTask.abort',
+        func: () => {},
+      },
+      {
+        id: 'addInterceptor',
+        func: null,
+      },
+      {
+        id: 'cleanInterceptors',
+        func: null,
+      },
+    ],
+  },
 
   /**
    * 生命周期函数--监听页面加载

@@ -29,14 +29,6 @@
             <view class="label" wx:if="{{control}}">控制属性与关键字</view>
           </view>
         </view>
-        <view class="cell" id="notEffectKey">
-          <view class="cell_hd">
-            <switch checked="false"></switch>
-          </view>
-          <view class="cell_bd">
-            <view class="label">不生效关键字</view>
-          </view>
-        </view>
       </view>
     </view>
     <view class="page-section">

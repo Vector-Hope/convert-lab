@@ -14,9 +14,9 @@
       </view>
     </view>
     <view class="page-section">
-      <view class="cells_title">block渲染(key为*this)</view>
+      <view class="cells_title">block渲染</view>
       <view class="cells cells_after-title" id="blockRender">
-        <block wx:for="{{blockRender}}" wx:key="*this">
+        <block wx:for="{{blockRender}}" wx:key="id">
           <view class="cell_hd">
             <view class="label">{{item.id}}</view>
           </view>

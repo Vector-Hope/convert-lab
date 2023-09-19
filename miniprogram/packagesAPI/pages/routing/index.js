@@ -24,7 +24,7 @@ Page({
               },
               complete: (res) => {
                 callback['complete'] = res
-                resolve(callback)
+                resolve({})
               },
             })
           })
@@ -49,7 +49,7 @@ Page({
               },
               complete: (res) => {
                 callback['complete'] = res
-                resolve(callback)
+                resolve({ callback })
               },
             })
           })
@@ -74,7 +74,7 @@ Page({
               },
               complete: (res) => {
                 callback['complete'] = res
-                resolve(callback)
+                resolve({ callback })
               },
             })
           })
@@ -96,7 +96,7 @@ Page({
               },
               complete: (res) => {
                 callback['complete'] = res
-                resolve(callback)
+                resolve({ callback })
               },
             })
           })

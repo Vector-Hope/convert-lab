@@ -12,7 +12,6 @@
         pageList="{{list}}"
         packageName="packagesAPI"
         category="API"
-        iconList="{{iconList}}"
         bind:enterSetTabBarPage="showSetTabBar"
       />
     </view>

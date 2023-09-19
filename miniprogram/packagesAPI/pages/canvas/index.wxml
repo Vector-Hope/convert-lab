@@ -1,2 +1,14 @@
 <!--packagesAPI/pages/canvas/index.wxml-->
-<text>packagesAPI/pages/canvas/index.wxml</text>
+<view class="api-page">
+  <view class="canvas-example-fixed">
+    <view class="canvas-main">
+      <canvas canvas-id="{{canvasId}}" class="canvas"></canvas>
+    </view>
+    <view class="canvas-preview">
+      <view>画布preview </view>
+      <image class="preview-image" mode="aspectFit" src="{{canvasImg}}"></image>
+    </view>
+  </view>
+  <view class="canvas-example-block"></view>
+  <button-list buttonList="{{list}}" />
+</view>

@@ -36,7 +36,9 @@
       <!-- 基本数据类型继续展示 -->
       <view class="single-data" wx:else>
         <text class="json-text json-key">{{item.key}}: </text>
-        <text class="json-text json-function" wx:if="{{item.type == 'String' && item.value == 'f ( )'}}">{{item.value}}</text>
+        <text class="json-text json-function" wx:if="{{item.type == 'String' && item.value == 'f ( )'}}"
+          >{{item.value}}</text
+        >
         <text class="json-text json-string" wx:elif="{{item.type == 'String'}}">"{{item.value}}"</text>
         <text class="json-text json-boolean" wx:elif="{{item.type == 'Boolean'}}">{{item.value}}</text>
         <text class="json-text json-undefined" wx:elif="{{item.type == 'Undefined'}}">undefined</text>

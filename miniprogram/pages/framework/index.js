@@ -44,9 +44,5 @@ Page({
         ],
       },
     ],
-    iconList: {
-      wxml: '../../image/framework/wxml.png',
-      wxs: '../../image/framework/wxs.png',
-    },
   },
 })

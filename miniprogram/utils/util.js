@@ -1,4 +1,4 @@
-export const formatTime = (date) => {
+const formatTime = (date) => {
   const year = date.getFullYear()
   const month = date.getMonth() + 1
   const day = date.getDate()
@@ -14,8 +14,12 @@ const formatNumber = (n) => {
   return n[1] ? n : `0${n}`
 }
 
-export const getType = (variable) => {
+const getType = (variable) => {
   const type = Object.prototype.toString.call(variable).split(' ')[1].split('').slice(0, -1).join('')
   return type
 }
 
+module.exports = {
+  getType,
+  formatTime,
+}

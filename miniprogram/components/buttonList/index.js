@@ -135,15 +135,15 @@ Component({
     async getResult(id, inputData = {}) {
       const { list } = this.data
       try {
-        let callback = await list[id].func(inputData)
-        let callbackRes = this.formatCallback(callback);
+        let { isShowToast, callback } = await list[id].func(inputData)
+        let callbackRes = this.formatCallback(callback)
         list[id].callbackRes = callbackRes
         console.log(`test API: ${id}`)
         console.log(callbackRes)
         this.setData({
           list,
         })
-        if (!this.isInteraction(id)) {
+        if (!isShowToast) {
           wx.showToast({
             icon: 'success',
             title: `触发${id}成功`,
@@ -165,16 +165,18 @@ Component({
       }
     },
     formatCallback(callback) {
-      const callbackRes = {};
-      const callbackKeys = Object.keys(callback);
-      callbackKeys.forEach((key) => {
-        if (getType(callback[key]) == 'Function') {
-          callbackRes[key] = 'f ( )';
-        } else {
-          callbackRes[key] = callback[key];
-        }
-      })
-      return callbackRes;
+      const callbackRes = {}
+      if (getType(callback) == 'Object') {
+        const callbackKeys = Object.keys(callback)
+        callbackKeys.forEach((key) => {
+          if (getType(callback[key]) == 'Function') {
+            callbackRes[key] = 'f ( )'
+          } else {
+            callbackRes[key] = callback[key]
+          }
+        })
+      }
+      return callbackRes
     },
     // 修改textarea中的内容，改变对应api入参
     changeData(e) {

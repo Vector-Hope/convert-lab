@@ -28,7 +28,7 @@ Component({
               },
               complete: (res) => {
                 callback['complete'] = res
-                resolve(callback)
+                resolve({ callback })
               },
             })
           })
@@ -53,7 +53,7 @@ Component({
               },
               complete: (res) => {
                 callback['complete'] = res
-                resolve(callback)
+                resolve({ callback })
               },
             })
           })
@@ -78,7 +78,7 @@ Component({
               },
               complete: (res) => {
                 callback['complete'] = res
-                resolve(callback)
+                resolve({ callback })
               },
             })
           })
@@ -103,7 +103,7 @@ Component({
               },
               complete: (res) => {
                 callback['complete'] = res
-                resolve(callback)
+                resolve({ callback })
               },
             })
           })
@@ -131,7 +131,7 @@ Component({
               },
               complete: (res) => {
                 callback['complete'] = res
-                resolve(callback)
+                resolve({ callback })
               },
             })
           })
@@ -159,7 +159,7 @@ Component({
               },
               complete: (res) => {
                 callback['complete'] = res
-                resolve(callback)
+                resolve({ callback })
               },
             })
           })
@@ -185,7 +185,7 @@ Component({
               },
               complete: (res) => {
                 callback['complete'] = res
-                resolve(callback)
+                resolve({ callback })
               },
             })
           })
@@ -210,7 +210,7 @@ Component({
               },
               complete: (res) => {
                 callback['complete'] = res
-                resolve(callback)
+                resolve({ callback })
               },
             })
           })

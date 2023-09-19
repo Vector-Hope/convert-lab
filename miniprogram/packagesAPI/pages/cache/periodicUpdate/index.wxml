@@ -1,4 +1,4 @@
-<!--packagesAPI/pages/network/upload/index.wxml-->
+<!--packagesAPI/pages/cache/periodicUpdate/index.wxml-->
 <view class="api-page">
   <button-list buttonList="{{list}}" />
 </view>

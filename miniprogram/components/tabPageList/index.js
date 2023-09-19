@@ -11,7 +11,6 @@ Component({
     pageList: Array,
     packageName: String,
     category: String,
-    iconList: Object,
   },
 
   /**
@@ -26,7 +25,7 @@ Component({
     // 点击页面跳转或列表展开事件
     kindToggle(e) {
       const id = e.currentTarget.id
-      const { pageList, packageName, iconList } = this.properties
+      const { pageList, packageName } = this.properties
       for (let i = 0, len = pageList.length; i < len; ++i) {
         if (pageList[i].id === id) {
           if (pageList[i].pages.length == 0) {
