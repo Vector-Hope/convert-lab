@@ -1,1 +1,18 @@
 /* packagesAPI/pages/file/index.wxss */
+.canvas-main {
+  width: 50%;
+  height: 300rpx;
+  border: #000 solid 4rpx;
+  margin: 20rpx auto;
+  padding: 10rpx;
+  border-radius: 20rpx;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  perspective: 600rpx;
+}
+.canvas {
+  width: 360rpx;
+  height: 300rpx;
+  margin: 10rpx;
+}

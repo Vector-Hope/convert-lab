@@ -475,10 +475,17 @@ Page({
       },
       {
         id: 'Animation.matrix3d',
+        inputData: {
+          matrixLine1: [-0.6, 1.3, 0, 0],
+          matrixLine2: [-2.3, -0.6, 0, 0],
+          matrixLine3: [0, 0, 1, 0,],
+          matrixLine4: [0, 0, 10, 1],
+        },
         func: (data = {}) => {
-          const { animation } = that.data
-          animation.matrix3d(-0.6, 1.3, 0, 0, -2.3, -0.6, 0, 0, 0, 0, 1, 0, 0, 0, 10, 1).step()
-          that.exportAnimationData('matrix3d(-0.6, 1.3, 0, 0, -2.3, -0.6, 0, 0, 0, 0, 1, 0, 0, 0, 10, 1).step()')
+          const { animation } = that.data;
+          const {matrixLine1, matrixLine2, matrixLine3, matrixLine4} = data;
+          animation.matrix3d(...matrixLine1, ...matrixLine2, ...matrixLine3, ...matrixLine4).step();
+          that.exportAnimationData(`matrix3d(${[...matrixLine1, ...matrixLine2, ...matrixLine3, ...matrixLine4].toString()}).step()`)
           return {
             callback: {},
           }

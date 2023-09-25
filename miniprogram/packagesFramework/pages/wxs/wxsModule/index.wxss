@@ -1,1 +1,4 @@
 /* pages/packagesFramework/pages/wxs/wxsModule/index.wxss */
+ .test {
+   height: 100px;
+ }

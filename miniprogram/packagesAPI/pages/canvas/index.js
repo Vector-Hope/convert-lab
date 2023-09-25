@@ -8,17 +8,31 @@ Page({
     canvasImg: '../../../image/defaultImg.png',
     canvasId: 'myCanvas',
     canvas: null,
-    obj: {},
+    imageTempPath: '',
     list: [
       {
         id: 'createCanvasContext',
+        inputData: {
+          downloadImgUrl: 'http://26.26.26.1:3000/static/icon.png'
+        },
         func: (data = {}) => {
-          const { canvasId } = that.data
+          const { canvasId } = that.data;
+          const {downloadImgUrl} = data;
           const canvas = wx.createCanvasContext(canvasId)
+          wx.downloadFile({
+            url: downloadImgUrl,
+            success: (res) => {
+              that.setData({
+                imageTempPath: res.tempFilePath,
+              })
+            },
+            fail: (res) => {
+              console.log(res);
+            }
+          })
           that.setData({
             canvas: canvas,
           })
-
           wx.showToast({
             title: '创建画布成功',
           })
@@ -29,6 +43,712 @@ Page({
         },
         isDone: true,
       },
+      {
+        id: 'CanvasContext.set',
+        inputData: {
+          fillStyle: '#751e9a',
+          fontSize: 24,
+          globalAlpha: 0.6,
+          lineCap: 'round',
+          lineJoin: 'miter',
+          lineWidth: 10,
+          miterLimit: 1,
+          shadow: {
+            offX: 10,
+            offY: 10,
+            blur: 10,
+            color: '#152611'
+          },
+          strokeStyle: '#751e9a',
+          textAlign: 'center',
+          textBaseline: 'top',
+        },
+        func: (data = {}) => {
+          const {canvas} = that.data;
+          const {
+            fillStyle,
+            fontSize,
+            globalAlpha,
+            lineCap,
+            lineJoin,
+            lineWidth,
+            miterLimit,
+            shadow,
+            strokeStyle,
+            textAlign,
+            textBaseline,
+          } = data;
+          canvas.setFillStyle(fillStyle);
+          canvas.setFontSize(fontSize);
+          canvas.setGlobalAlpha(globalAlpha);
+          canvas.setLineCap(lineCap);
+          canvas.setLineJoin(lineJoin);
+          canvas.setLineWidth(lineWidth);
+          canvas.setMiterLimit(miterLimit);
+          canvas.setShadow(shadow.offX, shadow.offY, shadow.blur, shadow.color);
+          canvas.setStrokeStyle(strokeStyle);
+          canvas.setTextAlign(textAlign);
+          canvas.setTextBaseline(textBaseline);
+          wx.showToast({
+            title: '请继续作画',
+          })
+          return {
+            isShowToast: true,
+            callback: {}
+          }
+        },
+        isDone: true
+      },
+      {
+        id: 'CanvasContext.setLineDash',
+        inputData: {
+          pattern: [5, 5],
+          offset: 4,
+        },
+        func: (data = {}) => {
+          const {canvas} = that.data;
+          const {pattern, offset} = data;
+          canvas.setLineDash(pattern, offset);
+          wx.showToast({
+            title: '请继续作画',
+          })
+          return {
+            isShowToast: true,
+            callback: {}
+          }
+        },
+        isDone: true
+      },
+      {
+        id: 'CanvasContext.setTransform',
+        inputData: {
+          scaleX: 0.8,
+          skewX: 0.1,
+          scaleY: 0.8,
+          skewY: 0.1,
+          tranX: 10,
+          tranY: 10
+        },
+        func: (data = {}) => {
+          const {canvas} = that.data;
+          const {scaleX, skewX, scaleY, skewY, tranX, tranY} = data;
+          canvas.setTransform(scaleX, skewX, scaleY, skewY, tranX, tranY);
+          wx.showToast({
+            title: '请继续作画',
+          })
+          return {
+            isShowToast: true,
+            callback: {}
+          }
+        },
+      },
+      {
+        id: 'CanvasContext.arc',
+        inputData: {
+          x: 100,
+          y: 75,
+          r: 50,
+          sAngle: 0,
+          eAngle: 2 * Math.PI,
+          counterclockwise: false,
+        },
+        func: (data = {}) => {
+          const { canvas } = that.data
+          const {x, y, r, sAngle, eAngle, counterclockwise} = data;
+          canvas.beginPath()
+          canvas.arc(x, y, r, sAngle, eAngle, counterclockwise)
+          canvas.stroke()
+          return new Promise((resolve) => {
+            canvas.draw(true, (res) => {
+              resolve({
+                callback: res
+              })
+            })
+          })
+        },
+        isDone: true,
+      },
+      {
+        id: 'CanvasContext.arcTo',
+        inputData: {
+          x1: 150,
+          y1: 20,
+          x2: 150,
+          y2: 70,
+          radius: 50,
+        },
+        func: (data = {}) => {
+          const {canvas} = that.data;
+          const {x1, y1, x2, y2, radius} = data;
+          canvas.beginPath()
+          canvas.moveTo(20, 20)
+          canvas.lineTo(100, 20)
+          canvas.arcTo(x1, y1, x2, y2, radius)
+          canvas.stroke()
+          return new Promise((resolve) => {
+            canvas.draw(true, (res) => {
+              resolve({
+                callback: res
+              })
+            })
+          })
+        },
+        isDone: true
+      },
+      {
+        id: 'CanvasContext.bezierCurveTo',
+        inputData: {
+          cp1x: 20,
+          cp1y: 100,
+          cp2x: 100,
+          cp2y: 100,
+          x: 100,
+          y: 20,
+        },
+        func: (data = {}) => {
+          const {canvas} = that.data;
+          const {cp1x, cp1y, cp2x, cp2y, x, y} = data;
+            canvas.beginPath()
+            canvas.bezierCurveTo(cp1x, cp1y, cp2x, cp2y, x, y);
+            canvas.closePath()
+            canvas.stroke()
+            return new Promise((resolve) => {
+              canvas.draw(true, (res) => {
+                resolve({
+                  callback: res
+                })
+              })
+            })
+        },
+        isDone: true
+      },
+      {
+        id: 'CanvasContext.strokeRect',
+        inputData: {
+          x: 20,
+          y: 20,
+          width: 100,
+          height: 40,
+        },
+        func: (data = {}) => {
+          const {canvas} =that.data;
+          const {x, y, width, height} = data;
+          canvas.beginPath();
+          canvas.strokeRect(x, y, width, height);
+          return new Promise((resolve) => {
+            canvas.draw(true, (res) => {
+              resolve({
+                callback: res,
+              })
+            })
+          })
+        },
+        isDone: true
+      },
+      {
+        id: 'CanvasContext.fillRect',
+        inputData: {
+          x: 20,
+          y: 20,
+          width: 100,
+          height: 40,
+        },
+        func: (data = {}) => {
+          const {canvas} =that.data;
+          const {x, y, width, height} = data;
+          canvas.beginPath();
+          canvas.fillRect(x, y, width, height);
+          return new Promise((resolve) => {
+            canvas.draw(true, (res) => {
+              resolve({
+                callback: res,
+              })
+            })
+          })
+        },
+        isDone: true
+      },
+      {
+        id: 'CanvasContext.clearRect',
+        inputData: {
+          x: 20,
+          y: 20,
+          width: 100,
+          height: 40,
+        },
+        func: (data = {}) => {
+          const {canvas} =that.data;
+          const {x, y, width, height} = data;
+          canvas.beginPath();
+          canvas.clearRect(x, y, width, height);
+          return new Promise((resolve) => {
+            canvas.draw(true, (res) => {
+              resolve({
+                callback: res,
+              })
+            })
+          })
+        },
+        isDone: true
+      },
+      {
+        id: 'CanvasContext.save',
+        func: (data = {}) => {
+          const {canvas} =that.data;
+          canvas.save();
+          wx.showToast({
+            title: '保存绘画上下文',
+          })
+          return {
+            isShowToast: true,
+            callback: {}
+          }
+        },
+        isDone: true
+      },
+      {
+        id: 'CanvasContext.clip',
+        func: (data = {}) => {
+          const {canvas} =that.data;
+          canvas.beginPath()
+          canvas.arc(100, 100, 50, 0, 2*Math.PI)
+          canvas.clip()
+          wx.showToast({
+            title: '请继续作画',
+          })
+          return {
+            isShowToast: true,
+            callback: {}
+          }
+        },
+        isDone: true,
+      },
+      {
+        id: 'CanvasContext.restore',
+        func: (data = {}) => {
+          const {canvas} =that.data;
+          canvas.restore();
+          wx.showToast({
+            title: '请继续作画',
+          })
+          return {
+            isShowToast: true,
+            callback: {}
+          }
+        },
+        isDone: true
+      },
+      {
+        id: 'CanvasContext.createCircularGradient',
+        inputData: {
+          x: 75,
+          y: 50,
+          r: 50,
+          colorStop: [
+            {
+              stop: 0,
+              color: '#129a7e',
+            },
+            {
+              stop: 0.5,
+              color: '#e2a77e',
+            },
+            {
+              stop: 1,
+              color: '#9ba118',
+            },
+          ]
+        },
+        func: (data = {}) => {
+          const {canvas} = that.data;
+          const {x, y, r, colorStop} = data;
+          const circGrd = canvas.createCircularGradient(x, y, r);
+          colorStop.forEach((item) => {
+            circGrd.addColorStop(item.stop, item.color)
+          })
+          canvas.setFillStyle(circGrd)
+          wx.showToast({
+            title: '请继续作画',
+          })
+          return {
+            isShowToast: true,
+            callback: {}
+          }
+        },
+        isDone: true
+      },
+      {
+        id: 'CanvasContext-createLinearGradient',
+        inputData: {
+          x0: 0,
+          y0: 0,
+          x1: 200,
+          y1: 0,
+          colorStop: [
+            {
+              stop: 0,
+              color: '#129a7e',
+            },
+            {
+              stop: 0.5,
+              color: '#e2a77e',
+            },
+            {
+              stop: 1,
+              color: '#9ba118',
+            },
+          ]
+        },
+        func: (data = {}) => {
+          const {canvas} = that.data;
+          const {x0, y0, x1, y1, colorStop} = data;
+          const lineGrd = canvas.createLinearGradient(x0, y0, x1, y1);
+          colorStop.forEach((item) => {
+            lineGrd.addColorStop(item.stop, item.color);
+          })
+          canvas.setFillStyle(lineGrd);
+          wx.showToast({
+            title: '请继续作画',
+          })
+          return {
+            isShowToast: true,
+            callback: {}
+          }
+        },
+        isDone: true
+      },
+      {
+        id: 'CanvasContext.createPattern',
+        inputData: {
+          repetition: 'repeat',
+        },
+        func: (data = {}) => {
+          const {canvas, imageTempPath} = that.data;
+          const {repetition} = data;
+          const pattern = canvas.createPattern(imageTempPath, repetition);
+          canvas.setFillStyle(pattern);
+          wx.showToast({
+            title: '请继续作画',
+          })
+          return {
+            isShowToast: true,
+            callback: {}
+          }
+        },
+        isDone: true
+      },
+      {
+        id: 'CanvasContext.drawImage',
+        inputData: {
+          sx: 0,
+          sy: 0,
+          sWidth: 150,
+          sHeight: 100,
+          dx: 0,
+          dy: 0,
+          dWidth: 150,
+          dHeight: 100,
+        },
+        func: (data = {}) => {
+          const {canvas, imageTempPath} = that.data;
+          const {sx, sy, sWidth, sHeight, dx, dy, dWidth, dHeight} = data;
+          canvas.drawImage(imageTempPath, sx, sy, sWidth, sHeight, dx, dy, dWidth, dHeight);
+          return new Promise((resolve) => {
+            canvas.draw(true, (res) => {
+              resolve({
+                callback: res,
+              })
+            })
+          })
+        },
+        isDone: true
+      },
+      {
+        id: 'CanvasContext.fill',
+        inputData: {
+          points: [
+            {
+              x: 100,
+              y: 10,
+            },
+            {
+              x: 50,
+              y: 100,
+            },
+            {
+              x: 60,
+              y: 90,
+            },
+          ]
+        },
+        func: (data = {}) => {
+          const {canvas} = that.data;
+          const {points} = data;
+          canvas.moveTo(10, 10);
+          points.forEach((point) => {
+            canvas.lineTo(point.x, point.y);
+          })
+          canvas.fill();
+          return new Promise((resolve) => {
+            canvas.draw(true, (res) => {
+              resolve({
+                callback: res,
+              })
+            })
+          })
+        },
+        isDone: true,
+      },
+      {
+        id: 'CanvasContext.fillText',
+        inputData: {
+          text: 'Hello word',
+          x: 10,
+          y: 50,
+          maxWidth: 500,
+        },
+        func: (data = {}) => {
+          const {canvas} = that.data;
+          const {text, x, y, maxWidth} = data;
+          canvas.fillText(text, x, y, maxWidth);
+          return new Promise((resolve) => {
+            canvas.draw(true, (res) => {
+              resolve({
+                callback: res,
+              })
+            })
+          })
+        },
+        isDone: true,
+      },
+      {
+        id: 'CanvasContext.measureText',
+        inputData: {
+          text: 'hello word',
+        },
+        func: (data = {}) => {
+          const {canvas} = that.data;
+          const {text} = data;
+          const textWidth = canvas.measureText(text);
+          console.log(canvas.measureText(text));
+          return {
+            callback: textWidth
+          }
+        },
+        isDone: true,
+      },
+      {
+        id: 'CanvasContext.moveTo',
+        inputData: {
+          x: 20,
+          y: 20,
+        },
+        func: (data = {}) => {
+          const {canvas} = that.data;
+          const {x, y} = data;
+          canvas.moveTo(x, y);
+          wx.showToast({
+            title: '请继续作画',
+          })
+          return {
+            isShowToast: true,
+            callback: {}
+          }
+        },
+        isDone: true,
+      },
+      {
+        id: 'CanvasContext.lineTo',
+        inputData: {
+          beginPosition: {
+            x: 10,
+            y: 10
+          },
+          points: [
+            {
+              x: 10,
+              y: 50,
+            },
+            {
+              x: 60,
+              y: 70,
+            },
+          ]
+        },
+        func: (data = {}) => {
+          const {canvas} = that.data;
+          const {beginPosition, points} = data;
+          canvas.moveTo(beginPosition.x, beginPosition.y);
+          points.forEach((point) => {
+          canvas.lineTo(point.x, point.y);
+          })
+          canvas.stroke();
+          return new Promise((resolve) => {
+            canvas.draw(true, (res) => {
+              resolve({
+                callback: res,
+              })
+            })
+          })
+        },
+        isDone: true,
+      },
+      {
+        id: 'CanvasContext.quadraticCurveTo',
+        inputData: {
+          cpx: 20,
+          cpy: 100,
+          x: 150,
+          y: 20,
+        },
+        func: (data = {}) => {
+          const {canvas} = that.data;
+          const {cpx, cpy, x, y} = data;
+          canvas.quadraticCurveTo(cpx, cpy, x, y);
+          canvas.stroke();
+          return new Promise((resolve) => {
+            canvas.draw(true, (res) => {
+              resolve({
+                callback: res,
+              })
+            })
+          })
+        },
+        isDone: true
+      },
+      {
+        id: 'CanvasContext.rect',
+        inputData: {
+          x: 20,
+          y: 20,
+          width: 100,
+          height: 40,
+          fill: false,
+          stroke: true
+        },
+        func: (data = {}) => {
+          const {canvas} = that.data;
+          const {x, y, width, height, fill, stroke} = data;
+          if (fill) {
+            canvas.rect(x, y, width, height);
+            canvas.fill();
+          } else if (stroke) {
+            canvas.rect(x, y, width, height);
+            canvas.stroke();
+          } else {
+            wx.showToast({
+              title: '请选择填充或描边',
+            })
+            return {
+              isShowToast: true,
+              callback: {}
+            }
+          }
+          return new Promise((resolve) => {
+            canvas.draw(true, (res) => {
+              resolve({
+                callback: res,
+              })
+            })
+          })
+        },
+        isDone: true
+      },
+      {
+        id: 'CanvasContext.rotate',
+        inputData: {
+          rotate: (20 * Math.PI) / 180,
+        },
+        func: (data = {}) => {
+          const {canvas} = that.data;
+          const {rotate} = data;
+          canvas.rotate(rotate);
+          wx.showToast({
+            title: '请继续作画',
+          })
+          return {
+            isShowToast: true,
+            callback: {}
+          }
+        },
+        isDone: true
+      },
+      {
+        id: 'CanvasContext.scale',
+        inputData: {
+          scaleWidth: 2,
+          scaleHeight: 2,
+        },
+        func: (data = {}) => {
+          const {canvas} = that.data;
+          const {scaleWidth, scaleHeight} = data;
+          canvas.scale(scaleWidth, scaleHeight);
+          wx.showToast({
+            title: '请继续作画',
+          })
+          return {
+            isShowToast: true,
+            callback: {}
+          }
+        },
+        isDone: true
+      },
+      {
+        id: 'CanvasContext-strokeText',
+        inputData: {
+          text: 'hello word',
+          x: 10,
+          y: 50,
+          maxWidth: 500,
+        },
+        func: (data = {}) => {
+          const {canvas} = that.data;
+          const {text, x, y, maxWidth} = data;
+          canvas.strokeText(text, x, y, maxWidth);
+          return new Promise((resolve) => {
+            canvas.draw(true, (res) => {
+              resolve({
+                callback: res,
+              })
+            })
+          })
+        },
+        isDone: true
+      },
+      {
+        id: 'CanvasContext-transform',
+        inputData: {
+          scaleX: 1,
+          scaleY: 0.5,
+          skewX: -0.5,
+          skewY: 1,
+          translateX: 20,
+          translateY: 10,
+        },
+        func: (data = {}) => {
+        },
+      },
+      {
+        id: 'CanvasContext-translate',
+        inputData: {
+          x: 20,
+          y: 20,
+        },
+        func: (data = {}) => {
+          const {canvas} = that.data;
+          const {x, y} = data;
+          canvas.translate(x, y);
+          wx.showToast({
+            title: '请继续作画',
+          })
+          return {
+            isShowToast: true,
+            callback: {}
+          }
+        },
+        isDone: true
+      },
+      
       {
         id: 'canvasToTempFilePath',
         inputData: {
@@ -65,87 +785,6 @@ Page({
               },
             })
           })
-        },
-        isDone: true,
-      },
-      {
-        id: 'CanvasContext.arc',
-        inputData: {
-          x: 100,
-          y: 75,
-          r: 50,
-          sAngle: 0,
-          eAngle: 2 * Math.PI,
-          counterclockwise: false,
-        },
-        func: (data = {}) => {
-          const { canvas } = that.data
-          canvas.setStrokeStyle('#152611')
-          canvas.setFontSize(24)
-
-          canvas.setTextBaseline('top')
-          canvas.setTextAlign('center')
-          canvas.setGlobalAlpha(0.6)
-          canvas.setLineCap('round')
-          canvas.setLineDash([5, 5], 5)
-          canvas.setLineJoin('miter')
-          canvas.setMiterLimit(1)
-
-          canvas.setLineWidth(6)
-          const linearGrd = canvas.createLinearGradient(0, 0, 100, 0)
-          linearGrd.addColorStop(0, '#751e9a')
-          linearGrd.addColorStop(1, '#2e7911')
-          canvas.setFillStyle(linearGrd)
-          canvas.rect(20, 120, 20, 30)
-          canvas.fill()
-          canvas.save()
-          canvas.beginPath()
-          canvas.arc(140, 100, 25, 0, 2 * Math.PI)
-          canvas.clip()
-          canvas.drawImage('../../../image/defaultIcon.png', 0, 0, 100, 100, 115, 75, 50, 50)
-          canvas.restore()
-          canvas.beginPath()
-          canvas.arc(90, 90, 20, 0, 2 * Math.PI, false)
-          canvas.closePath()
-          canvas.stroke()
-
-          canvas.setLineDash([0, 0], 0)
-          canvas.setLineWidth(10)
-          canvas.moveTo(20, 20)
-          const circGrd = canvas.createCircularGradient(75, 50, 50)
-          circGrd.addColorStop(0, '#2e4d1a')
-          circGrd.addColorStop(1, '#8b6c91')
-          canvas.setFillStyle(circGrd)
-          canvas.fillRect(10, 10, 150, 80)
-          canvas.stroke()
-          canvas.setLineWidth(2)
-
-          canvas.setShadow(10, 10, 10, 'blue')
-          canvas.strokeRect(10, 10, 150, 80)
-          canvas.arcTo(150, 20, 150, 70, 50)
-          canvas.bezierCurveTo(20, 50, 100, 50, 100, 20)
-          canvas.clearRect(80, 10, 30, 50)
-          canvas.fillText('text', 50, 30, 100)
-          canvas.strokeText('stroke', 50, 100, 100)
-          const pattern = canvas.createPattern('../../../image/defaultIcon.png', 'repeat')
-          canvas.setFillStyle(pattern)
-          canvas.fillRect(0, 0, 190, 80)
-          canvas.stroke()
-          canvas.setTransform(0.8, 0.1, 0.1, 0.8, 10, 10)
-          canvas.quadraticCurveTo(100, 100, 100, 20)
-          canvas.rotate((10 * Math.PI) / 180)
-          canvas.scale(1.2, 1.2)
-          canvas.transform(1.2, -0.1, -0.1, 1.2, 10, 10)
-          canvas.translate(-10, -10)
-
-          const measure = canvas.measureText('measureText')
-          canvas.stroke()
-          canvas.draw()
-          return {
-            callback: {
-              measureText: measure,
-            },
-          }
         },
         isDone: true,
       },

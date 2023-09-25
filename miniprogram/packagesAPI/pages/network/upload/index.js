@@ -24,8 +24,8 @@ Page({
               mediaType: ['image'],
               success(res) {
                 console.log(res)
-                const filePath = res.tempFiles[0].tempFilePath + '.jpg'
-                const callback = {}
+                const filePath = res.tempFiles[0].tempFilePath;
+                const callback = {};
                 const task = wx.uploadFile({
                   ...data,
                   filePath,

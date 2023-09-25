@@ -1,2 +1,5 @@
 <!--packagesAPI/pages/device/clipBoard/index.wxml-->
-<text>packagesAPI/pages/device/clipBoard/index.wxml</text>
+<view class="api-page">
+  <view class="pasted">粘贴内容：{{pasted}}</view>
+  <button-list buttonList="{{list}}" />
+</view>

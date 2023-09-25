@@ -1,1 +1,8 @@
 /* packagesAPI/pages/device/clipBoard/index.wxss */
+.pasted {
+  background-color: #fff;
+  width: 80%;
+  margin: 20rpx auto;
+  padding: 20rpx;
+  border-radius: 10rpx;
+}

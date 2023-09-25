@@ -1,2 +1,4 @@
 <!--packagesAPI/pages/device/deviceNetwork/index.wxml-->
-<text>packagesAPI/pages/device/deviceNetwork/index.wxml</text>
+<view class="api-page">
+  <button-list buttonList="{{list}}" />
+</view>

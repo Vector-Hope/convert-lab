@@ -1,47 +1,68 @@
 // packagesAPI/pages/device/clipBoard/index.js
+let that;
 Page({
   /**
    * 页面的初始数据
    */
-  data: {},
+  data: {
+    list: [
+      {
+        id: 'setClipboardData',
+        inputData: {
+          data: '我是复制的内容',
+        },
+        func: (data = {}) => {
+          return new Promise((resolve) => {
+            const callback = {};
+            wx.setClipboardData({
+              ...data,
+              success: (res) => {
+                callback['success'] = res;
+              },
+              fail: (res) => {
+                callback['fail'] = res;
+              },
+              complete: (res) => {
+                callback['complete'] = res;
+                resolve({ callback });
+              },
+            })
+          })
+        },
+        isDone: true
+      },
+      {
+        id: 'getClipboardData',
+        func: (data = {}) => {
+          return new Promise((resolve) => {
+            const callback = {};
+            wx.getClipboardData({
+              success: (res) => {
+                that.setData({
+                  pasted: res.data,
+                })
+                callback['success'] = res;
+              },
+              fail: (res) => {
+                callback['fail'] = res;
+              },
+              complete: (res) => {
+                callback['complete'] = res;
+                resolve({ callback });
+              },
+            })
+          })
+        },
+        isDone: true
+      },
+    ],
+  pasted: '',
+},
 
   /**
    * 生命周期函数--监听页面加载
    */
-  onLoad(options) {},
-
-  /**
-   * 生命周期函数--监听页面初次渲染完成
-   */
-  onReady() {},
-
-  /**
-   * 生命周期函数--监听页面显示
-   */
-  onShow() {},
-
-  /**
-   * 生命周期函数--监听页面隐藏
-   */
-  onHide() {},
-
-  /**
-   * 生命周期函数--监听页面卸载
-   */
-  onUnload() {},
-
-  /**
-   * 页面相关事件处理函数--监听用户下拉动作
-   */
-  onPullDownRefresh() {},
-
-  /**
-   * 页面上拉触底事件的处理函数
-   */
-  onReachBottom() {},
-
-  /**
-   * 用户点击右上角分享
-   */
-  onShareAppMessage() {},
+  onLoad(options) {
+    that = this;
+  },
 })

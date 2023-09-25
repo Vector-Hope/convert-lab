@@ -84,6 +84,14 @@
             <view class="label">array[0]: {{array[0]}}</view>
           </view>
         </view>
+        <view class="cell" id="pathOpera">
+          <view class="cell_hd">
+            <view class="label">正则对象exp3（忽略大小写qweqwe）：</view>
+          </view>
+          <view class="cell_bd">
+            <view class="label">/abc/i</view>
+          </view>
+        </view>
       </view>
     </view>
     <view class="page-section">
