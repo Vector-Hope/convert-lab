@@ -1,4 +1,5 @@
 <!--packagesAPI/pages/device/deviceNetwork/index.wxml-->
 <view class="api-page">
+  <view class="network-type-area"> 网络状态: {{networkType}} </view>
   <button-list buttonList="{{list}}" />
 </view>

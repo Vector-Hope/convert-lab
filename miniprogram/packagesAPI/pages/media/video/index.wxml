@@ -1,2 +1,11 @@
 <!--packagesAPI/pages/media/video/index.wxml-->
-<text>packagesAPI/pages/media/video/index.wxml</text>
+<view class="api-page">
+  <view class="video-example-fixed">
+    <view class="video-example-area">
+      <video wx:if="{{videoTempPath}}" id="myVideo" class="video-example" src="{{videoTempPath}}"></video>
+      <image wx:else class="preview-video" mode="aspectFit" src="../../../../image/defaultImg.png"></image>
+    </view>
+  </view>
+  <view class="video-example-block"></view>
+  <button-list buttonList="{{list}}" />
+</view>

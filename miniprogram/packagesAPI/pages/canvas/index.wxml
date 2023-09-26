@@ -6,7 +6,12 @@
     </view>
     <view class="canvas-preview">
       <view>画布preview </view>
-      <image class="preview-image" mode="aspectFit" src="{{canvasImg}}"></image>
+      <block wx:if="{{canvasImg}}">
+        <image class="preview-image" mode="aspectFit" src="{{canvasImg}}"></image>
+      </block>
+      <block wx:else>
+        <image class="preview-image" mode="aspectFit" src="../../../image/defaultImg.png"></image>
+      </block>
     </view>
   </view>
   <view class="canvas-example-block"></view>

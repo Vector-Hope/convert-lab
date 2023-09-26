@@ -1,4 +1,5 @@
 // packagesAPI/pages/device/deviceNetwork/index.js
+let that
 Page({
   /**
    * 页面的初始数据
@@ -12,9 +13,18 @@ Page({
       {
         id: 'onNetworkStatusChange',
         func: (data = {}) => {
-          TestConsole.consoleTest('onNetworkStatusChange')
-          Taro.onNetworkStatusChange(this.onNetworkStatusChange01)
+          return new Promise((resolve) => {
+            wx.onNetworkStatusChange((res) => {
+              console.log('test API: onNetworkStatusChange')
+              console.log(res)
+              that.setData({
+                networkType: res.networkType,
+              })
+              resolve({ callback: res })
+            })
+          })
         },
+        isDone: true,
       },
       {
         id: 'offNetworkWeakChange',
@@ -22,65 +32,53 @@ Page({
       },
       {
         id: 'offNetworkStatusChange',
-        inputData: {
-          closeAll: false,
-          close01: true,
-          close02: false,
+        func: (data = {}) => {
+          wx.offNetworkStatusChange()
+          return {}
         },
-        func: (apiIndex, data) => {
-          TestConsole.consoleTest('offNetworkStatusChange')
-          if (data.closeAll) {
-            Taro.offNetworkStatusChange()
-          } else {
-            if (data.close01) {
-              Taro.offNetworkStatusChange(this.onNetworkStatusChange01)
-            }
-            if (data.close02) {
-              Taro.offNetworkStatusChange(this.onNetworkStatusChange02)
-            }
-          }
-        },
+        isDone: true,
       },
       {
         id: 'getNetworkType',
-        func: (apiIndex) => {
-          TestConsole.consoleTest('getNetworkType')
-          Taro.getNetworkType({
-            success: (res) => {
-              TestConsole.consoleSuccess.call(this, res, apiIndex)
-              this.setState({
-                networkType: res.networkType,
-              })
-            },
-            fail: (res) => {
-              TestConsole.consoleFail.call(this, res, apiIndex)
-              this.setState({
-                networkType: '获取失败',
-              })
-            },
-            complete: (res) => {
-              TestConsole.consoleComplete.call(this, res, apiIndex)
-            },
+        func: (data = {}) => {
+          return new Promise((resolve) => {
+            const callback = {}
+            wx.getNetworkType({
+              success: (res) => {
+                callback['success'] = res
+                that.setData({
+                  networkType: res.networkType,
+                })
+              },
+              fail: (res) => {
+                callback['fail'] = res
+                that.setData({
+                  networkType: '获得网络失败',
+                })
+              },
+              complete: (res) => {
+                callback['complete'] = res
+                resolve({ callback })
+              },
+            })
           })
-            .then((res) => {
-              TestConsole.consoleReturn.call(this, res, apiIndex)
-            })
-            .catch((err) => {
-              TestConsole.consoleReturn.call(this, err, apiIndex)
-            })
         },
+        isDone: true,
       },
       {
         id: 'getLocalIPAddress',
         func: null,
       },
     ],
+    networkType: '',
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
-  onLoad(options) {},
+  onLoad(options) {
+    that = this
+  },
 
   /**
    * 生命周期函数--监听页面初次渲染完成

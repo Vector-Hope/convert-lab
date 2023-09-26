@@ -8,16 +8,20 @@ Page({
       {
         id: 'startPullDownRefresh',
         func: (data = {}) => {
+          console.log('start!!!!!!!!!!')
           return new Promise((resolve) => {
             const callback = {}
             wx.startPullDownRefresh({
               success: (res) => {
+                console.log('success ', res)
                 callback['success'] = res
               },
               fail: (res) => {
+                console.log('fail ', res)
                 callback['fail'] = res
               },
               complete: (res) => {
+                console.log('complete ', res)
                 callback['complete'] = res
                 resolve({ callback })
               },
@@ -29,16 +33,20 @@ Page({
       {
         id: 'stopPullDownRefresh',
         func: (data = {}) => {
+          console.log('stop!!!!!!!!!!')
           return new Promise((resolve) => {
             const callback = {}
             wx.stopPullDownRefresh({
               success: (res) => {
+                console.log('success ', res)
                 callback['success'] = res
               },
               fail: (res) => {
+                console.log('fail ', res)
                 callback['fail'] = res
               },
               complete: (res) => {
+                console.log('complete ', res)
                 callback['complete'] = res
                 resolve({ callback })
               },

@@ -1,2 +1,4 @@
 <!--packagesAPI/pages/network/webSocket/index.wxml-->
-<text>packagesAPI/pages/network/webSocket/index.wxml</text>
+<view class="api-page">
+  <button-list buttonList="{{list}}" />
+</view>

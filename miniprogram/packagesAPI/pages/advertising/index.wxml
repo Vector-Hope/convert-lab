@@ -1,2 +1,4 @@
 <!--packagesAPI/pages/advertising/index.wxml-->
-<text>packagesAPI/pages/advertising/index.wxml</text>
+<view class="api-page">
+  <button-list buttonList="{{list}}" />
+</view>

@@ -1,4 +1,9 @@
 // packagesAPI/pages/network/upload/index.js
+const urls = [
+  'http://www.baidu.com/img/bdlogo.png',
+  'https://img1.baidu.com/it/u=698323844,3339950020&fm=253&app=138&size=w931&n=0&f=PNG&fmt=auto?sec=1694278800&t=60a09ae53f4ed052e28032d918935164',
+  'https://img1.baidu.com/it/u=698323844,3339950020&fm=253&app=138&size=w931&n=0&f=PNG&fmt=auto?sec=1694278800&t=60a09ae53f4ed052e28032d918935164',
+]
 let that
 Page({
   /**
@@ -16,19 +21,21 @@ Page({
           },
           name: 'file',
           timeout: 60000,
+          downloadFilePath: urls[0],
         },
         func: (data = {}) => {
+          const { url, headers, name, timeout, downloadFilePath } = data
           return new Promise((resolve) => {
-            wx.chooseMedia({
-              count: 1,
-              mediaType: ['image'],
-              success(res) {
-                console.log(res)
-                const filePath = res.tempFiles[0].tempFilePath;
-                const callback = {};
+            wx.downloadFile({
+              url: downloadFilePath,
+              success: (res) => {
+                const callback = {}
                 const task = wx.uploadFile({
-                  ...data,
-                  filePath,
+                  url,
+                  headers,
+                  name,
+                  timeout,
+                  filePath: res.tempFilePath,
                   success: (res) => {
                     callback['success'] = res
                   },
@@ -144,16 +151,24 @@ Page({
         func: (data = {}) => {
           const { task } = that.data
           if (task) {
-            console.log(task)
-            task.onProgressUpdate((res) => {
-              console.log('上传进度', res.progress)
-              console.log('已经上传的数据长度', res.totalBytesSent)
-              console.log('预期需要上传的数据总长度', res.totalBytesExpectedToSend)
+            return new Promise((resolve) => {
+              let timeoutIndex
+              task.onProgressUpdate((res) => {
+                if (!timeoutIndex) {
+                  timeoutIndex = setTimeout(() => {
+                    console.log('test API: DownloadTask.onProgressUpdate')
+                    console.log(res)
+                    clearTimeout(timeoutIndex)
+                  }, 100)
+                }
+                resolve({
+                  callback: res,
+                })
+              })
             })
-            return {}
           } else {
             wx.showToast({
-              title: '暂无上传任务',
+              title: '暂无下载任务',
             })
             return {
               callback: {},
@@ -161,6 +176,7 @@ Page({
             }
           }
         },
+        isDone: true,
         isDone: true,
       },
     ],

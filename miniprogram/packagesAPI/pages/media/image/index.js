@@ -1,5 +1,5 @@
 // packagesAPI/pages/media/image/index.js
-let that;
+let that
 Page({
   /**
    * 页面的初始数据
@@ -15,26 +15,26 @@ Page({
         },
         func: (data = {}) => {
           return new Promise((resolve) => {
-            const callback = {};
+            const callback = {}
             wx.chooseImage({
               ...data,
               success: (res) => {
                 that.setData({
                   imgTempFilePaths: res.tempFilePaths,
                 })
-                callback['success'] = res;
+                callback['success'] = res
               },
               fail: (res) => {
-                callback['fail'] = res;
+                callback['fail'] = res
               },
               complete: (res) => {
-                callback['complete'] = res;
-                resolve({ callback });
+                callback['complete'] = res
+                resolve({ callback })
               },
             })
           })
         },
-        isDone: true
+        isDone: true,
       },
       {
         id: 'previewImage',
@@ -49,28 +49,28 @@ Page({
           referrerPolicy: 'no-referrer',
         },
         func: (data = {}) => {
-          const {urls, current, showmenu, referrerPolicy} = data;
+          const { urls, current, showmenu, referrerPolicy } = data
           return new Promise((resolve) => {
-            const callback = {};
+            const callback = {}
             wx.previewImage({
               urls,
               showmenu,
               current,
               referrerPolicy,
               success: (res) => {
-                callback['success'] = res;
+                callback['success'] = res
               },
               fail: (res) => {
-                callback['fail'] = res;
+                callback['fail'] = res
               },
               complete: (res) => {
-                callback['complete'] = res;
-                resolve({ callback });
+                callback['complete'] = res
+                resolve({ callback })
               },
             })
           })
         },
-        isDone: true
+        isDone: true,
       },
       {
         id: 'getImageInfo',
@@ -78,71 +78,71 @@ Page({
           imgIndex: 0,
         },
         func: (data = {}) => {
-          const {imgTempFilePaths} = that.data;
+          const { imgTempFilePaths } = that.data
           if (!imgTempFilePaths) {
             wx.showToast({
               title: '请先选择图片',
             })
             return {
               isShowToast: true,
-              callback: {}
+              callback: {},
             }
           }
-          const {imgIndex} = data;
+          const { imgIndex } = data
           return new Promise((resolve) => {
-            const callback = {};
+            const callback = {}
             wx.getImageInfo({
               src: imgTempFilePaths[imgIndex],
               success: (res) => {
-                callback['success'] = res;
+                callback['success'] = res
               },
               fail: (res) => {
-                callback['fail'] = res;
+                callback['fail'] = res
               },
               complete: (res) => {
-                callback['complete'] = res;
-                resolve({ callback });
+                callback['complete'] = res
+                resolve({ callback })
               },
             })
           })
         },
-        isDone: true
+        isDone: true,
       },
       {
         id: 'saveImageToPhotosAlbum',
         inputData: {
-          imgIndex: 0
+          imgIndex: 0,
         },
         func: (data = {}) => {
-          const {imgTempFilePaths} = that.data;
+          const { imgTempFilePaths } = that.data
           if (!imgTempFilePaths) {
             wx.showToast({
               title: '请先选择图片',
             })
             return {
               isShowToast: true,
-              callback: {}
+              callback: {},
             }
           }
-          const {imgIndex} = data;
+          const { imgIndex } = data
           return new Promise((resolve) => {
-            const callback = {};
+            const callback = {}
             wx.saveImageToPhotosAlbum({
               filePath: imgTempFilePaths[imgIndex],
               success: (res) => {
-                callback['success'] = res;
+                callback['success'] = res
               },
               fail: (res) => {
-                callback['fail'] = res;
+                callback['fail'] = res
               },
               complete: (res) => {
-                callback['complete'] = res;
-                resolve({ callback });
+                callback['complete'] = res
+                resolve({ callback })
               },
             })
           })
         },
-        isDone: true
+        isDone: true,
       },
       {
         id: 'compressImage',
@@ -331,7 +331,7 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad(options) {
-    that = this;
+    that = this
   },
 
   /**

@@ -1,8 +1,8 @@
 <!--packagesAPI/pages/file/index.wxml-->
 <view class="api-page">
-    <view class="canvas-main">
-      <canvas canvas-id="myCanvas" class="canvas"></canvas>
-    </view>
+  <view class="canvas-main">
+    <canvas canvas-id="myCanvas" class="canvas"></canvas>
+  </view>
   <button bindtap="drawSomething">作画</button>
   <button bindtap="transform">变换</button>
   <button bindtap="setTransform">设置变换</button>

@@ -1,14 +1,63 @@
 // packagesAPI/pages/advertising/index.js
+let that
 Page({
   /**
    * 页面的初始数据
    */
-  data: {},
+  data: {
+    list: [
+      {
+        id: 'createRewardedVideoAd',
+        func: null,
+      },
+      {
+        id: 'createInterstitialAd',
+        inputData: {
+          adUnitId: '',
+        },
+        func: (data = {}) => {
+          const interstitialAd = wx.createInterstitialAd(data)
+          that.setData({
+            interstitialAd,
+          })
+          return {
+            callback: interstitialAd,
+          }
+        },
+        isDone: true,
+      },
+      {
+        id: 'InterstitialAd.show',
+        func: (data = {}) => {
+          const { interstitialAd } = that.data
+          if (!interstitialAd) {
+            wx.showToast({
+              title: '请创建广告实例',
+            })
+            return {
+              isShowToast: true,
+              callback: {},
+            }
+          }
+          interstitialAd.show()
+          return {}
+        },
+        isDone: true,
+      },
+      {
+        id: 'RewardedVideoAd',
+        func: null,
+      },
+    ],
+    InterstitialAd: null,
+  },
 
   /**
    * 生命周期函数--监听页面加载
    */
-  onLoad(options) {},
+  onLoad(options) {
+    that = this
+  },
 
   /**
    * 生命周期函数--监听页面初次渲染完成
