@@ -15,6 +15,6 @@ Page({
   changeChooseTrue(e) {
     this.setData({
       chooseTrue: e.detail.value,
-    })
+    });
   },
-})
+});

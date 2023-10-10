@@ -14,21 +14,21 @@ Page({
         },
         func: (data = {}) => {
           return new Promise((resolve) => {
-            const callback = {}
+            const callback = {};
             wx.pageScrollTo({
               ...data,
               success: (res) => {
-                callback['success'] = res
+                callback['success'] = res;
               },
               fail: (res) => {
-                callback['fail'] = res
+                callback['fail'] = res;
               },
               complete: (res) => {
-                callback['complete'] = res
-                resolve({ callback })
+                callback['complete'] = res;
+                resolve({ callback });
               },
-            })
-          })
+            });
+          });
         },
         isDone: true,
       },
@@ -38,21 +38,21 @@ Page({
         id: 'scrollToTop',
         func: (data = {}) => {
           return new Promise((resolve) => {
-            const callback = {}
+            const callback = {};
             wx.pageScrollTo({
               scrollTop: 0,
               success: (res) => {
-                callback['success'] = res
+                callback['success'] = res;
               },
               fail: (res) => {
-                callback['fail'] = res
+                callback['fail'] = res;
               },
               complete: (res) => {
-                callback['complete'] = res
-                resolve({ callback })
+                callback['complete'] = res;
+                resolve({ callback });
               },
-            })
-          })
+            });
+          });
         },
         isDone: true,
       },
@@ -98,4 +98,4 @@ Page({
    * 用户点击右上角分享
    */
   onShareAppMessage() {},
-})
+});

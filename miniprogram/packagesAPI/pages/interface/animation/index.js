@@ -1,6 +1,6 @@
 // packagesAPI/pages/interface/animation/index.js
-let that = null
-let animation
+let that = null;
+let animation;
 Page({
   /**
    * 页面的初始数据
@@ -16,13 +16,13 @@ Page({
           delay: 0,
         },
         func: (data = {}) => {
-          const animation = wx.createAnimation(data)
+          const animation = wx.createAnimation(data);
           that.setData({
             animation,
-          })
+          });
           return {
             callback: animation,
-          }
+          };
         },
         isDone: true,
       },
@@ -32,13 +32,13 @@ Page({
           opacity: 0.5,
         },
         func: (data = {}) => {
-          const { animation } = that.data
-          const { opacity } = data
-          animation.opacity(opacity).step()
-          that.exportAnimationData(`opacity(${opacity})`)
+          const { animation } = that.data;
+          const { opacity } = data;
+          animation.opacity(opacity).step();
+          that.exportAnimationData(`opacity(${opacity})`);
           return {
             callback: {},
-          }
+          };
         },
         isDone: true,
       },
@@ -48,13 +48,13 @@ Page({
           color: '#64bb5c',
         },
         func: (data = {}) => {
-          const { animation } = that.data
-          const { color } = data
-          animation.backgroundColor(color).step()
-          that.exportAnimationData(`backgroundColor("${color}")`)
+          const { animation } = that.data;
+          const { color } = data;
+          animation.backgroundColor(color).step();
+          that.exportAnimationData(`backgroundColor("${color}")`);
           return {
             callback: {},
-          }
+          };
         },
         isDone: true,
       },
@@ -65,13 +65,13 @@ Page({
           y: 40,
         },
         func: (data = {}) => {
-          const { animation } = that.data
-          const { x, y } = data
-          animation.skew(x, y).step()
-          that.exportAnimationData(`skew(${x}, ${y})`)
+          const { animation } = that.data;
+          const { x, y } = data;
+          animation.skew(x, y).step();
+          that.exportAnimationData(`skew(${x}, ${y})`);
           return {
             callback: {},
-          }
+          };
         },
         isDone: true,
       },
@@ -81,13 +81,13 @@ Page({
           x: 20,
         },
         func: (data = {}) => {
-          const { animation } = that.data
-          const { x } = data
-          animation.skewX(x).step()
-          that.exportAnimationData(`skewX(${x})`)
+          const { animation } = that.data;
+          const { x } = data;
+          animation.skewX(x).step();
+          that.exportAnimationData(`skewX(${x})`);
           return {
             callback: {},
-          }
+          };
         },
         isDone: true,
       },
@@ -97,13 +97,13 @@ Page({
           y: 20,
         },
         func: (data = {}) => {
-          const { animation } = that.data
-          const { y } = data
-          animation.skewY(y).step()
-          that.exportAnimationData(`skewX(${y})`)
+          const { animation } = that.data;
+          const { y } = data;
+          animation.skewY(y).step();
+          that.exportAnimationData(`skewX(${y})`);
           return {
             callback: {},
-          }
+          };
         },
         isDone: true,
       },
@@ -114,13 +114,13 @@ Page({
           scaleY: 1.2,
         },
         func: (data = {}) => {
-          const { animation } = that.data
-          const { scaleX, scaleY } = data
-          animation.scale(scaleX, scaleY).step()
-          that.exportAnimationData(`scale(${scaleX}, ${scaleY})`)
+          const { animation } = that.data;
+          const { scaleX, scaleY } = data;
+          animation.scale(scaleX, scaleY).step();
+          that.exportAnimationData(`scale(${scaleX}, ${scaleY})`);
           return {
             callback: {},
-          }
+          };
         },
         isDone: true,
       },
@@ -132,13 +132,13 @@ Page({
           scaleZ: 1.2,
         },
         func: (data = {}) => {
-          const { animation } = that.data
-          const { scaleX, scaleY, scaleZ } = data
-          animation.scale3d(scaleX, scaleY, scaleZ).step()
-          that.exportAnimationData(`scale3d(${scaleX}, ${scaleY}, ${scaleZ})`)
+          const { animation } = that.data;
+          const { scaleX, scaleY, scaleZ } = data;
+          animation.scale3d(scaleX, scaleY, scaleZ).step();
+          that.exportAnimationData(`scale3d(${scaleX}, ${scaleY}, ${scaleZ})`);
           return {
             callback: {},
-          }
+          };
         },
         isDone: true,
       },
@@ -148,13 +148,13 @@ Page({
           scaleX: 1.2,
         },
         func: (data = {}) => {
-          const { animation } = that.data
-          const { scaleX } = data
-          animation.scaleX(scaleX).step()
-          that.exportAnimationData(`scaleX(${scaleX})`)
+          const { animation } = that.data;
+          const { scaleX } = data;
+          animation.scaleX(scaleX).step();
+          that.exportAnimationData(`scaleX(${scaleX})`);
           return {
             callback: {},
-          }
+          };
         },
         isDone: true,
       },
@@ -164,13 +164,13 @@ Page({
           scaleY: 1.2,
         },
         func: (data = {}) => {
-          const { animation } = that.data
-          const { scaleY } = data
-          animation.scaleY(scaleY).step()
-          that.exportAnimationData(`scaleY(${scaleY})`)
+          const { animation } = that.data;
+          const { scaleY } = data;
+          animation.scaleY(scaleY).step();
+          that.exportAnimationData(`scaleY(${scaleY})`);
           return {
             callback: {},
-          }
+          };
         },
         isDone: true,
       },
@@ -180,13 +180,13 @@ Page({
           scaleZ: 1.2,
         },
         func: (data = {}) => {
-          const { animation } = that.data
-          const { scaleZ } = data
-          animation.scaleZ(scaleZ).step()
-          that.exportAnimationData(`scaleZ(${scaleZ})`)
+          const { animation } = that.data;
+          const { scaleZ } = data;
+          animation.scaleZ(scaleZ).step();
+          that.exportAnimationData(`scaleZ(${scaleZ})`);
           return {
             callback: {},
-          }
+          };
         },
         isDone: true,
       },
@@ -196,13 +196,13 @@ Page({
           angle: 45,
         },
         func: (data = {}) => {
-          const { animation } = that.data
-          const { angle } = data
-          animation.rotate(angle).step()
-          that.exportAnimationData(`rotate(${angle})`)
+          const { animation } = that.data;
+          const { angle } = data;
+          animation.rotate(angle).step();
+          that.exportAnimationData(`rotate(${angle})`);
           return {
             callback: {},
-          }
+          };
         },
         isDone: true,
       },
@@ -215,13 +215,13 @@ Page({
           angle: 45,
         },
         func: (data = {}) => {
-          const { animation } = that.data
-          const { x, y, z, angle } = data
-          animation.rotate3d(x, y, z, angle).step()
-          that.exportAnimationData(`rotate3d(${x}, ${y}, ${z}, ${angle})`)
+          const { animation } = that.data;
+          const { x, y, z, angle } = data;
+          animation.rotate3d(x, y, z, angle).step();
+          that.exportAnimationData(`rotate3d(${x}, ${y}, ${z}, ${angle})`);
           return {
             callback: {},
-          }
+          };
         },
         isDone: true,
       },
@@ -231,13 +231,13 @@ Page({
           angle: 45,
         },
         func: (data = {}) => {
-          const { animation } = that.data
-          const { angle } = data
-          animation.rotateX(angle).step()
-          that.exportAnimationData(`rotateX(${angle})`)
+          const { animation } = that.data;
+          const { angle } = data;
+          animation.rotateX(angle).step();
+          that.exportAnimationData(`rotateX(${angle})`);
           return {
             callback: {},
-          }
+          };
         },
         isDone: true,
       },
@@ -247,13 +247,13 @@ Page({
           angle: 45,
         },
         func: (data = {}) => {
-          const { animation } = that.data
-          const { angle } = data
-          animation.rotateY(angle).step()
-          that.exportAnimationData(`rotateY(${angle})`)
+          const { animation } = that.data;
+          const { angle } = data;
+          animation.rotateY(angle).step();
+          that.exportAnimationData(`rotateY(${angle})`);
           return {
             callback: {},
-          }
+          };
         },
         isDone: true,
       },
@@ -263,13 +263,13 @@ Page({
           angle: 45,
         },
         func: (data = {}) => {
-          const { animation } = that.data
-          const { angle } = data
-          animation.rotateZ(angle).step()
-          that.exportAnimationData(`rotateZ(${angle})`)
+          const { animation } = that.data;
+          const { angle } = data;
+          animation.rotateZ(angle).step();
+          that.exportAnimationData(`rotateZ(${angle})`);
           return {
             callback: {},
-          }
+          };
         },
         isDone: true,
       },
@@ -280,13 +280,13 @@ Page({
           y: 20,
         },
         func: (data = {}) => {
-          const { animation } = that.data
-          const { x, y } = data
-          animation.translate(x, y).step()
-          that.exportAnimationData(`translate(${x}, ${y})`)
+          const { animation } = that.data;
+          const { x, y } = data;
+          animation.translate(x, y).step();
+          that.exportAnimationData(`translate(${x}, ${y})`);
           return {
             callback: {},
-          }
+          };
         },
         isDone: true,
       },
@@ -298,13 +298,13 @@ Page({
           z: 20,
         },
         func: (data = {}) => {
-          const { animation } = that.data
-          const { x, y, z } = data
-          animation.translate3d(x, y, z).step()
-          that.exportAnimationData(`translate3d(${x}, ${y}, ${z})`)
+          const { animation } = that.data;
+          const { x, y, z } = data;
+          animation.translate3d(x, y, z).step();
+          that.exportAnimationData(`translate3d(${x}, ${y}, ${z})`);
           return {
             callback: {},
-          }
+          };
         },
         isDone: true,
       },
@@ -314,13 +314,13 @@ Page({
           x: 40,
         },
         func: (data = {}) => {
-          const { animation } = that.data
-          const { x } = data
-          animation.translateX(x).step()
-          that.exportAnimationData(`translateX(${x}).step()`)
+          const { animation } = that.data;
+          const { x } = data;
+          animation.translateX(x).step();
+          that.exportAnimationData(`translateX(${x}).step()`);
           return {
             callback: {},
-          }
+          };
         },
         isDone: true,
       },
@@ -330,13 +330,13 @@ Page({
           y: 40,
         },
         func: (data = {}) => {
-          const { animation } = that.data
-          const { y } = data
-          animation.translateY(y).step()
-          that.exportAnimationData(`translateY(${y}).step()`)
+          const { animation } = that.data;
+          const { y } = data;
+          animation.translateY(y).step();
+          that.exportAnimationData(`translateY(${y}).step()`);
           return {
             callback: {},
-          }
+          };
         },
         isDone: true,
       },
@@ -346,13 +346,13 @@ Page({
           z: 40,
         },
         func: (data = {}) => {
-          const { animation } = that.data
-          const { z } = data
-          animation.translateZ(z).step()
-          that.exportAnimationData(`translateZ(${z}).step()`)
+          const { animation } = that.data;
+          const { z } = data;
+          animation.translateZ(z).step();
+          that.exportAnimationData(`translateZ(${z}).step()`);
           return {
             callback: {},
-          }
+          };
         },
         isDone: true,
       },
@@ -362,13 +362,13 @@ Page({
           width: 200,
         },
         func: (data = {}) => {
-          const { animation } = that.data
-          const { width } = data
-          animation.width(width).step()
-          that.exportAnimationData(`width(${width})`)
+          const { animation } = that.data;
+          const { width } = data;
+          animation.width(width).step();
+          that.exportAnimationData(`width(${width})`);
           return {
             callback: {},
-          }
+          };
         },
         isDone: true,
       },
@@ -378,13 +378,13 @@ Page({
           height: 200,
         },
         func: (data = {}) => {
-          const { animation } = that.data
-          const { height } = data
-          animation.height(height).step()
-          that.exportAnimationData(`height(${height})`)
+          const { animation } = that.data;
+          const { height } = data;
+          animation.height(height).step();
+          that.exportAnimationData(`height(${height})`);
           return {
             callback: {},
-          }
+          };
         },
         isDone: true,
       },
@@ -394,13 +394,13 @@ Page({
           left: 200,
         },
         func: (data = {}) => {
-          const { animation } = that.data
-          const { left } = data
-          animation.left(left).step()
-          that.exportAnimationData(`width(${left})`)
+          const { animation } = that.data;
+          const { left } = data;
+          animation.left(left).step();
+          that.exportAnimationData(`width(${left})`);
           return {
             callback: {},
-          }
+          };
         },
         isDone: true,
       },
@@ -410,13 +410,13 @@ Page({
           right: 200,
         },
         func: (data = {}) => {
-          const { animation } = that.data
-          const { right } = data
-          animation.right(right).step()
-          that.exportAnimationData(`right(${right})`)
+          const { animation } = that.data;
+          const { right } = data;
+          animation.right(right).step();
+          that.exportAnimationData(`right(${right})`);
           return {
             callback: {},
-          }
+          };
         },
         isDone: true,
       },
@@ -426,13 +426,13 @@ Page({
           top: 200,
         },
         func: (data = {}) => {
-          const { animation } = that.data
-          const { top } = data
-          animation.top(top).step()
-          that.exportAnimationData(`top(${top})`)
+          const { animation } = that.data;
+          const { top } = data;
+          animation.top(top).step();
+          that.exportAnimationData(`top(${top})`);
           return {
             callback: {},
-          }
+          };
         },
         isDone: true,
       },
@@ -442,13 +442,13 @@ Page({
           bottom: 200,
         },
         func: (data = {}) => {
-          const { animation } = that.data
-          const { bottom } = data
-          animation.bottom(bottom).step()
-          that.exportAnimationData(`bottom(${bottom})`)
+          const { animation } = that.data;
+          const { bottom } = data;
+          animation.bottom(bottom).step();
+          that.exportAnimationData(`bottom(${bottom})`);
           return {
             callback: {},
-          }
+          };
         },
         isDone: true,
       },
@@ -463,13 +463,13 @@ Page({
           translateY: 20,
         },
         func: (data = {}) => {
-          const { animation } = that.data
-          const { scaleX, skewY, skewX, scaleY, translateX, translateY } = data
-          animation.matrix(scaleX, skewY, skewX, scaleY, translateX, translateY).step()
-          that.exportAnimationData(`matrix(${scaleX}, ${skewY}, ${skewX}, ${scaleY}, ${translateX}, ${translateY})`)
+          const { animation } = that.data;
+          const { scaleX, skewY, skewX, scaleY, translateX, translateY } = data;
+          animation.matrix(scaleX, skewY, skewX, scaleY, translateX, translateY).step();
+          that.exportAnimationData(`matrix(${scaleX}, ${skewY}, ${skewX}, ${scaleY}, ${translateX}, ${translateY})`);
           return {
             callback: {},
-          }
+          };
         },
         isDone: true,
       },
@@ -482,15 +482,15 @@ Page({
           matrixLine4: [0, 0, 10, 1],
         },
         func: (data = {}) => {
-          const { animation } = that.data
-          const { matrixLine1, matrixLine2, matrixLine3, matrixLine4 } = data
-          animation.matrix3d(...matrixLine1, ...matrixLine2, ...matrixLine3, ...matrixLine4).step()
+          const { animation } = that.data;
+          const { matrixLine1, matrixLine2, matrixLine3, matrixLine4 } = data;
+          animation.matrix3d(...matrixLine1, ...matrixLine2, ...matrixLine3, ...matrixLine4).step();
           that.exportAnimationData(
             `matrix3d(${[...matrixLine1, ...matrixLine2, ...matrixLine3, ...matrixLine4].toString()}).step()`
-          )
+          );
           return {
             callback: {},
-          }
+          };
         },
         isDone: true,
       },
@@ -504,12 +504,12 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad(options) {
-    that = this
+    that = this;
   },
   exportAnimationData(description) {
     this.setData({
       animationData: this.data.animation.export(),
       description: description,
-    })
+    });
   },
-})
+});

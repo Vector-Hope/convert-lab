@@ -276,11 +276,11 @@ Page({
   changeNum1(e) {
     this.setData({
       num1: e.detail.value,
-    })
+    });
   },
   changeNum2(e) {
     this.setData({
       num2: e.detail.value,
-    })
+    });
   },
-})
+});

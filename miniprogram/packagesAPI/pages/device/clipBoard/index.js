@@ -1,5 +1,5 @@
 // packagesAPI/pages/device/clipBoard/index.js
-let that
+let that;
 Page({
   /**
    * 页面的初始数据
@@ -13,21 +13,21 @@ Page({
         },
         func: (data = {}) => {
           return new Promise((resolve) => {
-            const callback = {}
+            const callback = {};
             wx.setClipboardData({
               ...data,
               success: (res) => {
-                callback['success'] = res
+                callback['success'] = res;
               },
               fail: (res) => {
-                callback['fail'] = res
+                callback['fail'] = res;
               },
               complete: (res) => {
-                callback['complete'] = res
-                resolve({ callback })
+                callback['complete'] = res;
+                resolve({ callback });
               },
-            })
-          })
+            });
+          });
         },
         isDone: true,
       },
@@ -35,23 +35,23 @@ Page({
         id: 'getClipboardData',
         func: (data = {}) => {
           return new Promise((resolve) => {
-            const callback = {}
+            const callback = {};
             wx.getClipboardData({
               success: (res) => {
                 that.setData({
                   pasted: res.data,
-                })
-                callback['success'] = res
+                });
+                callback['success'] = res;
               },
               fail: (res) => {
-                callback['fail'] = res
+                callback['fail'] = res;
               },
               complete: (res) => {
-                callback['complete'] = res
-                resolve({ callback })
+                callback['complete'] = res;
+                resolve({ callback });
               },
-            })
-          })
+            });
+          });
         },
         isDone: true,
       },
@@ -63,6 +63,6 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad(options) {
-    that = this
+    that = this;
   },
-})
+});

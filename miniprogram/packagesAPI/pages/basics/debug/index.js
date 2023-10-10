@@ -1,5 +1,5 @@
 // packagesAPI/pages/basics/debug/index.js
-let that = null
+let that = null;
 Page({
   /**
    * 页面的初始数据
@@ -12,36 +12,36 @@ Page({
           enableDebug: true,
         },
         func: (data = {}) => {
-          const callback = {}
+          const callback = {};
           return new Promise((resolve) => {
             wx.setEnableDebug({
               ...data,
               success: (res) => {
-                callback['success'] = res
+                callback['success'] = res;
               },
               fail: (res) => {
-                callback['fail'] = res
+                callback['fail'] = res;
               },
               complete: (res) => {
-                callback['complete'] = res
-                resolve({ callback })
+                callback['complete'] = res;
+                resolve({ callback });
               },
-            })
-          })
+            });
+          });
         },
         isDone: true,
       },
       {
         id: 'getRealtimeLogManager',
         func: (data = {}) => {
-          const realtimeLogManager = wx.getRealtimeLogManager()
+          const realtimeLogManager = wx.getRealtimeLogManager();
           that.setData({
             realtimeLogManager,
-          })
-          console.log(realtimeLogManager)
+          });
+          console.log(realtimeLogManager);
           return {
             callback: realtimeLogManager,
-          }
+          };
         },
         isDone: true,
       },
@@ -53,58 +53,58 @@ Page({
         func: (data = {}) => {
           const logManager = wx.getLogManager({
             ...data,
-          })
+          });
           that.setData({
             logManager,
-          })
-          console.log(logManager)
+          });
+          console.log(logManager);
           return {
             callback: logManager,
-          }
+          };
         },
         isDone: true,
       },
       {
         id: 'LogManager.debug',
         func: (data = {}) => {
-          const { logManager } = that.data
-          logManager.debug({ debugMsg: 'debug msg' }, 'debug log')
+          const { logManager } = that.data;
+          logManager.debug({ debugMsg: 'debug msg' }, 'debug log');
           return {
             callback: {},
-          }
+          };
         },
         isDone: true,
       },
       {
         id: 'LogManager.info',
         func: (data = {}) => {
-          const { logManager } = that.data
-          logManager.info({ infoMsg: 'info msg' }, 'info log')
+          const { logManager } = that.data;
+          logManager.info({ infoMsg: 'info msg' }, 'info log');
           return {
             callback: {},
-          }
+          };
         },
         isDone: true,
       },
       {
         id: 'LogManager.log',
         func: (data = {}) => {
-          const { logManager } = that.data
-          logManager.log({ logMsg: 'log msg' }, 'log')
+          const { logManager } = that.data;
+          logManager.log({ logMsg: 'log msg' }, 'log');
           return {
             callback: {},
-          }
+          };
         },
         isDone: true,
       },
       {
         id: 'LogManager.warn',
         func: (data = {}) => {
-          const { logManager } = that.data
-          logManager.warn({ warnMsg: 'warn msg' }, 'warn log')
+          const { logManager } = that.data;
+          logManager.warn({ warnMsg: 'warn msg' }, 'warn log');
           return {
             callback: {},
-          }
+          };
         },
         isDone: true,
       },
@@ -125,7 +125,7 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad(options) {
-    that = this
+    that = this;
   },
 
   /**
@@ -162,4 +162,4 @@ Page({
    * 用户点击右上角分享
    */
   onShareAppMessage() {},
-})
+});

@@ -8,50 +8,50 @@ Page({
       {
         id: 'startPullDownRefresh',
         func: (data = {}) => {
-          console.log('start!!!!!!!!!!')
+          console.log('start!!!!!!!!!!');
           return new Promise((resolve) => {
-            const callback = {}
+            const callback = {};
             wx.startPullDownRefresh({
               success: (res) => {
-                console.log('success ', res)
-                callback['success'] = res
+                console.log('success ', res);
+                callback['success'] = res;
               },
               fail: (res) => {
-                console.log('fail ', res)
-                callback['fail'] = res
+                console.log('fail ', res);
+                callback['fail'] = res;
               },
               complete: (res) => {
-                console.log('complete ', res)
-                callback['complete'] = res
-                resolve({ callback })
+                console.log('complete ', res);
+                callback['complete'] = res;
+                resolve({ callback });
               },
-            })
-          })
+            });
+          });
         },
         isDone: true,
       },
       {
         id: 'stopPullDownRefresh',
         func: (data = {}) => {
-          console.log('stop!!!!!!!!!!')
+          console.log('stop!!!!!!!!!!');
           return new Promise((resolve) => {
-            const callback = {}
+            const callback = {};
             wx.stopPullDownRefresh({
               success: (res) => {
-                console.log('success ', res)
-                callback['success'] = res
+                console.log('success ', res);
+                callback['success'] = res;
               },
               fail: (res) => {
-                console.log('fail ', res)
-                callback['fail'] = res
+                console.log('fail ', res);
+                callback['fail'] = res;
               },
               complete: (res) => {
-                console.log('complete ', res)
-                callback['complete'] = res
-                resolve({ callback })
+                console.log('complete ', res);
+                callback['complete'] = res;
+                resolve({ callback });
               },
-            })
-          })
+            });
+          });
         },
         isDone: true,
       },
@@ -97,4 +97,4 @@ Page({
    * 用户点击右上角分享
    */
   onShareAppMessage() {},
-})
+});

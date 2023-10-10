@@ -1,5 +1,5 @@
 // packagesAPI/pages/device/deviceNetwork/index.js
-let that
+let that;
 Page({
   /**
    * 页面的初始数据
@@ -15,14 +15,14 @@ Page({
         func: (data = {}) => {
           return new Promise((resolve) => {
             wx.onNetworkStatusChange((res) => {
-              console.log('test API: onNetworkStatusChange')
-              console.log(res)
+              console.log('test API: onNetworkStatusChange');
+              console.log(res);
               that.setData({
                 networkType: res.networkType,
-              })
-              resolve({ callback: res })
-            })
-          })
+              });
+              resolve({ callback: res });
+            });
+          });
         },
         isDone: true,
       },
@@ -33,8 +33,8 @@ Page({
       {
         id: 'offNetworkStatusChange',
         func: (data = {}) => {
-          wx.offNetworkStatusChange()
-          return {}
+          wx.offNetworkStatusChange();
+          return {};
         },
         isDone: true,
       },
@@ -42,26 +42,26 @@ Page({
         id: 'getNetworkType',
         func: (data = {}) => {
           return new Promise((resolve) => {
-            const callback = {}
+            const callback = {};
             wx.getNetworkType({
               success: (res) => {
-                callback['success'] = res
+                callback['success'] = res;
                 that.setData({
                   networkType: res.networkType,
-                })
+                });
               },
               fail: (res) => {
-                callback['fail'] = res
+                callback['fail'] = res;
                 that.setData({
                   networkType: '获得网络失败',
-                })
+                });
               },
               complete: (res) => {
-                callback['complete'] = res
-                resolve({ callback })
+                callback['complete'] = res;
+                resolve({ callback });
               },
-            })
-          })
+            });
+          });
         },
         isDone: true,
       },
@@ -77,7 +77,7 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad(options) {
-    that = this
+    that = this;
   },
 
   /**
@@ -114,4 +114,4 @@ Page({
    * 用户点击右上角分享
    */
   onShareAppMessage() {},
-})
+});

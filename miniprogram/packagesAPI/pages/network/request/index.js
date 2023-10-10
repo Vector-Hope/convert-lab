@@ -17,22 +17,22 @@ Page({
           },
         },
         func: (data = {}) => {
-          const callback = {}
+          const callback = {};
           return new Promise((resolve) => {
             wx.request({
               ...data,
               success: (res) => {
-                callback['success'] = res
+                callback['success'] = res;
               },
               fail: (res) => {
-                callback['fail'] = res
+                callback['fail'] = res;
               },
               complete: (res) => {
-                callback['complete'] = res
-                resolve({ callback })
+                callback['complete'] = res;
+                resolve({ callback });
               },
-            })
-          })
+            });
+          });
         },
         isDone: true,
       },
@@ -90,4 +90,4 @@ Page({
    * 用户点击右上角分享
    */
   onShareAppMessage() {},
-})
+});

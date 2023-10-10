@@ -1,5 +1,5 @@
 // components/buttonList/index.js
-import { getType, formatJson } from '../../utils/util'
+import { getType, formatJson } from '../../utils/util';
 Component({
   /**
    * 组件的属性列表
@@ -25,14 +25,15 @@ Component({
 
   lifetimes: {
     attached() {
-      const { buttonList } = this.properties
-      const list = {}
-      const listKey = []
+      const { buttonList } = this.properties;
+      const list = {};
+      const listKey = [];
       buttonList.forEach((button) => {
-        let { id } = button
-        let inputData = undefined
+        let { id } = button;
+        let inputData = undefined;
         if (button.inputData) {
-          inputData = typeof button.inputData == 'string' ? button.inputData : JSON.stringify(button.inputData, null, 2)
+          inputData =
+            typeof button.inputData == 'string' ? button.inputData : JSON.stringify(button.inputData, null, 2);
         }
         const buttonItem = {
           inputData,
@@ -40,14 +41,14 @@ Component({
           func: button.func,
           hideTextarea: false,
           isDone: button.isDone,
-        }
-        list[id] = buttonItem
-        listKey.push(id)
-      })
+        };
+        list[id] = buttonItem;
+        listKey.push(id);
+      });
       this.setData({
         list,
         listKey,
-      })
+      });
     },
     // attached() {
     //   const {buttonList} = this.properties;
@@ -79,17 +80,17 @@ Component({
   methods: {
     // 隐藏textarea函数
     hideTextarea(e) {
-      const { id } = e.currentTarget.dataset
-      const { list } = this.data
-      list[id].hideTextarea = !list[id].hideTextarea
+      const { id } = e.currentTarget.dataset;
+      const { list } = this.data;
+      list[id].hideTextarea = !list[id].hideTextarea;
       this.setData({
         list,
-      })
+      });
     },
     // 展示回调结果，获得对应的apiId
     showRes(e) {
-      const { id } = e.currentTarget.dataset
-      const { list } = this.data
+      const { id } = e.currentTarget.dataset;
+      const { list } = this.data;
       if (list[id].callbackRes && Object.keys(list[id].callbackRes).length != 0) {
         // if (Object.keys(list[id].callbackRes).length == 0) {
         //   wx.showToast({
@@ -100,94 +101,94 @@ Component({
         this.setData({
           showResId: id,
           isShowRes: true,
-        })
+        });
       } else {
         wx.showToast({
           icon: 'error',
           title: '无回调内容',
-        })
+        });
       }
     },
     // 关闭回调展示，由jsonTree子组件触发
     closeRes() {
       this.setData({
         isShowRes: false,
-      })
+      });
     },
     // api事件触发器
     APITrigger(e) {
-      const { id } = e.currentTarget.dataset
-      const { list } = this.data
-      let inputData = {}
+      const { id } = e.currentTarget.dataset;
+      const { list } = this.data;
+      let inputData = {};
       if (list[id].inputData) {
         try {
-          inputData = JSON.parse(list[id].inputData)
+          inputData = JSON.parse(list[id].inputData);
         } catch (err) {
           wx.showToast({
             icon: 'error',
             title: '请检查参数格式',
-          })
+          });
         }
       }
-      this.getResult(id, inputData)
+      this.getResult(id, inputData);
     },
     // 获得api回调的内容
     async getResult(id, inputData = {}) {
-      const { list } = this.data
+      const { list } = this.data;
       try {
-        let { isShowToast, callback } = await list[id].func(inputData)
-        let callbackRes = this.formatCallback(formatJson(callback))
-        list[id].callbackRes = callbackRes
-        console.log(`test API: ${id}`)
-        console.log(callbackRes)
+        let { isShowToast, callback } = await list[id].func(inputData);
+        let callbackRes = this.formatCallback(formatJson(callback));
+        list[id].callbackRes = callbackRes;
+        console.log(`test API: ${id}`);
+        console.log(callbackRes);
         this.setData({
           list,
-        })
+        });
         if (!isShowToast) {
           wx.showToast({
             icon: 'success',
             title: `触发${id}成功`,
-          })
+          });
         }
       } catch (err) {
-        console.log(err)
+        console.log(err);
         if (err.name == 'TypeError') {
           wx.showToast({
             icon: 'error',
             title: '未创建实例对象',
-          })
+          });
         } else {
           wx.showToast({
             icon: 'error',
             title: '请检查执行函数',
-          })
+          });
         }
       }
     },
     formatCallback(callback) {
-      const callbackRes = {}
+      const callbackRes = {};
       if (getType(callback) == 'Object') {
-        const callbackKeys = Object.keys(callback)
+        const callbackKeys = Object.keys(callback);
         callbackKeys.forEach((key) => {
           if (getType(callback[key]) == 'Function') {
-            callbackRes[key] = 'f ( )'
+            callbackRes[key] = 'f ( )';
           } else if (getType(callback[key]) == 'Object') {
-            callbackRes[key] = this.formatCallback(callback[key])
+            callbackRes[key] = this.formatCallback(callback[key]);
           } else {
-            callbackRes[key] = callback[key]
+            callbackRes[key] = callback[key];
           }
-        })
+        });
       }
-      return callbackRes
+      return callbackRes;
     },
     // 修改textarea中的内容，改变对应api入参
     changeData(e) {
-      const { list } = this.data
-      const { id } = e.currentTarget.dataset
-      list[id].inputData = e.detail.value
+      const { list } = this.data;
+      const { id } = e.currentTarget.dataset;
+      list[id].inputData = e.detail.value;
       this.setData({
         list,
-      })
+      });
     },
     // 判断是否为交互内容
     isInteraction(apiId) {
@@ -198,7 +199,7 @@ Component({
         apiId == 'hideLoading' ||
         apiId == 'showModal' ||
         apiId == 'showActionSheet'
-      )
+      );
     },
   },
-})
+});

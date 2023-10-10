@@ -1,5 +1,5 @@
 // components/jsonTree/index.js
-import { getType } from '../../utils/util'
+import { getType } from '../../utils/util';
 Component({
   /**
    * 组件的属性列表
@@ -8,7 +8,7 @@ Component({
     jsonData: {
       type: Object || Array,
       observer: function (newVal) {
-        console.log(newVal)
+        console.log(newVal);
       },
     },
     isShowRes: {
@@ -16,7 +16,7 @@ Component({
       observer: function (newVal) {
         this.setData({
           showJsonData: newVal,
-        })
+        });
       },
     },
     apiId: String,
@@ -36,7 +36,7 @@ Component({
   },
   methods: {
     closeJsonData() {
-      this.triggerEvent('closeRes')
+      this.triggerEvent('closeRes');
     },
   },
-})
+});

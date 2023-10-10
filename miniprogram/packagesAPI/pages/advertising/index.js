@@ -1,5 +1,5 @@
 // packagesAPI/pages/advertising/index.js
-let that
+let that;
 Page({
   /**
    * 页面的初始数据
@@ -16,31 +16,31 @@ Page({
           adUnitId: '',
         },
         func: (data = {}) => {
-          const interstitialAd = wx.createInterstitialAd(data)
+          const interstitialAd = wx.createInterstitialAd(data);
           that.setData({
             interstitialAd,
-          })
+          });
           return {
             callback: interstitialAd,
-          }
+          };
         },
         isDone: true,
       },
       {
         id: 'InterstitialAd.show',
         func: (data = {}) => {
-          const { interstitialAd } = that.data
+          const { interstitialAd } = that.data;
           if (!interstitialAd) {
             wx.showToast({
               title: '请创建广告实例',
-            })
+            });
             return {
               isShowToast: true,
               callback: {},
-            }
+            };
           }
-          interstitialAd.show()
-          return {}
+          interstitialAd.show();
+          return {};
         },
         isDone: true,
       },
@@ -56,7 +56,7 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad(options) {
-    that = this
+    that = this;
   },
 
   /**
@@ -93,4 +93,4 @@ Page({
    * 用户点击右上角分享
    */
   onShareAppMessage() {},
-})
+});

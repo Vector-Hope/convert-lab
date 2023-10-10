@@ -24,27 +24,27 @@ Component({
   methods: {
     // 点击页面跳转或列表展开事件
     kindToggle(e) {
-      const id = e.currentTarget.id
-      const { pageList, packageName } = this.properties
+      const id = e.currentTarget.id;
+      const { pageList, packageName } = this.properties;
       for (let i = 0, len = pageList.length; i < len; ++i) {
         if (pageList[i].id === id) {
           if (pageList[i].pages.length == 0) {
             wx.navigateTo({
               url: `../../${packageName}/pages/${pageList[i].id}/index`,
-            })
-            return
+            });
+            return;
           }
-          pageList[i].open = !pageList[i].open
+          pageList[i].open = !pageList[i].open;
         } else {
-          pageList[i].open = false
+          pageList[i].open = false;
         }
       }
       this.setData({
         pageList,
-      })
+      });
     },
     enterSetTabBarPage(e) {
-      this.triggerEvent('enterSetTabBarPage')
+      this.triggerEvent('enterSetTabBarPage');
     },
   },
-})
+});

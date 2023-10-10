@@ -11,26 +11,26 @@ Page({
           value: 0.5,
         },
         func: (apiIndex, data) => {
-          TestConsole.consoleTest('Taro.setScreenBrightness')
-          TestConsole.consoleNormal('Taro.setScreenBrightness value:', data.value)
+          TestConsole.consoleTest('Taro.setScreenBrightness');
+          TestConsole.consoleNormal('Taro.setScreenBrightness value:', data.value);
           Taro.setScreenBrightness({
             ...data,
             success: (res) => {
-              TestConsole.consoleSuccess.call(this, res, apiIndex)
+              TestConsole.consoleSuccess.call(this, res, apiIndex);
             },
             fail: (res) => {
-              TestConsole.consoleFail.call(this, res, apiIndex)
+              TestConsole.consoleFail.call(this, res, apiIndex);
             },
             complete: (res) => {
-              TestConsole.consoleComplete.call(this, res, apiIndex)
+              TestConsole.consoleComplete.call(this, res, apiIndex);
             },
           })
             .then((res) => {
-              TestConsole.consoleReturn.call(this, res, apiIndex)
+              TestConsole.consoleReturn.call(this, res, apiIndex);
             })
             .catch((err) => {
-              TestConsole.consoleReturn.call(this, err, apiIndex)
-            })
+              TestConsole.consoleReturn.call(this, err, apiIndex);
+            });
         },
       },
       {
@@ -39,64 +39,64 @@ Page({
           keepScreenOn: true,
         },
         func: (data = {}) => {
-          const { keepScreenOn } = data
+          const { keepScreenOn } = data;
           return new Promise((resolve) => {
-            const callback = {}
+            const callback = {};
             wx.setKeepScreenOn({
               keepScreenOn,
               success: (res) => {
-                callback['success'] = res
+                callback['success'] = res;
               },
               fail: (res) => {
-                callback['fail'] = res
+                callback['fail'] = res;
               },
               complete: (res) => {
-                callback['complete'] = res
+                callback['complete'] = res;
                 resolve({
                   callback,
                   isShowToast: true,
-                })
+                });
               },
-            })
-          })
+            });
+          });
         },
         isDone: true,
       },
       {
         id: 'onUserCaptureScreen',
         func: (apiIndex) => {
-          TestConsole.consoleTest('Taro.onUserCaptureScreen')
-          Taro.onUserCaptureScreen(this.userCaptureScreen)
+          TestConsole.consoleTest('Taro.onUserCaptureScreen');
+          Taro.onUserCaptureScreen(this.userCaptureScreen);
         },
       },
       {
         id: 'offUserCaptureScreen',
         func: (apiIndex) => {
-          TestConsole.consoleTest('Taro.offUserCaptureScreen')
-          Taro.offUserCaptureScreen(this.userCaptureScreen)
+          TestConsole.consoleTest('Taro.offUserCaptureScreen');
+          Taro.offUserCaptureScreen(this.userCaptureScreen);
         },
       },
       {
         id: 'getScreenBrightness',
         func: (apiIndex) => {
-          TestConsole.consoleTest('Taro.getScreenBrightness')
+          TestConsole.consoleTest('Taro.getScreenBrightness');
           Taro.getScreenBrightness({
             success: (res) => {
-              TestConsole.consoleSuccess.call(this, res, apiIndex)
+              TestConsole.consoleSuccess.call(this, res, apiIndex);
             },
             fail: (res) => {
-              TestConsole.consoleFail.call(this, res, apiIndex)
+              TestConsole.consoleFail.call(this, res, apiIndex);
             },
             complete: (res) => {
-              TestConsole.consoleComplete.call(this, res, apiIndex)
+              TestConsole.consoleComplete.call(this, res, apiIndex);
             },
           })
             .then((res) => {
-              TestConsole.consoleReturn.call(this, res, apiIndex)
+              TestConsole.consoleReturn.call(this, res, apiIndex);
             })
             .catch((err) => {
-              TestConsole.consoleReturn.call(this, err, apiIndex)
-            })
+              TestConsole.consoleReturn.call(this, err, apiIndex);
+            });
         },
       },
     ],
@@ -141,4 +141,4 @@ Page({
    * 用户点击右上角分享
    */
   onShareAppMessage() {},
-})
+});

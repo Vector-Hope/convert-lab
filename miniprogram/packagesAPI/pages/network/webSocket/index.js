@@ -1,5 +1,5 @@
 // packagesAPI/pages/network/webSocket/index.js
-let that
+let that;
 Page({
   /**
    * 页面的初始数据
@@ -9,44 +9,44 @@ Page({
       {
         id: 'onSocketOpen',
         func: () => {
-          TestConsole.consoleTest('Taro.onSocketOpen')
-          console.log('注册onSocketOpen, 需要websocket连接后才能触发回调')
+          TestConsole.consoleTest('Taro.onSocketOpen');
+          console.log('注册onSocketOpen, 需要websocket连接后才能触发回调');
           Taro.onSocketOpen((res) => {
-            console.log('Taro.onSocketOpen:', res)
-          })
+            console.log('Taro.onSocketOpen:', res);
+          });
         },
       },
       {
         id: 'onSocketMessage',
         func: () => {
-          TestConsole.consoleTest('Taro.onSocketMessage')
-          console.log('注册onSocketMessage, 需要websocket连接收到信息后才能触发回调')
+          TestConsole.consoleTest('Taro.onSocketMessage');
+          console.log('注册onSocketMessage, 需要websocket连接收到信息后才能触发回调');
           Taro.onSocketMessage((res) => {
-            console.log('Taro.onSocketMessage:', res)
+            console.log('Taro.onSocketMessage:', res);
             Taro.showToast({
               title: res.data,
-            })
-          })
+            });
+          });
         },
       },
       {
         id: 'onSocketClose',
         func: () => {
-          TestConsole.consoleTest('Taro.onSocketClose')
-          console.log('注册onSocketClose, 需要websocket关闭才能触发回调')
+          TestConsole.consoleTest('Taro.onSocketClose');
+          console.log('注册onSocketClose, 需要websocket关闭才能触发回调');
           Taro.onSocketClose((res) => {
-            console.log('Taro.onSocketClose:', res)
-          })
+            console.log('Taro.onSocketClose:', res);
+          });
         },
       },
       {
         id: 'onSocketError',
         func: () => {
-          TestConsole.consoleTest('Taro.onSocketError')
-          console.log('注册onSocketError, 需要websocket连接后发生错误才能触发回调')
+          TestConsole.consoleTest('Taro.onSocketError');
+          console.log('注册onSocketError, 需要websocket连接后发生错误才能触发回调');
           Taro.onSocketError((res) => {
-            console.log('Taro.onSocketError:', res)
-          })
+            console.log('Taro.onSocketError:', res);
+          });
         },
       },
       {
@@ -63,32 +63,32 @@ Page({
           forceCellularNetwork: false,
         },
         func: async (data = {}) => {
-          const callback = {}
+          const callback = {};
           const socketTask = await wx.connectSocket({
             ...data,
             success: (res) => {
-              callback['success'] = res
+              callback['success'] = res;
             },
             fail: (res) => {
-              callback['fail'] = res
+              callback['fail'] = res;
             },
             complete: (res) => {
-              callback['complete'] = res
+              callback['complete'] = res;
             },
-          })
+          });
           socketTask.onOpen((res) => {
-            console.log('test API: SocketTask.onOpen')
-            console.log(res)
-          })
+            console.log('test API: SocketTask.onOpen');
+            console.log(res);
+          });
           that.setData({
             socketTask,
-          })
+          });
           return {
             callback: {
               callback,
               socketTask,
             },
-          }
+          };
         },
         isDone: true,
       },
@@ -98,19 +98,19 @@ Page({
           data: 'Taro三方框架',
         },
         func: (apiIndex, data) => {
-          TestConsole.consoleTest('Taro.sendSocketMessage')
+          TestConsole.consoleTest('Taro.sendSocketMessage');
           Taro.sendSocketMessage({
             ...data,
             success: (res) => {
-              TestConsole.consoleSuccess.call(this, res, apiIndex)
+              TestConsole.consoleSuccess.call(this, res, apiIndex);
             },
             fail: (res) => {
-              TestConsole.consoleFail.call(this, res, apiIndex)
+              TestConsole.consoleFail.call(this, res, apiIndex);
             },
             complete: (res) => {
-              TestConsole.consoleComplete.call(this, res, apiIndex)
+              TestConsole.consoleComplete.call(this, res, apiIndex);
             },
-          })
+          });
         },
       },
       {
@@ -120,90 +120,90 @@ Page({
           reason: '主动关闭',
         },
         func: (apiIndex, data) => {
-          TestConsole.consoleTest('Taro.closeSocket')
+          TestConsole.consoleTest('Taro.closeSocket');
           Taro.closeSocket({
             ...data,
             success: (res) => {
-              TestConsole.consoleSuccess.call(this, res, apiIndex)
+              TestConsole.consoleSuccess.call(this, res, apiIndex);
             },
             fail: (res) => {
-              TestConsole.consoleFail.call(this, res, apiIndex)
+              TestConsole.consoleFail.call(this, res, apiIndex);
             },
             complete: (res) => {
-              TestConsole.consoleComplete.call(this, res, apiIndex)
+              TestConsole.consoleComplete.call(this, res, apiIndex);
             },
-          })
+          });
         },
       },
       {
         id: 'SocketTask.onClose',
         func: (data = {}) => {
-          const { socketTask } = that.data
+          const { socketTask } = that.data;
           if (!socketTask || socketTask.readyState !== socketTask.OPEN) {
             wx.showToast({
               title: '请先连接websocket',
               icon: 'error',
-            })
+            });
             return {
               isShowToast: true,
               callback: {},
-            }
+            };
           }
           return new Promise((resolve) => {
             socketTask.onClose((res) => {
-              console.log('test API: SocketTask.onClose')
-              console.log(res)
-              resolve({ callback: res })
-            })
-          })
+              console.log('test API: SocketTask.onClose');
+              console.log(res);
+              resolve({ callback: res });
+            });
+          });
         },
         isDone: true,
       },
       {
         id: 'SocketTask.onError',
         func: (data = {}) => {
-          const { socketTask } = that.data
+          const { socketTask } = that.data;
           if (!socketTask || socketTask.readyState !== socketTask.OPEN) {
             wx.showToast({
               title: '请先连接websocket',
               icon: 'error',
-            })
+            });
             return {
               isShowToast: true,
               callback: {},
-            }
+            };
           }
           return new Promise((resolve) => {
             socketTask.onError((res) => {
-              console.log('test API: SocketTask.onError')
-              console.log(res)
-              resolve({ callback: res })
-            })
-          })
+              console.log('test API: SocketTask.onError');
+              console.log(res);
+              resolve({ callback: res });
+            });
+          });
         },
         isDone: true,
       },
       {
         id: 'SocketTask.onMessage',
         func: (data = {}) => {
-          const { socketTask } = that.data
+          const { socketTask } = that.data;
           if (!socketTask || socketTask.readyState !== socketTask.OPEN) {
             wx.showToast({
               title: '请先连接websocket',
               icon: 'error',
-            })
+            });
             return {
               isShowToast: true,
               callback: {},
-            }
+            };
           }
           return new Promise((resolve) => {
             socketTask.onMessage((res) => {
-              console.log('test API: SocketTask.onMessage')
-              console.log(res)
-              resolve({ callback: res })
-            })
-          })
+              console.log('test API: SocketTask.onMessage');
+              console.log(res);
+              resolve({ callback: res });
+            });
+          });
         },
         isDone: true,
       },
@@ -213,33 +213,33 @@ Page({
           data: 'convert!',
         },
         func: (data = {}) => {
-          const { socketTask } = that.data
+          const { socketTask } = that.data;
           if (!socketTask || socketTask.readyState !== socketTask.OPEN) {
             wx.showToast({
               title: '请先连接websocket',
               icon: 'error',
-            })
+            });
             return {
               isShowToast: true,
               callback: {},
-            }
+            };
           }
           return new Promise((resolve) => {
-            const callback = {}
+            const callback = {};
             socketTask.send({
               ...data,
               success: (res) => {
-                callback['success'] = res
+                callback['success'] = res;
               },
               fail: (res) => {
-                callback['fail'] = res
+                callback['fail'] = res;
               },
               complete: (res) => {
-                callback['complete'] = res
-                resolve({ callback })
+                callback['complete'] = res;
+                resolve({ callback });
               },
-            })
-          })
+            });
+          });
         },
         isDone: true,
       },
@@ -250,33 +250,33 @@ Page({
           reason: '主动关闭',
         },
         func: (data = {}) => {
-          const { socketTask } = that.data
+          const { socketTask } = that.data;
           if (!socketTask || socketTask.readyState !== socketTask.OPEN) {
             wx.showToast({
               title: '请先连接websocket',
               icon: 'error',
-            })
+            });
             return {
               isShowToast: true,
               callback: {},
-            }
+            };
           }
           return new Promise((resolve) => {
-            const callback = {}
+            const callback = {};
             socketTask.close({
               ...data,
               success: (res) => {
-                callback['success'] = res
+                callback['success'] = res;
               },
               fail: (res) => {
-                callback['fail'] = res
+                callback['fail'] = res;
               },
               complete: (res) => {
-                callback['complete'] = res
-                resolve({ callback })
+                callback['complete'] = res;
+                resolve({ callback });
               },
-            })
-          })
+            });
+          });
         },
         isDone: true,
       },
@@ -288,7 +288,7 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad(options) {
-    that = this
+    that = this;
   },
 
   /**
@@ -325,4 +325,4 @@ Page({
    * 用户点击右上角分享
    */
   onShareAppMessage() {},
-})
+});

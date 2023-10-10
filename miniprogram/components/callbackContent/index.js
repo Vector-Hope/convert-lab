@@ -11,7 +11,7 @@ Component({
       observer: function (newVal) {
         this.setData({
           callbackResString: this.stringify(newVal),
-        })
+        });
       },
     },
     testApi: String,
@@ -26,10 +26,10 @@ Component({
   },
   lifetimes: {
     attached() {
-      const { callbackRes } = this.properties
+      const { callbackRes } = this.properties;
       this.setData({
         callbackResString: this.stringify(callbackRes),
-      })
+      });
     },
   },
   /**
@@ -38,24 +38,24 @@ Component({
   methods: {
     // 对JSON.stringify进行封装，防止对象构造器循环引用
     stringify(object) {
-      let JSONStr = ''
+      let JSONStr = '';
       try {
-        JSONStr = JSON.stringify(object)
+        JSONStr = JSON.stringify(object);
       } catch (err) {
-        console.log('errrrrrrrrrrrr')
-        const cache = new Map()
+        console.log('errrrrrrrrrrrr');
+        const cache = new Map();
         JSONStr = JSON.stringify(object, (key, value) => {
           if (typeof value === 'object' && value !== null) {
             if (cache.has(value)) {
-              return
+              return;
             }
-            cache.set(value, value)
+            cache.set(value, value);
           }
-          return value
-        })
-        cache.clear()
+          return value;
+        });
+        cache.clear();
       }
-      return JSONStr
+      return JSONStr;
     },
   },
-})
+});

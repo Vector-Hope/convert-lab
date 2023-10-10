@@ -1,5 +1,5 @@
 // packagesAPI/pages/wxml/index.js
-let that
+let that;
 Page({
   /**
    * 页面的初始数据
@@ -11,13 +11,13 @@ Page({
       {
         id: 'createSelectorQuery',
         func: (data = {}) => {
-          const selectorQuery = wx.createSelectorQuery()
+          const selectorQuery = wx.createSelectorQuery();
           that.setData({
             selectorQuery,
-          })
+          });
           return {
             callback: selectorQuery,
-          }
+          };
         },
         isDone: true,
       },
@@ -27,24 +27,24 @@ Page({
           select: '.select-node',
         },
         func: (data = {}) => {
-          const { selectorQuery } = that.data
+          const { selectorQuery } = that.data;
           if (!selectorQuery) {
             wx.showToast({
               title: '请先创建实例',
-            })
+            });
             return {
               isShowToast: true,
               callback: {},
-            }
+            };
           }
-          const { select } = data
-          const nodesRef = selectorQuery.select(select)
+          const { select } = data;
+          const nodesRef = selectorQuery.select(select);
           that.setData({
             nodesRef,
-          })
+          });
           return {
             callback: nodesRef,
-          }
+          };
         },
         isDone: true,
       },
@@ -54,41 +54,41 @@ Page({
           select: '.select-node',
         },
         func: (data = {}) => {
-          const { selectorQuery } = that.data
+          const { selectorQuery } = that.data;
           if (!selectorQuery) {
             wx.showToast({
               title: '请先创建实例',
-            })
+            });
             return {
               isShowToast: true,
               callback: {},
-            }
+            };
           }
-          const { select } = data
-          const nodesRef = selectorQuery.selectAll(select)
+          const { select } = data;
+          const nodesRef = selectorQuery.selectAll(select);
           return {
             callback: nodesRef,
-          }
+          };
         },
         isDone: true,
       },
       {
         id: 'SelectorQuery.selectViewport',
         func: (data = {}) => {
-          const { selectorQuery } = that.data
+          const { selectorQuery } = that.data;
           if (!selectorQuery) {
             wx.showToast({
               title: '请先创建实例',
-            })
+            });
             return {
               isShowToast: true,
               callback: {},
-            }
+            };
           }
-          const viewport = selectorQuery.selectViewport()
+          const viewport = selectorQuery.selectViewport();
           return {
             callback: viewport,
-          }
+          };
         },
         isDone: true,
       },
@@ -98,16 +98,16 @@ Page({
           select: '#nodeRef',
         },
         func: (data = {}) => {
-          const { select } = data
+          const { select } = data;
           return new Promise((resolve) => {
             wx.createSelectorQuery()
               .select(select)
               .boundingClientRect()
               .exec((res) => {
-                console.log(res)
-                resolve({ callback: { exec: res } })
-              })
-          })
+                console.log(res);
+                resolve({ callback: { exec: res } });
+              });
+          });
         },
         isDone: true,
       },
@@ -117,12 +117,12 @@ Page({
           select: '#nodeRef',
         },
         func: (data = {}) => {
-          const { select } = data
-          const nodesRef = wx.createSelectorQuery().in(that).select(select)
-          console.log(nodesRef)
+          const { select } = data;
+          const nodesRef = wx.createSelectorQuery().in(that).select(select);
+          console.log(nodesRef);
           return {
             callback: nodesRef,
-          }
+          };
         },
         isDone: true,
       },
@@ -132,17 +132,17 @@ Page({
           select: '#nodeRef',
         },
         func: (data = {}) => {
-          const { select } = data
+          const { select } = data;
           return new Promise((resolve) => {
             wx.createSelectorQuery()
               .select(select)
               .boundingClientRect((res) => {
                 resolve({
                   callback: res,
-                })
+                });
               })
-              .exec()
-          })
+              .exec();
+          });
         },
         isDone: true,
       },
@@ -152,18 +152,18 @@ Page({
           select: '.canvas-node',
         },
         func: (data = {}) => {
-          const { select } = data
+          const { select } = data;
           return new Promise((resolve) => {
             wx.createSelectorQuery()
               .select(select)
               .context((res) => {
-                console.log(res)
+                console.log(res);
                 resolve({
                   callback: res,
-                })
+                });
               })
-              .exec()
-          })
+              .exec();
+          });
         },
       },
       {
@@ -183,15 +183,15 @@ Page({
           },
         },
         func: (data = {}) => {
-          const { select, fields } = data
+          const { select, fields } = data;
           return new Promise((resolve) => {
             wx.createSelectorQuery()
               .select(select)
               .fields(fields, (res) => {
-                resolve({ callback: res })
+                resolve({ callback: res });
               })
-              .exec()
-          })
+              .exec();
+          });
         },
         isDone: true,
       },
@@ -202,27 +202,27 @@ Page({
           select: '.scroll-view-node',
         },
         func: (data = {}) => {
-          const { selectViewport } = data
+          const { selectViewport } = data;
           if (selectViewport) {
             return new Promise((resolve) => {
               wx.createSelectorQuery()
                 .selectViewport()
                 .scrollOffset((res) => {
-                  resolve({ callback: res })
+                  resolve({ callback: res });
                 })
-                .exec()
-            })
+                .exec();
+            });
           }
 
-          const { select } = data
+          const { select } = data;
           return new Promise((resolve) => {
             wx.createSelectorQuery()
               .select(select)
               .scrollOffset((res) => {
-                resolve({ callback: res })
+                resolve({ callback: res });
               })
-              .exec()
-          })
+              .exec();
+          });
         },
         isDone: true,
       },
@@ -232,15 +232,15 @@ Page({
           select: '.scroll-view-node',
         },
         func: (data = {}) => {
-          const { select } = data
+          const { select } = data;
           return new Promise((resolve) => {
             wx.createSelectorQuery()
               .select(select)
               .node((res) => {
-                resolve({ callback: res })
+                resolve({ callback: res });
               })
-              .exec()
-          })
+              .exec();
+          });
         },
         isDone: true,
       },
@@ -254,17 +254,17 @@ Page({
           thresholds: [],
         },
         func: (data = {}) => {
-          let { observer } = that.data
+          let { observer } = that.data;
           if (observer) {
-            observer.disconnect()
+            observer.disconnect();
           }
-          observer = wx.createIntersectionObserver(that, data)
+          observer = wx.createIntersectionObserver(that, data);
           that.setData({
             observer,
-          })
+          });
           return {
             callback: observer,
-          }
+          };
         },
         isDone: true,
       },
@@ -274,17 +274,17 @@ Page({
           left: 0,
         },
         func: (data) => {
-          TestConsole.consoleTest('IntersectionObserver.relativeTo')
+          TestConsole.consoleTest('IntersectionObserver.relativeTo');
           if (this.observer) {
-            this.observer.disconnect()
+            this.observer.disconnect();
           }
-          this.observer = this.createIntersectionObserver()
+          this.observer = this.createIntersectionObserver();
           this.observer.relativeTo('.scroll-view', data).observe('.ball', (res) => {
-            console.log('IntersectionObserver.observe:', res)
+            console.log('IntersectionObserver.observe:', res);
             this.setState({
               appear: res.intersectionRatio > 0,
-            })
-          })
+            });
+          });
         },
       },
       {
@@ -293,28 +293,28 @@ Page({
           left: 0,
         },
         func: (_, data) => {
-          TestConsole.consoleTest('IntersectionObserver.relativeTo')
+          TestConsole.consoleTest('IntersectionObserver.relativeTo');
           if (this.observer) {
-            this.observer.disconnect()
+            this.observer.disconnect();
           }
-          this.observer = this.createIntersectionObserver()
+          this.observer = this.createIntersectionObserver();
           this.observer.relativeToViewport(data).observe('.ball', (res) => {
-            console.log('IntersectionObserver.observe:', res)
+            console.log('IntersectionObserver.observe:', res);
             this.setState({
               appear: res.intersectionRatio > 0,
-            })
-          })
+            });
+          });
         },
       },
       {
         id: 'disconnect',
         func: () => {
-          TestConsole.consoleTest('IntersectionObserver.disconnect')
+          TestConsole.consoleTest('IntersectionObserver.disconnect');
           if (this.observer) {
-            this.observer.disconnect()
-            this.observer = undefined
+            this.observer.disconnect();
+            this.observer = undefined;
           }
-          console.log('IntersectionObserver已断开')
+          console.log('IntersectionObserver已断开');
         },
       },
     ],
@@ -324,7 +324,7 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad(options) {
-    that = this
+    that = this;
   },
 
   /**
@@ -361,4 +361,4 @@ Page({
    * 用户点击右上角分享
    */
   onShareAppMessage() {},
-})
+});

@@ -8,9 +8,9 @@ Page({
       {
         id: 'onKeyboardHeightChange',
         func: (apiIndex) => {
-          TestConsole.consoleTest('Taro.onKeyboardHeightChange')
-          Taro.onKeyboardHeightChange(this.onBoardHgiehtChange01)
-          Taro.onKeyboardHeightChange(this.onBoardHgiehtChange02)
+          TestConsole.consoleTest('Taro.onKeyboardHeightChange');
+          Taro.onKeyboardHeightChange(this.onBoardHgiehtChange01);
+          Taro.onKeyboardHeightChange(this.onBoardHgiehtChange02);
         },
       },
       {
@@ -21,15 +21,15 @@ Page({
           close02: false,
         },
         func: (apiIndex, data) => {
-          TestConsole.consoleTest('Taro.offKeyboardHeightChange ')
+          TestConsole.consoleTest('Taro.offKeyboardHeightChange ');
           if (data.closeAll) {
-            Taro.offKeyboardHeightChange()
+            Taro.offKeyboardHeightChange();
           } else {
             if (data.close01) {
-              Taro.offKeyboardHeightChange(this.onBoardHgiehtChange01)
+              Taro.offKeyboardHeightChange(this.onBoardHgiehtChange01);
             }
             if (data.close02) {
-              Taro.offKeyboardHeightChange(this.onBoardHgiehtChange02)
+              Taro.offKeyboardHeightChange(this.onBoardHgiehtChange02);
             }
           }
         },
@@ -38,23 +38,23 @@ Page({
         id: 'hideKeyboard',
         func: (data = {}) => {
           return new Promise((resolve) => {
-            const callback = {}
+            const callback = {};
             wx.hideKeyboard({
               success: (res) => {
-                callback['success'] = res
+                callback['success'] = res;
               },
               fail: (res) => {
-                callback['fail'] = res
+                callback['fail'] = res;
               },
               complete: (res) => {
-                callback['complete'] = res
+                callback['complete'] = res;
                 resolve({
                   callback,
                   isShowToast: true,
-                })
+                });
               },
-            })
-          })
+            });
+          });
         },
         isDone: true,
       },
@@ -104,4 +104,4 @@ Page({
    * 用户点击右上角分享
    */
   onShareAppMessage() {},
-})
+});

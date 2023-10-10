@@ -8,10 +8,10 @@ Page({
       {
         id: 'env',
         func: (data = {}) => {
-          const env = wx.env
+          const env = wx.env;
           return {
             callback: env,
-          }
+          };
         },
         isDone: true,
       },
@@ -21,12 +21,12 @@ Page({
           apiName: 'openBluetoothAdapter',
         },
         func: (data = {}) => {
-          const { apiName } = data
-          const res = {}
-          res[apiName] = wx.canIUse(apiName)
+          const { apiName } = data;
+          const res = {};
+          res[apiName] = wx.canIUse(apiName);
           return {
             callback: res,
-          }
+          };
         },
         isDone: true,
       },
@@ -40,9 +40,9 @@ Page({
           base64: 'CxYh',
         },
         func: (data = {}) => {
-          const { base64 } = data
-          const arrayBuffer = wx.base64ToArrayBuffer(base64)
-          console.log(arrayBuffer)
+          const { base64 } = data;
+          const arrayBuffer = wx.base64ToArrayBuffer(base64);
+          console.log(arrayBuffer);
           return {
             callback: {
               base64,
@@ -50,21 +50,21 @@ Page({
               Uint8Array: new Uint8Array(arrayBuffer),
               ArrayBufferByteLength: arrayBuffer.byteLength,
             },
-          }
+          };
         },
         isDone: true,
       },
       {
         id: 'arrayBufferToBase64',
         func: (data = {}) => {
-          const arrayBuffer = new Uint8Array([11, 22, 33])
-          const res = wx.arrayBufferToBase64(arrayBuffer)
+          const arrayBuffer = new Uint8Array([11, 22, 33]);
+          const res = wx.arrayBufferToBase64(arrayBuffer);
           return {
             callback: {
               arrayBuffer: arrayBuffer,
               base64: res,
             },
-          }
+          };
         },
         isDone: true,
       },
@@ -114,4 +114,4 @@ Page({
    * 用户点击右上角分享
    */
   onShareAppMessage() {},
-})
+});

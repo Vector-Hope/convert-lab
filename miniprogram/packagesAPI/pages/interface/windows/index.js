@@ -12,19 +12,19 @@ Page({
             wx.onWindowResize((res) => {
               reslove({
                 callback: res,
-              })
-            })
-          })
+              });
+            });
+          });
         },
         isDone: true,
       },
       {
         id: 'offWindowResize',
         func: (data = {}) => {
-          wx.offWindowResize()
+          wx.offWindowResize();
           return {
             callback: {},
-          }
+          };
         },
         isDone: true,
       },
@@ -70,4 +70,4 @@ Page({
    * 用户点击右上角分享
    */
   onShareAppMessage() {},
-})
+});

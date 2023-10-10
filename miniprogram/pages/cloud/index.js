@@ -84,25 +84,25 @@ Page({
     ],
   },
   kindToggle(e) {
-    const id = e.currentTarget.id
-    const list = this.data.list
-    console.log(id, list)
+    const id = e.currentTarget.id;
+    const list = this.data.list;
+    console.log(id, list);
     for (let i = 0, len = list.length; i < len; ++i) {
       if (list[i].id === id) {
         if (list[i].url) {
-          console.log(list[i].url)
+          console.log(list[i].url);
           wx.navigateTo({
             url: `../../packageCloud/pages/${list[i].url}`,
-          })
-          return
+          });
+          return;
         }
-        list[i].open = !list[i].open
+        list[i].open = !list[i].open;
       } else {
-        list[i].open = false
+        list[i].open = false;
       }
     }
     this.setData({
       list,
-    })
+    });
   },
-})
+});

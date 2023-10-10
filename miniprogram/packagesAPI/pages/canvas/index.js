@@ -1,5 +1,5 @@
 // packagesAPI/pages/canvas/index.js
-let that
+let that;
 Page({
   /**
    * 页面的初始数据
@@ -13,30 +13,30 @@ Page({
       {
         id: 'createCanvasContext',
         func: (data = {}) => {
-          const { canvasId } = that.data
-          const canvas = wx.createCanvasContext(canvasId)
+          const { canvasId } = that.data;
+          const canvas = wx.createCanvasContext(canvasId);
           wx.downloadFile({
             url: 'http://www.baidu.com/img/bdlogo.png',
             success: (res) => {
               that.setData({
                 imageTempPath: res.tempFilePath,
                 canvas: canvas,
-              })
+              });
               wx.showToast({
                 title: '创建画布成功',
-              })
+              });
             },
             fail: (res) => {
-              console.log(res)
+              console.log(res);
               that.setData({
                 canvas: canvas,
-              })
+              });
             },
-          })
+          });
           return {
             isShowToast: true,
             callback: canvas,
-          }
+          };
         },
         isDone: true,
       },
@@ -61,7 +61,7 @@ Page({
           textBaseline: 'top',
         },
         func: (data = {}) => {
-          const { canvas } = that.data
+          const { canvas } = that.data;
           const {
             fillStyle,
             fontSize,
@@ -74,25 +74,25 @@ Page({
             strokeStyle,
             textAlign,
             textBaseline,
-          } = data
-          canvas.setFillStyle(fillStyle)
-          canvas.setFontSize(fontSize)
-          canvas.setGlobalAlpha(globalAlpha)
-          canvas.setLineCap(lineCap)
-          canvas.setLineJoin(lineJoin)
-          canvas.setLineWidth(lineWidth)
-          canvas.setMiterLimit(miterLimit)
-          canvas.setShadow(shadow.offX, shadow.offY, shadow.blur, shadow.color)
-          canvas.setStrokeStyle(strokeStyle)
-          canvas.setTextAlign(textAlign)
-          canvas.setTextBaseline(textBaseline)
+          } = data;
+          canvas.setFillStyle(fillStyle);
+          canvas.setFontSize(fontSize);
+          canvas.setGlobalAlpha(globalAlpha);
+          canvas.setLineCap(lineCap);
+          canvas.setLineJoin(lineJoin);
+          canvas.setLineWidth(lineWidth);
+          canvas.setMiterLimit(miterLimit);
+          canvas.setShadow(shadow.offX, shadow.offY, shadow.blur, shadow.color);
+          canvas.setStrokeStyle(strokeStyle);
+          canvas.setTextAlign(textAlign);
+          canvas.setTextBaseline(textBaseline);
           wx.showToast({
             title: '请继续作画',
-          })
+          });
           return {
             isShowToast: true,
             callback: {},
-          }
+          };
         },
         isDone: true,
       },
@@ -103,16 +103,16 @@ Page({
           offset: 4,
         },
         func: (data = {}) => {
-          const { canvas } = that.data
-          const { pattern, offset } = data
-          canvas.setLineDash(pattern, offset)
+          const { canvas } = that.data;
+          const { pattern, offset } = data;
+          canvas.setLineDash(pattern, offset);
           wx.showToast({
             title: '请继续作画',
-          })
+          });
           return {
             isShowToast: true,
             callback: {},
-          }
+          };
         },
         isDone: true,
       },
@@ -127,16 +127,16 @@ Page({
           tranY: 10,
         },
         func: (data = {}) => {
-          const { canvas } = that.data
-          const { scaleX, skewX, scaleY, skewY, tranX, tranY } = data
-          canvas.setTransform(scaleX, skewX, scaleY, skewY, tranX, tranY)
+          const { canvas } = that.data;
+          const { scaleX, skewX, scaleY, skewY, tranX, tranY } = data;
+          canvas.setTransform(scaleX, skewX, scaleY, skewY, tranX, tranY);
           wx.showToast({
             title: '请继续作画',
-          })
+          });
           return {
             isShowToast: true,
             callback: {},
-          }
+          };
         },
       },
       {
@@ -150,18 +150,18 @@ Page({
           counterclockwise: false,
         },
         func: (data = {}) => {
-          const { canvas } = that.data
-          const { x, y, r, sAngle, eAngle, counterclockwise } = data
-          canvas.beginPath()
-          canvas.arc(x, y, r, sAngle, eAngle, counterclockwise)
-          canvas.stroke()
+          const { canvas } = that.data;
+          const { x, y, r, sAngle, eAngle, counterclockwise } = data;
+          canvas.beginPath();
+          canvas.arc(x, y, r, sAngle, eAngle, counterclockwise);
+          canvas.stroke();
           return new Promise((resolve) => {
             canvas.draw(true, (res) => {
               resolve({
                 callback: res,
-              })
-            })
-          })
+              });
+            });
+          });
         },
         isDone: true,
       },
@@ -175,20 +175,20 @@ Page({
           radius: 50,
         },
         func: (data = {}) => {
-          const { canvas } = that.data
-          const { x1, y1, x2, y2, radius } = data
-          canvas.beginPath()
-          canvas.moveTo(20, 20)
-          canvas.lineTo(100, 20)
-          canvas.arcTo(x1, y1, x2, y2, radius)
-          canvas.stroke()
+          const { canvas } = that.data;
+          const { x1, y1, x2, y2, radius } = data;
+          canvas.beginPath();
+          canvas.moveTo(20, 20);
+          canvas.lineTo(100, 20);
+          canvas.arcTo(x1, y1, x2, y2, radius);
+          canvas.stroke();
           return new Promise((resolve) => {
             canvas.draw(true, (res) => {
               resolve({
                 callback: res,
-              })
-            })
-          })
+              });
+            });
+          });
         },
         isDone: true,
       },
@@ -203,19 +203,19 @@ Page({
           y: 20,
         },
         func: (data = {}) => {
-          const { canvas } = that.data
-          const { cp1x, cp1y, cp2x, cp2y, x, y } = data
-          canvas.beginPath()
-          canvas.bezierCurveTo(cp1x, cp1y, cp2x, cp2y, x, y)
-          canvas.closePath()
-          canvas.stroke()
+          const { canvas } = that.data;
+          const { cp1x, cp1y, cp2x, cp2y, x, y } = data;
+          canvas.beginPath();
+          canvas.bezierCurveTo(cp1x, cp1y, cp2x, cp2y, x, y);
+          canvas.closePath();
+          canvas.stroke();
           return new Promise((resolve) => {
             canvas.draw(true, (res) => {
               resolve({
                 callback: res,
-              })
-            })
-          })
+              });
+            });
+          });
         },
         isDone: true,
       },
@@ -228,17 +228,17 @@ Page({
           height: 40,
         },
         func: (data = {}) => {
-          const { canvas } = that.data
-          const { x, y, width, height } = data
-          canvas.beginPath()
-          canvas.strokeRect(x, y, width, height)
+          const { canvas } = that.data;
+          const { x, y, width, height } = data;
+          canvas.beginPath();
+          canvas.strokeRect(x, y, width, height);
           return new Promise((resolve) => {
             canvas.draw(true, (res) => {
               resolve({
                 callback: res,
-              })
-            })
-          })
+              });
+            });
+          });
         },
         isDone: true,
       },
@@ -251,17 +251,17 @@ Page({
           height: 40,
         },
         func: (data = {}) => {
-          const { canvas } = that.data
-          const { x, y, width, height } = data
-          canvas.beginPath()
-          canvas.fillRect(x, y, width, height)
+          const { canvas } = that.data;
+          const { x, y, width, height } = data;
+          canvas.beginPath();
+          canvas.fillRect(x, y, width, height);
           return new Promise((resolve) => {
             canvas.draw(true, (res) => {
               resolve({
                 callback: res,
-              })
-            })
-          })
+              });
+            });
+          });
         },
         isDone: true,
       },
@@ -274,64 +274,64 @@ Page({
           height: 40,
         },
         func: (data = {}) => {
-          const { canvas } = that.data
-          const { x, y, width, height } = data
-          canvas.beginPath()
-          canvas.clearRect(x, y, width, height)
+          const { canvas } = that.data;
+          const { x, y, width, height } = data;
+          canvas.beginPath();
+          canvas.clearRect(x, y, width, height);
           return new Promise((resolve) => {
             canvas.draw(true, (res) => {
               resolve({
                 callback: res,
-              })
-            })
-          })
+              });
+            });
+          });
         },
         isDone: true,
       },
       {
         id: 'CanvasContext.save',
         func: (data = {}) => {
-          const { canvas } = that.data
-          canvas.save()
+          const { canvas } = that.data;
+          canvas.save();
           wx.showToast({
             title: '保存绘画上下文',
-          })
+          });
           return {
             isShowToast: true,
             callback: {},
-          }
+          };
         },
         isDone: true,
       },
       {
         id: 'CanvasContext.clip',
         func: (data = {}) => {
-          const { canvas } = that.data
-          canvas.beginPath()
-          canvas.arc(100, 100, 50, 0, 2 * Math.PI)
-          canvas.clip()
+          const { canvas } = that.data;
+          canvas.beginPath();
+          canvas.arc(100, 100, 50, 0, 2 * Math.PI);
+          canvas.clip();
           wx.showToast({
             title: '请继续作画',
-          })
+          });
           return {
             isShowToast: true,
             callback: {},
-          }
+          };
         },
         isDone: true,
       },
       {
         id: 'CanvasContext.restore',
         func: (data = {}) => {
-          const { canvas } = that.data
-          canvas.restore()
+          const { canvas } = that.data;
+          canvas.restore();
           wx.showToast({
             title: '请继续作画',
-          })
+          });
           return {
             isShowToast: true,
             callback: {},
-          }
+          };
         },
         isDone: true,
       },
@@ -357,20 +357,20 @@ Page({
           ],
         },
         func: (data = {}) => {
-          const { canvas } = that.data
-          const { x, y, r, colorStop } = data
-          const circGrd = canvas.createCircularGradient(x, y, r)
+          const { canvas } = that.data;
+          const { x, y, r, colorStop } = data;
+          const circGrd = canvas.createCircularGradient(x, y, r);
           colorStop.forEach((item) => {
-            circGrd.addColorStop(item.stop, item.color)
-          })
-          canvas.setFillStyle(circGrd)
+            circGrd.addColorStop(item.stop, item.color);
+          });
+          canvas.setFillStyle(circGrd);
           wx.showToast({
             title: '请继续作画',
-          })
+          });
           return {
             isShowToast: true,
             callback: {},
-          }
+          };
         },
         isDone: true,
       },
@@ -397,20 +397,20 @@ Page({
           ],
         },
         func: (data = {}) => {
-          const { canvas } = that.data
-          const { x0, y0, x1, y1, colorStop } = data
-          const lineGrd = canvas.createLinearGradient(x0, y0, x1, y1)
+          const { canvas } = that.data;
+          const { x0, y0, x1, y1, colorStop } = data;
+          const lineGrd = canvas.createLinearGradient(x0, y0, x1, y1);
           colorStop.forEach((item) => {
-            lineGrd.addColorStop(item.stop, item.color)
-          })
-          canvas.setFillStyle(lineGrd)
+            lineGrd.addColorStop(item.stop, item.color);
+          });
+          canvas.setFillStyle(lineGrd);
           wx.showToast({
             title: '请继续作画',
-          })
+          });
           return {
             isShowToast: true,
             callback: {},
-          }
+          };
         },
         isDone: true,
       },
@@ -420,29 +420,29 @@ Page({
           repetition: 'repeat',
         },
         func: (data = {}) => {
-          const { canvas, imageTempPath } = that.data
+          const { canvas, imageTempPath } = that.data;
           if (!imageTempPath) {
             wx.showToast({
               title: '无image进行作画',
-            })
+            });
             return {
               isShowToast: true,
-            }
+            };
           }
-          console.log('image-------', imageTempPath)
-          const { repetition } = data
-          const pattern = canvas.createPattern(imageTempPath, repetition)
-          console.log('pattern-------', pattern)
-          canvas.fillStyle = pattern
+          console.log('image-------', imageTempPath);
+          const { repetition } = data;
+          const pattern = canvas.createPattern(imageTempPath, repetition);
+          console.log('pattern-------', pattern);
+          canvas.fillStyle = pattern;
           wx.showToast({
             title: '请继续作画',
-          })
+          });
           return {
             isShowToast: true,
             callback: {
               canvas,
             },
-          }
+          };
         },
         isDone: true,
       },
@@ -459,24 +459,24 @@ Page({
           dHeight: 100,
         },
         func: (data = {}) => {
-          const { canvas, imageTempPath } = that.data
+          const { canvas, imageTempPath } = that.data;
           if (!imageTempPath) {
             wx.showToast({
               title: '无image进行作画',
-            })
+            });
             return {
               isShowToast: true,
-            }
+            };
           }
-          const { sx, sy, sWidth, sHeight, dx, dy, dWidth, dHeight } = data
-          canvas.drawImage(imageTempPath, sx, sy, sWidth, sHeight, dx, dy, dWidth, dHeight)
+          const { sx, sy, sWidth, sHeight, dx, dy, dWidth, dHeight } = data;
+          canvas.drawImage(imageTempPath, sx, sy, sWidth, sHeight, dx, dy, dWidth, dHeight);
           return new Promise((resolve) => {
             canvas.draw(true, (res) => {
               resolve({
                 callback: res,
-              })
-            })
-          })
+              });
+            });
+          });
         },
         isDone: true,
       },
@@ -499,20 +499,20 @@ Page({
           ],
         },
         func: (data = {}) => {
-          const { canvas } = that.data
-          const { points } = data
-          canvas.moveTo(10, 10)
+          const { canvas } = that.data;
+          const { points } = data;
+          canvas.moveTo(10, 10);
           points.forEach((point) => {
-            canvas.lineTo(point.x, point.y)
-          })
-          canvas.fill()
+            canvas.lineTo(point.x, point.y);
+          });
+          canvas.fill();
           return new Promise((resolve) => {
             canvas.draw(true, (res) => {
               resolve({
                 callback: res,
-              })
-            })
-          })
+              });
+            });
+          });
         },
         isDone: true,
       },
@@ -525,16 +525,16 @@ Page({
           maxWidth: 500,
         },
         func: (data = {}) => {
-          const { canvas } = that.data
-          const { text, x, y, maxWidth } = data
-          canvas.fillText(text, x, y, maxWidth)
+          const { canvas } = that.data;
+          const { text, x, y, maxWidth } = data;
+          canvas.fillText(text, x, y, maxWidth);
           return new Promise((resolve) => {
             canvas.draw(true, (res) => {
               resolve({
                 callback: res,
-              })
-            })
-          })
+              });
+            });
+          });
         },
         isDone: true,
       },
@@ -544,14 +544,14 @@ Page({
           text: 'hello word',
         },
         func: (data = {}) => {
-          const { canvas } = that.data
-          const { text } = data
-          const textWidth = canvas.measureText(text)
-          console.log('test API: CanvasContext.measureText')
-          console.log(textWidth)
+          const { canvas } = that.data;
+          const { text } = data;
+          const textWidth = canvas.measureText(text);
+          console.log('test API: CanvasContext.measureText');
+          console.log(textWidth);
           return {
             callback: textWidth,
-          }
+          };
         },
         isDone: true,
       },
@@ -562,16 +562,16 @@ Page({
           y: 20,
         },
         func: (data = {}) => {
-          const { canvas } = that.data
-          const { x, y } = data
-          canvas.moveTo(x, y)
+          const { canvas } = that.data;
+          const { x, y } = data;
+          canvas.moveTo(x, y);
           wx.showToast({
             title: '请继续作画',
-          })
+          });
           return {
             isShowToast: true,
             callback: {},
-          }
+          };
         },
         isDone: true,
       },
@@ -594,20 +594,20 @@ Page({
           ],
         },
         func: (data = {}) => {
-          const { canvas } = that.data
-          const { beginPosition, points } = data
-          canvas.moveTo(beginPosition.x, beginPosition.y)
+          const { canvas } = that.data;
+          const { beginPosition, points } = data;
+          canvas.moveTo(beginPosition.x, beginPosition.y);
           points.forEach((point) => {
-            canvas.lineTo(point.x, point.y)
-          })
-          canvas.stroke()
+            canvas.lineTo(point.x, point.y);
+          });
+          canvas.stroke();
           return new Promise((resolve) => {
             canvas.draw(true, (res) => {
               resolve({
                 callback: res,
-              })
-            })
-          })
+              });
+            });
+          });
         },
         isDone: true,
       },
@@ -620,17 +620,17 @@ Page({
           y: 20,
         },
         func: (data = {}) => {
-          const { canvas } = that.data
-          const { cpx, cpy, x, y } = data
-          canvas.quadraticCurveTo(cpx, cpy, x, y)
-          canvas.stroke()
+          const { canvas } = that.data;
+          const { cpx, cpy, x, y } = data;
+          canvas.quadraticCurveTo(cpx, cpy, x, y);
+          canvas.stroke();
           return new Promise((resolve) => {
             canvas.draw(true, (res) => {
               resolve({
                 callback: res,
-              })
-            })
-          })
+              });
+            });
+          });
         },
         isDone: true,
       },
@@ -645,30 +645,30 @@ Page({
           stroke: true,
         },
         func: (data = {}) => {
-          const { canvas } = that.data
-          const { x, y, width, height, fill, stroke } = data
+          const { canvas } = that.data;
+          const { x, y, width, height, fill, stroke } = data;
           if (fill) {
-            canvas.rect(x, y, width, height)
-            canvas.fill()
+            canvas.rect(x, y, width, height);
+            canvas.fill();
           } else if (stroke) {
-            canvas.rect(x, y, width, height)
-            canvas.stroke()
+            canvas.rect(x, y, width, height);
+            canvas.stroke();
           } else {
             wx.showToast({
               title: '请选择填充或描边',
-            })
+            });
             return {
               isShowToast: true,
               callback: {},
-            }
+            };
           }
           return new Promise((resolve) => {
             canvas.draw(true, (res) => {
               resolve({
                 callback: res,
-              })
-            })
-          })
+              });
+            });
+          });
         },
         isDone: true,
       },
@@ -678,16 +678,16 @@ Page({
           rotate: (20 * Math.PI) / 180,
         },
         func: (data = {}) => {
-          const { canvas } = that.data
-          const { rotate } = data
-          canvas.rotate(rotate)
+          const { canvas } = that.data;
+          const { rotate } = data;
+          canvas.rotate(rotate);
           wx.showToast({
             title: '请继续作画',
-          })
+          });
           return {
             isShowToast: true,
             callback: {},
-          }
+          };
         },
         isDone: true,
       },
@@ -698,16 +698,16 @@ Page({
           scaleHeight: 2,
         },
         func: (data = {}) => {
-          const { canvas } = that.data
-          const { scaleWidth, scaleHeight } = data
-          canvas.scale(scaleWidth, scaleHeight)
+          const { canvas } = that.data;
+          const { scaleWidth, scaleHeight } = data;
+          canvas.scale(scaleWidth, scaleHeight);
           wx.showToast({
             title: '请继续作画',
-          })
+          });
           return {
             isShowToast: true,
             callback: {},
-          }
+          };
         },
         isDone: true,
       },
@@ -720,16 +720,16 @@ Page({
           maxWidth: 500,
         },
         func: (data = {}) => {
-          const { canvas } = that.data
-          const { text, x, y, maxWidth } = data
-          canvas.strokeText(text, x, y, maxWidth)
+          const { canvas } = that.data;
+          const { text, x, y, maxWidth } = data;
+          canvas.strokeText(text, x, y, maxWidth);
           return new Promise((resolve) => {
             canvas.draw(true, (res) => {
               resolve({
                 callback: res,
-              })
-            })
-          })
+              });
+            });
+          });
         },
         isDone: true,
       },
@@ -752,16 +752,16 @@ Page({
           y: 20,
         },
         func: (data = {}) => {
-          const { canvas } = that.data
-          const { x, y } = data
-          canvas.translate(x, y)
+          const { canvas } = that.data;
+          const { x, y } = data;
+          canvas.translate(x, y);
           wx.showToast({
             title: '请继续作画',
-          })
+          });
           return {
             isShowToast: true,
             callback: {},
-          }
+          };
         },
         isDone: true,
       },
@@ -779,8 +779,8 @@ Page({
           fileType: 'png',
         },
         func: (data = {}) => {
-          const { canvasId } = that.data
-          const callback = {}
+          const { canvasId } = that.data;
+          const callback = {};
           return new Promise((resolve) => {
             wx.canvasToTempFilePath({
               canvasId: canvasId,
@@ -788,20 +788,20 @@ Page({
               success: (res) => {
                 that.setData({
                   canvasImg: res.tempFilePath,
-                })
-                callback['success'] = res
+                });
+                callback['success'] = res;
               },
               fail: (res) => {
-                callback['fail'] = res
+                callback['fail'] = res;
               },
               complete: (res) => {
-                callback['complete'] = res
+                callback['complete'] = res;
                 resolve({
                   callback,
-                })
+                });
               },
-            })
-          })
+            });
+          });
         },
         isDone: true,
       },
@@ -856,7 +856,7 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad(options) {
-    that = this
+    that = this;
   },
 
   /**
@@ -893,4 +893,4 @@ Page({
    * 用户点击右上角分享
    */
   onShareAppMessage() {},
-})
+});

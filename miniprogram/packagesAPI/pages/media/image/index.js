@@ -1,5 +1,5 @@
 // packagesAPI/pages/media/image/index.js
-let that
+let that;
 Page({
   /**
    * 页面的初始数据
@@ -15,24 +15,24 @@ Page({
         },
         func: (data = {}) => {
           return new Promise((resolve) => {
-            const callback = {}
+            const callback = {};
             wx.chooseImage({
               ...data,
               success: (res) => {
                 that.setData({
                   imgTempFilePaths: res.tempFilePaths,
-                })
-                callback['success'] = res
+                });
+                callback['success'] = res;
               },
               fail: (res) => {
-                callback['fail'] = res
+                callback['fail'] = res;
               },
               complete: (res) => {
-                callback['complete'] = res
-                resolve({ callback })
+                callback['complete'] = res;
+                resolve({ callback });
               },
-            })
-          })
+            });
+          });
         },
         isDone: true,
       },
@@ -49,26 +49,26 @@ Page({
           referrerPolicy: 'no-referrer',
         },
         func: (data = {}) => {
-          const { urls, current, showmenu, referrerPolicy } = data
+          const { urls, current, showmenu, referrerPolicy } = data;
           return new Promise((resolve) => {
-            const callback = {}
+            const callback = {};
             wx.previewImage({
               urls,
               showmenu,
               current,
               referrerPolicy,
               success: (res) => {
-                callback['success'] = res
+                callback['success'] = res;
               },
               fail: (res) => {
-                callback['fail'] = res
+                callback['fail'] = res;
               },
               complete: (res) => {
-                callback['complete'] = res
-                resolve({ callback })
+                callback['complete'] = res;
+                resolve({ callback });
               },
-            })
-          })
+            });
+          });
         },
         isDone: true,
       },
@@ -78,33 +78,33 @@ Page({
           imgIndex: 0,
         },
         func: (data = {}) => {
-          const { imgTempFilePaths } = that.data
+          const { imgTempFilePaths } = that.data;
           if (!imgTempFilePaths) {
             wx.showToast({
               title: '请先选择图片',
-            })
+            });
             return {
               isShowToast: true,
               callback: {},
-            }
+            };
           }
-          const { imgIndex } = data
+          const { imgIndex } = data;
           return new Promise((resolve) => {
-            const callback = {}
+            const callback = {};
             wx.getImageInfo({
               src: imgTempFilePaths[imgIndex],
               success: (res) => {
-                callback['success'] = res
+                callback['success'] = res;
               },
               fail: (res) => {
-                callback['fail'] = res
+                callback['fail'] = res;
               },
               complete: (res) => {
-                callback['complete'] = res
-                resolve({ callback })
+                callback['complete'] = res;
+                resolve({ callback });
               },
-            })
-          })
+            });
+          });
         },
         isDone: true,
       },
@@ -114,40 +114,40 @@ Page({
           imgIndex: 0,
         },
         func: (data = {}) => {
-          const { imgTempFilePaths } = that.data
+          const { imgTempFilePaths } = that.data;
           if (!imgTempFilePaths) {
             wx.showToast({
               title: '请先选择图片',
-            })
+            });
             return {
               isShowToast: true,
               callback: {},
-            }
+            };
           }
-          const { imgIndex } = data
+          const { imgIndex } = data;
           return new Promise((resolve) => {
-            const callback = {}
+            const callback = {};
             wx.saveImageToPhotosAlbum({
               filePath: imgTempFilePaths[imgIndex],
               success: (res) => {
-                callback['success'] = res
+                callback['success'] = res;
               },
               fail: (res) => {
-                callback['fail'] = res
+                callback['fail'] = res;
               },
               complete: (res) => {
-                callback['complete'] = res
-                resolve({ callback })
+                callback['complete'] = res;
+                resolve({ callback });
               },
-            })
-          })
+            });
+          });
         },
         isDone: true,
       },
       {
         id: 'compressImage',
         func: (apiIndex) => {
-          TestConsole.consoleTest('compressImage')
+          TestConsole.consoleTest('compressImage');
           Taro.chooseImage({
             success: (res) => {
               Taro.compressImage({
@@ -156,54 +156,54 @@ Page({
                 compressedWidth: 300,
                 compressHeight: 200,
                 success: (res1) => {
-                  TestConsole.consoleNormal('compressImage success ', res1)
+                  TestConsole.consoleNormal('compressImage success ', res1);
                   Taro.saveImageToPhotosAlbum({
                     filePath: res1.tempFilePath,
                     success: (res2) => {
-                      TestConsole.consoleNormal('saveImageToPhotosAlbum success ', res2)
+                      TestConsole.consoleNormal('saveImageToPhotosAlbum success ', res2);
                       Taro.getImageInfo({
                         src: res1.tempFilePath,
                         success: (res) => {
-                          TestConsole.consoleNormal('compress later:getImageInfo success ', res)
+                          TestConsole.consoleNormal('compress later:getImageInfo success ', res);
                         },
                         fail: (res) => {
-                          TestConsole.consoleNormal('compress later:getImageInfo fail ', res)
+                          TestConsole.consoleNormal('compress later:getImageInfo fail ', res);
                         },
                         complete: (res) => {
-                          TestConsole.consoleNormal('compress later:getImageInfo complete ', res)
+                          TestConsole.consoleNormal('compress later:getImageInfo complete ', res);
                         },
-                      })
+                      });
                     },
                     fail: (res2) => {
-                      TestConsole.consoleNormal('saveImageToPhotosAlbum fail ', res2)
+                      TestConsole.consoleNormal('saveImageToPhotosAlbum fail ', res2);
                     },
                     complete: (res2) => {
-                      TestConsole.consoleNormal('saveImageToPhotosAlbum complete ', res2)
+                      TestConsole.consoleNormal('saveImageToPhotosAlbum complete ', res2);
                     },
-                  })
+                  });
                 },
                 fail: (res1) => {
-                  TestConsole.consoleFail(res1)
+                  TestConsole.consoleFail(res1);
                 },
                 complete: (res1) => {
-                  TestConsole.consoleComplete(res1)
+                  TestConsole.consoleComplete(res1);
                 },
               }).then((ret1) => {
-                TestConsole.consoleReturn(ret1)
-              })
+                TestConsole.consoleReturn(ret1);
+              });
             },
           }).then((res) => {
-            TestConsole.consoleNormal('compress before :chooseImage ret ', res.tempFiles[0].size)
-          })
+            TestConsole.consoleNormal('compress before :chooseImage ret ', res.tempFiles[0].size);
+          });
         },
       },
       {
         id: 'previewMedia_image',
         func: (apiIndex) => {
-          TestConsole.consoleTest('previewMedia_image')
+          TestConsole.consoleTest('previewMedia_image');
           Taro.chooseImage({
             success: (res) => {
-              TestConsole.consoleNormal('chooseImage success:', res)
+              TestConsole.consoleNormal('chooseImage success:', res);
               Taro.previewMedia({
                 sources: [
                   {
@@ -216,39 +216,39 @@ Page({
                 showmenu: false,
                 referrerPolicy: 'origin',
                 success: (res) => {
-                  TestConsole.consoleSuccess.call(this, res, apiIndex)
+                  TestConsole.consoleSuccess.call(this, res, apiIndex);
                 },
                 fail: (res) => {
-                  TestConsole.consoleFail.call(this, res, apiIndex)
+                  TestConsole.consoleFail.call(this, res, apiIndex);
                 },
                 complete: (res) => {
-                  TestConsole.consoleComplete.call(this, res, apiIndex)
+                  TestConsole.consoleComplete.call(this, res, apiIndex);
                 },
               }).then((res) => {
-                TestConsole.consoleReturn.call(this, res, apiIndex)
-              })
+                TestConsole.consoleReturn.call(this, res, apiIndex);
+              });
             },
             fail: (err) => {
-              TestConsole.consoleNormal('chooseImage fail:', err)
+              TestConsole.consoleNormal('chooseImage fail:', err);
             },
             complete: (com) => {
-              TestConsole.consoleNormal('chooseImage complete', com)
+              TestConsole.consoleNormal('chooseImage complete', com);
             },
           }).then((ret) => {
-            TestConsole.consoleNormal('chooseImage return', ret)
-          })
+            TestConsole.consoleNormal('chooseImage return', ret);
+          });
         },
       },
       {
         id: 'previewMedia_video_album',
         func: (apiIndex) => {
-          TestConsole.consoleTest('previewMedia_video_album')
+          TestConsole.consoleTest('previewMedia_video_album');
           Taro.chooseVideo({
             sourceType: ['album'],
             maxDuration: 60,
             camera: 'back',
             success: (res) => {
-              TestConsole.consoleNormal('chooseVideo success ', res)
+              TestConsole.consoleNormal('chooseVideo success ', res);
               Taro.previewMedia({
                 sources: [
                   {
@@ -258,39 +258,39 @@ Page({
                   },
                 ],
                 success: (res) => {
-                  TestConsole.consoleSuccess.call(this, res, apiIndex)
+                  TestConsole.consoleSuccess.call(this, res, apiIndex);
                 },
                 fail: (res) => {
-                  TestConsole.consoleFail.call(this, res, apiIndex)
+                  TestConsole.consoleFail.call(this, res, apiIndex);
                 },
                 complete: (res) => {
-                  TestConsole.consoleComplete.call(this, res, apiIndex)
+                  TestConsole.consoleComplete.call(this, res, apiIndex);
                 },
               }).then((res) => {
-                TestConsole.consoleReturn.call(this, res, apiIndex)
-              })
+                TestConsole.consoleReturn.call(this, res, apiIndex);
+              });
             },
             fail: (err) => {
-              TestConsole.consoleNormal('chooseVideo fail:', err)
+              TestConsole.consoleNormal('chooseVideo fail:', err);
             },
             complete: (com) => {
-              TestConsole.consoleNormal('chooseVideo complete', com)
+              TestConsole.consoleNormal('chooseVideo complete', com);
             },
           }).then((ret) => {
-            TestConsole.consoleNormal('chooseVideo return', ret)
-          })
+            TestConsole.consoleNormal('chooseVideo return', ret);
+          });
         },
       },
       {
         id: 'previewMedia_video_camera',
         func: (apiIndex) => {
-          TestConsole.consoleTest('previewMedia_video_camera')
+          TestConsole.consoleTest('previewMedia_video_camera');
           Taro.chooseVideo({
             sourceType: ['camera'],
             maxDuration: 60,
             camera: 'back',
             success: (res) => {
-              TestConsole.consoleNormal('chooseVideo success ', res)
+              TestConsole.consoleNormal('chooseVideo success ', res);
               Taro.previewMedia({
                 sources: [
                   {
@@ -300,27 +300,27 @@ Page({
                   },
                 ],
                 success: (res) => {
-                  TestConsole.consoleSuccess.call(this, res, apiIndex)
+                  TestConsole.consoleSuccess.call(this, res, apiIndex);
                 },
                 fail: (res) => {
-                  TestConsole.consoleFail.call(this, res, apiIndex)
+                  TestConsole.consoleFail.call(this, res, apiIndex);
                 },
                 complete: (res) => {
-                  TestConsole.consoleComplete.call(this, res, apiIndex)
+                  TestConsole.consoleComplete.call(this, res, apiIndex);
                 },
               }).then((res) => {
-                TestConsole.consoleReturn.call(this, res, apiIndex)
-              })
+                TestConsole.consoleReturn.call(this, res, apiIndex);
+              });
             },
             fail: (err) => {
-              TestConsole.consoleNormal('chooseVideo fail:', err)
+              TestConsole.consoleNormal('chooseVideo fail:', err);
             },
             complete: (com) => {
-              TestConsole.consoleNormal('chooseVideo complete', com)
+              TestConsole.consoleNormal('chooseVideo complete', com);
             },
           }).then((ret) => {
-            TestConsole.consoleNormal('chooseVideo return', ret)
-          })
+            TestConsole.consoleNormal('chooseVideo return', ret);
+          });
         },
       },
     ],
@@ -331,7 +331,7 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad(options) {
-    that = this
+    that = this;
   },
 
   /**
@@ -368,4 +368,4 @@ Page({
    * 用户点击右上角分享
    */
   onShareAppMessage() {},
-})
+});

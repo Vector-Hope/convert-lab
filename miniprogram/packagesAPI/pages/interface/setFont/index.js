@@ -3,7 +3,7 @@ const fontUrls = [
   'https://mdn.github.io/css-examples/web-fonts/VeraSeBd.ttf',
   'https://puhuiti.oss-cn-hangzhou.aliyuncs.com/AlimamaShuHeiTi/AlimamaShuHeiTi-Bold/AlimamaShuHeiTi-Bold.ttf',
   'https://mdn.alipayobjects.com/portal_mnwejl/afts/file/A*GG6cQ5B6iMsAAAAAAAAAAAAAAQAAAQ',
-]
+];
 
 Page({
   /**
@@ -24,24 +24,24 @@ Page({
         },
         func: (data = {}) => {
           return new Promise((resolve) => {
-            const callback = {}
+            const callback = {};
             wx.loadFontFace({
               ...data,
               success: (res) => {
-                callback['success'] = res
+                callback['success'] = res;
               },
               fail: (res) => {
-                callback['fail'] = res
+                callback['fail'] = res;
               },
               complete: (res) => {
-                callback['complete'] = res
-                resolve({ callback })
+                callback['complete'] = res;
+                resolve({ callback });
               },
-            })
-          })
+            });
+          });
         },
         isDone: true,
       },
     ],
   },
-})
+});

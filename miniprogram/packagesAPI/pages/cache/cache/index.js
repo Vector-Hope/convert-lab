@@ -12,12 +12,12 @@ Page({
           value: 'setStorageSyncValue',
         },
         func: (data = {}) => {
-          wx.setStorageSync(data['key'], data['value'])
+          wx.setStorageSync(data['key'], data['value']);
           return {
             callback: {
               value: wx.getStorageSync(data['key']),
             },
-          }
+          };
         },
         isDone: true,
       },
@@ -28,24 +28,24 @@ Page({
           data: 'setStorageValue',
         },
         func: (data = {}) => {
-          const callback = {}
+          const callback = {};
           return new Promise((resolve) => {
             wx.setStorage({
               ...data,
               success: (res) => {
-                callback['success'] = res
+                callback['success'] = res;
               },
               fail: (res) => {
-                callback['fail'] = res
+                callback['fail'] = res;
               },
               complete: (res) => {
-                callback['complete'] = res
+                callback['complete'] = res;
                 resolve({
                   callback,
-                })
+                });
               },
-            })
-          })
+            });
+          });
         },
         isDone: true,
       },
@@ -55,27 +55,27 @@ Page({
           removeKey: 'setStorageSyncKey',
         },
         func: (data = {}) => {
-          const { removeKey } = data
-          const value = wx.getStorageSync(removeKey)
+          const { removeKey } = data;
+          const value = wx.getStorageSync(removeKey);
           if (value) {
-            wx.removeStorageSync(removeKey)
+            wx.removeStorageSync(removeKey);
             const callback = {
               msg: 'removeStorageSync:ok',
-            }
+            };
             if (wx.getStorageSync(removeKey)) {
-              callback.msg = 'removeStorageSync:error'
+              callback.msg = 'removeStorageSync:error';
             }
             return {
               callback,
-            }
+            };
           } else {
             wx.showToast({
               title: '请先缓存对应数据',
-            })
+            });
             return {
               isShowToast: true,
               callback: {},
-            }
+            };
           }
         },
         isDone: true,
@@ -86,35 +86,35 @@ Page({
           removeKey: 'setStorageSyncKey',
         },
         func: (data = {}) => {
-          const { removeKey } = data
-          const value = wx.getStorageSync(removeKey)
+          const { removeKey } = data;
+          const value = wx.getStorageSync(removeKey);
           if (value) {
-            const callback = {}
+            const callback = {};
             return new Promise((resolve) => {
               wx.removeStorage({
                 key: removeKey,
                 success: (res) => {
-                  callback['success'] = res
+                  callback['success'] = res;
                 },
                 fail: (res) => {
-                  callback['fail'] = res
+                  callback['fail'] = res;
                 },
                 complete: (res) => {
-                  callback['complete'] = res
+                  callback['complete'] = res;
                   resolve({
                     callback,
-                  })
+                  });
                 },
-              })
-            })
+              });
+            });
           } else {
             wx.showToast({
               title: '请先缓存对应数据',
-            })
+            });
             return {
               isShowToast: true,
               callback: {},
-            }
+            };
           }
         },
         isDone: true,
@@ -125,23 +125,23 @@ Page({
           getKey: 'setStorageSyncKey',
         },
         func: (data = {}) => {
-          const { getKey } = data
-          const value = wx.getStorageSync(getKey)
+          const { getKey } = data;
+          const value = wx.getStorageSync(getKey);
           if (value) {
             const callback = {
               value,
-            }
+            };
             return {
               callback,
-            }
+            };
           } else {
             wx.showToast({
               title: '请先缓存对应数据',
-            })
+            });
             return {
               isShowToast: true,
               callback: {},
-            }
+            };
           }
         },
         isDone: true,
@@ -149,32 +149,32 @@ Page({
       {
         id: 'getStorageInfoSync',
         func: (apiIndex) => {
-          TestConsole.consoleTest('getStorageInfoSync')
+          TestConsole.consoleTest('getStorageInfoSync');
           try {
-            const res = Taro.getStorageInfoSync()
-            TestConsole.consoleSuccess.call(this, res, apiIndex)
+            const res = Taro.getStorageInfoSync();
+            TestConsole.consoleSuccess.call(this, res, apiIndex);
           } catch (err) {
-            TestConsole.consoleFail.call(this, err, apiIndex)
+            TestConsole.consoleFail.call(this, err, apiIndex);
           }
         },
       },
       {
         id: 'getStorageInfo',
         func: (apiIndex) => {
-          TestConsole.consoleTest('getStorageInfo')
+          TestConsole.consoleTest('getStorageInfo');
           Taro.getStorageInfo({
             success: (res) => {
-              TestConsole.consoleSuccess.call(this, res, apiIndex)
+              TestConsole.consoleSuccess.call(this, res, apiIndex);
             },
             fail: (res) => {
-              TestConsole.consoleFail.call(this, res, apiIndex)
+              TestConsole.consoleFail.call(this, res, apiIndex);
             },
             complete: (res) => {
-              TestConsole.consoleComplete.call(this, res, apiIndex)
+              TestConsole.consoleComplete.call(this, res, apiIndex);
             },
           }).then((res) => {
-            TestConsole.consoleReturn.call(this, res, apiIndex)
-          })
+            TestConsole.consoleReturn.call(this, res, apiIndex);
+          });
         },
       },
       {
@@ -183,35 +183,35 @@ Page({
           getKey: 'setStorageSyncKey',
         },
         func: (data = {}) => {
-          const { getKey } = data
-          const value = wx.getStorageSync(getKey)
+          const { getKey } = data;
+          const value = wx.getStorageSync(getKey);
           if (value) {
-            const callback = {}
+            const callback = {};
             return new Promise((resolve) => {
               wx.getStorage({
                 key: getKey,
                 success: (res) => {
-                  callback['success'] = res
+                  callback['success'] = res;
                 },
                 fail: (res) => {
-                  callback['fail'] = res
+                  callback['fail'] = res;
                 },
                 complete: (res) => {
-                  callback['complete'] = res
+                  callback['complete'] = res;
                   resolve({
                     callback,
-                  })
+                  });
                 },
-              })
-            })
+              });
+            });
           } else {
             wx.showToast({
               title: '请先缓存对应数据',
-            })
+            });
             return {
               isShowToast: true,
               callback: {},
-            }
+            };
           }
         },
         isDone: true,
@@ -219,35 +219,35 @@ Page({
       {
         id: 'clearStorageSync',
         func: (data = {}) => {
-          wx.clearStorageSync()
+          wx.clearStorageSync();
           return {
             callback: {
               msg: 'clearStorageSync:ok',
             },
-          }
+          };
         },
         isDone: true,
       },
       {
         id: 'clearStorage',
         func: (data = {}) => {
-          const callback = {}
+          const callback = {};
           return new Promise((resolve) => {
             wx.clearStorage({
               success: (res) => {
-                callback['success'] = res
+                callback['success'] = res;
               },
               fail: (res) => {
-                callback['fail'] = res
+                callback['fail'] = res;
               },
               complete: (res) => {
-                callback['complete'] = res
+                callback['complete'] = res;
                 resolve({
                   callback,
-                })
+                });
               },
-            })
-          })
+            });
+          });
         },
         isDone: true,
       },
@@ -261,19 +261,19 @@ Page({
           token: '',
         },
         func: (apiIndex, data) => {
-          TestConsole.consoleTest('setBackgroundFetchToken')
+          TestConsole.consoleTest('setBackgroundFetchToken');
           Taro.setBackgroundFetchToken({
             ...data,
             success: (res) => {
-              TestConsole.consoleSuccess.call(this, res, apiIndex)
+              TestConsole.consoleSuccess.call(this, res, apiIndex);
             },
             fail: (res) => {
-              TestConsole.consoleFail.call(this, res, apiIndex)
+              TestConsole.consoleFail.call(this, res, apiIndex);
             },
             complete: (res) => {
-              TestConsole.consoleComplete.call(this, res, apiIndex)
+              TestConsole.consoleComplete.call(this, res, apiIndex);
             },
-          })
+          });
         },
       },
       {
@@ -282,19 +282,19 @@ Page({
           fetchType: '',
         },
         func: (apiIndex, data) => {
-          TestConsole.consoleTest('getBackgroundFetchData')
+          TestConsole.consoleTest('getBackgroundFetchData');
           Taro.getBackgroundFetchData({
             ...data,
             success: (res) => {
-              TestConsole.consoleSuccess.call(this, res, apiIndex)
+              TestConsole.consoleSuccess.call(this, res, apiIndex);
             },
             fail: (res) => {
-              TestConsole.consoleFail.call(this, res, apiIndex)
+              TestConsole.consoleFail.call(this, res, apiIndex);
             },
             complete: (res) => {
-              TestConsole.consoleComplete.call(this, res, apiIndex)
+              TestConsole.consoleComplete.call(this, res, apiIndex);
             },
-          })
+          });
         },
       },
       {
@@ -343,4 +343,4 @@ Page({
    * 用户点击右上角分享
    */
   onShareAppMessage() {},
-})
+});

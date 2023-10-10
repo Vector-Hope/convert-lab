@@ -14,15 +14,15 @@ Page({
           Taro.getBackgroundFetchData({
             ...data,
             success: (res) => {
-              TestConsole.consoleSuccess.call(this, res, apiIndex)
+              TestConsole.consoleSuccess.call(this, res, apiIndex);
             },
             fail: (res) => {
-              TestConsole.consoleFail.call(this, res, apiIndex)
+              TestConsole.consoleFail.call(this, res, apiIndex);
             },
             complete: (res) => {
-              TestConsole.consoleComplete.call(this, res, apiIndex)
+              TestConsole.consoleComplete.call(this, res, apiIndex);
             },
-          })
+          });
         },
       },
     ],
@@ -67,4 +67,4 @@ Page({
    * 用户点击右上角分享
    */
   onShareAppMessage() {},
-})
+});

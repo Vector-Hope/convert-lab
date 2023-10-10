@@ -1,5 +1,5 @@
 // packagesAPI/pages/media/richText/index.js
-let that
+let that;
 Page({
   /**
    * 页面的初始数据
@@ -10,49 +10,49 @@ Page({
         id: 'EditorContext',
         func: (data = {}) => {
           return new Promise((resolve) => {
-            const query = wx.createSelectorQuery()
+            const query = wx.createSelectorQuery();
             query
               .select('#editor')
               .context((res) => {
-                const editorContext = res.context
+                const editorContext = res.context;
                 that.setData({
                   editorContext,
-                })
-                resolve({ callback: editorContext })
+                });
+                resolve({ callback: editorContext });
               })
-              .exec()
-          })
+              .exec();
+          });
         },
         isDone: true,
       },
       {
         id: 'EditorContext.clear',
         func: (data = {}) => {
-          const { editorContext } = that.data
+          const { editorContext } = that.data;
           if (!editorContext) {
             wx.showToast({
               title: '请先创建实例',
-            })
+            });
             return {
               isShowToast: true,
               callback: {},
-            }
+            };
           }
           return new Promise((resolve) => {
-            const callback = {}
+            const callback = {};
             editorContext.clear({
               success: (res) => {
-                callback['success'] = res
+                callback['success'] = res;
               },
               fail: (res) => {
-                callback['fail'] = res
+                callback['fail'] = res;
               },
               complete: (res) => {
-                callback['complete'] = res
-                resolve({ callback })
+                callback['complete'] = res;
+                resolve({ callback });
               },
-            })
-          })
+            });
+          });
         },
         isDone: true,
       },
@@ -63,54 +63,54 @@ Page({
           value: 'H1',
         },
         func: (data = {}) => {
-          const { editorContext } = that.data
+          const { editorContext } = that.data;
           if (!editorContext) {
             wx.showToast({
               title: '请先创建实例',
-            })
+            });
             return {
               isShowToast: true,
               callback: {},
-            }
+            };
           }
-          const { name, value } = data
+          const { name, value } = data;
           if (value) {
-            editorContext.format(name, value)
+            editorContext.format(name, value);
           } else {
-            editorContext.format(name)
+            editorContext.format(name);
           }
-          return {}
+          return {};
         },
         isDone: true,
       },
       {
         id: 'EditorContext.getContents',
         func: (data = {}) => {
-          const { editorContext } = that.data
+          const { editorContext } = that.data;
           if (!editorContext) {
             wx.showToast({
               title: '请先创建实例',
-            })
+            });
             return {
               isShowToast: true,
               callback: {},
-            }
+            };
           }
           return new Promise((resolve) => {
-            const callback = {}
+            const callback = {};
             editorContext.getContents({
               success: (res) => {
-                callback['success'] = res
+                callback['success'] = res;
               },
               fail: (res) => {
-                callback['fail'] = res
+                callback['fail'] = res;
               },
               complete: (res) => {
-                callback['complete'] = res
-                resolve({ callback })
+                callback['complete'] = res;
+                resolve({ callback });
               },
-            })
-          })
+            });
+          });
         },
         isDone: true,
       },
@@ -120,113 +120,113 @@ Page({
           text: 'developer conference',
         },
         func: (data = {}) => {
-          const { editorContext } = that.data
+          const { editorContext } = that.data;
           if (!editorContext) {
             wx.showToast({
               title: '请先创建实例',
-            })
+            });
             return {
               isShowToast: true,
               callback: {},
-            }
+            };
           }
-          const { text } = data
+          const { text } = data;
           return new Promise((resolve) => {
-            const callback = {}
+            const callback = {};
             editorContext.insertText({
               text,
               success: (res) => {
-                callback['success'] = res
+                callback['success'] = res;
               },
               fail: (res) => {
-                callback['fail'] = res
+                callback['fail'] = res;
               },
               complete: (res) => {
-                callback['complete'] = res
-                resolve({ callback })
+                callback['complete'] = res;
+                resolve({ callback });
               },
-            })
-          })
+            });
+          });
         },
         isDone: true,
       },
       {
         id: 'EditorContext.redo',
         func: (data = {}) => {
-          const { editorContext } = that.data
+          const { editorContext } = that.data;
           if (!editorContext) {
             wx.showToast({
               title: '请先创建实例',
-            })
+            });
             return {
               isShowToast: true,
               callback: {},
-            }
+            };
           }
           return new Promise((resolve) => {
-            const callback = {}
+            const callback = {};
             editorContext.redo({
               success: (res) => {
-                callback['success'] = res
+                callback['success'] = res;
               },
               fail: (res) => {
-                callback['fail'] = res
+                callback['fail'] = res;
               },
               complete: (res) => {
-                callback['complete'] = res
-                resolve({ callback })
+                callback['complete'] = res;
+                resolve({ callback });
               },
-            })
-          })
+            });
+          });
         },
         isDone: true,
       },
       {
         id: 'EditorContext.removeFormat',
         func: (data = {}) => {
-          const { editorContext } = that.data
+          const { editorContext } = that.data;
           if (!editorContext) {
             wx.showToast({
               title: '请先创建实例',
-            })
+            });
             return {
               isShowToast: true,
               callback: {},
-            }
+            };
           }
           return new Promise((resolve) => {
-            const callback = {}
+            const callback = {};
             editorContext.removeFormat({
               success: (res) => {
-                callback['success'] = res
+                callback['success'] = res;
               },
               fail: (res) => {
-                callback['fail'] = res
+                callback['fail'] = res;
               },
               complete: (res) => {
-                callback['complete'] = res
-                resolve({ callback })
+                callback['complete'] = res;
+                resolve({ callback });
               },
-            })
-          })
+            });
+          });
         },
         isDone: true,
       },
       {
         id: 'EditorContext.scrollIntoView',
         func: (data = {}) => {
-          const { editorContext } = that.data
+          const { editorContext } = that.data;
           if (!editorContext) {
             wx.showToast({
               title: '请先创建实例',
-            })
+            });
             return {
               isShowToast: true,
               callback: {},
-            }
+            };
           }
-          editorContext.scrollIntoView()
-          return {}
+          editorContext.scrollIntoView();
+          return {};
         },
         isDone: true,
       },
@@ -237,160 +237,160 @@ Page({
           delta: {},
         },
         func: (data = {}) => {
-          const { editorContext } = that.data
+          const { editorContext } = that.data;
           if (!editorContext) {
             wx.showToast({
               title: '请先创建实例',
-            })
+            });
             return {
               isShowToast: true,
               callback: {},
-            }
+            };
           }
-          let props = { html: data.html }
+          let props = { html: data.html };
           if (Object.keys(data.delta).length) {
-            props.delta = data.delta
+            props.delta = data.delta;
           }
           return new Promise((resolve) => {
-            const callback = {}
+            const callback = {};
             editorContext.setContents({
               ...props,
               success: (res) => {
-                callback['success'] = res
+                callback['success'] = res;
               },
               fail: (res) => {
-                callback['fail'] = res
+                callback['fail'] = res;
               },
               complete: (res) => {
-                callback['complete'] = res
-                resolve({ callback })
+                callback['complete'] = res;
+                resolve({ callback });
               },
-            })
-          })
+            });
+          });
         },
         isDone: true,
       },
       {
         id: 'EditorContext.undo',
         func: (data = {}) => {
-          const { editorContext } = that.data
+          const { editorContext } = that.data;
           if (!editorContext) {
             wx.showToast({
               title: '请先创建实例',
-            })
+            });
             return {
               isShowToast: true,
               callback: {},
-            }
+            };
           }
           return new Promise((resolve) => {
-            const callback = {}
+            const callback = {};
             editorContext.undo({
               success: (res) => {
-                callback['success'] = res
+                callback['success'] = res;
               },
               fail: (res) => {
-                callback['fail'] = res
+                callback['fail'] = res;
               },
               complete: (res) => {
-                callback['complete'] = res
-                resolve({ callback })
+                callback['complete'] = res;
+                resolve({ callback });
               },
-            })
-          })
+            });
+          });
         },
         isDone: true,
       },
       {
         id: 'EditorContext.getSelectionText',
         func: (data = {}) => {
-          const { editorContext } = that.data
+          const { editorContext } = that.data;
           if (!editorContext) {
             wx.showToast({
               title: '请先创建实例',
-            })
+            });
             return {
               isShowToast: true,
               callback: {},
-            }
+            };
           }
           return new Promise((resolve) => {
-            const callback = {}
+            const callback = {};
             editorContext.getSelectionText({
               success: (res) => {
-                callback['success'] = res
+                callback['success'] = res;
               },
               fail: (res) => {
-                callback['fail'] = res
+                callback['fail'] = res;
               },
               complete: (res) => {
-                callback['complete'] = res
-                resolve({ callback })
+                callback['complete'] = res;
+                resolve({ callback });
               },
-            })
-          })
+            });
+          });
         },
         isDone: true,
       },
       {
         id: 'EditorContext.blur',
         func: (data = {}) => {
-          const { editorContext } = that.data
+          const { editorContext } = that.data;
           if (!editorContext) {
             wx.showToast({
               title: '请先创建实例',
-            })
+            });
             return {
               isShowToast: true,
               callback: {},
-            }
+            };
           }
           return new Promise((resolve) => {
-            const callback = {}
+            const callback = {};
             editorContext.blur({
               success: (res) => {
-                callback['success'] = res
+                callback['success'] = res;
               },
               fail: (res) => {
-                callback['fail'] = res
+                callback['fail'] = res;
               },
               complete: (res) => {
-                callback['complete'] = res
-                resolve({ callback })
+                callback['complete'] = res;
+                resolve({ callback });
               },
-            })
-          })
+            });
+          });
         },
         isDone: true,
       },
       {
         id: 'EditorContext.insertDivider',
         func: (data = {}) => {
-          const { editorContext } = that.data
+          const { editorContext } = that.data;
           if (!editorContext) {
             wx.showToast({
               title: '请先创建实例',
-            })
+            });
             return {
               isShowToast: true,
               callback: {},
-            }
+            };
           }
           return new Promise((resolve) => {
-            const callback = {}
+            const callback = {};
             editorContext.insertDivider({
               success: (res) => {
-                callback['success'] = res
+                callback['success'] = res;
               },
               fail: (res) => {
-                callback['fail'] = res
+                callback['fail'] = res;
               },
               complete: (res) => {
-                callback['complete'] = res
-                resolve({ callback })
+                callback['complete'] = res;
+                resolve({ callback });
               },
-            })
-          })
+            });
+          });
         },
         isDone: true,
       },
@@ -406,32 +406,32 @@ Page({
           width: '100',
         },
         func: (data) => {
-          const { editorContext } = that.data
+          const { editorContext } = that.data;
           if (!editorContext) {
             wx.showToast({
               title: '请先创建实例',
-            })
+            });
             return {
               isShowToast: true,
               callback: {},
-            }
+            };
           }
           return new Promise((resolve) => {
-            const callback = {}
+            const callback = {};
             editorContext.insertImage({
               ...data,
               success: (res) => {
-                callback['success'] = res
+                callback['success'] = res;
               },
               fail: (res) => {
-                callback['fail'] = res
+                callback['fail'] = res;
               },
               complete: (res) => {
-                callback['complete'] = res
-                resolve({ callback })
+                callback['complete'] = res;
+                resolve({ callback });
               },
-            })
-          })
+            });
+          });
         },
         isDone: true,
       },
@@ -443,7 +443,7 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad(options) {
-    that = this
+    that = this;
   },
 
   /**
@@ -480,4 +480,4 @@ Page({
    * 用户点击右上角分享
    */
   onShareAppMessage() {},
-})
+});

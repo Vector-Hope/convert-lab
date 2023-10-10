@@ -15,16 +15,16 @@ Page({
   changeControl(e) {
     this.setData({
       control: e.detail.value,
-    })
+    });
   },
   changeSimple(e) {
     this.setData({
       simple: e.detail.value,
-    })
+    });
   },
   changeLogicNum(e) {
     this.setData({
       logicNum: e.detail.value,
-    })
+    });
   },
-})
+});

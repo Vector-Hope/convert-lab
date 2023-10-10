@@ -14,10 +14,10 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad() {
-    const { num1, num2 } = this.data
+    const { num1, num2 } = this.data;
     // const wxsFuncRes = fileWxs.operator(num1, num2);
     // this.setData({
     //   wxsFuncRes,
     // })
   },
-})
+});

@@ -515,11 +515,11 @@ Page({
   showSetTabBar() {
     this.setData({
       isSetTabBarPage: true,
-    })
+    });
   },
   hideSetTabBar() {
     this.setData({
       isSetTabBarPage: false,
-    })
+    });
   },
-})
+});

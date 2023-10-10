@@ -14,17 +14,17 @@ Component({
         id: 'nextTick',
         func: (data = {}) => {
           return new Promise((resolve) => {
-            console.log('before nextTick')
+            console.log('before nextTick');
             wx.nextTick(() => {
-              console.log('nextTick is ok!')
+              console.log('nextTick is ok!');
               resolve({
                 callback: {
                   nextTick: 'nextTick is ok!',
                 },
-              })
-            })
-            console.log('after nextTick')
-          })
+              });
+            });
+            console.log('after nextTick');
+          });
         },
         isDone: true,
       },
@@ -34,4 +34,4 @@ Component({
    * 组件的方法列表
    */
   methods: {},
-})
+});

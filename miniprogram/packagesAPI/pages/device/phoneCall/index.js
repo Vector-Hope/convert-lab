@@ -11,26 +11,26 @@ Page({
           phoneNumber: '13352354363',
         },
         func: (data = {}) => {
-          const { phoneNumber } = data
+          const { phoneNumber } = data;
           return new Promise((resolve) => {
-            const callback = {}
+            const callback = {};
             wx.makePhoneCall({
               phoneNumber,
               success: (res) => {
-                callback['success'] = res
+                callback['success'] = res;
               },
               fail: (res) => {
-                callback['fail'] = res
+                callback['fail'] = res;
               },
               complete: (res) => {
-                callback['complete'] = res
+                callback['complete'] = res;
                 resolve({
                   callback,
                   isShowToast: true,
-                })
+                });
               },
-            })
-          })
+            });
+          });
         },
         isDone: true,
       },
@@ -76,4 +76,4 @@ Page({
    * 用户点击右上角分享
    */
   onShareAppMessage() {},
-})
+});

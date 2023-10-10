@@ -1,5 +1,5 @@
 // packagesAPI/pages/network/download/index.js
-let that
+let that;
 Page({
   /**
    * 页面的初始数据
@@ -16,48 +16,48 @@ Page({
           timeout: 60000,
         },
         func: (data = {}) => {
-          const callback = {}
+          const callback = {};
           return new Promise((resolve) => {
             const task = wx.downloadFile({
               ...data,
               success: (res) => {
-                callback['success'] = res
+                callback['success'] = res;
               },
               fail: (res) => {
-                callback['fail'] = res
+                callback['fail'] = res;
               },
               complete: (res) => {
-                callback['complete'] = res
+                callback['complete'] = res;
                 that.setData({
                   task: null,
-                })
-                resolve({ callback })
+                });
+                resolve({ callback });
               },
-            })
+            });
             that.setData({
               task,
-            })
-          })
+            });
+          });
         },
         isDone: true,
       },
       {
         id: 'DownloadTask.abort',
         func: (data = {}) => {
-          const { task } = that.data
+          const { task } = that.data;
           if (task) {
-            task.abort()
+            task.abort();
             return {
               callback: {},
-            }
+            };
           } else {
             wx.showToast({
               title: '暂无下载任务',
-            })
+            });
             return {
               callback: {},
               isShowToast: true,
-            }
+            };
           }
         },
         isDone: true,
@@ -65,20 +65,20 @@ Page({
       {
         id: 'DownloadTask.offHeadersReceived',
         func: (data = {}) => {
-          const { task } = that.data
+          const { task } = that.data;
           if (task) {
-            task.offHeadersReceived()
+            task.offHeadersReceived();
             return {
               callback: {},
-            }
+            };
           } else {
             wx.showToast({
               title: '暂无下载任务',
-            })
+            });
             return {
               callback: {},
               isShowToast: true,
-            }
+            };
           }
         },
         isDone: true,
@@ -86,20 +86,20 @@ Page({
       {
         id: 'DownloadTask.offProgressUpdate',
         func: (data = {}) => {
-          const { task } = that.data
+          const { task } = that.data;
           if (task) {
-            task.offProgressUpdate()
+            task.offProgressUpdate();
             return {
               callback: {},
-            }
+            };
           } else {
             wx.showToast({
               title: '暂无下载任务',
-            })
+            });
             return {
               callback: {},
               isShowToast: true,
-            }
+            };
           }
         },
         isDone: true,
@@ -107,25 +107,25 @@ Page({
       {
         id: 'DownloadTask.onHeadersReceived',
         func: (data = {}) => {
-          const { task } = that.data
+          const { task } = that.data;
           if (task) {
             return new Promise((resolve) => {
               task.onHeadersReceived((res) => {
-                console.log('test API: DownloadTask.onHeadersReceived')
-                console.log(res)
+                console.log('test API: DownloadTask.onHeadersReceived');
+                console.log(res);
                 resolve({
                   callback: res,
-                })
-              })
-            })
+                });
+              });
+            });
           } else {
             wx.showToast({
               title: '暂无下载任务',
-            })
+            });
             return {
               callback: {},
               isShowToast: true,
-            }
+            };
           }
         },
         isDone: true,
@@ -133,31 +133,31 @@ Page({
       {
         id: 'DownloadTask.onProgressUpdate',
         func: (data = {}) => {
-          const { task } = that.data
+          const { task } = that.data;
           if (task) {
             return new Promise((resolve) => {
-              let timeoutIndex
+              let timeoutIndex;
               task.onProgressUpdate((res) => {
                 if (!timeoutIndex) {
                   timeoutIndex = setTimeout(() => {
-                    console.log('test API: DownloadTask.onProgressUpdate')
-                    console.log(res)
-                    clearTimeout(timeoutIndex)
-                  }, 100)
+                    console.log('test API: DownloadTask.onProgressUpdate');
+                    console.log(res);
+                    clearTimeout(timeoutIndex);
+                  }, 100);
                 }
                 resolve({
                   callback: res,
-                })
-              })
-            })
+                });
+              });
+            });
           } else {
             wx.showToast({
               title: '暂无下载任务',
-            })
+            });
             return {
               callback: {},
               isShowToast: true,
-            }
+            };
           }
         },
         isDone: true,
@@ -170,7 +170,7 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad(options) {
-    that = this
+    that = this;
   },
 
   /**
@@ -207,4 +207,4 @@ Page({
    * 用户点击右上角分享
    */
   onShareAppMessage() {},
-})
+});

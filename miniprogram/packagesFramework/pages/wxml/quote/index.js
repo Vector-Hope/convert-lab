@@ -9,4 +9,4 @@ Page({
       content: '文件为includeQuote',
     },
   },
-})
+});
