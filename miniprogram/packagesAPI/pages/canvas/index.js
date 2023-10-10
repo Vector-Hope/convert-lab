@@ -429,15 +429,19 @@ Page({
               isShowToast: true,
             }
           }
+          console.log('image-------', imageTempPath)
           const { repetition } = data
           const pattern = canvas.createPattern(imageTempPath, repetition)
-          canvas.setFillStyle(pattern)
+          console.log('pattern-------', pattern)
+          canvas.fillStyle = pattern
           wx.showToast({
             title: '请继续作画',
           })
           return {
             isShowToast: true,
-            callback: {},
+            callback: {
+              canvas,
+            },
           }
         },
         isDone: true,

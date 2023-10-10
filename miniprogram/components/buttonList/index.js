@@ -1,5 +1,5 @@
 // components/buttonList/index.js
-import { getType } from '../../utils/util'
+import { getType, formatJson } from '../../utils/util'
 Component({
   /**
    * 组件的属性列表
@@ -136,7 +136,7 @@ Component({
       const { list } = this.data
       try {
         let { isShowToast, callback } = await list[id].func(inputData)
-        let callbackRes = this.formatCallback(callback)
+        let callbackRes = this.formatCallback(formatJson(callback))
         list[id].callbackRes = callbackRes
         console.log(`test API: ${id}`)
         console.log(callbackRes)
@@ -171,6 +171,8 @@ Component({
         callbackKeys.forEach((key) => {
           if (getType(callback[key]) == 'Function') {
             callbackRes[key] = 'f ( )'
+          } else if (getType(callback[key]) == 'Object') {
+            callbackRes[key] = this.formatCallback(callback[key])
           } else {
             callbackRes[key] = callback[key]
           }

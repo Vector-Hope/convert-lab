@@ -31,7 +31,7 @@
 
 .api-input-area {
   width: 80%;
-  height: 180px;
+  height: 360rpx;
   margin: 20rpx auto;
   padding: 20rpx;
   border: #333 solid 4rpx;

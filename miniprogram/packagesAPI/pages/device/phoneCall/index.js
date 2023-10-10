@@ -3,7 +3,39 @@ Page({
   /**
    * 页面的初始数据
    */
-  data: {},
+  data: {
+    list: [
+      {
+        id: 'makePhoneCall',
+        inputData: {
+          phoneNumber: '13352354363',
+        },
+        func: (data = {}) => {
+          const { phoneNumber } = data
+          return new Promise((resolve) => {
+            const callback = {}
+            wx.makePhoneCall({
+              phoneNumber,
+              success: (res) => {
+                callback['success'] = res
+              },
+              fail: (res) => {
+                callback['fail'] = res
+              },
+              complete: (res) => {
+                callback['complete'] = res
+                resolve({
+                  callback,
+                  isShowToast: true,
+                })
+              },
+            })
+          })
+        },
+        isDone: true,
+      },
+    ],
+  },
 
   /**
    * 生命周期函数--监听页面加载

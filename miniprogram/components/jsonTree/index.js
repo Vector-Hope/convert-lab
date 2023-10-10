@@ -5,7 +5,12 @@ Component({
    * 组件的属性列表
    */
   properties: {
-    jsonData: Object || Array,
+    jsonData: {
+      type: Object || Array,
+      observer: function (newVal) {
+        console.log(newVal)
+      },
+    },
     isShowRes: {
       type: Boolean,
       observer: function (newVal) {
@@ -32,11 +37,6 @@ Component({
   methods: {
     closeJsonData() {
       this.triggerEvent('closeRes')
-    },
-    showJsonData() {
-      this.setData({
-        showJsonData: true,
-      })
     },
   },
 })

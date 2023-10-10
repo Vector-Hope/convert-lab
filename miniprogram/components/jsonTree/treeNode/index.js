@@ -88,6 +88,7 @@ Component({
         let dataDetail = {}
         dataDetail.type = this.getType(data[index])
         dataDetail.key = index
+        console.log(index, this.getType(data[index]))
         dataDetail.value = data[index]
         if (dataDetail.type == 'Boolean') {
           dataDetail.value = data[index].toString()

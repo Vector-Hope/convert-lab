@@ -42,6 +42,7 @@ Component({
       try {
         JSONStr = JSON.stringify(object)
       } catch (err) {
+        console.log('errrrrrrrrrrrr')
         const cache = new Map()
         JSONStr = JSON.stringify(object, (key, value) => {
           if (typeof value === 'object' && value !== null) {

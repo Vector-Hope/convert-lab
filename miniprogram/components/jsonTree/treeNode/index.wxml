@@ -43,6 +43,7 @@
         <text class="json-text json-boolean" wx:elif="{{item.type == 'Boolean'}}">{{item.value}}</text>
         <text class="json-text json-undefined" wx:elif="{{item.type == 'Undefined'}}">undefined</text>
         <text class="json-text json-null" wx:elif="{{item.type == 'Null'}}">{{item.value}}</text>
+        <text class="json-text json-null" wx:elif="{{typeof(item.value) == 'Object'}}"></text>
         <text class="json-text json-number" wx:else>{{item.value}}</text>
       </view>
     </block>

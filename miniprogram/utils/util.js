@@ -19,7 +19,28 @@ const getType = (variable) => {
   return type
 }
 
+const formatJson = (data) => {
+  try {
+    JSON.stringify(data)
+    return data
+  } catch (err) {
+    const cache = new Map()
+    const JSONStr = JSON.stringify(data, (key, value) => {
+      if (typeof value === 'object' && value !== null) {
+        if (cache.has(value)) {
+          return
+        }
+        cache.set(value, value)
+      }
+      return value
+    })
+    cache.clear()
+    return JSON.parse(JSONStr)
+  }
+}
+
 module.exports = {
   getType,
   formatTime,
+  formatJson,
 }

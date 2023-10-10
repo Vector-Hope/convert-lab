@@ -25,11 +25,6 @@ radio {
   margin-bottom: 0.3rpx;
 }
 
-canvas {
-  position: fixed;
-  top: 0;
-}
-
 .info {
   position: absolute;
   left: 0;
