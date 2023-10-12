@@ -4,7 +4,27 @@ Page({
    * 页面的初始数据
    */
   data: {
-    list: [
+    lifeCycleList: [
+      {
+        id: 'getLaunchOptionsSync',
+        func: (data = {}) => {
+          const options = wx.getLaunchOptionsSync();
+          return {
+            callback: options,
+          }
+        },
+        isDone: true
+      },
+      {
+        id: 'getEnterOptionsSync',
+        func: () => {
+          TestConsole.consoleTest('Taro.getEnterOptionsSync')
+          const options = Taro.getEnterOptionsSync()
+          TestConsole.consoleNormal('getEnterOptionsSync', options)
+        },
+      },
+    ],
+    appLevelEventsList: [
       {
         id: 'onUnhandledRejection',
         func: (data = {}) => {

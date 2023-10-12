@@ -22,7 +22,7 @@ const getType = (variable) => {
 const formatJson = (data) => {
   try {
     JSON.stringify(data);
-    return data;
+    return JSON.parse(JSON.stringify(data));
   } catch (err) {
     const cache = new Map();
     const JSONStr = JSON.stringify(data, (key, value) => {

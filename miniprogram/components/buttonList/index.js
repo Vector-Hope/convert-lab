@@ -140,7 +140,7 @@ Component({
         let callbackRes = this.formatCallback(formatJson(callback));
         list[id].callbackRes = callbackRes;
         console.log(`test API: ${id}`);
-        console.log(callbackRes);
+        console.log(callback);
         this.setData({
           list,
         });

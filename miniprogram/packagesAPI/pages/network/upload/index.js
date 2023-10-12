@@ -15,7 +15,7 @@ Page({
       {
         id: 'uploadFile',
         inputData: {
-          url: 'http://172.20.10.11:3000/upload',
+          url: 'http://26.26.26.1:3000/upload',
           headers: {
             'Content-Type': 'application/json',
           },

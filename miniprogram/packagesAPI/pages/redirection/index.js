@@ -3,7 +3,53 @@ Page({
   /**
    * 页面的初始数据
    */
-  data: {},
+  data: {
+    list: [
+      {
+        id: 'openBusinessView',
+        func: null,
+      },
+      {
+        id: 'openEmbeddedMiniProgram',
+        func: null,
+      },
+      {
+        id: 'navigateToMiniProgram',
+        inputData: {
+          appId: 'com.example.myapplication',
+          path: 'EntryAbility',
+          extraData: {},
+        },
+        func: (data = {}) => {
+          return new Promise((resolve) => {
+            const callback = {};
+            wx.navigateToMiniProgram({
+              ...data,
+              success: (res) => {
+                callback['success'] = res;
+              },
+              fail: (res) => {
+                callback['fail'] = res;
+              },
+              complete: (res) => {
+                callback['complete'] = res;
+                resolve({callback});
+              },
+            })
+          })
+        },
+        isDone: true
+      },
+      {
+        id: 'navigateBackMiniProgram',
+        func: null,
+      },
+      {
+        id: 'exitMiniProgram',
+        func: null,
+      },
+    ],
+  },
 
   /**
    * 生命周期函数--监听页面加载

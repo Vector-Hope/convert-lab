@@ -1,4 +1,7 @@
 <!--packagesAPI/pages/basics/miniProgram/index.wxml-->
 <view class="api-page">
-  <button-list buttonList="{{list}}" />
+  <view class="mini-title">生命周期</view>
+  <button-list buttonList="{{lifeCycleList}}" />
+  <view class="mini-title">应用级事件</view>
+  <button-list buttonList="{{appLevelEventsList}}" />
 </view>

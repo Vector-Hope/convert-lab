@@ -3,7 +3,20 @@ Page({
   /**
    * 页面的初始数据
    */
-  data: {},
+  data: {
+    list: [
+      {
+        id: 'getMenuButtonBoundingClientRect',
+        func: (data = {}) => {
+          const rect = wx.getMenuButtonBoundingClientRect();
+          return {
+            callback: rect,
+          }
+        },
+        isDone: true
+      },
+    ],
+  },
 
   /**
    * 生命周期函数--监听页面加载

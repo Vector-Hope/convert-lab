@@ -40,23 +40,23 @@ Page({
       },
       {
         id: 'getSystemSetting',
-        func: (apiIndex) => {
-          TestConsole.consoleTest('Taro.getSystemSetting');
-          const res = Taro.getSystemSetting();
-          TestConsole.consoleSuccess.call(this, res, apiIndex);
+        func: (data = {}) => {
+          const res = wx.getSystemSetting();
+          return {
+            callback: res,
+          }
         },
+        isDone: true
       },
       {
         id: 'getSystemInfoSync',
-        func: (apiIndex) => {
-          TestConsole.consoleTest('Taro.getSystemInfoSync');
-          try {
-            const res = Taro.getSystemInfoSync();
-            TestConsole.consoleSuccess.call(this, res, apiIndex);
-          } catch (err) {
-            TestConsole.consoleFail.call(this, err, apiIndex);
+        func: (data = {}) => {
+          const res = wx.getSystemInfoSync();
+          return {
+            callback: res,
           }
         },
+        isDone: true
       },
       {
         id: 'getSystemInfoAsync',
@@ -79,30 +79,34 @@ Page({
       },
       {
         id: 'getSystemInfo',
-        func: (apiIndex) => {
-          TestConsole.consoleTest('Taro.getSystemInfo');
-          Taro.getSystemInfo({
-            success: (res) => {
-              TestConsole.consoleSuccess.call(this, res, apiIndex);
-            },
-            fail: (res) => {
-              TestConsole.consoleFail.call(this, res, apiIndex);
-            },
-            complete: (res) => {
-              TestConsole.consoleComplete.call(this, res, apiIndex);
-            },
-          }).then((res) => {
-            TestConsole.consoleReturn.call(this, res, apiIndex);
-          });
+        func: (data = {}) => {
+          return new Promise((resolve) => {
+            const callback = {};
+            wx.getSystemInfo({
+              success: (res) => {
+                callback['success'] = res;
+              },
+              fail: (res) => {
+                callback['fail'] = res;
+              },
+              complete: (res) => {
+                callback['complete'] = res;
+                resolve({callback});
+              },
+            })
+          })
         },
+        isDone: true
       },
       {
         id: 'getDeviceInfo',
-        func: (apiIndex) => {
-          TestConsole.consoleTest('Taro.getDeviceInfo');
-          let res = Taro.getDeviceInfo();
-          TestConsole.consoleSuccess.call(this, res, apiIndex);
+        func: (data = {}) => {
+          const res = wx.getDeviceInfo();
+          return {
+            callback: res,
+          }
         },
+        isDone: true
       },
       {
         id: 'getAppBaseInfo',
@@ -114,11 +118,13 @@ Page({
       },
       {
         id: 'getAppAuthorizeSetting',
-        func: (apiIndex) => {
-          TestConsole.consoleTest('Taro.getAppAuthorizeSetting');
-          let res = Taro.getAppAuthorizeSetting();
-          TestConsole.consoleSuccess.call(this, res, apiIndex);
+        func: (data = {}) => {
+          const res = wx.getAppAuthorizeSetting();
+          return {
+            callback: res,
+          }
         },
+        isDone: true
       },
     ],
   },

@@ -1,16 +1,19 @@
 // packagesAPI/pages/network/request/index.js
+let that;
 Page({
   /**
    * 页面的初始数据
    */
   data: {
+    request: null,
     list: [
       {
         id: 'request',
         inputData: {
-          url: 'http://172.20.10.11:3000/hello',
+          url: 'http://26.26.26.1:3000/hello',
           dataType: 'json',
           method: 'POST',
+          timeout: 10000,
           data: { name: 'Taro' },
           headers: {
             'Content-Type': 'application/json',
@@ -19,7 +22,7 @@ Page({
         func: (data = {}) => {
           const callback = {};
           return new Promise((resolve) => {
-            wx.request({
+            const request = wx.request({
               ...data,
               success: (res) => {
                 callback['success'] = res;
@@ -32,13 +35,78 @@ Page({
                 resolve({ callback });
               },
             });
+            that.setData({
+              request,
+            })
           });
         },
         isDone: true,
       },
       {
         id: 'RequestTask.abort',
-        func: () => {},
+        func: (data = {}) => {
+          const { request } = that.data;
+          if (request) {
+            request.abort();
+            return {
+              callback: {},
+            };
+          } else {
+            wx.showToast({
+              title: '暂无请求',
+            });
+            return {
+              callback: {},
+              isShowToast: true,
+            };
+          }
+        },
+        isDone: true,
+      },
+      {
+        id: 'RequestTask.onHeadersReceived',
+        func: (data = {}) => {
+          const { request } = that.data;
+          if (request) {
+            return new Promise((resolve) => {
+              request.onHeadersReceived((res) => {
+                console.log('test API: RequestTask.onHeadersReceived');
+                console.log(res);
+                resolve({callback: res});
+              })
+            })
+          } else {
+            wx.showToast({
+              title: '暂无请求',
+            });
+            return {
+              callback: {},
+              isShowToast: true,
+            };
+          }
+        },
+        isDone: true
+      },
+      {
+        id: 'RequestTask.offHeadersReceived',
+        func: (data = {}) => {
+          const { request } = that.data;
+          if (request) {
+              request.offHeadersReceived();
+            return {
+              callback: {},
+            }
+          } else {
+            wx.showToast({
+              title: '暂无请求',
+            });
+            return {
+              callback: {},
+              isShowToast: true,
+            };
+          }
+        },
+        isDone: true
       },
       {
         id: 'addInterceptor',
@@ -54,7 +122,9 @@ Page({
   /**
    * 生命周期函数--监听页面加载
    */
-  onLoad(options) {},
+  onLoad(options) {
+    that = this;
+  },
 
   /**
    * 生命周期函数--监听页面初次渲染完成
