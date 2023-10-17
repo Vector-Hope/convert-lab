@@ -15,22 +15,22 @@ Page({
           withShareTicket: true,
         },
         func: (apiIndex, data) => {
-          TestConsole.consoleTest('Taro.showShareMenu')
+          TestConsole.consoleTest('Taro.showShareMenu');
           Taro.showShareMenu(data).then(() => {
-            TestConsole.consoleNormal('showShareMenu')
-          })
+            TestConsole.consoleNormal('showShareMenu');
+          });
           Taro.showShareMenu({
             ...data,
             success: (res) => {
-              TestConsole.consoleSuccess.call(this, res, apiIndex)
+              TestConsole.consoleSuccess.call(this, res, apiIndex);
             },
             fail: (res) => {
-              TestConsole.consoleFail.call(this, res, apiIndex)
+              TestConsole.consoleFail.call(this, res, apiIndex);
             },
             complete: (res) => {
-              TestConsole.consoleComplete.call(this, res, apiIndex)
+              TestConsole.consoleComplete.call(this, res, apiIndex);
             },
-          })
+          });
         },
       },
       {
@@ -59,22 +59,22 @@ Page({
           menus: ['shareAppMessage', 'shareTimeline'],
         },
         func: (apiIndex, data) => {
-          TestConsole.consoleTest('Taro.hideShareMenu')
+          TestConsole.consoleTest('Taro.hideShareMenu');
           Taro.hideShareMenu(data).then(() => {
-            TestConsole.consoleNormal('hideShareMenu')
-          })
+            TestConsole.consoleNormal('hideShareMenu');
+          });
           Taro.hideShareMenu({
             ...data,
             success: (res) => {
-              TestConsole.consoleSuccess.call(this, res, apiIndex)
+              TestConsole.consoleSuccess.call(this, res, apiIndex);
             },
             fail: (res) => {
-              TestConsole.consoleFail.call(this, res, apiIndex)
+              TestConsole.consoleFail.call(this, res, apiIndex);
             },
             complete: (res) => {
-              TestConsole.consoleComplete.call(this, res, apiIndex)
+              TestConsole.consoleComplete.call(this, res, apiIndex);
             },
-          })
+          });
         },
       },
       {
@@ -83,19 +83,19 @@ Page({
           shareTicket: '',
         },
         func: (apiIndex, data) => {
-          TestConsole.consoleTest('Taro.getShareInfo')
+          TestConsole.consoleTest('Taro.getShareInfo');
           Taro.getShareInfo({
             ...data,
             success: (res) => {
-              TestConsole.consoleSuccess.call(this, res, apiIndex)
+              TestConsole.consoleSuccess.call(this, res, apiIndex);
             },
             fail: (res) => {
-              TestConsole.consoleFail.call(this, res, apiIndex)
+              TestConsole.consoleFail.call(this, res, apiIndex);
             },
             complete: (res) => {
-              TestConsole.consoleComplete.call(this, res, apiIndex)
+              TestConsole.consoleComplete.call(this, res, apiIndex);
             },
-          })
+          });
         },
       },
       {

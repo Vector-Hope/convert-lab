@@ -33,12 +33,12 @@ Page({
               },
               complete: (res) => {
                 callback['complete'] = res;
-                resolve({callback});
+                resolve({ callback });
               },
-            })
-          })
+            });
+          });
         },
-        isDone: true
+        isDone: true,
       },
       {
         id: 'navigateBackMiniProgram',

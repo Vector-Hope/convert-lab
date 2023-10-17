@@ -2,9 +2,10 @@
   绝对路径不可用
   <import src="/template/creatTemplate" /> 
 -->
-<import src="../../../../template/creatTemplate" />
-<import src="../../../../template/chooseTrue" />
-<import src="../../../../template/chooseFalse" />
+<import src="./template/creatTemplate" />
+<import src="./template/chooseTrue" />
+<import src="./template/chooseFalse" />
+<import src="./template/deconstruct" />
 <view class="container page">
   <view class="page-body">
     <template is="creatTemplate" data="{{...creatTemplate}}" />
@@ -22,5 +23,6 @@
       </view>
     </view>
     <template is="{{chooseTrue ? 'chooseTrue' : 'chooseFalse'}}" data="{{...chooseTemplate}}" />
+    <template is="deconstruct" data="{{...mixObject1, mixVar1, ...mixObject2, mixVar2}}" />
   </view>
 </view>

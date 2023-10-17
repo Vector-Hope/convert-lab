@@ -1,0 +1,9 @@
+/*
+    注释内容与'./noted2.wxss'相互引用
+    @import './noted2.wxss'
+*/
+
+.noted3Box {
+  border: 3px solid rgb(255, 111, 219);
+  background-color: rgb(255, 189, 214);
+}

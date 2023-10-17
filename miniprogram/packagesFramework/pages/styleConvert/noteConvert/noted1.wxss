@@ -1,0 +1,9 @@
+/*
+    注释内容引用自身样式表
+    @import './noted1.wxss'
+*/
+
+.noted1Box {
+  border: 3px solid rgb(255, 151, 151);
+  background-color: rgb(224, 248, 193);
+}

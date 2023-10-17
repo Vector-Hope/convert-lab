@@ -40,11 +40,13 @@
           >{{item.value}}</text
         >
         <text class="json-text json-string" wx:elif="{{item.type == 'String'}}">"{{item.value}}"</text>
-        <text class="json-text json-boolean" wx:elif="{{item.type == 'Boolean'}}">{{item.value}}</text>
+        <text
+          class="json-text json-boolean"
+          wx:elif="{{item.type == 'Boolean' || item.type == 'Number' || item.type == 'Null'}}"
+          >{{item.value}}</text
+        >
         <text class="json-text json-undefined" wx:elif="{{item.type == 'Undefined'}}">undefined</text>
-        <text class="json-text json-null" wx:elif="{{item.type == 'Null'}}">{{item.value}}</text>
-        <text class="json-text json-null" wx:elif="{{typeof(item.value) == 'Object'}}"></text>
-        <text class="json-text json-number" wx:else>{{item.value}}</text>
+        <text class="json-text json-number" wx:else>{{item.type}} {{item.value}}</text>
       </view>
     </block>
   </view>

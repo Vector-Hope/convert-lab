@@ -64,7 +64,15 @@
         "pages/wxml/template/index",
         "pages/wxml/quote/index",
         "pages/wxs/wxsModule/index",
-        "pages/wxs/wxsOperator/index"
+        "pages/wxs/wxsOperator/index",
+        "pages/wxs/regExp/index",
+        "pages/styleConvert/noteConvert/index",
+        "pages/jsSyntax/requireJs/index",
+        "pages/jsSyntax/esSyntax/index",
+        "pages/structure/jsProjectStructure/index",
+        "pages/structure/tsProjectStructure/index",
+        "pages/structure/frameworkStructure/index",
+        "pages/structure/pageStructure/index"
       ]
     },
     {

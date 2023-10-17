@@ -37,7 +37,7 @@ Page({
             });
             that.setData({
               request,
-            })
+            });
           });
         },
         isDone: true,
@@ -70,11 +70,11 @@ Page({
           if (request) {
             return new Promise((resolve) => {
               request.onHeadersReceived((res) => {
-                console.log('test API: RequestTask.onHeadersReceived');
-                console.log(res);
-                resolve({callback: res});
-              })
-            })
+                // console.log('test API: RequestTask.onHeadersReceived');
+                // console.log(res);
+                resolve({ callback: res });
+              });
+            });
           } else {
             wx.showToast({
               title: '暂无请求',
@@ -85,17 +85,17 @@ Page({
             };
           }
         },
-        isDone: true
+        isDone: true,
       },
       {
         id: 'RequestTask.offHeadersReceived',
         func: (data = {}) => {
           const { request } = that.data;
           if (request) {
-              request.offHeadersReceived();
+            request.offHeadersReceived();
             return {
               callback: {},
-            }
+            };
           } else {
             wx.showToast({
               title: '暂无请求',
@@ -106,7 +106,7 @@ Page({
             };
           }
         },
-        isDone: true
+        isDone: true,
       },
       {
         id: 'addInterceptor',

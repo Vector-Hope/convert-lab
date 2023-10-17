@@ -11,9 +11,9 @@ Page({
           const rect = wx.getMenuButtonBoundingClientRect();
           return {
             callback: rect,
-          }
+          };
         },
-        isDone: true
+        isDone: true,
       },
     ],
   },

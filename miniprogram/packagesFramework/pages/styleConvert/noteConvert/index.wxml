@@ -1,0 +1,34 @@
+<!--packagesFramework/pages/styleConvert/noteConvert/index.wxml-->
+<view class="container page">
+  <view class="page-body">
+    <view class="page-section">
+      <view class="cells_title">wxss文件注释中的引用不转换</view>
+      <view class="cells cells_after-title">
+        <view class="cell">
+          <view class="cell_hd">
+            <view class="label">noted1.wxss</view>
+          </view>
+          <view class="cell_bd">
+            <view class="noted1Box">注释包括 @import './noted1.wxss'</view>
+          </view>
+        </view>
+        <view class="cell">
+          <view class="cell_hd">
+            <view class="label">noted2.wxss</view>
+          </view>
+          <view class="cell_bd">
+            <view class="noted2Box">注释包括 @import './noted3.wxss'</view>
+          </view>
+        </view>
+        <view class="cell">
+          <view class="cell_hd">
+            <view class="label">noted3.wxss</view>
+          </view>
+          <view class="cell_bd">
+            <view class="noted3Box">注释包括 @import './noted2.wxss'</view>
+          </view>
+        </view>
+      </view>
+    </view>
+  </view>
+</view>

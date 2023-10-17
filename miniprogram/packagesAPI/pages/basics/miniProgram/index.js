@@ -11,16 +11,16 @@ Page({
           const options = wx.getLaunchOptionsSync();
           return {
             callback: options,
-          }
+          };
         },
-        isDone: true
+        isDone: true,
       },
       {
         id: 'getEnterOptionsSync',
         func: () => {
-          TestConsole.consoleTest('Taro.getEnterOptionsSync')
-          const options = Taro.getEnterOptionsSync()
-          TestConsole.consoleNormal('getEnterOptionsSync', options)
+          TestConsole.consoleTest('Taro.getEnterOptionsSync');
+          const options = Taro.getEnterOptionsSync();
+          TestConsole.consoleNormal('getEnterOptionsSync', options);
         },
       },
     ],

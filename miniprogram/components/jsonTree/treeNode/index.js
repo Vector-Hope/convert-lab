@@ -1,5 +1,5 @@
 // components/jsonTree/treeNode/index.js
-import { getType } from '../../../utils/util';
+import { getType, formatJson } from '../../../utils/util';
 Component({
   /**
    * 组件的属性列表
@@ -89,7 +89,12 @@ Component({
         dataDetail.type = this.getType(data[index]);
         dataDetail.key = index;
         // console.log(index, this.getType(data[index]));
-        dataDetail.value = data[index];
+        if (dataDetail.type !== 'Object' && dataDetail.type !== 'Array' && data[index] instanceof Object) {
+          console.log(dataDetail.type);
+          dataDetail.value = formatJson(data[index]);
+        } else {
+          dataDetail.value = data[index];
+        }
         if (dataDetail.type == 'Boolean') {
           dataDetail.value = data[index].toString();
         }

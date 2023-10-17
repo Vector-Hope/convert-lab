@@ -1,0 +1,37 @@
+<template name="deconstruct">
+  <view class="page-section" id="deconstruct">
+    <view class="cells_title">解构符和变量的混用</view>
+    <view class="cells cells_after-title">
+      <view class="cell">
+        <view class="cell_bd">
+          <view class="label">{{mixData11}}</view>
+        </view>
+      </view>
+      <view class="cell">
+        <view class="cell_bd">
+          <view class="label">{{mixData12}}</view>
+        </view>
+      </view>
+      <view class="cell">
+        <view class="cell_bd">
+          <view class="label">{{mixData21}}</view>
+        </view>
+      </view>
+      <view class="cell">
+        <view class="cell_bd">
+          <view class="label">{{mixData22}}</view>
+        </view>
+      </view>
+      <view class="cell">
+        <view class="cell_bd">
+          <view class="label">{{mixVar1}}</view>
+        </view>
+      </view>
+      <view class="cell">
+        <view class="cell_bd">
+          <view class="label">{{mixVar2}}</view>
+        </view>
+      </view>
+    </view>
+  </view>
+</template>

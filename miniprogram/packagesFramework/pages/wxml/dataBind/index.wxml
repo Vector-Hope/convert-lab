@@ -1,4 +1,5 @@
-<import src="../../../../template/dataBindTemplate" />
+<!-- <import src="../../../../template/dataBindTemplate" /> -->
+<import src="/template/dataBindTemplate" />
 
 <view class="container page">
   <view class="page-body">

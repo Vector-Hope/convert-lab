@@ -3,7 +3,7 @@ Page({
     list: [
       {
         id: 'wxml',
-        name: 'WXML语法参考',
+        name: 'WXML转换参考',
         open: false,
         pages: [
           {
@@ -30,7 +30,7 @@ Page({
       },
       {
         id: 'wxs',
-        name: 'WXS语法参考',
+        name: 'WXS转换参考',
         open: false,
         pages: [
           {
@@ -40,6 +40,59 @@ Page({
           {
             id: 'wxsOperator',
             name: '运算符',
+          },
+          {
+            id: 'regExp',
+            name: '正则表达式',
+          },
+        ],
+      },
+      {
+        id: 'styleConvert',
+        name: '样式转换参考',
+        open: false,
+        pages: [
+          {
+            id: 'noteConvert',
+            name: '注释转换',
+          },
+        ],
+      },
+      {
+        id: 'jsSyntax',
+        name: 'js转换参考',
+        open: false,
+        pages: [
+          {
+            id: 'requireJs',
+            name: '文件引入',
+          },
+          {
+            id: 'esSyntax',
+            name: 'ES语法',
+          },
+        ],
+      },
+      {
+        id: 'structure',
+        name: '结构',
+        open: false,
+        pages: [
+          {
+            id: 'jsProjectStructure',
+            name: 'JS工程结构',
+          },
+          {
+            id: 'tsProjectStructure',
+            name: 'TS工程结构',
+          },
+          {
+            id: 'frameworkStructure',
+            name: '框架结构',
+          },
+          {
+            id: 'pageStructure',
+            name: '页面结构',
           },
         ],
       },

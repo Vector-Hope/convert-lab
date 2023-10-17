@@ -44,9 +44,9 @@ Page({
           const res = wx.getSystemSetting();
           return {
             callback: res,
-          }
+          };
         },
-        isDone: true
+        isDone: true,
       },
       {
         id: 'getSystemInfoSync',
@@ -54,9 +54,9 @@ Page({
           const res = wx.getSystemInfoSync();
           return {
             callback: res,
-          }
+          };
         },
-        isDone: true
+        isDone: true,
       },
       {
         id: 'getSystemInfoAsync',
@@ -91,12 +91,12 @@ Page({
               },
               complete: (res) => {
                 callback['complete'] = res;
-                resolve({callback});
+                resolve({ callback });
               },
-            })
-          })
+            });
+          });
         },
-        isDone: true
+        isDone: true,
       },
       {
         id: 'getDeviceInfo',
@@ -104,9 +104,9 @@ Page({
           const res = wx.getDeviceInfo();
           return {
             callback: res,
-          }
+          };
         },
-        isDone: true
+        isDone: true,
       },
       {
         id: 'getAppBaseInfo',
@@ -122,9 +122,9 @@ Page({
           const res = wx.getAppAuthorizeSetting();
           return {
             callback: res,
-          }
+          };
         },
-        isDone: true
+        isDone: true,
       },
     ],
   },

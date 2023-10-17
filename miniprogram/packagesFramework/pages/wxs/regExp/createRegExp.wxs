@@ -1,0 +1,31 @@
+var exp1 = getRegExp("abc");
+var exp2 = getRegExp("abc", 'g');
+var exp3 = getRegExp("abc", 'i');
+var exp4 = getRegExp("abc", 'm');
+var exp5 = getRegExp("abc", 'img');
+var string = '-ABC-abc\\n-abc-ABC-';
+var reg1 = exp1.toString();
+var reg2 = exp2.toString();
+var reg3 = exp3.toString();
+var reg4 = exp4.toString();
+var reg5 = exp5.toString();
+var search = string.search(exp1);
+var match = string.match(exp1);
+var globalMatch = string.match(exp2);
+var ignoreMatch = string.match(exp3);
+var multiLineMatch = string.match(exp4);
+var allMatch = string.match(exp5);
+module.exports = {
+    reg1: reg1,
+    reg2: reg2,
+    reg3: reg3,
+    reg4: reg4,
+    reg5: reg5,
+    string: string,
+    search: search,
+    match: match,
+    globalMatch: globalMatch,
+    ignoreMatch: ignoreMatch,
+    multiLineMatch: multiLineMatch,
+    allMatch: allMatch
+}

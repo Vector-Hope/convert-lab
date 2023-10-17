@@ -1,0 +1,222 @@
+<!--packagesFramework/pages/wxs/regExp/index.wxml-->
+<wxs module="labelWxs">
+  var exp1 = getRegExp("xyz"); var exp2 = getRegExp("xyz", 'g'); var exp3 = getRegExp("xyz", 'i'); var exp4 =
+  getRegExp("xyz", 'm'); var exp5 = getRegExp("xyz", 'img'); var string = '-XYZ-xyz\\n-xyz-XYZ-'; var reg1 =
+  exp1.toString(); var reg2 = exp2.toString(); var reg3 = exp3.toString(); var reg4 = exp4.toString(); var reg5 =
+  exp5.toString(); var search = string.search(exp1); var match = string.match(exp1); var globalMatch =
+  string.match(exp2); var ignoreMatch = string.match(exp3); var multiLineMatch = string.match(exp4); var allMatch =
+  string.match(exp5); module.exports = { reg1: reg1, reg2: reg2, reg3: reg3, reg4: reg4, reg5: reg5, string: string,
+  search: search, match: match, globalMatch: globalMatch, ignoreMatch: ignoreMatch, multiLineMatch: multiLineMatch,
+  allMatch: allMatch }
+</wxs>
+<wxs src="./createRegExp.wxs" module="fileWxs"></wxs>
+<view class="container page">
+  <view class="page-body">
+    <view class="page-section">
+      <view class="cells_title">wxs标签中创建正则表达式</view>
+      <view class="cells cells_after-title">
+        <view class="cell">
+          <view class="cell_hd">
+            <view class="label">正则对象exp1：</view>
+          </view>
+          <view class="cell_bd">
+            <view>{{labelWxs.reg1}}</view>
+          </view>
+        </view>
+        <view class="cell">
+          <view class="cell_hd">
+            <view class="label">正则对象exp2（全局搜索）：</view>
+          </view>
+          <view class="cell_bd">
+            <view>{{labelWxs.reg2}}</view>
+          </view>
+        </view>
+        <view class="cell">
+          <view class="cell_hd">
+            <view class="label">正则对象exp3（忽略大小写）：</view>
+          </view>
+          <view class="cell_bd">
+            <view>{{labelWxs.reg3}}</view>
+          </view>
+        </view>
+        <view class="cell">
+          <view class="cell_hd">
+            <view class="label">正则对象exp4（匹配多行）：</view>
+          </view>
+          <view class="cell_bd">
+            <view>{{labelWxs.reg4}}</view>
+          </view>
+        </view>
+        <view class="cell">
+          <view class="cell_hd">
+            <view class="label">正则对象exp5（全匹配）：</view>
+          </view>
+          <view class="cell_bd">
+            <view>{{labelWxs.reg5}}</view>
+          </view>
+        </view>
+        <view class="cell">
+          <view class="cell_hd">
+            <view class="label">字符串string：</view>
+          </view>
+          <view class="cell_bd">
+            <view>{{labelWxs.string}}</view>
+          </view>
+        </view>
+      </view>
+      <view class="cells">
+        <view class="cell">
+          <view class="cell_hd">
+            <view class="label">string.search(exp1)：</view>
+          </view>
+          <view class="cell_bd">
+            <view>起始索引：{{labelWxs.search}}</view>
+          </view>
+        </view>
+        <view class="cell">
+          <view class="cell_hd">
+            <view class="label">string.match(exp1)：</view>
+          </view>
+          <view class="cell_bd">
+            <view>匹配首个：{{labelWxs.match}}</view>
+          </view>
+        </view>
+        <view class="cell">
+          <view class="cell_hd">
+            <view class="label">string.match(exp2)：</view>
+          </view>
+          <view class="cell_bd">
+            <view>全局匹配：{{labelWxs.globalMatch}}</view>
+          </view>
+        </view>
+        <view class="cell">
+          <view class="cell_hd">
+            <view class="label">string.match(exp3)：</view>
+          </view>
+          <view class="cell_bd">
+            <view>忽略大小写匹配：{{labelWxs.ignoreMatch}}</view>
+          </view>
+        </view>
+        <view class="cell">
+          <view class="cell_hd">
+            <view class="label">string.match(exp4)：</view>
+          </view>
+          <view class="cell_bd">
+            <view>多行匹配：{{labelWxs.multiLineMatch}}</view>
+          </view>
+        </view>
+        <view class="cell">
+          <view class="cell_hd">
+            <view class="label">string.match(exp5)：</view>
+          </view>
+          <view class="cell_bd">
+            <view>全匹配：{{labelWxs.allMatch}}</view>
+          </view>
+        </view>
+      </view>
+    </view>
+    <view class="page-section">
+      <view class="cells_title">wxs文件中使用 getRegExp 创建正则表达式对象</view>
+      <view class="cells cells_after-title">
+        <view class="cell">
+          <view class="cell_hd">
+            <view class="label">正则对象exp1：</view>
+          </view>
+          <view class="cell_bd">
+            <view>{{fileWxs.reg1}}</view>
+          </view>
+        </view>
+        <view class="cell">
+          <view class="cell_hd">
+            <view class="label">正则对象exp2（全局搜索）：</view>
+          </view>
+          <view class="cell_bd">
+            <view>{{fileWxs.reg2}}</view>
+          </view>
+        </view>
+        <view class="cell">
+          <view class="cell_hd">
+            <view class="label">正则对象exp3（忽略大小写）：</view>
+          </view>
+          <view class="cell_bd">
+            <view>{{fileWxs.reg3}}</view>
+          </view>
+        </view>
+        <view class="cell">
+          <view class="cell_hd">
+            <view class="label">正则对象exp4（匹配多行）：</view>
+          </view>
+          <view class="cell_bd">
+            <view>{{fileWxs.reg4}}</view>
+          </view>
+        </view>
+        <view class="cell">
+          <view class="cell_hd">
+            <view class="label">正则对象exp5（全匹配）：</view>
+          </view>
+          <view class="cell_bd">
+            <view>{{fileWxs.reg5}}</view>
+          </view>
+        </view>
+        <view class="cell">
+          <view class="cell_hd">
+            <view class="label">字符串string：</view>
+          </view>
+          <view class="cell_bd">
+            <view>{{fileWxs.string}}</view>
+          </view>
+        </view>
+      </view>
+      <view class="cells">
+        <view class="cell">
+          <view class="cell_hd">
+            <view class="label">string.search(exp1)：</view>
+          </view>
+          <view class="cell_bd">
+            <view>起始索引：{{fileWxs.search}}</view>
+          </view>
+        </view>
+        <view class="cell">
+          <view class="cell_hd">
+            <view class="label">string.match(exp1)：</view>
+          </view>
+          <view class="cell_bd">
+            <view>匹配首个：{{fileWxs.match}}</view>
+          </view>
+        </view>
+        <view class="cell">
+          <view class="cell_hd">
+            <view class="label">string.match(exp2)：</view>
+          </view>
+          <view class="cell_bd">
+            <view>全局匹配：{{fileWxs.globalMatch}}</view>
+          </view>
+        </view>
+        <view class="cell">
+          <view class="cell_hd">
+            <view class="label">string.match(exp3)：</view>
+          </view>
+          <view class="cell_bd">
+            <view>忽略大小写匹配：{{fileWxs.ignoreMatch}}</view>
+          </view>
+        </view>
+        <view class="cell">
+          <view class="cell_hd">
+            <view class="label">string.match(exp4)：</view>
+          </view>
+          <view class="cell_bd">
+            <view>多行匹配：{{fileWxs.multiLineMatch}}</view>
+          </view>
+        </view>
+        <view class="cell">
+          <view class="cell_hd">
+            <view class="label">string.match(exp5)：</view>
+          </view>
+          <view class="cell_bd">
+            <view>全匹配：{{fileWxs.allMatch}}</view>
+          </view>
+        </view>
+      </view>
+    </view>
+  </view>
+</view>

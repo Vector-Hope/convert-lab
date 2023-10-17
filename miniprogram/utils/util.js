@@ -20,12 +20,17 @@ const getType = (variable) => {
 };
 
 const formatJson = (data) => {
+  const ownKeys = Object.getOwnPropertyNames(data);
+  let newData = {};
+  for (let key of ownKeys) {
+    newData[key] = data[key];
+  }
   try {
-    JSON.stringify(data);
-    return JSON.parse(JSON.stringify(data));
+    JSON.stringify(newData);
+    return JSON.parse(JSON.stringify(newData));
   } catch (err) {
     const cache = new Map();
-    const JSONStr = JSON.stringify(data, (key, value) => {
+    const JSONStr = JSON.stringify(newData, (key, value) => {
       if (typeof value === 'object' && value !== null) {
         if (cache.has(value)) {
           return;

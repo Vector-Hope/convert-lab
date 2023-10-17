@@ -1,0 +1,42 @@
+<!--packagesFramework/pages/jsSyntax/requireJs/index.wxml-->
+<view class="container page">
+  <view class="page-body">
+    <view class="page-section">
+      <view class="cells_title">引入js文件（无.js后缀）</view>
+      <view class="cells cells_after-title">
+        <view class="cell">
+          <view class="cell_hd">
+            <view class="label">通过 './' 引入</view>
+          </view>
+          <view class="cell_bd">
+            <view>{{samePath1 ? 'true' : 'false'}}</view>
+          </view>
+        </view>
+        <view class="cell">
+          <view class="cell_hd">
+            <view class="label">通过 '/' 引入</view>
+          </view>
+          <view class="cell_bd">
+            <view>{{samePath2 ? 'true' : 'false'}}</view>
+          </view>
+        </view>
+        <view class="cell">
+          <view class="cell_hd">
+            <view class="label">省略前缀'/'或'./'引入</view>
+          </view>
+          <view class="cell_bd">
+            <view>{{samePath3 ? 'true' : 'false'}}</view>
+          </view>
+        </view>
+        <view class="cell">
+          <view class="cell_hd">
+            <view class="label">通过 '../' 引入上层文件</view>
+          </view>
+          <view class="cell_bd">
+            <view>{{outerPath ? 'true' : 'false'}}</view>
+          </view>
+        </view>
+      </view>
+    </view>
+  </view>
+</view>
