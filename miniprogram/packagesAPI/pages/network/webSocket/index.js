@@ -50,7 +50,7 @@ Page({
         },
       },
       {
-        id: 'connectSocket & onOpen',
+        id: 'connectSocket',
         inputData: {
           url: 'ws://26.26.26.1:3000',
           header: {
@@ -63,26 +63,73 @@ Page({
           forceCellularNetwork: false,
         },
         func: async (data = {}) => {
-          const callback = {};
-          const socketTask = await wx.connectSocket({
+          return new Promise((resolve) => {
+            const callback = {};
+            const socketTask = wx.connectSocket({
+              ...data,
+              success: (res) => {
+                callback['success'] = res;
+              },
+              fail: (res) => {
+                callback['fail'] = res;
+              },
+              complete: (res) => {
+                callback['complete'] = res;
+                resolve({callback});
+              },
+            });
+            that.setData({
+              socketTask,
+            });
+          })
+        },
+        isDone: true,
+      },
+      {
+        id: 'connectSocket.onOpen',
+        inputData: {
+          url: 'ws://26.26.26.1:3000',
+          header: {
+            'content-type': 'application/json',
+          },
+          protocols: [],
+          tcpNoDelay: true,
+          perMessageDeflate: false,
+          timeout: 6000,
+          forceCellularNetwork: false,
+        },
+        func: async (data = {}) => {
+          const {socketTask} = that.data;
+          if (socketTask) {
+            socketTask.close();
+          }
+          const newSocketTask = wx.connectSocket({
             ...data,
             success: (res) => {
-              callback['success'] = res;
+              wx.showToast({
+                title: '连接成功',
+              })
             },
             fail: (res) => {
-              callback['fail'] = res;
+              wx.showToast({
+                title: '连接失败',
+              })
             },
-            complete: (res) => {
-              callback['complete'] = res;
-            },
-          });
-          socketTask.onOpen((res) => {
-            console.log('test API: SocketTask.onOpen');
-            console.log(res);
           });
           that.setData({
-            socketTask,
+            socketTask: newSocketTask,
           });
+          return new Promise((resolve) => {
+            newSocketTask.onOpen((res) => {
+              console.log(res)
+              resolve({
+                callback: res,
+                isShowToast: true
+              })
+            });
+          })
+          
+          
           return {
             callback: {
               callback,
