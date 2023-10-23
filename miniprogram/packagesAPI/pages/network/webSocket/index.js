@@ -8,46 +8,95 @@ Page({
     list: [
       {
         id: 'onSocketOpen',
-        func: () => {
-          TestConsole.consoleTest('Taro.onSocketOpen');
-          console.log('注册onSocketOpen, 需要websocket连接后才能触发回调');
-          Taro.onSocketOpen((res) => {
-            console.log('Taro.onSocketOpen:', res);
-          });
+        func: (data = {}) => {
+          return new Promise ((resolve) => {
+            wx.showToast({
+              title: '监听开启，请连接websocket',
+            })
+            let isFirstListen = true;
+            wx.onSocketOpen((res) => {
+              if (!isFirstListen) {
+                console.log('test API: onSocketOpen');
+                console.log(res);
+              }
+              isFirstListen = false;
+              resolve({
+                callback: res,
+                isShowToast: true,
+              })
+            });
+          })
         },
+        isDone: true
       },
       {
         id: 'onSocketMessage',
-        func: () => {
-          TestConsole.consoleTest('Taro.onSocketMessage');
-          console.log('注册onSocketMessage, 需要websocket连接收到信息后才能触发回调');
-          Taro.onSocketMessage((res) => {
-            console.log('Taro.onSocketMessage:', res);
-            Taro.showToast({
-              title: res.data,
+        func: (data = {}) => {
+          return new Promise ((resolve) => {
+            wx.showToast({
+              title: '监听开启，请连接websocket',
+            })
+            let isFirstListen = true;
+            wx.onSocketMessage((res) => {
+              if (!isFirstListen) {
+                console.log('test API: onSocketMessage');
+                console.log(res);
+              }
+              isFirstListen = false;
+              resolve({
+                callback: res,
+                isShowToast: true,
+              })
             });
-          });
+          })
         },
+        isDone: true
       },
       {
         id: 'onSocketClose',
-        func: () => {
-          TestConsole.consoleTest('Taro.onSocketClose');
-          console.log('注册onSocketClose, 需要websocket关闭才能触发回调');
-          Taro.onSocketClose((res) => {
-            console.log('Taro.onSocketClose:', res);
-          });
+        func: (data = {}) => {
+          return new Promise ((resolve) => {
+            wx.showToast({
+              title: '监听开启，请连接websocket',
+            })
+            let isFirstListen = true;
+            wx.onSocketClose((res) => {
+              if (!isFirstListen) {
+                console.log('test API: onSocketClose');
+                console.log(res);
+              }
+              isFirstListen = false;
+              resolve({
+                callback: res,
+                isShowToast: true,
+              })
+            });
+          })
         },
+        isDone: true
       },
       {
         id: 'onSocketError',
-        func: () => {
-          TestConsole.consoleTest('Taro.onSocketError');
-          console.log('注册onSocketError, 需要websocket连接后发生错误才能触发回调');
-          Taro.onSocketError((res) => {
-            console.log('Taro.onSocketError:', res);
-          });
+        func: (data = {}) => {
+          return new Promise ((resolve) => {
+            wx.showToast({
+              title: '监听开启，请连接websocket',
+            })
+            let isFirstListen = true;
+            wx.onSocketError((res) => {
+              if (!isFirstListen) {
+                console.log('test API: onSocketError');
+                console.log(res);
+              }
+              isFirstListen = false;
+              resolve({
+                callback: res,
+                isShowToast: true,
+              })
+            });
+          })
         },
+        isDone: true
       },
       {
         id: 'connectSocket',
@@ -121,44 +170,39 @@ Page({
           });
           return new Promise((resolve) => {
             newSocketTask.onOpen((res) => {
-              console.log(res)
               resolve({
                 callback: res,
                 isShowToast: true
               })
             });
           })
-          
-          
-          return {
-            callback: {
-              callback,
-              socketTask,
-            },
-          };
         },
         isDone: true,
       },
       {
         id: 'sendSocketMessage',
         inputData: {
-          data: 'Taro三方框架',
+          data: 'convert小程序',
         },
-        func: (apiIndex, data) => {
-          TestConsole.consoleTest('Taro.sendSocketMessage');
-          Taro.sendSocketMessage({
-            ...data,
-            success: (res) => {
-              TestConsole.consoleSuccess.call(this, res, apiIndex);
-            },
-            fail: (res) => {
-              TestConsole.consoleFail.call(this, res, apiIndex);
-            },
-            complete: (res) => {
-              TestConsole.consoleComplete.call(this, res, apiIndex);
-            },
-          });
+        func: (data = {}) => {
+          return new Promise ((resolve) => {
+            const callback = {};
+            wx.sendSocketMessage({
+              ...data,
+              success: (res) => {
+                callback['success'] = res;
+              },
+              fail: (res) => {
+                callback['fail'] = res;
+              },
+              complete: (res) => {
+                callback['complete'] = res;
+                resolve({callback});
+              },
+            });
+          })
         },
+        isDone: true
       },
       {
         id: 'closeSocket',
@@ -166,21 +210,25 @@ Page({
           code: 1000,
           reason: '主动关闭',
         },
-        func: (apiIndex, data) => {
-          TestConsole.consoleTest('Taro.closeSocket');
-          Taro.closeSocket({
-            ...data,
-            success: (res) => {
-              TestConsole.consoleSuccess.call(this, res, apiIndex);
-            },
-            fail: (res) => {
-              TestConsole.consoleFail.call(this, res, apiIndex);
-            },
-            complete: (res) => {
-              TestConsole.consoleComplete.call(this, res, apiIndex);
-            },
-          });
+        func: (data = {}) => {
+          return new Promise ((resolve) => {
+            const callback = {};
+            wx.closeSocket({
+              ...data,
+              success: (res) => {
+                callback['success'] = res;
+              },
+              fail: (res) => {
+                callback['fail'] = res;
+              },
+              complete: (res) => {
+                callback['complete'] = res;
+                resolve({callback});
+              },
+            });
+          })
         },
+        isDone: true
       },
       {
         id: 'SocketTask.onClose',

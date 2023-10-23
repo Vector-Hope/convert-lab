@@ -3,7 +3,43 @@ Page({
   /**
    * 页面的初始数据
    */
-  data: {},
+  data: {
+    list: [
+      {
+        id: 'reportMonitor',
+        func: null,
+      },
+      {
+        id: 'reportEvent',
+        func: null,
+      },
+      {
+        id: 'reportAnalytics',
+        inputData: {
+          eventName: 'purchase',
+          eventData: {
+            price: 120,
+            color: 'red'
+          },
+        },
+        func: (data = {}) => {
+          const {eventName, eventData} = data;
+          wx.reportAnalytics(eventName, eventData);
+          return {};
+        },
+      },
+      {
+        id: 'getExptInfoSync',
+        inputData: {
+          key: [],
+        },
+        func: (data = {}) => {
+          const {key} = data;
+          wx.getExptInfoSync(key);
+        },
+      },
+    ],
+  },
 
   /**
    * 生命周期函数--监听页面加载

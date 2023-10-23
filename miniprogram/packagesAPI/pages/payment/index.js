@@ -8,17 +8,22 @@ Page({
       {
         id: 'requestPayment',
         inputData: {
-          timeStamp: new Date(),
           nonceStr: '',
-          package: 'prepay_id=testPayment',
+          packageName: 'prepay_id=testPayment',
           signType: 'MD5',
           paySign: '',
         },
         func: (data = {}) => {
+          const timeStamp = new Date();
+          const {nonceStr, packageName, signType, paySign} = data;
           return new Promise((resolve) => {
             const callback = {};
             wx.requestPayment({
-              ...data,
+              timeStamp: timeStamp.getTime().toString(),
+              nonceStr,
+              package: packageName,
+              signType,
+              paySign,
               success: (res) => {
                 callback['success'] = res;
               },

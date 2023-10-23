@@ -547,19 +547,16 @@ Page({
           const { canvas } = that.data;
           const { text } = data;
           const textWidth = canvas.measureText(text);
-          console.log('test API: CanvasContext.measureText');
-          console.log(textWidth);
-          console.log('test-----', {
-            actualBoundingBoxAscent: textWidth.actualBoundingBoxAscent,
-            actualBoundingBoxDescent: textWidth.actualBoundingBoxDescent,
-            actualBoundingBoxLeft: textWidth.actualBoundingBoxLeft,
-            actualBoundingBoxRight: textWidth.actualBoundingBoxRight,
-            fontBoundingBoxAscent: textWidth.fontBoundingBoxAscent,
-            fontBoundingBoxDescent: textWidth.fontBoundingBoxDescent,
-            width: textWidth.width,
-          });
           return {
-            callback: textWidth,
+            callback: {
+              actualBoundingBoxAscent: textWidth.actualBoundingBoxAscent,
+              actualBoundingBoxDescent: textWidth.actualBoundingBoxDescent,
+              actualBoundingBoxLeft: textWidth.actualBoundingBoxLeft,
+              actualBoundingBoxRight: textWidth.actualBoundingBoxRight,
+              fontBoundingBoxAscent: textWidth.fontBoundingBoxAscent,
+              fontBoundingBoxDescent: textWidth.fontBoundingBoxDescent,
+              width: textWidth.width,
+            },
           };
         },
         isDone: true,

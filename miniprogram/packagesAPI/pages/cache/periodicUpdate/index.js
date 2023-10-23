@@ -11,19 +11,70 @@ Page({
           fetchType: '',
         },
         func: (data = {}) => {
-          Taro.getBackgroundFetchData({
-            ...data,
-            success: (res) => {
-              TestConsole.consoleSuccess.call(this, res, apiIndex);
-            },
-            fail: (res) => {
-              TestConsole.consoleFail.call(this, res, apiIndex);
-            },
-            complete: (res) => {
-              TestConsole.consoleComplete.call(this, res, apiIndex);
-            },
-          });
+          return new Promise((resolve) => {
+            const callback ={};
+            wx.getBackgroundFetchData({
+              ...data,
+              success: (res) => {
+                callback['success'] = res;
+              },
+              fail: (res) => {
+                callback['fail'] = res;
+              },
+              complete: (res) => {
+                callback['complete'] = res;
+                resolve({callback});
+              },
+            })
+          })
         },
+        isDone: true
+      },
+      {
+        id: 'setBackgroundFetchToken',
+        inputData: {
+          token: 'backgroundFetchToken',
+        },
+        func: (data = {}) => {
+          return new Promise((resolve) => {
+            const callback ={};
+            wx.setBackgroundFetchToken({
+              ...data,
+              success: (res) => {
+                callback['success'] = res;
+              },
+              fail: (res) => {
+                callback['fail'] = res;
+              },
+              complete: (res) => {
+                callback['complete'] = res;
+                resolve({callback});
+              },
+            })
+          })
+        },
+        isDone: true,
+      },
+      {
+        id: 'getBackgroundFetchToken',
+        func: (data = {}) => {
+          return new Promise((resolve) => {
+            const callback ={};
+            wx.getBackgroundFetchToken({
+              success: (res) => {
+                callback['success'] = res;
+              },
+              fail: (res) => {
+                callback['fail'] = res;
+              },
+              complete: (res) => {
+                callback['complete'] = res;
+                resolve({callback});
+              },
+            })
+          })
+        },
+        isDone: true,
       },
     ],
   },

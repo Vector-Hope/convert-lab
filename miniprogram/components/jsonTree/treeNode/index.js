@@ -65,6 +65,7 @@ Component({
     initData() {
       const { showData } = this.properties;
       const type = getType(showData);
+      console.log(type)
       const resetData = this.resetData(showData);
       let needMore = false;
       if ((type == 'Object' && Object.keys(showData).length != 0) || (type == 'Array' && showData.length != 0)) {

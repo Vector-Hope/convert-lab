@@ -1,2 +1,8 @@
 <!--packagesAPI/pages/media/recording/index.wxml-->
-<text>packagesAPI/pages/media/recording/index.wxml</text>
+<view class="api-page">
+  <view class='timer'>
+    <view>{{isRecording ? '| |' : '| >'}}</view>
+    <view>{{formatedRecordTime}}</view>
+  </view>
+  <button-list buttonList="{{list}}" />
+</view>

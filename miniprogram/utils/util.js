@@ -1,12 +1,15 @@
-const formatTime = (date) => {
-  const year = date.getFullYear();
-  const month = date.getMonth() + 1;
-  const day = date.getDate();
-  const hour = date.getHours();
-  const minute = date.getMinutes();
-  const second = date.getSeconds();
-
-  return `${[year, month, day].map(formatNumber).join('/')} ${[hour, minute, second].map(formatNumber).join(':')}`;
+const formatTime = (time) => {
+  const hour = parseInt(time / 3600 + '')
+    time %= 3600
+    const minute = parseInt(time / 60 + '')
+    time = parseInt((time % 60) + '')
+    const second = time
+    return [hour, minute, second]
+      .map((n) => {
+        n = n.toString()
+        return n[1] ? n : `0${n}`
+      })
+      .join(':')
 };
 
 const formatNumber = (n) => {
@@ -20,11 +23,20 @@ const getType = (variable) => {
 };
 
 const formatJson = (data) => {
+  // console.log('before format: ', data)
+  if (!data) {
+    return data;
+  }
   const ownKeys = Object.getOwnPropertyNames(data);
   let newData = {};
   for (let key of ownKeys) {
-    newData[key] = data[key];
+    if (getType(data[key]) === 'Function') {
+      newData[key] = 'f( )';
+    } else {
+      newData[key] = data[key];
+    }
   }
+  // console.log('before format: ', newData)
   try {
     JSON.stringify(newData);
     return JSON.parse(JSON.stringify(newData));

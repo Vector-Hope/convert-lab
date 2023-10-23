@@ -148,34 +148,34 @@ Page({
       },
       {
         id: 'getStorageInfoSync',
-        func: (apiIndex) => {
-          TestConsole.consoleTest('getStorageInfoSync');
-          try {
-            const res = Taro.getStorageInfoSync();
-            TestConsole.consoleSuccess.call(this, res, apiIndex);
-          } catch (err) {
-            TestConsole.consoleFail.call(this, err, apiIndex);
+        func: (data = {}) => {
+          const storageInfo = wx.getStorageInfoSync();
+          return {
+            callback: storageInfo
           }
         },
+        isDone: true,
       },
       {
         id: 'getStorageInfo',
-        func: (apiIndex) => {
-          TestConsole.consoleTest('getStorageInfo');
-          Taro.getStorageInfo({
-            success: (res) => {
-              TestConsole.consoleSuccess.call(this, res, apiIndex);
-            },
-            fail: (res) => {
-              TestConsole.consoleFail.call(this, res, apiIndex);
-            },
-            complete: (res) => {
-              TestConsole.consoleComplete.call(this, res, apiIndex);
-            },
-          }).then((res) => {
-            TestConsole.consoleReturn.call(this, res, apiIndex);
-          });
+        func: (data = {}) => {
+          return new Promise((resolve) => {
+            const callback ={};
+            wx.getStorageInfo({
+              success: (res) => {
+                callback['success'] = res;
+              },
+              fail: (res) => {
+                callback['fail'] = res;
+              },
+              complete: (res) => {
+                callback['complete'] = res;
+                resolve({callback});
+              },
+            })
+          })
         },
+        isDone: true
       },
       {
         id: 'getStorage',
