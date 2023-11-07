@@ -6,6 +6,11 @@
     "pages/component/index",
     "pages/API/index"
   ],
+  "permission": {
+    "scope.userLocation": {
+      "desc": "你的位置信息将用于小程序位置接口的效果展示"
+    }
+  },
   "usingComponents": {
     "button-list": "./components/buttonList/index"
   },
@@ -186,6 +191,10 @@
         "pages/skyline/index"
       ]
     }
+  ],
+  "requiredPrivateInfos": [
+    "getLocation",
+    "chooseLocation"
   ],
   "style": "v2",
   "sitemapLocation": "sitemap.json",

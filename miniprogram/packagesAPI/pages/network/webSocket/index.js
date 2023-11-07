@@ -111,7 +111,7 @@ Page({
           timeout: 6000,
           forceCellularNetwork: false,
         },
-        func: async (data = {}) => {
+        func: (data = {}) => {
           return new Promise((resolve) => {
             const callback = {};
             const socketTask = wx.connectSocket({
@@ -147,7 +147,7 @@ Page({
           timeout: 6000,
           forceCellularNetwork: false,
         },
-        func: async (data = {}) => {
+        func: (data = {}) => {
           const {socketTask} = that.data;
           if (socketTask) {
             socketTask.close();

@@ -24,7 +24,10 @@ Page({
               },
               complete: (res) => {
                 callback['complete'] = res;
-                resolve({ callback });
+                resolve({
+                  callback,
+                  isShowToast: true
+                });
               },
             });
           });

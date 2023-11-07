@@ -43,6 +43,23 @@ Page({
         isDone: true,
       },
       {
+        id: 'Animation.step',
+        inputData: {
+          step1Opacity: 0.5,
+          step2Opacity: 0.3,
+        },
+        func: (data = {}) => {
+          const { animation } = that.data;
+          const { step1Opacity, step2Opacity } = data;
+          animation.opacity(step1Opacity).step().opacity(step2Opacity).step();
+          that.exportAnimationData(`opacity(${step1Opacity}).step().opacity(${step2Opacity}).step()`);
+          return {
+            callback: {},
+          };
+        },
+        isDone: true,
+      },
+      {
         id: 'Animation.backgroundColor',
         inputData: {
           color: '#64bb5c',
@@ -116,8 +133,13 @@ Page({
         func: (data = {}) => {
           const { animation } = that.data;
           const { scaleX, scaleY } = data;
-          animation.scale(scaleX, scaleY).step();
-          that.exportAnimationData(`scale(${scaleX}, ${scaleY})`);
+          if (scaleY) {
+            animation.scale(scaleX, scaleY).step();
+            that.exportAnimationData(`scale(${scaleX}, ${scaleY})`);
+          } else {
+            animation.scale(scaleX).step();
+            that.exportAnimationData(`scale(${scaleX})`);
+          }
           return {
             callback: {},
           };

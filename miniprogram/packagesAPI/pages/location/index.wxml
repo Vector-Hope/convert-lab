@@ -1,2 +1,12 @@
 <!--packagesAPI/pages/location/index.wxml-->
-<text>packagesAPI/pages/location/index.wxml</text>
+<view class="api-page">
+  <view>
+    <view class='location-area'>
+      <Text wx:if="{{location}}">
+        {{location}}
+      </Text>
+      <Text wx:else>未获得位置</Text>
+    </view>
+  </view>
+  <button-list buttonList="{{list}}" />
+</view>

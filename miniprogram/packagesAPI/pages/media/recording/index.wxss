@@ -4,3 +4,9 @@
   width: 100%;
   justify-content: center;
 }
+
+.record {
+  display: flex;
+  width: 100%;
+  justify-content: center;
+}

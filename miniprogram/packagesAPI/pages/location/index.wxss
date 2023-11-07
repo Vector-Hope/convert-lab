@@ -1,1 +1,7 @@
 /* packagesAPI/pages/location/index.wxss */
+.location-area {
+  width: 100%;
+  margin: 20rpx;
+  text-align: center;
+  font-size: 40rpx;
+}

@@ -34,11 +34,15 @@ Page({
         id: 'getRecoederManager',
         func: (data = {}) => {
           const recorderManager = wx.getRecorderManager();
+          wx.showToast({
+            title: '先添加所有监听',
+          })
           that.setData({
             recorderManager,
           })
           return {
-            callback: recorderManager
+            callback: recorderManager,
+            isShowToast: true
           }
         },
         isDone: true
@@ -63,10 +67,7 @@ Page({
               isShowToast: true,
             }
           }
-          that.setData({
-            isRecording: true,
-          })
-          recorderManager.start(data);
+          recorderManager.start();
           return {};
         },
         isDone: true,
@@ -335,6 +336,9 @@ Page({
                 console.log(res);
               }
               isFirstListen = false;
+              that.setData({
+                recordFilePath: res.tempFilePath,
+              })
               resolve({callback: res});
             })
           })
@@ -347,6 +351,7 @@ Page({
     isRecording: false,
     recordTime: 0,
     formatedRecordTime: '00:00:00',
+    recordFilePath: null,
   },
 
   /**

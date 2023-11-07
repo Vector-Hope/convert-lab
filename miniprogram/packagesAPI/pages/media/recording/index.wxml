@@ -4,5 +4,8 @@
     <view>{{isRecording ? '| |' : '| >'}}</view>
     <view>{{formatedRecordTime}}</view>
   </view>
+  <view class='record'>
+    <audio src="{{recordFilePath}}" id="myAudio" controls loop></audio>
+  </view>
   <button-list buttonList="{{list}}" />
 </view>
