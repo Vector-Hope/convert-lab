@@ -5,68 +5,300 @@ Page({
         id: 'view',
         name: '视图容器',
         open: false,
-        pages: ['view', 'scroll-view', 'swiper', 'movable-view', 'cover-view', 'root-portal', 'grid-view', 'sticky'],
+        pages: [
+          {
+            id: 'coverImage',
+            name: 'cover-image'
+          },
+          {
+            id: 'coverView',
+            name: 'cover-view',
+          },
+          {
+            id: 'matchMedia',
+            name: 'match-media',
+          },
+          {
+            id: 'movableArea',
+            name: 'movable-area',
+          },
+          {
+            id: 'movableView',
+            name: 'movable-view',
+          },
+          {
+            id: 'pageContainer',
+            name: 'page-container',
+          },
+          {
+            id: 'rootPortal',
+            name: 'root-portal',
+          },
+          {
+            id: 'scrollView',
+            name: 'scroll-view',
+          },
+          {
+            id: 'swiper',
+            name: 'swiper',
+          },
+          {
+            id: 'swiperItem',
+            name: 'swiper-item',
+          },
+          {
+            id: 'view',
+            name: 'view',
+          },
+        ],
       },
       {
         id: 'content',
         name: '基础内容',
         open: false,
-        pages: ['text', 'icon', 'progress', 'rich-text'],
+        pages: [
+        {
+          id: 'icon',
+          name: 'icon'
+        },
+        {
+          id: 'progress',
+          name: 'progress'
+        },
+        {
+          id: 'richText',
+          name: 'rich-text'
+        },
+        {
+          id: 'text',
+          name: 'text'
+        },
+      ],
       },
       {
         id: 'form',
         name: '表单组件',
         open: false,
         pages: [
-          'button',
-          'checkbox',
-          'form',
-          'input',
-          'label',
-          'picker',
-          'picker-view',
-          'radio',
-          'slider',
-          'switch',
-          'textarea',
-          'editor',
+          {
+            id: 'button',
+            name: 'button',
+          },
+          {
+            id: 'checkbox',
+            name: 'checkbox',
+          },
+          {
+            id: 'checkboxGroup',
+            name: 'checkbox-group',
+          },
+          {
+            id: 'editor',
+            name: 'editor',
+          },
+          {
+            id: 'form',
+            name: 'form',
+          },
+          {
+            id: 'input',
+            name: 'input',
+          },
+          {
+            id: 'keyboardAccessory',
+            name: 'keyboard-accessory',
+          },
+          {
+            id: 'label',
+            name: 'label',
+          },
+          {
+            id: 'picker',
+            name: 'picker',
+          },
+          {
+            id: 'pickerView',
+            name: 'picker-view',
+          },
+          {
+            id: 'pickerViewColumn',
+            name: 'picker-view-column',
+          },
+          {
+            id: 'radio',
+            name: 'radio',
+          },
+          {
+            id: 'radioGroup',
+            name: 'radio-group',
+          },
+          {
+            id: 'slider',
+            name: 'slider',
+          },
+          {
+            id: 'switch',
+            name: 'switch',
+          },
+          {
+            id: 'textarea',
+            name: 'textarea',
+          },
         ],
       },
       {
         id: 'nav',
         name: '导航',
         open: false,
-        pages: ['navigator'],
+        pages: [
+        {
+          id: 'gridView',
+          name: 'grid-view'
+        },
+        {
+          id: 'listView',
+          name: 'list-view'
+        },
+        {
+          id: 'shareElement',
+          name: 'share-element'
+        },
+        {
+          id: 'snapshot',
+          name: 'snapshot'
+        },
+        {
+          id: 'stickyHeader',
+          name: 'sticky-header'
+        },
+        {
+          id: 'stickySection',
+          name: 'sticky-section'
+        }
+      ],
+      },
+      {
+        id: 'nav',
+        name: '导航',
+        open: false,
+        pages: [
+        {
+          id: 'functionalPageNavigator',
+          name: 'functional-page-navigator'
+        },
+        {
+          id: 'navigator',
+          name: 'navigator'
+        },
+      ],
       },
       {
         id: 'media',
         name: '媒体组件',
         open: false,
-        pages: ['image', 'video', 'camera', 'live-pusher', 'live-player', 'channel-live', 'channel-video'],
+        pages: [
+          {
+            id: 'audio', 
+            name: 'audio',
+          },
+        {
+          id: 'camera', 
+          name: 'camera',
+        },
+        {
+          id: 'channelLive', 
+          name: 'channel-live',
+        },
+        {
+          id: 'channelVideo',
+          name: 'channel-video',
+        },
+          {
+            id: 'image', 
+            name: 'image',
+          },
+        {
+          id: 'livePusher', 
+          name: 'live-pusher',
+        },
+        {
+          id: 'livePlayer', 
+          name: 'live-player',
+        },
+        {
+          id: 'video', 
+          name: 'video',
+        },
+        {
+          id: 'voipRoom', 
+          name: 'voip-room',
+        },
+      ],
       },
       {
         id: 'map',
         name: '地图',
         open: false,
-        pages: ['map', { appid: 'wxe3f314db2e921db0', name: '腾讯位置服务示例中心' }],
+        pages: [{
+          id:'map',
+          name: 'map'
+        }],
       },
       {
         id: 'canvas',
         name: '画布',
         open: false,
-        pages: ['canvas-2d', 'webgl'],
+        pages: [
+          {
+            id: 'canvas',
+            name: 'canvas',
+          }
+        ],
       },
       {
         id: 'open',
         name: '开放能力',
         open: false,
-        pages: ['ad', 'open-data', 'web-view'],
+        pages: [
+          {
+            id: 'ad', 
+            name: 'ad',
+          },
+          {
+            id: 'adCustom', 
+            name: 'ad-custom',
+          },
+          {
+            id: 'afficialAccount', 
+            name: 'afficial-account',
+          },
+        {
+          id: 'openData', 
+          name: 'open-data',
+        },
+        {
+          id: 'webView',
+          name: 'web-view',
+        },
+      ],
       },
       {
-        id: 'obstacle-free',
+        id: 'obstacleFree',
         name: '无障碍访问',
         open: false,
-        pages: ['aria-component'],
+        pages: [{
+          id: 'ariaComponent',
+          name: 'aria-component',
+        }],
+      },
+      {
+        id: 'navigationBar',
+        name: '导航栏',
+        open: false,
+        pages: [{
+          id: 'navigationBar',
+          name: 'navigation-bar',
+        }],
       },
     ],
   },
