@@ -1,60 +1,52 @@
 // packagesAPI/pages/cache/cache/index.js
+let that;
 Page({
   /**
    * 页面的初始数据
    */
   data: {
-    list: [
-      {
-        id: 'setStorageSync',
+    list: {
+      setStorageSync: {
         inputData: {
           key: 'setStorageSyncKey',
           value: 'setStorageSyncValue',
         },
-        func: (data = {}) => {
+        func: (data = {}, id) => {
           wx.setStorageSync(data['key'], data['value']);
-          return {
-            callback: {
-              value: wx.getStorageSync(data['key']),
-            },
-          };
+          that.setCallback(id, {
+            value: wx.getStorageSync(data['key']),
+          })
         },
         isDone: true,
       },
-      {
-        id: 'setStorage',
+      setStorage: {
         inputData: {
           key: 'setStorageKey',
           data: 'setStorageValue',
         },
-        func: (data = {}) => {
-          const callback = {};
-          return new Promise((resolve) => {
-            wx.setStorage({
-              ...data,
-              success: (res) => {
-                callback['success'] = res;
-              },
-              fail: (res) => {
-                callback['fail'] = res;
-              },
-              complete: (res) => {
-                callback['complete'] = res;
-                resolve({
-                  callback,
-                });
-              },
-            });
+        func: (data = {}, id) => {
+          let callback = {};
+          wx.setStorage({
+            ...data,
+             success: (res) => {
+              callback['success'] = res;
+            },
+            fail: (res) => {
+              callback['fail'] = res;
+            },
+            complete: (res) => {
+              that.setCallback(id, {...callback, complete: res});
+            },
           });
+
         },
         isDone: true,
       },
-      {
-        id: 'removeStorageSync',
+      removeStorageSync: {
         inputData: {
           removeKey: 'setStorageSyncKey',
         },
-        func: (data = {}) => {
+        func: (data = {}, id) => {
           const { removeKey } = data;
           const value = wx.getStorageSync(removeKey);
           if (value) {
@@ -65,32 +57,25 @@ Page({
             if (wx.getStorageSync(removeKey)) {
               callback.msg = 'removeStorageSync:error';
             }
-            return {
-              callback,
-            };
+            that.setCallback(id, callback);
           } else {
             wx.showToast({
               title: '请先缓存对应数据',
             });
-            return {
-              isShowToast: true,
-              callback: {},
-            };
+            return true;
           }
         },
         isDone: true,
       },
-      {
-        id: 'removeStorage',
+      removeStorage: {
         inputData: {
           removeKey: 'setStorageSyncKey',
         },
-        func: (data = {}) => {
+        func: (data = {}, id) => {
           const { removeKey } = data;
           const value = wx.getStorageSync(removeKey);
+          let callback = {};
           if (value) {
-            const callback = {};
-            return new Promise((resolve) => {
               wx.removeStorage({
                 key: removeKey,
                 success: (res) => {
@@ -100,67 +85,46 @@ Page({
                   callback['fail'] = res;
                 },
                 complete: (res) => {
-                  callback['complete'] = res;
-                  resolve({
-                    callback,
-                  });
+                  that.setCallback(id, {...callback, complete: res});
                 },
               });
-            });
           } else {
             wx.showToast({
               title: '请先缓存对应数据',
             });
-            return {
-              isShowToast: true,
-              callback: {},
-            };
+            return true;
           }
         },
         isDone: true,
       },
-      {
-        id: 'getStorageSync',
+      getStorageSync: {
         inputData: {
           getKey: 'setStorageSyncKey',
         },
-        func: (data = {}) => {
+        func: (data = {}, id) => {
           const { getKey } = data;
           const value = wx.getStorageSync(getKey);
           if (value) {
-            const callback = {
-              value,
-            };
-            return {
-              callback,
-            };
+            that.setCallback(id, {value});
           } else {
             wx.showToast({
               title: '请先缓存对应数据',
             });
-            return {
-              isShowToast: true,
-              callback: {},
-            };
+            return true;
           }
         },
         isDone: true,
       },
-      {
-        id: 'getStorageInfoSync',
-        func: (data = {}) => {
+      getStorageInfoSync: {
+        func: (data = {}, id) => {
           const storageInfo = wx.getStorageInfoSync();
-          return {
-            callback: storageInfo
-          }
+          that.setCallback(id, storageInfo);
         },
         isDone: true,
       },
-      {
-        id: 'getStorageInfo',
-        func: (data = {}) => {
-          return new Promise((resolve) => {
-            const callback ={};
+      getStorageInfo: {
+        func: (data = {}, id) => {
+          let callback = {};
             wx.getStorageInfo({
               success: (res) => {
                 callback['success'] = res;
@@ -169,70 +133,54 @@ Page({
                 callback['fail'] = res;
               },
               complete: (res) => {
-                callback['complete'] = res;
-                resolve({callback});
+                that.setCallback(id, {...callback, complete: res});
               },
             })
-          })
         },
         isDone: true
       },
-      {
-        id: 'getStorage',
+      getStorage: {
         inputData: {
           getKey: 'setStorageSyncKey',
         },
-        func: (data = {}) => {
+        func: (data = {}, id) => {
           const { getKey } = data;
           const value = wx.getStorageSync(getKey);
           if (value) {
-            const callback = {};
-            return new Promise((resolve) => {
-              wx.getStorage({
-                key: getKey,
-                success: (res) => {
-                  callback['success'] = res;
-                },
-                fail: (res) => {
-                  callback['fail'] = res;
-                },
-                complete: (res) => {
-                  callback['complete'] = res;
-                  resolve({
-                    callback,
-                  });
-                },
-              });
+            let callback = {};
+            wx.getStorage({
+              key: getKey,
+              success: (res) => {
+                callback['success'] = res;
+              },
+              fail: (res) => {
+                callback['fail'] = res;
+              },
+              complete: (res) => {
+                that.setCallback(id, {...callback, complete: res});
+              },
             });
           } else {
             wx.showToast({
               title: '请先缓存对应数据',
             });
-            return {
-              isShowToast: true,
-              callback: {},
-            };
+            return true;
           }
         },
         isDone: true,
       },
-      {
-        id: 'clearStorageSync',
-        func: (data = {}) => {
+      clearStorageSync: {
+        func: (data = {}, id) => {
           wx.clearStorageSync();
-          return {
-            callback: {
-              msg: 'clearStorageSync:ok',
-            },
-          };
+          that.setCallback(id, {
+            msg: 'clearStorageSync:ok',
+          });
         },
         isDone: true,
       },
-      {
-        id: 'clearStorage',
-        func: (data = {}) => {
-          const callback = {};
-          return new Promise((resolve) => {
+      clearStorage: {
+        func: (data = {}, id) => {
+          let callback = {};
             wx.clearStorage({
               success: (res) => {
                 callback['success'] = res;
@@ -241,22 +189,16 @@ Page({
                 callback['fail'] = res;
               },
               complete: (res) => {
-                callback['complete'] = res;
-                resolve({
-                  callback,
-                });
+                that.setCallback(id, {...callback, complete: res});
               },
             });
-          });
         },
         isDone: true,
       },
-      {
-        id: 'PeriodicUpdate_暂不支持',
+      PeriodicUpdate: {
         func: null,
       },
-      {
-        id: 'setBackgroundFetchToken',
+      setBackgroundFetchToken: {
         inputData: {
           token: '',
         },
@@ -276,7 +218,7 @@ Page({
           });
         },
       },
-      {
+      getBackgroundFetchData: {
         id: 'getBackgroundFetchData',
         inputData: {
           fetchType: '',
@@ -297,50 +239,32 @@ Page({
           });
         },
       },
-      {
-        id: 'CacheManager_暂不支持',
+      CacheManager: {
         func: null,
       },
-    ],
+  },
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
-  onLoad(options) {},
-
-  /**
-   * 生命周期函数--监听页面初次渲染完成
-   */
-  onReady() {},
-
-  /**
-   * 生命周期函数--监听页面显示
-   */
-  onShow() {},
-
-  /**
-   * 生命周期函数--监听页面隐藏
-   */
-  onHide() {},
-
-  /**
-   * 生命周期函数--监听页面卸载
-   */
-  onUnload() {},
-
-  /**
-   * 页面相关事件处理函数--监听用户下拉动作
-   */
-  onPullDownRefresh() {},
-
-  /**
-   * 页面上拉触底事件的处理函数
-   */
-  onReachBottom() {},
-
-  /**
-   * 用户点击右上角分享
-   */
-  onShareAppMessage() {},
+  onLoad(options) {
+    that = this;
+    const {list} = this.data;
+    const listKey = Object.keys(list);
+    listKey.forEach((key) => {
+      list[key].callbackRes = {};
+    })
+    this.setData({
+      list
+    })
+  },
+  setCallback(id, callback) {
+    const {list} = that.data;
+    console.log(callback);
+    list[id].callbackRes = callback;
+    that.setData({
+      list
+    })
+  },
 });

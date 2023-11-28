@@ -6,9 +6,8 @@ Page({
    */
   data: {
     request: null,
-    list: [
-      {
-        id: 'request',
+    list: {
+      request: {
         inputData: {
           url: 'http://26.26.26.1:3000/hello',
           dataType: 'json',
@@ -19,104 +18,77 @@ Page({
             'Content-Type': 'application/json',
           },
         },
-        func: (data = {}) => {
+        func: (data = {}, id) => {
           const callback = {};
-          return new Promise((resolve) => {
-            const request = wx.request({
-              ...data,
-              success: (res) => {
-                callback['success'] = res;
-              },
-              fail: (res) => {
-                callback['fail'] = res;
-              },
-              complete: (res) => {
-                callback['complete'] = res;
-                resolve({ callback });
-              },
-            });
-            that.setData({
-              request,
-            });
+          const request = wx.request({
+            ...data,
+            success: (res) => {
+              callback['success'] = res;
+            },
+            fail: (res) => {
+              callback['fail'] = res;
+            },
+            complete: (res) => {
+              that.setCallback(id, {...callback, complete: res});
+            },
+          });
+          that.setData({
+            request,
           });
         },
         isDone: true,
       },
-      {
-        id: 'RequestTask.abort',
-        func: (data = {}) => {
+      RequestTask_abort: {
+        func: (data = {}, id) => {
           const { request } = that.data;
           if (request) {
             request.abort();
-            return {
-              callback: {},
-            };
           } else {
             wx.showToast({
               title: '暂无请求',
             });
-            return {
-              callback: {},
-              isShowToast: true,
-            };
+            return true;
           }
         },
         isDone: true,
       },
-      {
-        id: 'RequestTask.onHeadersReceived',
-        func: (data = {}) => {
+      RequestTask_onHeadersReceived: {
+        func: (data = {}, id) => {
           const { request } = that.data;
           if (request) {
-            return new Promise((resolve) => {
-              request.onHeadersReceived((res) => {
-                // console.log('test API: RequestTask.onHeadersReceived');
-                // console.log(res);
-                resolve({ callback: res });
-              });
+            request.onHeadersReceived((res) => {
+              that.setCallback(id, res);
             });
           } else {
             wx.showToast({
               title: '暂无请求',
             });
-            return {
-              callback: {},
-              isShowToast: true,
-            };
+            return true;
           }
         },
         isDone: true,
       },
-      {
-        id: 'RequestTask.offHeadersReceived',
-        func: (data = {}) => {
+      RequestTask_offHeadersReceived: {
+        func: (data = {}, id) => {
           const { request } = that.data;
           if (request) {
             request.offHeadersReceived();
-            return {
-              callback: {},
-            };
           } else {
             wx.showToast({
               title: '暂无请求',
             });
-            return {
-              callback: {},
-              isShowToast: true,
-            };
+            return true;
           }
         },
         isDone: true,
       },
-      {
-        id: 'addInterceptor',
+      addInterceptor: {
         func: null,
       },
-      {
-        id: 'cleanInterceptors',
+      cleanInterceptors: {
         func: null,
       },
-    ],
+    },
   },
 
   /**
@@ -124,40 +96,21 @@ Page({
    */
   onLoad(options) {
     that = this;
+    const {list} = this.data;
+    const listKey = Object.keys(list);
+    listKey.forEach((key) => {
+      list[key].callbackRes = {};
+    })
+    this.setData({
+      list
+    })
   },
-
-  /**
-   * 生命周期函数--监听页面初次渲染完成
-   */
-  onReady() {},
-
-  /**
-   * 生命周期函数--监听页面显示
-   */
-  onShow() {},
-
-  /**
-   * 生命周期函数--监听页面隐藏
-   */
-  onHide() {},
-
-  /**
-   * 生命周期函数--监听页面卸载
-   */
-  onUnload() {},
-
-  /**
-   * 页面相关事件处理函数--监听用户下拉动作
-   */
-  onPullDownRefresh() {},
-
-  /**
-   * 页面上拉触底事件的处理函数
-   */
-  onReachBottom() {},
-
-  /**
-   * 用户点击右上角分享
-   */
-  onShareAppMessage() {},
+  setCallback(id, callback) {
+    const {list} = that.data;
+    console.log(callback);
+    list[id].callbackRes = callback;
+    that.setData({
+      list
+    })
+  },
 });

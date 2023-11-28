@@ -4,7 +4,7 @@
   <view class="json-tree-component">
     <json-tree
       wx:if="{{showResId != ''}}"
-      jsonData="{{list[showResId].callbackRes}}"
+      jsonData="{{buttonList[showResId].callbackRes}}"
       isShowRes="{{isShowRes}}"
       apiId="{{showResId}}"
       bind:closeRes="closeRes"
@@ -14,9 +14,9 @@
     <!-- 用于修改入参的textarea -->
     <view class="api-textarea-area">
       <textarea
-        class="api-input-area {{!list[item].inputData || list[item].hideTextarea ? 'api-input-area-hidden' : ''}}"
+        class="api-input-area {{!inputDataList[item] || hideTextareaList[item] ? 'api-input-area-hidden' : ''}}"
         maxlength="{{-1}}"
-        value="{{list[item].inputData}}"
+        value="{{inputDataList[item]}}"
         bindinput="changeData"
         data-id="{{item}}"
         id="{{item}}-input"
@@ -26,19 +26,19 @@
     <view class="btn-area">
       <!-- api触发按钮 -->
       <view
-        class="api-page-btn {{list[item].isDone ? '' : 'api-page-btn-uncreate'}}"
+        class="api-page-btn {{buttonList[item].isDone ? '' : 'api-page-btn-uncreate'}}"
         bindtap="APITrigger"
         data-id="{{item}}"
         id="{{item}}"
       >
         {{item}}
         <!-- 用于自动化测试获取页面回调内容节点 -->
-        <callback-contents callbackRes="{{list[item].callbackRes}}" testApi="{{item}}" />
+        <callback-contents callbackRes="{{buttonList[item].callbackRes}}" testApi="{{item}}" />
       </view>
       <!-- 控制textarea展示控件 -->
       <view class="textarea-control">
         <image
-          class="control-icon {{!list[item].inputData ? 'control-icon-hidden': ''}} {{list[item].hideTextarea ? 'textarea-hidden' : ''}}"
+          class="control-icon {{!inputDataList[item] ? 'control-icon-hidden': ''}} {{hideTextareaList[item] ? 'textarea-hidden' : ''}}"
           src="./image/close.png"
           bindtap="hideTextarea"
           data-id="{{item}}"
@@ -48,27 +48,4 @@
       <view class="show-res-btn" bindtap="showRes" data-id="{{item}}">显示结果</view>
     </view>
   </view>
-  <!-- 微信小程序可以利用遍历Object进行列表渲染，taro不行，所以暂时注释掉 -->
-  <!-- <view class="api-page-btn-area" wx:for="{{list}}" wx:key="id">
-    <view class="api-textarea-area">
-      <textarea
-        class="api-input-area {{!item.inputData || item.hideTextarea ? 'api-input-area-hidden' : ''}}"
-        maxlength="{{-1}}"
-        value="{{item.inputData}}"
-        bindinput="changeData"
-        data-id="{{index}}"
-        id="{{index}}-input"
-      />
-    </view>
-    <view class="btn-area">
-      <button class="api-page-btn" bindtap="APITrigger" data-id="{{index}}" id="{{index}}">
-        {{index}}
-        <callback-contents callbackRes="{{item.callbackRes}}" testAPI="{{index}}"/>
-      </button>
-      <view class="textarea-control">
-        <image class="control-icon {{!item.inputData ? 'control-icon-hidden': ''}} {{item.hideTextarea ? 'textarea-hidden' : ''}}" src="./image/close.png" bindtap="hideTextarea" data-id="{{index}}"></image>
-      </view>
-      <button class="show-res-btn" bindtap="showRes" data-id="{{index}}">showRes</button>
-    </view>
-  </view> -->
 </view>

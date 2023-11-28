@@ -5,44 +5,33 @@ Page({
    * 页面的初始数据
    */
   data: {
-    list: [
-      {
-        id: 'onNetworkWeakChange',
+    list: {
+      onNetworkWeakChange: {
         func: null,
       },
-      {
-        id: 'onNetworkStatusChange',
-        func: (data = {}) => {
-          return new Promise((resolve) => {
+      onNetworkStatusChange: {
+        func: (data = {}, id) => {
             wx.onNetworkStatusChange((res) => {
-              console.log('test API: onNetworkStatusChange');
-              console.log(res);
               that.setData({
                 networkType: res.networkType,
               });
-              resolve({ callback: res });
+              that.setCallback(id, res);
             });
-          });
         },
         isDone: true,
       },
-      {
-        id: 'offNetworkWeakChange',
+      offNetworkWeakChange: {
         func: null,
       },
-      {
-        id: 'offNetworkStatusChange',
-        func: (data = {}) => {
+      offNetworkStatusChange: {
+        func: (data = {}, id) => {
           wx.offNetworkStatusChange();
-          return {};
         },
         isDone: true,
       },
-      {
-        id: 'getNetworkType',
-        func: (data = {}) => {
-          return new Promise((resolve) => {
-            const callback = {};
+      getNetworkType: {
+        func: (data = {}, id) => {
+          let callback = {};
             wx.getNetworkType({
               success: (res) => {
                 callback['success'] = res;
@@ -57,19 +46,16 @@ Page({
                 });
               },
               complete: (res) => {
-                callback['complete'] = res;
-                resolve({ callback });
+                that.setCallback(id, {...callback, complete: res});
               },
             });
-          });
         },
         isDone: true,
       },
-      {
-        id: 'getLocalIPAddress',
+      getLocalIPAddress: {
         func: null,
       },
-    ],
+  },
     networkType: '',
   },
 
@@ -78,40 +64,21 @@ Page({
    */
   onLoad(options) {
     that = this;
+    const {list} = this.data;
+    const listKey = Object.keys(list);
+    listKey.forEach((key) => {
+      list[key].callbackRes = {};
+    })
+    this.setData({
+      list
+    })
   },
-
-  /**
-   * 生命周期函数--监听页面初次渲染完成
-   */
-  onReady() {},
-
-  /**
-   * 生命周期函数--监听页面显示
-   */
-  onShow() {},
-
-  /**
-   * 生命周期函数--监听页面隐藏
-   */
-  onHide() {},
-
-  /**
-   * 生命周期函数--监听页面卸载
-   */
-  onUnload() {},
-
-  /**
-   * 页面相关事件处理函数--监听用户下拉动作
-   */
-  onPullDownRefresh() {},
-
-  /**
-   * 页面上拉触底事件的处理函数
-   */
-  onReachBottom() {},
-
-  /**
-   * 用户点击右上角分享
-   */
-  onShareAppMessage() {},
+  setCallback(id, callback) {
+    const {list} = that.data;
+    console.log(callback);
+    list[id].callbackRes = callback;
+    that.setData({
+      list
+    })
+  },
 });

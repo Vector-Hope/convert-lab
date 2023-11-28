@@ -1,21 +1,19 @@
 // packagesAPI/pages/media/recording/index.js
-import {formatTime} from '../../../../utils/util'
+import {formatTime} from '../../../../utils/util';
 let that;
 Page({
   /**
    * 页面的初始数据
    */
   data: {
-    list: [
-      {
-        id: 'stopRecord',
-        func: (data = {}) => {
+    list: {
+      stopRecord: {
+        func: (data = {}, id) => {
           Taro.stopRecord()
         },
       },
-      {
-        id: 'startRecord',
-        func: (data = {}) => {
+      startRecord: {
+        func: (data = {}, id) => {
           this.setState({
             recording: true,
           })
@@ -30,9 +28,8 @@ Page({
           Taro.startRecord(options)
         },
       },
-      {
-        id: 'getRecoederManager',
-        func: (data = {}) => {
+      getRecoederManager: {
+        func: (data = {}, id) => {
           const recorderManager = wx.getRecorderManager();
           wx.showToast({
             title: '先添加所有监听',
@@ -40,15 +37,12 @@ Page({
           that.setData({
             recorderManager,
           })
-          return {
-            callback: recorderManager,
-            isShowToast: true
-          }
+          that.setCallback(id, recorderManager);
+          return true;
         },
         isDone: true
       },
-      {
-        id: 'recorderManager.start',
+      recorderManager_start: {
         inputData: {
           duration: 50000,
           sampleRate: 44100,
@@ -57,295 +51,180 @@ Page({
           format: 'aac',
           frameSize: 50,
         },
-        func: (data = {}) => {
+        func: (data = {}, id) => {
           const {recorderManager} = that.data;
           if (!recorderManager) {
             wx.showToast({
               title: '请创建录音',
             })
-            return {
-              isShowToast: true,
-            }
+            return true;
           }
           recorderManager.start();
-          return {};
         },
         isDone: true,
       },
-      {
-        id: 'recorderManager.stop',
-        func: (data = {}) => {
+      recorderManager_stop: {
+        func: (data = {}, id) => {
           const {recorderManager} = that.data;
           if (!recorderManager) {
             wx.showToast({
               title: '请创建录音',
             })
-            return {
-              isShowToast: true,
-            }
+            return true;
           }
           recorderManager.stop();
-          return {};
         },
         isDone: true,
       },
 
-      {
-        id: 'recorderManager.pause',
-        func: (data = {}) => {
+      recorderManager_pause: {
+        func: (data = {}, id) => {
           const {recorderManager} = that.data;
           if (!recorderManager) {
             wx.showToast({
               title: '请创建录音',
             })
-            return {
-              isShowToast: true,
-            }
+            return true;
           }
           recorderManager.pause();
-          return {};
         },
         isDone: true,
       },
-      {
-        id: 'recorderManager.resume',
-        func: (data = {}) => {
+      recorderManager_resume: {
+        func: (data = {}, id) => {
           const {recorderManager} = that.data;
           if (!recorderManager) {
             wx.showToast({
               title: '请创建录音',
             })
-            return {
-              isShowToast: true,
-            }
+            return true;
           }
           recorderManager.resume();
-          return {};
         },
         isDone: true,
       },
-      {
-        id: 'recorderManager.onError',
-        func: (data = {}) => {
+      recorderManager_onError: {
+        func: (data = {}, id) => {
           const {recorderManager} = that.data;
           if (!recorderManager) {
             wx.showToast({
               title: '请创建录音',
             })
-            return {
-              isShowToast: true,
-            }
+            return true;
           }
-          return new Promise ((resolve) => {
-            let isFirstListen = true;
-            recorderManager.onError((res) => {
-              if (!isFirstListen) {
-                console.log('test API: recorderManager.onError');
-                console.log(res);
-              }
-              isFirstListen = false;
-              resolve({callback: res});
-            })
+          recorderManager.onError((res) => {
+            that.setCallback(id, res);
           })
+
         },
         isDone: true,
       },
-      {
-        id: 'recorderManager.onFrameRecorded',
-        func: (data = {}) => {
+      recorderManager_onFrameRecorded: {
+        func: (data = {}, id) => {
           const {recorderManager} = that.data;
           if (!recorderManager) {
             wx.showToast({
               title: '请创建录音',
             })
-            return {
-              isShowToast: true,
-            }
+            return true;
           }
-          return new Promise ((resolve) => {
-            let isFirstListen = true;
-            recorderManager.onFrameRecorded((res) => {
-              if (!isFirstListen) {
-                console.log('test API: recorderManager.onFrameRecorded');
-                console.log(res);
-              }
-              isFirstListen = false;
-              resolve({callback: res});
-            })
+          recorderManager.onFrameRecorded((res) => {
+            that.setCallback(id, res);
           })
         },
         isDone: true,
       },
-      {
-        id: 'recorderManager.onInterruptionBegin',
-        func: (data = {}) => {
+      recorderManager_onInterruptionBegin: {
+        func: (data = {}, id) => {
           const {recorderManager} = that.data;
           if (!recorderManager) {
             wx.showToast({
               title: '请创建录音',
             })
-            return {
-              isShowToast: true,
-            }
+            return true;
           }
-          return new Promise ((resolve) => {
-            let isFirstListen = true;
-            recorderManager.onInterruptionBegin((res) => {
-              if (!isFirstListen) {
-                console.log('test API: recorderManager.onInterruptionBegin');
-                console.log(res);
-              }
-              isFirstListen = false;
-              resolve({callback: res});
-            })
+          recorderManager.onInterruptionBegin((res) => {
+            that.setCallback(id, res);
           })
         },
         isDone: true,
       },
-      {
-        id: 'recorderManager.onInterruptionEnd',
-        func: (data = {}) => {
+      recorderManager_onInterruptionEnd: {
+        func: (data = {}, id) => {
           const {recorderManager} = that.data;
           if (!recorderManager) {
             wx.showToast({
               title: '请创建录音',
             })
-            return {
-              isShowToast: true,
-            }
+            return true;
           }
-          return new Promise ((resolve) => {
-            let isFirstListen = true;
-            recorderManager.onInterruptionEnd((res) => {
-              if (!isFirstListen) {
-                console.log('test API: recorderManager.onInterruptionEnd');
-                console.log(res);
-              }
-              isFirstListen = false;
-              resolve({callback: res});
-            })
+          recorderManager.onInterruptionEnd((res) => {
+            that.setCallback(id, res);
           })
         },
         isDone: true,
       },
-      {
-        id: 'recorderManager.onPause',
-        func: (data = {}) => {
+      recorderManager_onPause: {
+        func: (data = {}, id) => {
           const {recorderManager} = that.data;
           if (!recorderManager) {
             wx.showToast({
               title: '请创建录音',
             })
-            return {
-              isShowToast: true,
-            }
+            return true;
           }
-          return new Promise ((resolve) => {
-            let isFirstListen = true;
-            recorderManager.onPause((res) => {
-              that.stopTimer();
-              if (!isFirstListen) {
-                console.log('test API: recorderManager.onPause');
-                console.log(res);
-              }
-              isFirstListen = false;
-              resolve({callback: res});
-            })
+          recorderManager.onPause((res) => {
+            that.setCallback(id, res);
           })
         },
         isDone: true,
       },
-      {
-        id: 'recorderManager.onResume',
-        func: (data = {}) => {
+      recorderManager_onResume: {
+        func: (data = {}, id) => {
           const {recorderManager} = that.data;
           if (!recorderManager) {
             wx.showToast({
               title: '请创建录音',
             })
-            return {
-              isShowToast: true,
-            }
+            return true;
           }
-          return new Promise ((resolve) => {
-            let isFirstListen = true;
-            recorderManager.onResume((res) => {
-              that.startTimer();
-              if (!isFirstListen) {
-                console.log('test API: recorderManager.onResume');
-                console.log(res);
-              }
-              isFirstListen = false;
-              resolve({callback: res});
-            })
+          recorderManager.onResume((res) => {
+            that.setCallback(id, res);
           })
         },
         isDone: true,
       },
-      {
-        id: 'recorderManager.onStart',
-        func: (data = {}) => {
+      recorderManager_onStart: {
+        func: (data = {}, id) => {
           const {recorderManager} = that.data;
           if (!recorderManager) {
             wx.showToast({
               title: '请创建录音',
             })
-            return {
-              isShowToast: true,
-            }
+            return true;
           }
-          return new Promise ((resolve) => {
-            let isFirstListen = true;
-            recorderManager.onStart((res) => {
-              that.setData({
-                recordTime: 0
-              })
-              that.startTimer();
-              if (!isFirstListen) {
-                console.log('test API: recorderManager.onStart');
-                console.log(res);
-              }
-              isFirstListen = false;
-              resolve({callback: res});
-            })
+          recorderManager.onStart((res) => {
+            that.setCallback(id, res);
           })
         },
         isDone: true,
       },
-      {
-        id: 'recorderManager.onStop',
-        func: (data = {}) => {
+      recorderManager_onStop: {
+        func: (data = {}, id) => {
           const {recorderManager} = that.data;
           if (!recorderManager) {
             wx.showToast({
               title: '请创建录音',
             })
-            return {
-              isShowToast: true,
-            }
+            return true;
           }
-          return new Promise ((resolve) => {
-            let isFirstListen = true;
-            that.setData({
-              formatedRecordTime: '00:00:00',
-            })
-            recorderManager.onStop((res) => {
-              that.stopTimer();
-              if (!isFirstListen) {
-                console.log('test API: recorderManager.onStop');
-                console.log(res);
-              }
-              isFirstListen = false;
-              that.setData({
-                recordFilePath: res.tempFilePath,
-              })
-              resolve({callback: res});
-            })
+          recorderManager.onStop((res) => {
+            that.setCallback(id, res);
           })
         },
         isDone: true,
       },
-    ],
+  },
     recorderManager: null,
     recordTimeInterval: null,
     isRecording: false,
@@ -359,6 +238,22 @@ Page({
    */
   onLoad(options) {
     that = this;
+    const {list} = this.data;
+    const listKey = Object.keys(list);
+    listKey.forEach((key) => {
+      list[key].callbackRes = {};
+    })
+    this.setData({
+      list
+    })
+  },
+  setCallback(id, callback) {
+    const {list} = that.data;
+    console.log(callback);
+    list[id].callbackRes = callback;
+    that.setData({
+      list
+    })
   },
   startTimer() {
     let {recordTimeInterval} = that.data;

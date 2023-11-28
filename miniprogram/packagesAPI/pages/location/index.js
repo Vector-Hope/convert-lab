@@ -5,9 +5,8 @@ Page({
    * 页面的初始数据
    */
   data: {
-    list: [
-      {
-        id: 'onLocationChange',
+    list: {
+      onLocationChange: {
         func: (apiIndex) => {
           TestConsole.consoleTest('onLocationChange')
           Taro.onLocationChange((res) => {
@@ -15,8 +14,7 @@ Page({
           })
         },
       },
-      {
-        id: 'startLocationUpdate',
+      startLocationUpdate: {
         func: (apiIndex) => {
           TestConsole.consoleTest('startLocationUpdate')
           Taro.startLocationUpdate({
@@ -32,8 +30,7 @@ Page({
           })
         },
       },
-      {
-        id: 'stopLocationUpdate',
+      stopLocationUpdate: {
         func: (apiIndex) => {
           TestConsole.consoleTest('stopLocationUpdate')
           Taro.stopLocationUpdate({
@@ -49,8 +46,7 @@ Page({
           })
         },
       },
-      {
-        id: 'startLocationUpdateBackground',
+      startLocationUpdateBackground: {
         func: (apiIndex) => {
           TestConsole.consoleTest('startLocationUpdateBackground')
           Taro.startLocationUpdateBackground({
@@ -66,8 +62,7 @@ Page({
           })
         },
       },
-      {
-        id: 'offLocationChange',
+      offLocationChange: {
         func: (apiIndex) => {
           TestConsole.consoleTest('offLocationChange')
           Taro.offLocationChange((res) => {
@@ -75,8 +70,7 @@ Page({
           })
         },
       },
-      {
-        id: 'onLocationChangeError',
+      onLocationChangeError: {
         func: (apiIndex) => {
           TestConsole.consoleTest('onLocationChangeError')
           Taro.onLocationChangeError((res) => {
@@ -84,8 +78,7 @@ Page({
           })
         },
       },
-      {
-        id: 'offLocationChangeError',
+      offLocationChangeError: {
         func: (apiIndex) => {
           TestConsole.consoleTest('offLocationChangeError')
           Taro.offLocationChangeError((res) => {
@@ -93,66 +86,57 @@ Page({
           })
         },
       },
-      {
-        id: 'getLocation',
+      getLocation: {
         inputData: {
           altitude: 'false',
           highAccuracyExpireTime: 8000,
           isHighAccuracy: true,
           type: 'wgs84',
         },
-        func: (data = {}) => {
-          return new Promise((resolve) => {
-            const callback = {};
-            wx.getLocation({
-              ...data,
-              success: (res) => {
-                callback['success'] = res;
-                const location = that.formatLocation(res.longitude, res.latitude);
-                that.setData({
-                  location,
-                })
-              },
-              fail: (res) => {
-                callback['fail'] = res;
-              },
-              complete: (res) => {
-                callback['complete'] = res;
-                resolve({callback});
-              },
-            })
+        func: (data = {}, id) => {
+          let callback = {};
+          wx.getLocation({
+            ...data,
+            success: (res) => {
+              const location = that.formatLocation(res.longitude, res.latitude);
+              that.setData({
+                location,
+              })
+              callback['success'] = res;
+            },
+            fail: (res) => {
+              callback['fail'] = res;
+            },
+            complete: (res) => {
+              that.setCallback(id, {...callback, complete: res});
+            },
           })
         },
         isDone: true
       },
-      {
-        id: 'chooseLocation',
+      chooseLocation: {
         inputData: {
           latitude: 114.34,
           longitude: 30.50
         },
-        func: (data = {}) => {
-          return new Promise((resolve) => {
-            const callback = {};
-            wx.chooseLocation({
-              ...data,
-              success: (res) => {
-                callback['success'] = res;
-              },
-              fail: (res) => {
-                callback['fail'] = res;
-              },
-              complete: (res) => {
-                callback['complete'] = res;
-                resolve({callback});
-              },
-            })
+        func: (data = {}, id) => {
+          let callback = {};
+          wx.chooseLocation({
+            ...data,
+             success: (res) => {
+              callback['success'] = res;
+            },
+            fail: (res) => {
+              callback['fail'] = res;
+            },
+            complete: (res) => {
+              that.setCallback(id, {...callback, complete: res});
+            },
           })
         },
         isDone: true
       },
-      {
-        id: 'getFuzzyLocation',
+      getFuzzyLocation: {
         inputData: {
           type: 'gcj02',
         },
@@ -178,8 +162,7 @@ Page({
           }
         },
       },
-      {
-        id: 'openLocation',
+      openLocation: {
         func: async (apiIndex) => {
           try {
             TestConsole.consoleTest('openLocation')
@@ -206,7 +189,7 @@ Page({
           }
         },
       },
-    ],
+  },
     location: '',
   },
 
@@ -215,6 +198,22 @@ Page({
    */
   onLoad(options) {
     that = this;
+    const {list} = this.data;
+    const listKey = Object.keys(list);
+    listKey.forEach((key) => {
+      list[key].callbackRes = {};
+    })
+    this.setData({
+      list
+    })
+  },
+  setCallback(id, callback) {
+    const {list} = that.data;
+    console.log(callback);
+    list[id].callbackRes = callback;
+    that.setData({
+      list
+    })
   },
 
   formatLocation(longitude, latitude) {

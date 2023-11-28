@@ -5,41 +5,33 @@ Page({
    * 页面的初始数据
    */
   data: {
-    list: [
-      {
-        id: 'saveVideoToPhotosAlbum',
-        func: (data = {}) => {
+    list: {
+      saveVideoToPhotosAlbum: {
+        func: (data = {}, id) => {
           const { videoTempPath } = that.data;
           if (!videoTempPath) {
             wx.showToast({
               title: '请先选择视频',
             });
-            return {
-              isShowToast: true,
-              callback: {},
-            };
+            return true;
           }
-          return new Promise((resolve) => {
-            const callback = {};
+          let callback = {};
             wx.saveVideoToPhotosAlbum({
               filePath: videoTempPath,
-              success: (res) => {
-                callback['success'] = res;
-              },
-              fail: (res) => {
-                callback['fail'] = res;
-              },
-              complete: (res) => {
-                callback['complete'] = res;
-                resolve({ callback });
-              },
+               success: (res) => {
+              callback['success'] = res;
+            },
+            fail: (res) => {
+              callback['fail'] = res;
+            },
+            complete: (res) => {
+              that.setCallback(id, {...callback, complete: res});
+            },
             });
-          });
         },
         isDone: true,
       },
-      {
-        id: 'openVideoEditor_暂不支持',
+      openVideoEditor: {
         func: (data) => {
           TestConsole.consoleTest('openVideoEditor');
           Taro.chooseVideo({
@@ -73,39 +65,31 @@ Page({
           });
         },
       },
-      {
-        id: 'getVideoInfo',
-        func: (data = {}) => {
+      getVideoInfo: {
+        func: (data = {}, id) => {
           const { videoTempPath } = that.data;
           if (!videoTempPath) {
             wx.showToast({
               title: '请先选择视频',
             });
-            return {
-              isShowToast: true,
-              callback: {},
-            };
+            return true;
           }
-          return new Promise((resolve) => {
             const callback = {};
             wx.getVideoInfo({
               src: videoTempPath,
-              success: (res) => {
-                callback['success'] = res;
-              },
-              fail: (res) => {
-                callback['fail'] = res;
-              },
-              complete: (res) => {
-                callback['complete'] = res;
-                resolve({ callback });
-              },
+               success: (res) => {
+              callback['success'] = res;
+            },
+            fail: (res) => {
+              callback['fail'] = res;
+            },
+            complete: (res) => {
+              that.setCallback(id, {...callback, complete: res});
+            },
             });
-          });
         },
       },
-      {
-        id: 'compressVideo_暂不支持',
+      compressVideo: {
         func: (apiIndex) => {
           TestConsole.consoleTest('compressVideo');
           Taro.chooseVideo({
@@ -144,15 +128,14 @@ Page({
           });
         },
       },
-      {
-        id: 'chooseVideo',
+      chooseVideo: {
         inputData: {
           camera: 'back',
           compressed: false,
           sourceType: ['album', 'camera'],
           maxDuration: 30,
         },
-        func: (data = {}) => {
+        func: (data = {}, id) => {
           return new Promise((resolve) => {
             const callback = {};
             wx.chooseVideo({
@@ -174,8 +157,7 @@ Page({
           });
         },
       },
-      {
-        id: 'chooseMedia',
+      chooseMedia: {
         inputData: {
           count: 1,
           mediaType: ['video'],
@@ -185,69 +167,59 @@ Page({
           camera: 'back',
           mediaId: '',
         },
-        func: (data = {}) => {
-          return new Promise((resolve) => {
-            const callback = {};
-            wx.chooseMedia({
-              ...data,
-              success: (res) => {
-                that.setData({
-                  videoTempPath: res.tempFiles[0].tempFilePath,
-                });
-                callback['success'] = res;
-              },
-              fail: (res) => {
-                callback['fail'] = res;
-              },
-              complete: (res) => {
-                callback['complete'] = res;
-                resolve({ callback });
-              },
-            });
+        func: (data = {}, id) => {
+          let callback = {};
+          wx.chooseMedia({
+            ...data,
+            success: (res) => {
+              that.setData({
+                videoTempPath: res.tempFiles[0].tempFilePath,
+              });
+              callback['success'] = res;
+            },
+            fail: (res) => {
+              callback['fail'] = res;
+            },
+            complete: (res) => {
+              that.setCallback(id, {...callback, complete: res});
+            },
           });
         },
         isDone: true,
       },
-      {
-        id: 'createVideoContext',
-        func: (data = {}) => {
+      createVideoContext: {
+        func: (data = {}, id) => {
           const { videoTempPath } = that.data;
           if (!videoTempPath) {
             wx.showToast({
               title: '请先选择视频',
             });
-            return {
-              isShowToast: true,
-              callback: {},
-            };
+            return true;
           }
           const videoContext = wx.createVideoContext('myVideo');
           console.log(videoContext);
           that.setData({
             videoContext,
           });
-          return { callback: videoContext };
+          that.setCallback(id, videoContext);
         },
         isDone: true,
       },
-      {
-        id: 'video_exitBackgroundPlayback_暂不支持',
+      video_exitBackgroundPlayback: {
         func: (apiIndex) => {
           TestConsole.consoleTest('videoContext_exitBackgroundPlayback');
           videoContext.exitBackgroundPlayback();
           TestConsole.consoleNormal('exitBackgroundPlayback');
         },
       },
-      {
-        id: 'video_exitFullScreen',
+      video_exitFullScreen: {
         func: (apiIndex) => {
           TestConsole.consoleTest('videoContext_exitFullScreen');
           videoContext.exitFullScreen();
           TestConsole.consoleNormal('exitFullScreen');
         },
       },
-      {
-        id: 'video_exitPictureInPicture_暂不支持',
+      video_exitPictureInPicture: {
         func: (apiIndex) => {
           TestConsole.consoleTest('videoContext_exitPictureInPicture');
           videoContext
@@ -267,72 +239,61 @@ Page({
             });
         },
       },
-      {
-        id: 'video_hideStatusBar_暂不支持',
+      video_hideStatusBar: {
         func: (apiIndex) => {
           TestConsole.consoleTest('videoContext_hideStatusBar');
           videoContext.hideStatusBar();
           TestConsole.consoleNormal('hideStatusBar');
         },
       },
-      {
-        id: 'video.pause',
-        func: (data = {}) => {
+      video_pause: {
+        func: (data = {}, id) => {
           const { videoContext } = that.data;
           videoContext.pause();
-          return {};
         },
         isDone: true,
       },
-      {
-        id: 'video.play',
-        func: (data = {}) => {
+      video_play: {
+        func: (data = {}, id) => {
           const { videoContext } = that.data;
           videoContext.play();
-          return {};
         },
         isDone: true,
       },
-      {
-        id: 'video_playbackRate_暂不支持',
+      video_playbackRate: {
         func: (apiIndex) => {
           TestConsole.consoleTest('videoContext_playbackRate');
           videoContext.playbackRate(1.5);
           TestConsole.consoleNormal('playbackRate');
         },
       },
-      {
-        id: 'video_requestBackgroundPlayback_暂不支持',
+      video_requestBackgroundPlayback: {
         func: (apiIndex) => {
           TestConsole.consoleTest('videoContext_requestBackgroundPlayback');
           videoContext.requestBackgroundPlayback();
           TestConsole.consoleNormal('requestBackgroundPlayback');
         },
       },
-      {
-        id: 'video.requestFullScreen',
+      video_requestFullScreen: {
         inputData: {
           direction: 0,
         },
-        func: (data = {}) => {
+        func: (data = {}, id) => {
           const { videoContext } = that.data;
           videoContext.requestFullScreen({
             ...data,
           });
-          return {};
         },
         isDone: true,
       },
-      {
-        id: 'video_seek',
+      video_seek: {
         func: (apiIndex) => {
           TestConsole.consoleTest('videoContext_seek');
           videoContext.seek(5);
           TestConsole.consoleNormal('seek');
         },
       },
-      {
-        id: 'video_sendDanmu_暂不支持',
+      video_sendDanmu: {
         func: (apiIndex) => {
           TestConsole.consoleTest('videoContext_sendDanmu');
           videoContext.sendDanmu({
@@ -342,24 +303,21 @@ Page({
           TestConsole.consoleNormal('sendDanmu');
         },
       },
-      {
-        id: 'video_showStatusBar_暂不支持',
+      video_showStatusBar: {
         func: (apiIndex) => {
           TestConsole.consoleTest('videoContext_showStatusBar');
           videoContext.showStatusBar();
           TestConsole.consoleNormal('showStatusBar');
         },
       },
-      {
-        id: 'video_stop',
-        func: (data = {}) => {
+      video_stop: {
+        func: (data = {}, id) => {
           const { videoContext } = that.data;
           videoContext.stop();
-          return {};
         },
         isDone: true,
       },
-    ],
+  },
     videoTempPath: null,
   },
 
@@ -368,40 +326,21 @@ Page({
    */
   onLoad(options) {
     that = this;
+    const {list} = this.data;
+    const listKey = Object.keys(list);
+    listKey.forEach((key) => {
+      list[key].callbackRes = {};
+    })
+    this.setData({
+      list
+    })
   },
-
-  /**
-   * 生命周期函数--监听页面初次渲染完成
-   */
-  onReady() {},
-
-  /**
-   * 生命周期函数--监听页面显示
-   */
-  onShow() {},
-
-  /**
-   * 生命周期函数--监听页面隐藏
-   */
-  onHide() {},
-
-  /**
-   * 生命周期函数--监听页面卸载
-   */
-  onUnload() {},
-
-  /**
-   * 页面相关事件处理函数--监听用户下拉动作
-   */
-  onPullDownRefresh() {},
-
-  /**
-   * 页面上拉触底事件的处理函数
-   */
-  onReachBottom() {},
-
-  /**
-   * 用户点击右上角分享
-   */
-  onShareAppMessage() {},
+  setCallback(id, callback) {
+    const {list} = that.data;
+    console.log(callback);
+    list[id].callbackRes = callback;
+    that.setData({
+      list
+    })
+  },
 });

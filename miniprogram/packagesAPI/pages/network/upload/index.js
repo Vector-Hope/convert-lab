@@ -11,9 +11,8 @@ Page({
    */
   data: {
     task: null,
-    list: [
-      {
-        id: 'uploadFile',
+    list: {
+      uploadFile: {
         inputData: {
           url: 'http://26.26.26.1:3000/upload',
           headers: {
@@ -23,7 +22,7 @@ Page({
           timeout: 60000,
           downloadFilePath: urls[0],
         },
-        func: (data = {}) => {
+        func: (data = {}, id) => {
           const { url, headers, name, timeout, downloadFilePath } = data;
           return new Promise((resolve) => {
             wx.downloadFile({
@@ -43,11 +42,7 @@ Page({
                     callback['fail'] = res;
                   },
                   complete: (res) => {
-                    callback['complete'] = res;
-                    that.setData({
-                      task: null,
-                    });
-                    resolve({ callback });
+                    that.setCallback(id, {...callback, complete: res});
                   },
                 });
                 that.setData({
@@ -59,127 +54,82 @@ Page({
         },
         isDone: true,
       },
-      {
-        id: 'UploadTask.abort',
-        func: (data = {}) => {
+      UploadTask_abort: {
+        func: (data = {}, id) => {
           const { task } = that.data;
           if (task) {
             task.abort();
-            return {
-              callback: {},
-            };
           } else {
             wx.showToast({
               title: '暂无上传任务',
             });
-            return {
-              callback: {},
-              isShowToast: true,
-            };
+            return true;
           }
         },
         isDone: true,
       },
-      {
-        id: 'UploadTask.offHeadersReceived',
-        func: (data = {}) => {
+      UploadTask_offHeadersReceived: {
+        func: (data = {}, id) => {
           const { task } = that.data;
           if (task) {
             task.offHeadersReceived();
-            return {
-              callback: {},
-            };
           } else {
             wx.showToast({
               title: '暂无上传任务',
             });
-            return {
-              callback: {},
-              isShowToast: true,
-            };
+            return true;
           }
         },
         isDone: true,
       },
-      {
-        id: 'UploadTask.offProgressUpdate',
-        func: (data = {}) => {
+      UploadTask_offProgressUpdate: {
+        func: (data = {}, id) => {
           const { task } = that.data;
           if (task) {
             task.offProgressUpdate();
-            return {
-              callback: {},
-            };
           } else {
             wx.showToast({
               title: '暂无上传任务',
             });
-            return {
-              callback: {},
-              isShowToast: true,
-            };
+            return true;
           }
         },
         isDone: true,
       },
-      {
-        id: 'UploadTask.onHeadersReceived',
-        func: (data = {}) => {
+      UploadTask_onHeadersReceived: {
+        func: (data = {}, id) => {
           const { task } = that.data;
           if (task) {
-            return new Promise((resolve) => {
-              task.onHeadersReceived((res) => {
-                resolve({
-                  callback: res,
-                });
-              });
+            task.onHeadersReceived((res) => {
+              that.setCallback(id, res);
             });
           } else {
             wx.showToast({
               title: '暂无上传任务',
             });
-            return {
-              callback: {},
-              isShowToast: true,
-            };
+            return true;
           }
         },
         isDone: true,
       },
-      {
-        id: 'UploadTask.onProgressUpdate',
-        func: (data = {}) => {
+      UploadTask_onProgressUpdate: {
+        func: (data = {}, id) => {
           const { task } = that.data;
           if (task) {
-            return new Promise((resolve) => {
-              let timeoutIndex;
-              task.onProgressUpdate((res) => {
-                if (!timeoutIndex) {
-                  timeoutIndex = setTimeout(() => {
-                    console.log('test API: DownloadTask.onProgressUpdate');
-                    console.log(res);
-                    clearTimeout(timeoutIndex);
-                  }, 100);
-                }
-                resolve({
-                  callback: res,
-                });
-              });
+            task.onProgressUpdate((res) => {
+              that.setCallback(id, res);
             });
           } else {
             wx.showToast({
               title: '暂无下载任务',
             });
-            return {
-              callback: {},
-              isShowToast: true,
-            };
+            return true;
           }
         },
         isDone: true,
         isDone: true,
       },
-    ],
+  },
   },
 
   /**
@@ -187,40 +137,21 @@ Page({
    */
   onLoad(options) {
     that = this;
+    const {list} = this.data;
+    const listKey = Object.keys(list);
+    listKey.forEach((key) => {
+      list[key].callbackRes = {};
+    })
+    this.setData({
+      list
+    })
   },
-
-  /**
-   * 生命周期函数--监听页面初次渲染完成
-   */
-  onReady() {},
-
-  /**
-   * 生命周期函数--监听页面显示
-   */
-  onShow() {},
-
-  /**
-   * 生命周期函数--监听页面隐藏
-   */
-  onHide() {},
-
-  /**
-   * 生命周期函数--监听页面卸载
-   */
-  onUnload() {},
-
-  /**
-   * 页面相关事件处理函数--监听用户下拉动作
-   */
-  onPullDownRefresh() {},
-
-  /**
-   * 页面上拉触底事件的处理函数
-   */
-  onReachBottom() {},
-
-  /**
-   * 用户点击右上角分享
-   */
-  onShareAppMessage() {},
+  setCallback(id, callback) {
+    const {list} = that.data;
+    console.log(callback);
+    list[id].callbackRes = callback;
+    that.setData({
+      list
+    })
+  },
 });

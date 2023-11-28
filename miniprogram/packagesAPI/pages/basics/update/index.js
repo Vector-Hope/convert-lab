@@ -1,95 +1,72 @@
 // packagesAPI/pages/basics/update/index.js
-let that = null;
+let that;
 Page({
   /**
    * 页面的初始数据
    */
   data: {
-    list: [
-      {
-        id: 'updateWeChatApp',
+    list: {
+      updateWeChatApp: {
         func: null,
       },
-      {
-        id: 'getUpdateManager',
-        func: (data = {}) => {
+      getUpdateManager: {
+        func: (data = {}, id) => {
           const updateManager = wx.getUpdateManager();
           that.setData({
             updateManager,
           });
-          console.log(updateManager);
-          return {
-            callback: updateManager,
-          };
+          that.setCallback(id, updateManager);
         },
         isDone: true,
       },
-      {
-        id: 'UpdateManager.applyUpdate',
-        func: (data = {}) => {
+      UpdateManager_applyUpdate: {
+        func: (data = {}, id) => {
           const { updateManager } = that.data;
           updateManager.applyUpdate();
           that.setData({
             updateManager,
           });
-          return {
-            callback: updateManager,
-          };
+          that.setCallback(id, updateManager);
         },
         isDone: true,
       },
-      {
-        id: 'UpdateManager.onCheckForUpdate',
-        func: (data = {}) => {
+      UpdateManager_onCheckForUpdate: {
+        func: (data = {}, id) => {
           const { updateManager } = that.data;
-          return new Promise((resolve) => {
-            updateManager.onCheckForUpdate((res) => {
-              resolve({
-                callback: res,
-              });
-            });
-            that.setData({
-              updateManager,
-            });
+          updateManager.onCheckForUpdate((res) => {
+            that.setCallback(id, res);
+          });
+          that.setData({
+            updateManager,
           });
         },
         isDone: true,
       },
-      {
-        id: 'UpdateManager.onUpdateReady',
-        func: (data = {}) => {
+      UpdateManager_onUpdateReady: {
+        func: (data = {}, id) => {
           const { updateManager } = that.data;
-          return new Promise((resolve) => {
-            updateManager.onUpdateReady((res) => {
-              resolve({
-                callback: res,
-              });
-            });
-            that.setData({
-              updateManager,
-            });
+          updateManager.onUpdateReady((res) => {
+            that.setCallback(id, res);
+          });
+          that.setData({
+            updateManager,
           });
         },
         isDone: true,
       },
-      {
-        id: 'UpdateManager.onUpdateFailed',
-        func: (data = {}) => {
+      UpdateManager_onUpdateFailed: {
+        func: (data = {}, id) => {
           const { updateManager } = that.data;
-          return new Promise((resolve) => {
-            updateManager.onUpdateFailed((res) => {
-              resolve({
-                callback: res,
-              });
-            });
-            that.setData({
-              updateManager,
-            });
+          updateManager.onUpdateFailed((res) => {
+            that.setCallback(id, res);
+          });
+          that.setData({
+            updateManager,
           });
         },
         isDone: true,
       },
-    ],
+  },
     updateManager: null,
   },
 
@@ -98,40 +75,21 @@ Page({
    */
   onLoad(options) {
     that = this;
+    const {list} = this.data;
+    const listKey = Object.keys(list);
+    listKey.forEach((key) => {
+      list[key].callbackRes = {};
+    })
+    this.setData({
+      list
+    })
   },
-
-  /**
-   * 生命周期函数--监听页面初次渲染完成
-   */
-  onReady() {},
-
-  /**
-   * 生命周期函数--监听页面显示
-   */
-  onShow() {},
-
-  /**
-   * 生命周期函数--监听页面隐藏
-   */
-  onHide() {},
-
-  /**
-   * 生命周期函数--监听页面卸载
-   */
-  onUnload() {},
-
-  /**
-   * 页面相关事件处理函数--监听用户下拉动作
-   */
-  onPullDownRefresh() {},
-
-  /**
-   * 页面上拉触底事件的处理函数
-   */
-  onReachBottom() {},
-
-  /**
-   * 用户点击右上角分享
-   */
-  onShareAppMessage() {},
+  setCallback(id, callback) {
+    const {list} = that.data;
+    console.log(callback);
+    list[id].callbackRes = callback;
+    that.setData({
+      list
+    })
+  }
 });

@@ -1,4 +1,5 @@
 // packagesAPI/pages/wxml/index.js
+import {myJSONStringify} from '../../../utils/util'
 let that;
 Page({
   /**
@@ -7,167 +8,127 @@ Page({
   data: {
     selectorQuery: null,
     observer: null,
-    selectorQueryList: [
-      {
-        id: 'createSelectorQuery',
-        func: (data = {}) => {
+    selectorQueryList: {
+      createSelectorQuery: {
+        func: (data = {}, id) => {
           const selectorQuery = wx.createSelectorQuery();
           that.setData({
             selectorQuery,
           });
-          return {
-            callback: selectorQuery,
-          };
+          that.setSelectorQueryListCallback(id, selectorQuery);
         },
         isDone: true,
       },
-      {
-        id: 'SelectorQuery.select',
+      SelectorQuery_select: {
         inputData: {
           select: '.select-node',
         },
-        func: (data = {}) => {
+        func: (data = {}, id) => {
           const { selectorQuery } = that.data;
           if (!selectorQuery) {
             wx.showToast({
               title: '请先创建实例',
             });
-            return {
-              isShowToast: true,
-              callback: {},
-            };
+            return true;
           }
           const { select } = data;
           const nodesRef = selectorQuery.select(select);
           that.setData({
             nodesRef,
           });
-          return {
-            callback: nodesRef,
-          };
+          that.setSelectorQueryListCallback(id, nodesRef);
         },
         isDone: true,
       },
-      {
-        id: 'SelectorQuery.selectAll',
+      SelectorQuery_selectAll: {
         inputData: {
           select: '.select-node',
         },
-        func: (data = {}) => {
+        func: (data = {}, id) => {
           const { selectorQuery } = that.data;
           if (!selectorQuery) {
             wx.showToast({
               title: '请先创建实例',
             });
-            return {
-              isShowToast: true,
-              callback: {},
-            };
+            return true;
           }
           const { select } = data;
           const nodesRef = selectorQuery.selectAll(select);
-          return {
-            callback: nodesRef,
-          };
+          that.setSelectorQueryListCallback(id, nodesRef);
         },
         isDone: true,
       },
-      {
-        id: 'SelectorQuery.selectViewport',
-        func: (data = {}) => {
+      SelectorQuery_selectViewport: {
+        func: (data = {}, id) => {
           const { selectorQuery } = that.data;
           if (!selectorQuery) {
             wx.showToast({
               title: '请先创建实例',
             });
-            return {
-              isShowToast: true,
-              callback: {},
-            };
+            return true;
           }
           const viewport = selectorQuery.selectViewport();
-          return {
-            callback: viewport,
-          };
+          that.setSelectorQueryListCallback(id, viewport);
         },
         isDone: true,
       },
-      {
-        id: 'SelectorQuery.exec',
+      SelectorQuery_exec: {
         inputData: {
           select: '#nodeRef',
         },
-        func: (data = {}) => {
+        func: (data = {}, id) => {
           const { select } = data;
-          return new Promise((resolve) => {
-            wx.createSelectorQuery()
-              .select(select)
-              .boundingClientRect()
-              .exec((res) => {
-                console.log(res);
-                resolve({ callback: { exec: res } });
-              });
-          });
+          wx.createSelectorQuery()
+            .select(select)
+            .boundingClientRect()
+            .exec((res) => {
+              console.log(res);
+              that.setSelectorQueryListCallback(id, {exec: res});
+            });
         },
         isDone: true,
       },
-      {
-        id: 'SelectorQuery.in',
+      SelectorQuery_in: {
         inputData: {
           select: '#nodeRef',
         },
-        func: (data = {}) => {
+        func: (data = {}, id) => {
           const { select } = data;
           const nodesRef = wx.createSelectorQuery().in(that).select(select);
-          console.log(nodesRef);
-          return {
-            callback: nodesRef,
-          };
+          that.setSelectorQueryListCallback(id, JSON.parse(myJSONStringify(nodesRef)));
         },
         isDone: true,
       },
-      {
-        id: 'NodesRef.boundingClientRect',
+      NodesRef_boundingClientRect: {
         inputData: {
           select: '#nodeRef',
         },
-        func: (data = {}) => {
+        func: (data = {}, id) => {
           const { select } = data;
-          return new Promise((resolve) => {
-            wx.createSelectorQuery()
-              .select(select)
-              .boundingClientRect((res) => {
-                resolve({
-                  callback: res,
-                });
-              })
-              .exec();
-          });
+          wx.createSelectorQuery()
+            .select(select)
+            .boundingClientRect((res) => {
+              that.setSelectorQueryListCallback(id, res);
+            })
+            .exec();
         },
         isDone: true,
       },
-      {
-        id: 'NodesRef.context',
+      NodesRef_context: {
         inputData: {
           select: '.canvas-node',
         },
-        func: (data = {}) => {
+        func: (data = {}, id) => {
           const { select } = data;
-          return new Promise((resolve) => {
-            wx.createSelectorQuery()
-              .select(select)
-              .context((res) => {
-                console.log(res);
-                resolve({
-                  callback: res,
-                });
-              })
-              .exec();
-          });
+          wx.createSelectorQuery()
+            .select(select)
+            .context((res) => {
+              that.setSelectorQueryListCallback(id, res);
+            })
+            .exec();
         },
       },
-      {
-        id: 'NodesRef.fields',
+      NodesRef_fields: {
         inputData: {
           select: '#nodeRef',
           fields: {
@@ -182,78 +143,67 @@ Page({
             node: true,
           },
         },
-        func: (data = {}) => {
+        func: (data = {}, id) => {
           const { select, fields } = data;
-          return new Promise((resolve) => {
-            wx.createSelectorQuery()
-              .select(select)
-              .fields(fields, (res) => {
-                resolve({ callback: res });
-              })
-              .exec();
-          });
+          wx.createSelectorQuery()
+            .select(select)
+            .fields(fields, (res) => {
+              that.setSelectorQueryListCallback(id, res);
+            })
+            .exec();
         },
         isDone: true,
       },
-      {
-        id: 'NodesRef.scrollOffset',
+      NodesRef_scrollOffset: {
         inputData: {
           selectViewport: true,
           select: '.scroll-view-node',
         },
-        func: (data = {}) => {
+        func: (data = {}, id) => {
           const { selectViewport } = data;
           if (selectViewport) {
-            return new Promise((resolve) => {
               wx.createSelectorQuery()
                 .selectViewport()
                 .scrollOffset((res) => {
-                  resolve({ callback: res });
+                  that.setSelectorQueryListCallback(id, res);
                 })
                 .exec();
-            });
-          }
-
-          const { select } = data;
-          return new Promise((resolve) => {
+          } else {
+            const { select } = data;
             wx.createSelectorQuery()
               .select(select)
               .scrollOffset((res) => {
-                resolve({ callback: res });
+                that.setSelectorQueryListCallback(id, res);
               })
               .exec();
-          });
+          }
         },
         isDone: true,
       },
-      {
-        id: 'NodesRef.node',
+      NodesRef_node: {
         inputData: {
           select: '.scroll-view-node',
         },
-        func: (data = {}) => {
+        func: (data = {}, id) => {
           const { select } = data;
-          return new Promise((resolve) => {
-            wx.createSelectorQuery()
-              .select(select)
-              .node((res) => {
-                resolve({ callback: res });
-              })
-              .exec();
-          });
+          wx.createSelectorQuery()
+            .select(select)
+            .node((res) => {
+              that.setSelectorQueryListCallback(id, res);
+            })
+            .exec();
         },
         isDone: true,
       },
-    ],
-    intersectionObserverList: [
-      {
-        id: 'createIntersectionObserver',
+  },
+    intersectionObserverList: {
+      createIntersectionObserver: {
         inputData: {
           initialRatio: 0,
           observeAll: true,
           thresholds: [],
         },
-        func: (data = {}) => {
+        func: (data = {}, id) => {
           let { observer } = that.data;
           if (observer) {
             observer.disconnect();
@@ -262,14 +212,11 @@ Page({
           that.setData({
             observer,
           });
-          return {
-            callback: observer,
-          };
+          that.setIntersectionObserverListCallback(id, observer);
         },
         isDone: true,
       },
-      {
-        id: 'relativeTo',
+      relativeTo: {
         inputData: {
           left: 0,
         },
@@ -287,8 +234,7 @@ Page({
           });
         },
       },
-      {
-        id: 'relativeToViewport',
+      relativeToViewport: {
         inputData: {
           left: 0,
         },
@@ -306,8 +252,7 @@ Page({
           });
         },
       },
-      {
-        id: 'disconnect',
+      disconnect: {
         func: () => {
           TestConsole.consoleTest('IntersectionObserver.disconnect');
           if (this.observer) {
@@ -317,7 +262,7 @@ Page({
           console.log('IntersectionObserver已断开');
         },
       },
-    ],
+  },
   },
 
   /**
@@ -325,40 +270,33 @@ Page({
    */
   onLoad(options) {
     that = this;
+    const {selectorQueryList, intersectionObserverList} = this.data;
+    Object.keys(selectorQueryList).forEach((key) => {
+      selectorQueryList[key].callbackRes = {};
+    })
+    Object.keys(intersectionObserverList).forEach((key) => {
+      intersectionObserverList[key].callbackRes = {};
+    })
+    this.setData({
+      selectorQueryList,
+      intersectionObserverList
+    })
+  },
+  setSelectorQueryListCallback(id, callback) {
+    const {selectorQueryList} = that.data;
+    console.log(callback);
+    selectorQueryList[id].callbackRes = callback;
+    that.setData({
+      selectorQueryList
+    })
   },
 
-  /**
-   * 生命周期函数--监听页面初次渲染完成
-   */
-  onReady() {},
-
-  /**
-   * 生命周期函数--监听页面显示
-   */
-  onShow() {},
-
-  /**
-   * 生命周期函数--监听页面隐藏
-   */
-  onHide() {},
-
-  /**
-   * 生命周期函数--监听页面卸载
-   */
-  onUnload() {},
-
-  /**
-   * 页面相关事件处理函数--监听用户下拉动作
-   */
-  onPullDownRefresh() {},
-
-  /**
-   * 页面上拉触底事件的处理函数
-   */
-  onReachBottom() {},
-
-  /**
-   * 用户点击右上角分享
-   */
-  onShareAppMessage() {},
+  setIntersectionObserverListCallback(id, callback) {
+    const {intersectionObserverList} = that.data;
+    console.log(callback);
+    intersectionObserverList[id].callbackRes = callback;
+    that.setData({
+      intersectionObserverList
+    })
+  }
 });

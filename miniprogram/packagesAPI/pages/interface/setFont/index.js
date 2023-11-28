@@ -1,4 +1,5 @@
 // packagesAPI/pages/interface/setFont/index.js
+let that;
 const fontUrls = [
   'https://mdn.github.io/css-examples/web-fonts/VeraSeBd.ttf',
   'https://puhuiti.oss-cn-hangzhou.aliyuncs.com/AlimamaShuHeiTi/AlimamaShuHeiTi-Bold/AlimamaShuHeiTi-Bold.ttf',
@@ -10,9 +11,8 @@ Page({
    * 页面的初始数据
    */
   data: {
-    list: [
-      {
-        id: 'loadFontFace',
+    list: {
+      loadFontFace: {
         inputData: {
           family: 'My Font',
           source: `url("${fontUrls[2]}")`,
@@ -22,26 +22,46 @@ Page({
             weight: 'normal',
           },
         },
-        func: (data = {}) => {
-          return new Promise((resolve) => {
-            const callback = {};
-            wx.loadFontFace({
-              ...data,
-              success: (res) => {
-                callback['success'] = res;
-              },
-              fail: (res) => {
-                callback['fail'] = res;
-              },
-              complete: (res) => {
-                callback['complete'] = res;
-                resolve({ callback });
-              },
-            });
+        func: (data = {}, id) => {
+          let callback = {};
+          wx.loadFontFace({
+            ...data,
+             success: (res) => {
+              callback['success'] = res;
+            },
+            fail: (res) => {
+              callback['fail'] = res;
+            },
+            complete: (res) => {
+              that.setCallback(id, {...callback, complete: res});
+            },
           });
         },
         isDone: true,
       },
-    ],
+  },
+  },
+
+  /**
+   * 生命周期函数--监听页面加载
+   */
+  onLoad(options) {
+    that = this;
+    const {list} = this.data;
+    const listKey = Object.keys(list);
+    listKey.forEach((key) => {
+      list[key].callbackRes = {};
+    })
+    this.setData({
+      list
+    })
+  },
+  setCallback(id, callback) {
+    const {list} = that.data;
+    console.log(callback);
+    list[id].callbackRes = callback;
+    that.setData({
+      list
+    })
   },
 });

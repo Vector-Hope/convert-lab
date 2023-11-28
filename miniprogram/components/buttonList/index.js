@@ -6,19 +6,21 @@ Component({
    * buttonList: api对应的按钮列表信息
    */
   properties: {
-    buttonList: Array,
+    buttonList: Object
   },
 
   /**
    * 组件的初始数据
-   * list: reset之后的api列表信息
-   * listKey: reset后的api列表信息的key值，用于列表渲染
+   * listKey: api列表信息的key值，用于列表渲染
+   * hideTextareaList: api对应的是否隐藏输入框列表
+   * inputDataList: api对应的输入data列表
    * showResId: 对应显示结果的api Id
    * isShowRes: 是否显示回调内容
    */
   data: {
-    list: {},
     listKey: [],
+    hideTextareaList: {},
+    inputDataList: {},
     showResId: '',
     isShowRes: false,
   },
@@ -26,52 +28,18 @@ Component({
   lifetimes: {
     attached() {
       const { buttonList } = this.properties;
-      const list = {};
-      const listKey = [];
-      buttonList.forEach((button) => {
-        let { id } = button;
-        let inputData = undefined;
-        if (button.inputData) {
-          inputData =
-            typeof button.inputData == 'string' ? button.inputData : JSON.stringify(button.inputData, null, 2);
-        }
-        const buttonItem = {
-          inputData,
-          callbackRes: {},
-          func: button.func,
-          hideTextarea: false,
-          isDone: button.isDone,
-        };
-        list[id] = buttonItem;
-        listKey.push(id);
-      });
+      const {hideTextareaList, inputDataList} = this.data;
+      const listKey = Object.keys(buttonList);
+      listKey.forEach((key) => {
+        hideTextareaList[key] = false;
+        inputDataList[key] = buttonList[key].inputData ? JSON.stringify(buttonList[key].inputData, null, 2) : null;
+      })
       this.setData({
-        list,
+        hideTextareaList,
+        inputDataList,
         listKey,
-      });
+      })
     },
-    // attached() {
-    //   const {buttonList} = this.properties;
-    //   const list = {};
-    //   const listKey = Object.keys(buttonList);
-    //   listKey.forEach((apiId) => {
-    //     let inputData = undefined;
-    //     if (buttonList[apiId].inputData) {
-    //       inputData =  typeof buttonList[apiId].inputData == 'string' ? buttonList[apiId].inputData : JSON.stringify(buttonList[apiId].inputData, null, 2);
-    //     }
-    //     const buttonItem = {
-    //       inputData,
-    //       callbackRes: buttonList[apiId].callbackRes,
-    //       func: buttonList[apiId].func,
-    //       hideTextarea: false,
-    //     }
-    //     list[apiId] = buttonItem;
-    //   })
-    //   this.setData({
-    //     list,
-    //     listKey,
-    //   })
-    // }
   },
 
   /**
@@ -81,23 +49,17 @@ Component({
     // 隐藏textarea函数
     hideTextarea(e) {
       const { id } = e.currentTarget.dataset;
-      const { list } = this.data;
-      list[id].hideTextarea = !list[id].hideTextarea;
+      const { hideTextareaList } = this.data;
+      hideTextareaList[id] = !hideTextareaList[id];
       this.setData({
-        list,
+        hideTextareaList,
       });
     },
     // 展示回调结果，获得对应的apiId
     showRes(e) {
       const { id } = e.currentTarget.dataset;
-      const { list } = this.data;
-      if (list[id].callbackRes && Object.keys(list[id].callbackRes).length != 0) {
-        // if (Object.keys(list[id].callbackRes).length == 0) {
-        //   wx.showToast({
-        //     icon: 'error',
-        //     title: '内容可能为内置属性',
-        //   })
-        // }
+      const { buttonList } = this.properties;
+      if (buttonList[id].callbackRes && Object.keys(buttonList[id].callbackRes).length != 0) {
         this.setData({
           showResId: id,
           isShowRes: true,
@@ -118,32 +80,28 @@ Component({
     // api事件触发器
     APITrigger(e) {
       const { id } = e.currentTarget.dataset;
-      const { list } = this.data;
-      let inputData = {};
-      if (list[id].inputData) {
+      const {inputDataList} = this.data;
+      if (inputDataList[id]) {
         try {
-          inputData = JSON.parse(list[id].inputData);
+          let inputData = JSON.parse(inputDataList[id]);
+          console.log(`test API: ${id}`);
+          this.getResult(id, inputData);
         } catch (err) {
           wx.showToast({
             icon: 'error',
             title: '请检查参数格式',
           });
         }
+      } else {
+        console.log(`test API: ${id}`);
+        this.getResult(id);
       }
-      this.getResult(id, inputData);
     },
     // 获得api回调的内容
-    async getResult(id, inputData = {}) {
-      const { list } = this.data;
+    getResult(id, inputData = {}) {
+      const { buttonList } = this.properties;
       try {
-        let { isShowToast, callback } = await list[id].func(inputData);
-        let callbackRes = this.formatCallback(formatJson(callback));
-        list[id].callbackRes = callbackRes;
-        console.log(`test API: ${id}`);
-        console.log(callback);
-        this.setData({
-          list,
-        });
+        const isShowToast = buttonList[id].func(inputData, id);
         if (!isShowToast) {
           wx.showToast({
             icon: 'success',
@@ -165,41 +123,14 @@ Component({
         }
       }
     },
-    formatCallback(callback) {
-      const callbackRes = {};
-      if (getType(callback) == 'Object') {
-        const callbackKeys = Object.keys(callback);
-        callbackKeys.forEach((key) => {
-          if (getType(callback[key]) == 'Function') {
-            callbackRes[key] = 'f ( )';
-          } else if (getType(callback[key]) == 'Object') {
-            callbackRes[key] = this.formatCallback(callback[key]);
-          } else {
-            callbackRes[key] = callback[key];
-          }
-        });
-      }
-      return callbackRes;
-    },
     // 修改textarea中的内容，改变对应api入参
     changeData(e) {
-      const { list } = this.data;
+      const { inputDataList } = this.data;
       const { id } = e.currentTarget.dataset;
-      list[id].inputData = e.detail.value;
+      inputDataList[id] = e.detail.value;
       this.setData({
-        list,
+        inputDataList,
       });
-    },
-    // 判断是否为交互内容
-    isInteraction(apiId) {
-      return (
-        apiId == 'showToast' ||
-        apiId == 'hideToast' ||
-        apiId == 'showLoading' ||
-        apiId == 'hideLoading' ||
-        apiId == 'showModal' ||
-        apiId == 'showActionSheet'
-      );
     },
   },
 });

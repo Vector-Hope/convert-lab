@@ -1,16 +1,17 @@
 // components/callbackContent/index.js
+import { getType, myJSONStringify } from '../../utils/util';
 Component({
   /**
    * 组件的属性列表
    * callbackRes: api的回调内容
-   * testAPI: 回调对应的api名称
+   * testApi: 回调对应的api名称
    */
   properties: {
     callbackRes: {
       type: Object,
       observer: function (newVal) {
         this.setData({
-          callbackResString: this.stringify(newVal),
+          callbackResString: myJSONStringify(newVal),
         });
       },
     },
@@ -25,37 +26,10 @@ Component({
     callbackResString: '',
   },
   lifetimes: {
-    attached() {
-      const { callbackRes } = this.properties;
-      this.setData({
-        callbackResString: this.stringify(callbackRes),
-      });
-    },
+    attached() {},
   },
   /**
    * 组件的方法列表
    */
-  methods: {
-    // 对JSON.stringify进行封装，防止对象构造器循环引用
-    stringify(object) {
-      let JSONStr = '';
-      try {
-        JSONStr = JSON.stringify(object);
-      } catch (err) {
-        console.log('errrrrrrrrrrrr');
-        const cache = new Map();
-        JSONStr = JSON.stringify(object, (key, value) => {
-          if (typeof value === 'object' && value !== null) {
-            if (cache.has(value)) {
-              return;
-            }
-            cache.set(value, value);
-          }
-          return value;
-        });
-        cache.clear();
-      }
-      return JSONStr;
-    },
-  },
+  methods: {},
 });

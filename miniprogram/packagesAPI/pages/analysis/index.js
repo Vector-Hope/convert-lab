@@ -1,20 +1,18 @@
 // packagesAPI/pages/analysis/index.js
+let that;
 Page({
   /**
    * 页面的初始数据
    */
   data: {
-    list: [
-      {
-        id: 'reportMonitor',
+    list: {
+      reportMonitor: {
         func: null,
       },
-      {
-        id: 'reportEvent',
+      reportEvent: {
         func: null,
       },
-      {
-        id: 'reportAnalytics',
+      reportAnalytics: {
         inputData: {
           eventName: 'purchase',
           eventData: {
@@ -22,62 +20,44 @@ Page({
             color: 'red'
           },
         },
-        func: (data = {}) => {
+        func: (data = {}, id) => {
           const {eventName, eventData} = data;
           wx.reportAnalytics(eventName, eventData);
-          return {};
         },
       },
-      {
-        id: 'getExptInfoSync',
+      getExptInfoSync: {
         inputData: {
           key: [],
         },
-        func: (data = {}) => {
+        func: (data = {}, id) => {
           const {key} = data;
           wx.getExptInfoSync(key);
         },
       },
-    ],
+    },
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
-  onLoad(options) {},
+  onLoad(options) {
+    that = this;
+    const {list} = this.data;
+    const listKey = Object.keys(list);
+    listKey.forEach((key) => {
+      list[key].callbackRes = {};
+    })
+    this.setData({
+      list
+    })
+  },
 
-  /**
-   * 生命周期函数--监听页面初次渲染完成
-   */
-  onReady() {},
-
-  /**
-   * 生命周期函数--监听页面显示
-   */
-  onShow() {},
-
-  /**
-   * 生命周期函数--监听页面隐藏
-   */
-  onHide() {},
-
-  /**
-   * 生命周期函数--监听页面卸载
-   */
-  onUnload() {},
-
-  /**
-   * 页面相关事件处理函数--监听用户下拉动作
-   */
-  onPullDownRefresh() {},
-
-  /**
-   * 页面上拉触底事件的处理函数
-   */
-  onReachBottom() {},
-
-  /**
-   * 用户点击右上角分享
-   */
-  onShareAppMessage() {},
+  setCallback(id, callback) {
+    const {list} = that.data;
+    console.log(callback);
+    list[id].callbackRes = callback;
+    that.setData({
+      list
+    })
+  }
 });

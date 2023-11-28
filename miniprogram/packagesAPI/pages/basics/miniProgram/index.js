@@ -1,54 +1,49 @@
 // packagesAPI/pages/basics/miniProgram/index.js
+let that;
 Page({
   /**
    * 页面的初始数据
    */
   data: {
-    lifeCycleList: [
-      {
-        id: 'getLaunchOptionsSync',
-        func: (data = {}) => {
+    lifeCycleList: {
+      getLaunchOptionsSync: {
+        func: (data = {}, id) => {
           const options = wx.getLaunchOptionsSync();
-          return {
-            callback: options,
-          };
+          that.setLifeCycleListCallback(id, {options});
         },
         isDone: true,
       },
-      {
-        id: 'getEnterOptionsSync',
+      getEnterOptionsSync: {
         func: () => {
           TestConsole.consoleTest('Taro.getEnterOptionsSync');
           const options = Taro.getEnterOptionsSync();
           TestConsole.consoleNormal('getEnterOptionsSync', options);
         },
       },
-    ],
-    appLevelEventsList: [
-      {
-        id: 'onUnhandledRejection',
-        func: (data = {}) => {
+    },
+    appLevelEventsList: {
+      onUnhandledRejection: {
+        func: (data = {}, id) => {
           new Promise((resolve, reject) => {
             reject({ message: 'error' });
           });
         },
         isDone: true,
       },
-      {
-        id: 'onThemeChange',
-        func: (apiIndex) => {
+      onThemeChange: {
+        func: (data = {}, id) => {
           TestConsole.consoleTest('Taro.onThemeChange');
           Taro.onThemeChange((res) => {
             TestConsole.consoleOnCallback.call(this, res, 'onThemeChange', apiIndex);
           });
         },
       },
-      {
+      onPageNotFound: {
         id: 'onPageNotFound',
         inputData: {
           url: 'pages/api/index/11',
         },
-        func: (data = {}) => {
+        func: (data = {}, id) => {
           wx.onPageNotFound((result) => {
             wx.showToast({
               title: 'page not found',
@@ -59,63 +54,56 @@ Page({
           });
         },
       },
-      {
-        id: 'onError',
-        func: (apiIndex) => {
+      onError: {
+        func: (data = {}, id) => {
           TestConsole.consoleTest('Taro.onError');
           Taro.onError((err) => {
             TestConsole.consoleOnCallback.call(this, err, 'onError', apiIndex);
           });
         },
       },
-      {
-        id: 'onAudioInterruptionEnd',
-        func: (apiIndex) => {
+      onAudioInterruptionEnd: {
+        func: (data = {}, id) => {
           TestConsole.consoleTest('Taro.onAudioInterruptionEnd');
           Taro.onAudioInterruptionEnd((res) => {
             TestConsole.consoleOnCallback.call(this, res, 'onAudioInterruptionEnd', apiIndex);
           });
         },
       },
-      {
-        id: 'onAudioInterruptionBegin',
-        func: (apiIndex) => {
+      onAudioInterruptionBegin: {
+        func: (data = {}, id) => {
           TestConsole.consoleTest('Taro.onAudioInterruptionBegin');
           Taro.onAudioInterruptionBegin((res) => {
             TestConsole.consoleOnCallback.call(this, res, 'onAudioInterruptionBegin', apiIndex);
           });
         },
       },
-      {
-        id: 'onAppShow',
-        func: (apiIndex) => {
+      onAppShow: {
+        func: (data = {}, id) => {
           TestConsole.consoleTest('Taro.onAppShow');
           Taro.onAppShow((res) => {
             TestConsole.consoleOnCallback.call(this, res, 'onAppShow', apiIndex);
           });
         },
       },
-      {
-        id: 'onAppHide',
-        func: (apiIndex) => {
+      onAppHide: {
+        func: (data = {}, id) => {
           TestConsole.consoleTest('Taro.onAppHide');
           Taro.onAppHide((res) => {
             TestConsole.consoleOnCallback.call(this, res, 'onAppHide', apiIndex);
           });
         },
       },
-      {
-        id: 'offThemeChange',
-        func: (apiIndex) => {
+      offThemeChange: {
+        func: (data = {}, id) => {
           TestConsole.consoleTest('Taro.offThemeChange');
           Taro.offThemeChange((res) => {
             TestConsole.consoleOnCallback.call(this, res, 'offThemeChange', apiIndex);
           });
         },
       },
-      {
-        id: 'offPageNotFound',
-        func: (apiIndex) => {
+      offPageNotFound: {
+        func: (data = {}, id) => {
           TestConsole.consoleTest('Taro.offPageNotFound');
           Taro.offPageNotFound((res) => {
             TestConsole.consoleOnCallback.call(this, res, 'offPageNotFound', apiIndex);
@@ -125,91 +113,80 @@ Page({
           });
         },
       },
-      {
-        id: 'offError',
-        func: (apiIndex) => {
+      offError: {
+        func: (data = {}, id) => {
           TestConsole.consoleTest('Taro.offError');
           Taro.offError((res) => {
             TestConsole.consoleOnCallback.call(this, res, 'offError', apiIndex);
           });
         },
       },
-      {
-        id: 'offAudioInterruptionEnd',
-        func: (apiIndex) => {
+      offAudioInterruptionEnd: {
+        func: (data = {}, id) => {
           TestConsole.consoleTest('Taro.offAudioInterruptionEnd');
           Taro.offAudioInterruptionEnd((res) => {
             TestConsole.consoleOnCallback.call(this, res, 'offAudioInterruptionEnd', apiIndex);
           });
         },
       },
-      {
-        id: 'offAudioInterruptionBegin',
-        func: (apiIndex) => {
+      offAudioInterruptionBegin: {
+        func: (data = {}, id) => {
           TestConsole.consoleTest('Taro.offAudioInterruptionBegin');
           Taro.offAudioInterruptionBegin((res) => {
             TestConsole.consoleOnCallback.call(this, res, 'offAudioInterruptionBegin', apiIndex);
           });
         },
       },
-      {
-        id: 'offAppShow',
-        func: (apiIndex) => {
+      offAppShow: {
+        func: (data = {}, id) => {
           TestConsole.consoleTest('Taro.offAppShow');
           Taro.offAppShow((res) => {
             TestConsole.consoleOnCallback.call(this, res, 'offAppShow', apiIndex);
           });
         },
       },
-      {
-        id: 'offAppHide',
-        func: (apiIndex) => {
+      offAppHide: {
+        func: (data = {}, id) => {
           TestConsole.consoleTest('Taro.offAppHide');
           Taro.offAppHide((res) => {
             TestConsole.consoleOnCallback.call(this, res, 'offAppHide', apiIndex);
           });
         },
       },
-    ],
+    },
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
-  onLoad(options) {},
-
-  /**
-   * 生命周期函数--监听页面初次渲染完成
-   */
-  onReady() {},
-
-  /**
-   * 生命周期函数--监听页面显示
-   */
-  onShow() {},
-
-  /**
-   * 生命周期函数--监听页面隐藏
-   */
-  onHide() {},
-
-  /**
-   * 生命周期函数--监听页面卸载
-   */
-  onUnload() {},
-
-  /**
-   * 页面相关事件处理函数--监听用户下拉动作
-   */
-  onPullDownRefresh() {},
-
-  /**
-   * 页面上拉触底事件的处理函数
-   */
-  onReachBottom() {},
-
-  /**
-   * 用户点击右上角分享
-   */
-  onShareAppMessage() {},
+  onLoad(options) {
+    that = this;
+    const {lifeCycleList, appLevelEventsList} = this.data;
+    Object.keys(lifeCycleList).forEach((key) => {
+      lifeCycleList[key].callbackRes = {};
+    })
+    Object.keys(appLevelEventsList).forEach((key) => {
+      appLevelEventsList[key].callbackRes = {};
+    })
+    this.setData({
+      lifeCycleList,
+      appLevelEventsList
+    })
+  },
+  setLifeCycleListCallback(id, callback) {
+    const {lifeCycleList} = that.data;
+    console.log(callback);
+    lifeCycleList[id].callbackRes = callback;
+    that.setData({
+      lifeCycleList
+    })
+  },
+  setAppLevelEventsListCallback(id, callback) {
+    const {appLevelEventsList} = that.data;
+    console.log(callback);
+    appLevelEventsList[id].callbackRes = callback;
+    that.setData({
+      appLevelEventsList
+    })
+  }
 });

@@ -1,4 +1,5 @@
 // packagesAPI/pages/interface/customizedComponents/nextTick/index.js
+let that;
 Component({
   /**
    * 组件的属性列表
@@ -9,29 +10,46 @@ Component({
    * 组件的初始数据
    */
   data: {
-    list: [
-      {
-        id: 'nextTick',
-        func: (data = {}) => {
-          return new Promise((resolve) => {
-            console.log('before nextTick');
-            wx.nextTick(() => {
-              console.log('nextTick is ok!');
-              resolve({
-                callback: {
-                  nextTick: 'nextTick is ok!',
-                },
-              });
-            });
-            console.log('after nextTick');
+    list: {
+      nextTick: {
+        func: (data = {}, id) => {
+          console.log('before nextTick');
+          wx.nextTick(() => {
+            console.log('nextTick is ok!');
+            that.setCallback(id, {
+              nextTick: 'nextTick is ok!',
+            })
           });
+          console.log('after nextTick');
         },
         isDone: true,
       },
-    ],
+  },
   },
   /**
    * 组件的方法列表
    */
-  methods: {},
+  lifetimes: {
+    attached() {
+      that = this;
+      const {list} = this.data;
+      const listKey = Object.keys(list);
+      listKey.forEach((key) => {
+        list[key].callbackRes = {};
+      })
+      this.setData({
+        list
+      })
+    }
+  },
+  methods: {
+    setCallback(id, callback) {
+      const {list} = that.data;
+      console.log(callback);
+      list[id].callbackRes = callback;
+      that.setData({
+        list
+      })
+    },
+  },
 });

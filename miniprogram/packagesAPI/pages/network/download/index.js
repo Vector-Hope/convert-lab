@@ -5,9 +5,8 @@ Page({
    * 页面的初始数据
    */
   data: {
-    list: [
-      {
-        id: 'downloadFile',
+    list: {
+      downloadFile: {
         inputData: {
           url: 'http://172.20.10.11:3000/static/test.rar',
           headers: {
@@ -15,154 +14,101 @@ Page({
           },
           timeout: 60000,
         },
-        func: (data = {}) => {
-          const callback = {};
-          return new Promise((resolve) => {
-            const task = wx.downloadFile({
-              ...data,
-              success: (res) => {
-                callback['success'] = res;
-              },
-              fail: (res) => {
-                callback['fail'] = res;
-              },
-              complete: (res) => {
-                callback['complete'] = res;
-                that.setData({
-                  task: null,
-                });
-                resolve({ callback });
-              },
-            });
-            that.setData({
-              task,
-            });
+        func: (data = {}, id) => {
+          let callback = {};
+          const task = wx.downloadFile({
+            ...data,
+            success: (res) => {
+              callback['success'] = res;
+            },
+            fail: (res) => {
+              callback['fail'] = res;
+            },
+            complete: (res) => {
+              that.setCallback(id, {...callback, complete: res});
+            },
+          });
+          that.setData({
+            task,
           });
         },
         isDone: true,
       },
-      {
-        id: 'DownloadTask.abort',
-        func: (data = {}) => {
+      DownloadTask_abort: {
+        func: (data = {}, id) => {
           const { task } = that.data;
           if (task) {
             task.abort();
-            return {
-              callback: {},
-            };
           } else {
             wx.showToast({
               title: '暂无下载任务',
             });
-            return {
-              callback: {},
-              isShowToast: true,
-            };
+            return true;
           }
         },
         isDone: true,
       },
-      {
-        id: 'DownloadTask.offHeadersReceived',
-        func: (data = {}) => {
+      DownloadTask_offHeadersReceived: {
+        func: (data = {}, id) => {
           const { task } = that.data;
           if (task) {
             task.offHeadersReceived();
-            return {
-              callback: {},
-            };
           } else {
             wx.showToast({
               title: '暂无下载任务',
             });
-            return {
-              callback: {},
-              isShowToast: true,
-            };
+            return true;
           }
         },
         isDone: true,
       },
-      {
-        id: 'DownloadTask.offProgressUpdate',
-        func: (data = {}) => {
+      DownloadTask_offProgressUpdate: {
+        func: (data = {}, id) => {
           const { task } = that.data;
           if (task) {
             task.offProgressUpdate();
-            return {
-              callback: {},
-            };
           } else {
             wx.showToast({
               title: '暂无下载任务',
             });
-            return {
-              callback: {},
-              isShowToast: true,
-            };
+            return true;
           }
         },
         isDone: true,
       },
-      {
-        id: 'DownloadTask.onHeadersReceived',
-        func: (data = {}) => {
+      DownloadTask_onHeadersReceived: {
+        func: (data = {}, id) => {
           const { task } = that.data;
           if (task) {
-            return new Promise((resolve) => {
-              task.onHeadersReceived((res) => {
-                console.log('test API: DownloadTask.onHeadersReceived');
-                console.log(res);
-                resolve({
-                  callback: res,
-                });
-              });
+            task.onHeadersReceived((res) => {
+              that.setCallback(id, res);
             });
           } else {
             wx.showToast({
               title: '暂无下载任务',
             });
-            return {
-              callback: {},
-              isShowToast: true,
-            };
+            return true;
           }
         },
         isDone: true,
       },
-      {
-        id: 'DownloadTask.onProgressUpdate',
-        func: (data = {}) => {
+      DownloadTask_onProgressUpdate: {
+        func: (data = {}, id) => {
           const { task } = that.data;
           if (task) {
-            return new Promise((resolve) => {
-              let timeoutIndex;
-              task.onProgressUpdate((res) => {
-                if (!timeoutIndex) {
-                  timeoutIndex = setTimeout(() => {
-                    console.log('test API: DownloadTask.onProgressUpdate');
-                    console.log(res);
-                    clearTimeout(timeoutIndex);
-                  }, 100);
-                }
-                resolve({
-                  callback: res,
-                });
-              });
+            task.onProgressUpdate((res) => {
+              that.setCallback(id, res);
             });
           } else {
             wx.showToast({
               title: '暂无下载任务',
             });
-            return {
-              callback: {},
-              isShowToast: true,
-            };
+            return true;
           }
         },
         isDone: true,
       },
-    ],
+  },
     task: null,
   },
 
@@ -171,40 +117,21 @@ Page({
    */
   onLoad(options) {
     that = this;
+    const {list} = this.data;
+    const listKey = Object.keys(list);
+    listKey.forEach((key) => {
+      list[key].callbackRes = {};
+    })
+    this.setData({
+      list
+    })
   },
-
-  /**
-   * 生命周期函数--监听页面初次渲染完成
-   */
-  onReady() {},
-
-  /**
-   * 生命周期函数--监听页面显示
-   */
-  onShow() {},
-
-  /**
-   * 生命周期函数--监听页面隐藏
-   */
-  onHide() {},
-
-  /**
-   * 生命周期函数--监听页面卸载
-   */
-  onUnload() {},
-
-  /**
-   * 页面相关事件处理函数--监听用户下拉动作
-   */
-  onPullDownRefresh() {},
-
-  /**
-   * 页面上拉触底事件的处理函数
-   */
-  onReachBottom() {},
-
-  /**
-   * 用户点击右上角分享
-   */
-  onShareAppMessage() {},
+  setCallback(id, callback) {
+    const {list} = that.data;
+    console.log(callback);
+    list[id].callbackRes = callback;
+    that.setData({
+      list
+    })
+  },
 });

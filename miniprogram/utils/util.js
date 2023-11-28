@@ -22,42 +22,33 @@ const getType = (variable) => {
   return type;
 };
 
-const formatJson = (data) => {
-  // console.log('before format: ', data)
-  if (!data) {
-    return data;
-  }
-  const ownKeys = Object.getOwnPropertyNames(data);
-  let newData = {};
-  for (let key of ownKeys) {
-    if (getType(data[key]) === 'Function') {
-      newData[key] = 'f( )';
-    } else {
-      newData[key] = data[key];
-    }
-  }
-  // console.log('before format: ', newData)
+const myJSONStringify = (obj) => {
   try {
-    JSON.stringify(newData);
-    return JSON.parse(JSON.stringify(newData));
+    let JSONStr = JSON.stringify(obj, (key, value) => {
+        return getType(value) === 'Function' ? 'f ( )' : value;
+    })
+    return JSONStr;
   } catch (err) {
-    const cache = new Map();
-    const JSONStr = JSON.stringify(newData, (key, value) => {
+    let cache = new WeakMap();
+    let JSONStr = JSON.stringify(obj, (key, value) => {
+      if (getType(value) === 'Function') {
+        return 'f ( )';
+      }
       if (typeof value === 'object' && value !== null) {
         if (cache.has(value)) {
-          return;
+          return `[Circular ${cache.get(value)}]`;
         }
-        cache.set(value, value);
+        cache.set(value, key || 'root');
       }
       return value;
     });
-    cache.clear();
-    return JSON.parse(JSONStr);
+    cache = null;
+    return JSONStr;
   }
-};
+}
 
 module.exports = {
   getType,
   formatTime,
-  formatJson,
+  myJSONStringify,
 };

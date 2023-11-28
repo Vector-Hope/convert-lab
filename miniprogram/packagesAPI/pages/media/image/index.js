@@ -5,39 +5,34 @@ Page({
    * 页面的初始数据
    */
   data: {
-    list: [
-      {
-        id: 'chooseImage',
+    list: {
+      chooseImage: {
         inputData: {
           count: 7,
           sizeType: ['original', 'compressed'],
           sourceType: ['album'],
         },
-        func: (data = {}) => {
-          return new Promise((resolve) => {
-            const callback = {};
-            wx.chooseImage({
-              ...data,
-              success: (res) => {
-                that.setData({
-                  imgTempFilePaths: res.tempFilePaths,
-                });
-                callback['success'] = res;
-              },
-              fail: (res) => {
-                callback['fail'] = res;
-              },
-              complete: (res) => {
-                callback['complete'] = res;
-                resolve({ callback });
-              },
-            });
+        func: (data = {}, id) => {
+          let callback = {};
+          wx.chooseImage({
+            ...data,
+            success: (res) => {
+              that.setData({
+                imgTempFilePaths: res.tempFilePaths,
+              });
+              callback['success'] = res;
+            },
+            fail: (res) => {
+              callback['fail'] = res;
+            },
+            complete: (res) => {
+              that.setCallback(id, {...callback, complete: res});
+            },
           });
         },
         isDone: true,
       },
-      {
-        id: 'previewImage',
+      previewImage: {
         inputData: {
           urls: [
             'http://www.baidu.com/img/bdlogo.png',
@@ -48,104 +43,86 @@ Page({
           showmenu: true,
           referrerPolicy: 'no-referrer',
         },
-        func: (data = {}) => {
+        func: (data = {}, id) => {
+          let callback = {};
           const { urls, current, showmenu, referrerPolicy } = data;
-          return new Promise((resolve) => {
-            const callback = {};
-            wx.previewImage({
-              urls,
-              showmenu,
-              current,
-              referrerPolicy,
-              success: (res) => {
-                callback['success'] = res;
-              },
-              fail: (res) => {
-                callback['fail'] = res;
-              },
-              complete: (res) => {
-                callback['complete'] = res;
-                resolve({ callback });
-              },
-            });
+          wx.previewImage({
+            urls,
+            showmenu,
+            current,
+            referrerPolicy,
+             success: (res) => {
+              callback['success'] = res;
+            },
+            fail: (res) => {
+              callback['fail'] = res;
+            },
+            complete: (res) => {
+              that.setCallback(id, {...callback, complete: res});
+            },
           });
         },
         isDone: true,
       },
-      {
-        id: 'getImageInfo',
+      getImageInfo: {
         inputData: {
           imgIndex: 0,
         },
-        func: (data = {}) => {
+        func: (data = {}, id) => {
           const { imgTempFilePaths } = that.data;
           if (!imgTempFilePaths) {
             wx.showToast({
               title: '请先选择图片',
             });
-            return {
-              isShowToast: true,
-              callback: {},
-            };
+            return true;
           }
           const { imgIndex } = data;
-          return new Promise((resolve) => {
-            const callback = {};
-            wx.getImageInfo({
-              src: imgTempFilePaths[imgIndex],
-              success: (res) => {
-                callback['success'] = res;
-              },
-              fail: (res) => {
-                callback['fail'] = res;
-              },
-              complete: (res) => {
-                callback['complete'] = res;
-                resolve({ callback });
-              },
-            });
+          let callback = {};
+          wx.getImageInfo({
+            src: imgTempFilePaths[imgIndex],
+             success: (res) => {
+              callback['success'] = res;
+            },
+            fail: (res) => {
+              callback['fail'] = res;
+            },
+            complete: (res) => {
+              that.setCallback(id, {...callback, complete: res});
+            },
           });
         },
         isDone: true,
       },
-      {
-        id: 'saveImageToPhotosAlbum',
+      saveImageToPhotosAlbum: {
         inputData: {
           imgIndex: 0,
         },
-        func: (data = {}) => {
+        func: (data = {}, id) => {
           const { imgTempFilePaths } = that.data;
           if (!imgTempFilePaths) {
             wx.showToast({
               title: '请先选择图片',
             });
-            return {
-              isShowToast: true,
-              callback: {},
-            };
+            return true;
           }
           const { imgIndex } = data;
-          return new Promise((resolve) => {
-            const callback = {};
-            wx.saveImageToPhotosAlbum({
-              filePath: imgTempFilePaths[imgIndex],
-              success: (res) => {
-                callback['success'] = res;
-              },
-              fail: (res) => {
-                callback['fail'] = res;
-              },
-              complete: (res) => {
-                callback['complete'] = res;
-                resolve({ callback });
-              },
-            });
+          let callback = {};
+          wx.saveImageToPhotosAlbum({
+            filePath: imgTempFilePaths[imgIndex],
+             success: (res) => {
+              callback['success'] = res;
+            },
+            fail: (res) => {
+              callback['fail'] = res;
+            },
+            complete: (res) => {
+              that.setCallback(id, {...callback, complete: res});
+            },
           });
         },
         isDone: true,
       },
-      {
-        id: 'compressImage',
+      compressImage: {
         func: (apiIndex) => {
           TestConsole.consoleTest('compressImage');
           Taro.chooseImage({
@@ -197,8 +174,7 @@ Page({
           });
         },
       },
-      {
-        id: 'previewMedia_image',
+      previewMedia_image: {
         func: (apiIndex) => {
           TestConsole.consoleTest('previewMedia_image');
           Taro.chooseImage({
@@ -239,8 +215,7 @@ Page({
           });
         },
       },
-      {
-        id: 'previewMedia_video_album',
+      previewMedia_video_album: {
         func: (apiIndex) => {
           TestConsole.consoleTest('previewMedia_video_album');
           Taro.chooseVideo({
@@ -281,8 +256,7 @@ Page({
           });
         },
       },
-      {
-        id: 'previewMedia_video_camera',
+      previewMedia_video_camera: {
         func: (apiIndex) => {
           TestConsole.consoleTest('previewMedia_video_camera');
           Taro.chooseVideo({
@@ -323,7 +297,7 @@ Page({
           });
         },
       },
-    ],
+  },
     imgTempFilePaths: null,
   },
 
@@ -332,40 +306,21 @@ Page({
    */
   onLoad(options) {
     that = this;
+    const {list} = this.data;
+    const listKey = Object.keys(list);
+    listKey.forEach((key) => {
+      list[key].callbackRes = {};
+    })
+    this.setData({
+      list
+    })
   },
-
-  /**
-   * 生命周期函数--监听页面初次渲染完成
-   */
-  onReady() {},
-
-  /**
-   * 生命周期函数--监听页面显示
-   */
-  onShow() {},
-
-  /**
-   * 生命周期函数--监听页面隐藏
-   */
-  onHide() {},
-
-  /**
-   * 生命周期函数--监听页面卸载
-   */
-  onUnload() {},
-
-  /**
-   * 页面相关事件处理函数--监听用户下拉动作
-   */
-  onPullDownRefresh() {},
-
-  /**
-   * 页面上拉触底事件的处理函数
-   */
-  onReachBottom() {},
-
-  /**
-   * 用户点击右上角分享
-   */
-  onShareAppMessage() {},
+  setCallback(id, callback) {
+    const {list} = that.data;
+    console.log(callback);
+    list[id].callbackRes = callback;
+    that.setData({
+      list
+    })
+  },
 });

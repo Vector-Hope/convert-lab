@@ -5,101 +5,56 @@ Page({
    * 页面的初始数据
    */
   data: {
-    list: [
-      {
-        id: 'onSocketOpen',
-        func: (data = {}) => {
-          return new Promise ((resolve) => {
-            wx.showToast({
-              title: '监听开启，请连接websocket',
-            })
-            let isFirstListen = true;
-            wx.onSocketOpen((res) => {
-              if (!isFirstListen) {
-                console.log('test API: onSocketOpen');
-                console.log(res);
-              }
-              isFirstListen = false;
-              resolve({
-                callback: res,
-                isShowToast: true,
-              })
-            });
+    list: {
+      onSocketOpen: {
+        func: (data = {}, id) => {
+          wx.showToast({
+            title: '监听开启，请连接websocket',
           })
+          wx.onSocketOpen((res) => {
+            that.setCallback(id, res);
+          });
+          return true;
         },
         isDone: true
       },
-      {
-        id: 'onSocketMessage',
-        func: (data = {}) => {
-          return new Promise ((resolve) => {
-            wx.showToast({
-              title: '监听开启，请连接websocket',
-            })
-            let isFirstListen = true;
-            wx.onSocketMessage((res) => {
-              if (!isFirstListen) {
-                console.log('test API: onSocketMessage');
-                console.log(res);
-              }
-              isFirstListen = false;
-              resolve({
-                callback: res,
-                isShowToast: true,
-              })
-            });
+      onSocketMessage: {
+        func: (data = {}, id) => {
+          wx.showToast({
+            title: '监听开启，请连接websocket',
           })
+          wx.onSocketMessage((res) => {
+            that.setCallback(id, res);
+          });
+          return true;
         },
         isDone: true
       },
-      {
-        id: 'onSocketClose',
-        func: (data = {}) => {
-          return new Promise ((resolve) => {
-            wx.showToast({
-              title: '监听开启，请连接websocket',
-            })
-            let isFirstListen = true;
-            wx.onSocketClose((res) => {
-              if (!isFirstListen) {
-                console.log('test API: onSocketClose');
-                console.log(res);
-              }
-              isFirstListen = false;
-              resolve({
-                callback: res,
-                isShowToast: true,
-              })
-            });
+      onSocketClose: {
+        func: (data = {}, id) => {
+          wx.showToast({
+            title: '监听开启，请连接websocket',
           })
+          wx.onSocketClose((res) => {
+            that.setCallback(id, res);
+          });
+          return true;
         },
         isDone: true
       },
-      {
-        id: 'onSocketError',
-        func: (data = {}) => {
-          return new Promise ((resolve) => {
-            wx.showToast({
-              title: '监听开启，请连接websocket',
-            })
-            let isFirstListen = true;
-            wx.onSocketError((res) => {
-              if (!isFirstListen) {
-                console.log('test API: onSocketError');
-                console.log(res);
-              }
-              isFirstListen = false;
-              resolve({
-                callback: res,
-                isShowToast: true,
-              })
-            });
+      onSocketError: {
+        func: (data = {}, id) => {
+          wx.showToast({
+            title: '监听开启，请连接websocket',
           })
+          wx.onSocketError((res) => {
+            that.setCallback(id, res);
+          });
+          return true;
         },
         isDone: true
       },
-      {
-        id: 'connectSocket',
+      connectSocket: {
         inputData: {
           url: 'ws://26.26.26.1:3000',
           header: {
@@ -111,31 +66,27 @@ Page({
           timeout: 6000,
           forceCellularNetwork: false,
         },
-        func: (data = {}) => {
-          return new Promise((resolve) => {
-            const callback = {};
-            const socketTask = wx.connectSocket({
-              ...data,
-              success: (res) => {
-                callback['success'] = res;
-              },
-              fail: (res) => {
-                callback['fail'] = res;
-              },
-              complete: (res) => {
-                callback['complete'] = res;
-                resolve({callback});
-              },
-            });
-            that.setData({
-              socketTask,
-            });
-          })
+        func: (data = {}, id) => {
+          const callback = {};
+          const socketTask = wx.connectSocket({
+            ...data,
+            success: (res) => {
+              callback['success'] = res;
+            },
+            fail: (res) => {
+              callback['fail'] = res;
+            },
+            complete: (res) => {
+              that.setCallback(id, {...callback, complete: res});
+            },
+          });
+          that.setData({
+            socketTask,
+          });
         },
         isDone: true,
       },
-      {
-        id: 'connectSocket.onOpen',
+      SocketTask_onOpen: {
         inputData: {
           url: 'ws://26.26.26.1:3000',
           header: {
@@ -147,12 +98,12 @@ Page({
           timeout: 6000,
           forceCellularNetwork: false,
         },
-        func: (data = {}) => {
+        func: async (data = {}, id) => {
           const {socketTask} = that.data;
           if (socketTask) {
             socketTask.close();
           }
-          const newSocketTask = wx.connectSocket({
+          const newSocketTask = await wx.connectSocket({
             ...data,
             success: (res) => {
               wx.showToast({
@@ -168,214 +119,164 @@ Page({
           that.setData({
             socketTask: newSocketTask,
           });
-          return new Promise((resolve) => {
-            newSocketTask.onOpen((res) => {
-              resolve({
-                callback: res,
-                isShowToast: true
-              })
-            });
-          })
+          newSocketTask.onOpen((res) => {
+            that.setCallback(id, res);
+          });
+          return true;
         },
         isDone: true,
       },
-      {
-        id: 'sendSocketMessage',
+      sendSocketMessage: {
         inputData: {
           data: 'convert小程序',
         },
-        func: (data = {}) => {
-          return new Promise ((resolve) => {
-            const callback = {};
-            wx.sendSocketMessage({
-              ...data,
-              success: (res) => {
-                callback['success'] = res;
-              },
-              fail: (res) => {
-                callback['fail'] = res;
-              },
-              complete: (res) => {
-                callback['complete'] = res;
-                resolve({callback});
-              },
-            });
-          })
+        func: (data = {}, id) => {
+          const callback = {};
+          wx.sendSocketMessage({
+            ...data,
+            success: (res) => {
+              callback['success'] = res;
+            },
+            fail: (res) => {
+              callback['fail'] = res;
+            },
+            complete: (res) => {
+              that.setCallback(id, {...callback, complete: res});
+            },
+          });
         },
         isDone: true
       },
-      {
-        id: 'closeSocket',
+      closeSocket: {
         inputData: {
           code: 1000,
           reason: '主动关闭',
         },
-        func: (data = {}) => {
-          return new Promise ((resolve) => {
-            const callback = {};
-            wx.closeSocket({
-              ...data,
-              success: (res) => {
-                callback['success'] = res;
-              },
-              fail: (res) => {
-                callback['fail'] = res;
-              },
-              complete: (res) => {
-                callback['complete'] = res;
-                resolve({callback});
-              },
-            });
-          })
+        func: (data = {}, id) => {
+          const callback = {};
+          wx.closeSocket({
+            ...data,
+            success: (res) => {
+              callback['success'] = res;
+            },
+            fail: (res) => {
+              callback['fail'] = res;
+            },
+            complete: (res) => {
+              that.setCallback(id, {...callback, complete: res});
+            },
+          });
         },
         isDone: true
       },
-      {
-        id: 'SocketTask.onClose',
-        func: (data = {}) => {
+      SocketTask_onClose: {
+        func: (data = {}, id) => {
           const { socketTask } = that.data;
           if (!socketTask || socketTask.readyState !== socketTask.OPEN) {
             wx.showToast({
               title: '请先连接websocket',
               icon: 'error',
             });
-            return {
-              isShowToast: true,
-              callback: {},
-            };
+            return true;
           }
-          return new Promise((resolve) => {
-            socketTask.onClose((res) => {
-              console.log('test API: SocketTask.onClose');
-              console.log(res);
-              resolve({ callback: res });
-            });
+          socketTask.onClose((res) => {
+            that.setCallback(id, res);
           });
         },
         isDone: true,
       },
-      {
-        id: 'SocketTask.onError',
-        func: (data = {}) => {
+      SocketTask_onError: {
+        func: (data = {}, id) => {
           const { socketTask } = that.data;
           if (!socketTask || socketTask.readyState !== socketTask.OPEN) {
             wx.showToast({
               title: '请先连接websocket',
               icon: 'error',
             });
-            return {
-              isShowToast: true,
-              callback: {},
-            };
+            return true;
           }
-          return new Promise((resolve) => {
-            socketTask.onError((res) => {
-              console.log('test API: SocketTask.onError');
-              console.log(res);
-              resolve({ callback: res });
-            });
+          socketTask.onError((res) => {
+            that.setCallback(id, res);
           });
         },
         isDone: true,
       },
-      {
-        id: 'SocketTask.onMessage',
-        func: (data = {}) => {
+      SocketTask_onMessage: {
+        func: (data = {}, id) => {
           const { socketTask } = that.data;
           if (!socketTask || socketTask.readyState !== socketTask.OPEN) {
             wx.showToast({
               title: '请先连接websocket',
               icon: 'error',
             });
-            return {
-              isShowToast: true,
-              callback: {},
-            };
+            return true;
           }
-          return new Promise((resolve) => {
-            socketTask.onMessage((res) => {
-              console.log('test API: SocketTask.onMessage');
-              console.log(res);
-              resolve({ callback: res });
-            });
+          socketTask.onMessage((res) => {
+            that.setCallback(id, res);
           });
         },
         isDone: true,
       },
-      {
-        id: 'SocketTask.send',
+      SocketTask_send: {
         inputData: {
           data: 'convert!',
         },
-        func: (data = {}) => {
+        func: (data = {}, id) => {
           const { socketTask } = that.data;
           if (!socketTask || socketTask.readyState !== socketTask.OPEN) {
             wx.showToast({
               title: '请先连接websocket',
               icon: 'error',
             });
-            return {
-              isShowToast: true,
-              callback: {},
-            };
+            return true;
           }
-          return new Promise((resolve) => {
             const callback = {};
             socketTask.send({
               ...data,
               success: (res) => {
-                callback['success'] = res;
-              },
-              fail: (res) => {
-                callback['fail'] = res;
-              },
-              complete: (res) => {
-                callback['complete'] = res;
-                resolve({ callback });
-              },
+              callback['success'] = res;
+            },
+            fail: (res) => {
+              callback['fail'] = res;
+            },
+            complete: (res) => {
+              that.setCallback(id, {...callback, complete: res});
+            },
             });
-          });
         },
         isDone: true,
       },
-      {
-        id: 'SocketTask.close',
+      SocketTask_close: {
         inputData: {
           code: 1000,
           reason: '主动关闭',
         },
-        func: (data = {}) => {
+        func: (data = {}, id) => {
           const { socketTask } = that.data;
           if (!socketTask || socketTask.readyState !== socketTask.OPEN) {
             wx.showToast({
               title: '请先连接websocket',
               icon: 'error',
             });
-            return {
-              isShowToast: true,
-              callback: {},
-            };
+            return true;
           }
-          return new Promise((resolve) => {
             const callback = {};
             socketTask.close({
               ...data,
               success: (res) => {
-                callback['success'] = res;
-              },
-              fail: (res) => {
-                callback['fail'] = res;
-              },
-              complete: (res) => {
-                callback['complete'] = res;
-                resolve({ callback });
-              },
+              callback['success'] = res;
+            },
+            fail: (res) => {
+              callback['fail'] = res;
+            },
+            complete: (res) => {
+              that.setCallback(id, {...callback, complete: res});
+            },
             });
-          });
         },
         isDone: true,
       },
-    ],
+    },
     socketTask: null,
   },
 
@@ -384,40 +285,21 @@ Page({
    */
   onLoad(options) {
     that = this;
+    const {list} = this.data;
+    const listKey = Object.keys(list);
+    listKey.forEach((key) => {
+      list[key].callbackRes = {};
+    })
+    this.setData({
+      list
+    })
   },
-
-  /**
-   * 生命周期函数--监听页面初次渲染完成
-   */
-  onReady() {},
-
-  /**
-   * 生命周期函数--监听页面显示
-   */
-  onShow() {},
-
-  /**
-   * 生命周期函数--监听页面隐藏
-   */
-  onHide() {},
-
-  /**
-   * 生命周期函数--监听页面卸载
-   */
-  onUnload() {},
-
-  /**
-   * 页面相关事件处理函数--监听用户下拉动作
-   */
-  onPullDownRefresh() {},
-
-  /**
-   * 页面上拉触底事件的处理函数
-   */
-  onReachBottom() {},
-
-  /**
-   * 用户点击右上角分享
-   */
-  onShareAppMessage() {},
+  setCallback(id, callback) {
+    const {list} = that.data;
+    console.log(callback);
+    list[id].callbackRes = callback;
+    that.setData({
+      list
+    })
+  },
 });

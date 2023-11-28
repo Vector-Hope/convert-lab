@@ -1,14 +1,16 @@
 // components/jsonTree/index.js
-import { getType } from '../../utils/util';
+import { myJSONStringify } from '../../utils/util';
 Component({
   /**
    * 组件的属性列表
    */
   properties: {
     jsonData: {
-      type: Object || Array,
+      type: Object,
       observer: function (newVal) {
-        console.log(newVal);
+        this.setData({
+          formatJsonData: JSON.parse(myJSONStringify(newVal)),
+        })
       },
     },
     isShowRes: {
@@ -26,6 +28,7 @@ Component({
    * 组件的初始数据
    */
   data: {
+    formatJsonData: null,
     showJsonData: false,
   },
   /**
