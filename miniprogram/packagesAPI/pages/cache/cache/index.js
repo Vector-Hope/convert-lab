@@ -62,6 +62,7 @@ Page({
             wx.showToast({
               title: '请先缓存对应数据',
             });
+            that.setCallback(id, {});
             return true;
           }
         },
@@ -92,6 +93,7 @@ Page({
             wx.showToast({
               title: '请先缓存对应数据',
             });
+            that.setCallback(id, {});
             return true;
           }
         },
@@ -110,6 +112,7 @@ Page({
             wx.showToast({
               title: '请先缓存对应数据',
             });
+            that.setCallback(id, {});
             return true;
           }
         },
@@ -164,6 +167,7 @@ Page({
             wx.showToast({
               title: '请先缓存对应数据',
             });
+            that.setCallback(id, {});
             return true;
           }
         },

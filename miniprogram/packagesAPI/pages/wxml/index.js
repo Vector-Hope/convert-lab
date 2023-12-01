@@ -148,7 +148,7 @@ Page({
           wx.createSelectorQuery()
             .select(select)
             .fields(fields, (res) => {
-              that.setSelectorQueryListCallback(id, res);
+              that.setSelectorQueryListCallback(id, JSON.parse(myJSONStringify(res)));
             })
             .exec();
         },
@@ -189,7 +189,7 @@ Page({
           wx.createSelectorQuery()
             .select(select)
             .node((res) => {
-              that.setSelectorQueryListCallback(id, res);
+              that.setSelectorQueryListCallback(id, JSON.parse(myJSONStringify(res)));
             })
             .exec();
         },
