@@ -66,9 +66,9 @@ Page({
           timeout: 6000,
           forceCellularNetwork: false,
         },
-        func: (data = {}, id) => {
+        func: async (data = {}, id) => {
           const callback = {};
-          const socketTask = wx.connectSocket({
+          const socketTask = await wx.connectSocket({
             ...data,
             success: (res) => {
               callback['success'] = res;
